@@ -224,7 +224,7 @@ Use this roadmap structure:
 - [ ] feature-c -- [one-line description]. Dependencies: feature-a, feature-b
 ```
 
-Then write `{{SPECTRA_DIR}}/specs/<feature>/brief.md` for **every** feature listed under `## Specs (dependency order)` using the Path C brief format. This enables parallel spec creation via `$spectra-batch`.
+Then write `{{SPECTRA_DIR}}/specs/<feature>/brief.md` for **every** feature listed under `## Specs (dependency order)` using the Path C brief format. This enables parallel spec creation via `/spectra-batch`.
 
 **For Path E (mixed decomposition)**:
 
@@ -245,7 +245,7 @@ Use the same roadmap structure as Path D, plus these additional sections:
 ```
 
 Path E rules:
-- Keep `## Specs (dependency order)` reserved for **new specs only** so `$spectra-batch` can still parse it unchanged
+- Keep `## Specs (dependency order)` reserved for **new specs only** so `/spectra-batch` can still parse it unchanged
 - Record existing-spec extensions under `## Existing Spec Updates`
 - Record true no-spec work under `## Direct Implementation Candidates`
 - Write `brief.md` only for the **new specs** listed under `## Specs (dependency order)`
@@ -259,17 +259,17 @@ After writing, verify the files exist by reading them back.
 
 Suggest the next command and stop. Do NOT automatically run downstream spec generation from this skill.
 
-- Path A: `$spectra-requirements {feature}` to update the existing spec
+- Path A: `/spectra-requirements {feature}` to update the existing spec
 - Path B: Recommend direct implementation without creating a spec
-- Path C: Default to `$spectra-init <feature-name>`
-  - Optional fast path: `$spectra-quick <feature-name>` when the user explicitly wants to continue immediately
-- Path D: Default to `$spectra-batch` (creates all specs in parallel based on roadmap.md dependency order)
-  - Optional cautious path: `$spectra-init <first-feature-name>` when the user wants to validate the first slice before batching the rest
+- Path C: Default to `/spectra-init <feature-name>`
+  - Optional fast path: `/spectra-quick <feature-name>` when the user explicitly wants to continue immediately
+- Path D: Default to `/spectra-batch` (creates all specs in parallel based on roadmap.md dependency order)
+  - Optional cautious path: `/spectra-init <first-feature-name>` when the user wants to validate the first slice before batching the rest
 - Path E: Choose the next command based on the new-spec portion of the decomposition
-  - If there is exactly one new spec: `$spectra-init <new-feature-name>`
-  - If there are multiple new specs: `$spectra-batch`
-  - Also note which existing specs should be revisited with `$spectra-requirements <feature>`
-- Re-entry: `$spectra-init <next-feature-name>` or `$spectra-batch` if multiple specs remain
+  - If there is exactly one new spec: `/spectra-init <new-feature-name>`
+  - If there are multiple new specs: `/spectra-batch`
+  - Also note which existing specs should be revisited with `/spectra-requirements <feature>`
+- Re-entry: `/spectra-init <next-feature-name>` or `/spectra-batch` if multiple specs remain
 
 If the decomposition contains only existing-spec updates plus direct implementation candidates, do NOT use Path E. Prefer Path A when one existing spec is the clear home, or recommend the existing-spec update plus direct implementation work without creating roadmap entries.
 

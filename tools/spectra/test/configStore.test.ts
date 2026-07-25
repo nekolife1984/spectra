@@ -21,15 +21,17 @@ describe('config store', () => {
 
   it('saves and loads config round-trip', async () => {
     const dir = await mkTmp();
+    // v3.0: agent names end in -skills. configStore round-trips any
+    // UserConfig, so the value is just a string; we use a v3.0 name.
     const input: UserConfig = {
-      agent: 'gemini-cli',
+      agent: 'gemini-cli-skills',
       lang: 'en',
       os: 'linux',
       spectraDir: '.work/spectra',
       overwrite: 'skip',
       backupDir: 'bk',
       agentLayouts: {
-        'gemini-cli': { commandsDir: '.gemini/commands/custom' },
+        'gemini-cli-skills': { commandsDir: '.gemini/commands/custom' },
       },
     };
     await saveUserConfig(dir, input);

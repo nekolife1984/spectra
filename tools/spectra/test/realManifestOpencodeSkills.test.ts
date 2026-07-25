@@ -73,7 +73,7 @@ describe('real opencode-skills manifest', () => {
     const docText = await readFile(doc, 'utf8');
     expect(docText).toMatch(/# Agentic SDLC and Spec-Driven Development/);
     expect(docText).toContain('/spectra-status');
-    expect(docText).not.toContain('$spectra-status');
+    expect(docText).toContain('/spectra-status');
     expect(docText).toContain('autonomous mode');
     expect(docText).toContain('[--review required|inline|off]');
     expect(docText).toContain('`--review off` skips task-local review');

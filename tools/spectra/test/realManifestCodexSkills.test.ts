@@ -72,7 +72,7 @@ describe('real codex-skills manifest', () => {
     expect(await exists(doc)).toBe(true);
     const docText = await readFile(doc, 'utf8');
     expect(docText).toMatch(/# Agentic SDLC and Spec-Driven Development/);
-    expect(docText).toContain('$spectra-status');
+    expect(docText).toContain('/spectra-status');
     expect(docText).not.toContain('/prompts:spectra-status');
     expect(docText).toContain('autonomous mode');
     expect(docText).toContain('[--review required|inline|off]');
@@ -82,13 +82,13 @@ describe('real codex-skills manifest', () => {
     expect(await exists(skillSpecInit)).toBe(true);
     const skillSpecInitText = await readFile(skillSpecInit, 'utf8');
     expect(skillSpecInitText).toMatch(/name: spectra-init/);
-    expect(skillSpecInitText).toContain('$spectra-requirements');
+    expect(skillSpecInitText).toContain('/spectra-requirements');
 
     const skillSpecQuick = join(cwd, '.agents/skills/spectra-quick/SKILL.md');
     expect(await exists(skillSpecQuick)).toBe(true);
     const skillSpecQuickText = await readFile(skillSpecQuick, 'utf8');
     expect(skillSpecQuickText).toMatch(/name: spectra-quick/);
-    expect(skillSpecQuickText).toContain('$spectra-impl');
+    expect(skillSpecQuickText).toContain('/spectra-impl');
 
     const settingsTemplate = join(cwd, '.spectra/settings/templates/specs/init.json');
     expect(await exists(settingsTemplate)).toBe(true);

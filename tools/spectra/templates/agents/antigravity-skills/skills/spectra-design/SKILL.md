@@ -24,7 +24,7 @@ metadata:
 
 **Read all necessary context**:
 - `{{SPECTRA_DIR}}/specs/$1/spec.json`, `requirements.md`, `design.md` (if exists)
-- `{{SPECTRA_DIR}}/specs/$1/research.md` (if exists, contains gap analysis from `$spectra-validate-gap`)
+- `{{SPECTRA_DIR}}/specs/$1/research.md` (if exists, contains gap analysis from `/spectra-validate-gap`)
 - Core steering context: `product.md`, `tech.md`, `structure.md`
 - Additional steering files only when directly relevant to requirement coverage, architecture boundaries, integrations, runtime prerequisites, security/performance constraints, or team conventions that affect implementation readiness
 - `{{SPECTRA_DIR}}/settings/templates/specs/design.md` for document structure
@@ -187,12 +187,12 @@ Provide brief summary in the language specified in spec.json:
 **Requirements Not Approved**:
 - **Stop Execution**: Cannot proceed without approved requirements
 - **User Message**: "Requirements not yet approved. Approval required before design generation."
-- **Suggested Action**: "Run `$spectra-design $1 -y` to auto-approve requirements and proceed"
+- **Suggested Action**: "Run `/spectra-design $1 -y` to auto-approve requirements and proceed"
 
 **Missing Requirements**:
 - **Stop Execution**: Requirements document must exist
 - **User Message**: "No requirements.md found at `{{SPECTRA_DIR}}/specs/$1/requirements.md`"
-- **Suggested Action**: "Run `$spectra-requirements $1` to generate requirements first"
+- **Suggested Action**: "Run `/spectra-requirements $1` to generate requirements first"
 
 **Template Missing**:
 - **User Message**: "Template file missing at `{{SPECTRA_DIR}}/settings/templates/specs/design.md`"
@@ -209,15 +209,15 @@ Provide brief summary in the language specified in spec.json:
 **Spec Gap Found During Design Review**:
 - **Stop Execution**: Do not write a patched-over `design.md`
 - **User Message**: "Design review found a real spec gap or ambiguity that must be resolved before design can be finalized."
-- **Suggested Action**: Clarify or fix `requirements.md`, then re-run `$spectra-design $1`
+- **Suggested Action**: Clarify or fix `requirements.md`, then re-run `/spectra-design $1`
 
 ### Next Phase: Task Generation
 
 **If Design Approved**:
 - Review generated design at `{{SPECTRA_DIR}}/specs/$1/design.md`
-- **Optional**: Run `$spectra-validate-design $1` for interactive quality review
-- Then `$spectra-tasks $1 -y` to generate implementation tasks
+- **Optional**: Run `/spectra-validate-design $1` for interactive quality review
+- Then `/spectra-tasks $1 -y` to generate implementation tasks
 
 **If Modifications Needed**:
-- Provide feedback and re-run `$spectra-design $1`
+- Provide feedback and re-run `/spectra-design $1`
 - Existing design used as reference (merge mode)

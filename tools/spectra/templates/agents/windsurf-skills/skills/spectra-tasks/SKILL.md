@@ -133,13 +133,13 @@ Before writing `tasks.md`, run one lightweight independent sanity review of the 
 - If auto-approve flag (`-y`) is provided:
   - Set `approvals.tasks.approved: true` in spec.json
   - Display task summary (task count, major groups, parallel markers)
-  - Respond: "Tasks generated and auto-approved. Start implementation with `$spectra-impl $1`"
+  - Respond: "Tasks generated and auto-approved. Start implementation with `/spectra-impl $1`"
 - Otherwise (interactive):
   - Display a summary of the generated tasks (task count, major groups, parallel markers)
   - Ask the user: "Tasks generated. Approve and proceed to implementation?"
   - If the user approves:
     - Set `approvals.tasks.approved: true` in spec.json
-    - Respond: "Tasks approved. Start implementation with `$spectra-impl $1`"
+    - Respond: "Tasks approved. Start implementation with `/spectra-impl $1`"
   - If the user wants changes:
     - Keep `approvals.tasks.approved: false`
     - Respond with guidance on what to adjust and re-run
@@ -185,7 +185,7 @@ Provide brief summary in the language specified in spec.json:
 **Requirements or Design Not Approved**:
 - **Stop Execution**: Cannot proceed without approved requirements and design
 - **User Message**: "Requirements and design must be approved before task generation"
-- **Suggested Action**: "Run `$spectra-tasks $1 -y` to auto-approve both and proceed"
+- **Suggested Action**: "Run `/spectra-tasks $1 -y` to auto-approve both and proceed"
 
 **Missing Requirements or Design**:
 - **Stop Execution**: Both documents must exist
@@ -199,7 +199,7 @@ Provide brief summary in the language specified in spec.json:
 **Spec Gap Found During Task Review**:
 - **Stop Execution**: Do not write a patched-over `tasks.md`
 - **User Message**: "Requirements/design do not provide enough clear coverage to generate an executable task plan"
-- **Suggested Action**: "Refine requirements.md or design.md, then re-run `$spectra-tasks $1`"
+- **Suggested Action**: "Refine requirements.md or design.md, then re-run `/spectra-tasks $1`"
 
 **Template/Rules Missing**:
 - **User Message**: "Template or rules files missing in `{{SPECTRA_DIR}}/settings/`"
@@ -211,5 +211,5 @@ Provide brief summary in the language specified in spec.json:
 ### Next Phase: Implementation
 
 Tasks are approved in Step 4 via user confirmation. Once approved:
-- Autonomous implementation: `$spectra-impl $1`
-- Specific tasks only: `$spectra-impl $1 1.1,1.2`
+- Autonomous implementation: `/spectra-impl $1`
+- Specific tasks only: `/spectra-impl $1 1.1,1.2`

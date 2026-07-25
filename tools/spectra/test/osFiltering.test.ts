@@ -4,8 +4,10 @@ import type { AgentType } from '../src/resolvers/agentLayout';
 import type { OSType } from '../src/resolvers/os';
 import { buildTemplateContext } from '../src/template/context';
 
+// v3.0 renamed all command-based agent installs to --*-skills.
+// Update from the v1.x names 'claude-code' / 'gemini-cli'.
 describe('OS filtering in processManifest', () => {
-  const agent: AgentType = 'claude-code';
+  const agent: AgentType = 'claude-code-skills';
   const ctx = buildTemplateContext({ agent, lang: 'en' });
 
   it('includes artifacts with no OS condition', () => {
@@ -91,7 +93,7 @@ describe('OS filtering in processManifest', () => {
             fromDir: 'templates/agents/{{AGENT}}/commands/os-mac',
             toDir: '{{AGENT_COMMANDS_DIR}}',
           },
-          when: { agent: 'claude-code' as AgentType, os: 'mac' as OSType },
+          when: { agent: 'claude-code-skills' as AgentType, os: 'mac' as OSType },
         },
         {
           id: 'gemini_mac_commands',
@@ -100,14 +102,19 @@ describe('OS filtering in processManifest', () => {
             fromDir: 'templates/agents/{{AGENT}}/commands/os-mac',
             toDir: '{{AGENT_COMMANDS_DIR}}',
           },
-          when: { agent: 'gemini-cli' as AgentType, os: 'mac' as OSType },
+          when: { agent: 'gemini-cli-skills' as AgentType, os: 'mac' as OSType },
         },
       ],
     };
 
-    const claudeMacResult = processManifest(manifest, 'claude-code', ctx, 'mac');
-    const claudeWindowsResult = processManifest(manifest, 'claude-code', ctx, 'windows');
-    const geminiMacResult = processManifest(manifest, 'gemini-cli', buildTemplateContext({ agent: 'gemini-cli', lang: 'en' }), 'mac');
+    const claudeMacResult = processManifest(manifest, 'claude-code-skills', ctx, 'mac');
+    const claudeWindowsResult = processManifest(manifest, 'claude-code-skills', ctx, 'windows');
+    const geminiMacResult = processManifest(
+      manifest,
+      'gemini-cli-skills',
+      buildTemplateContext({ agent: 'gemini-cli-skills', lang: 'en' }),
+      'mac',
+    );
 
     expect(claudeMacResult).toHaveLength(1);
     expect(claudeMacResult[0].id).toBe('claude_mac_commands');

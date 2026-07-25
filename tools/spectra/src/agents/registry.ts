@@ -69,9 +69,12 @@ export const agentDefinitions = {
       docFile: 'AGENTS.md',
     },
     commands: {
-      spec: '`$spectra-init <what-to-build>`',
-      steering: '`$spectra-steering`',
-      steeringCustom: '`$spectra-steering-custom <what-to-create-custom-steering-document>`',
+      // v3.0 unified all skill-internal command references to /spectra-xxx.
+      // Codex remains a first-class skills target; only the command
+      // prefix changed, not the .agents/skills install path.
+      spec: '`/spectra-init <what-to-build>`',
+      steering: '`/spectra-steering`',
+      steeringCustom: '`/spectra-steering-custom <what-to-create-custom-steering-document>`',
     },
     completionGuide: {
       prependSteps: [
@@ -113,14 +116,16 @@ export const agentDefinitions = {
     label: 'GitHub Copilot Skills',
     description:
       'Installs spec skills in `.github/skills/spectra-*/`, shared settings in `{{SPECTRA_DIR}}/settings/`, and an AGENTS.md quickstart.',
-    aliasFlags: ['--copilot-skills', '--github-copilot-skills'],
-    recommendedModels: ['Planning / review: Claude Opus 4.6 or newer / gpt-5.4 high', 'Implementation: Claude Sonnet 4.6 or newer / gpt-5.4'],
+    aliasFlags: ['--copilot-skills'],
+    recommendedModels: ['Planning / review: Claude Opus 4.6 or newer / gpt-5.4 high', 'Implementation: Claude Sonnet 4.6 or newer / gpt-5.4 / Composer 2'],
     layout: {
       commandsDir: '.github/skills',
       agentDir: '.github',
       docFile: 'AGENTS.md',
     },
     commands: {
+      // v3.0 unified all skill-internal command references to /spectra-xxx.
+      // GitHub Copilot still uses /spectra-xxx in its prompt invocation.
       spec: '`/spectra-init <what-to-build>`',
       steering: '`/spectra-steering`',
       steeringCustom: '`/spectra-steering-custom <what-to-create-custom-steering-document>`',
@@ -166,16 +171,18 @@ export const agentDefinitions = {
     description:
       'Installs spec skills in `.windsurf/skills/spectra-*/`, shared settings in `{{SPECTRA_DIR}}/settings/`, and an AGENTS.md quickstart.',
     aliasFlags: ['--windsurf-skills'],
-    recommendedModels: ['Planning / review: Claude Opus 4.6 or newer / gpt-5.4 high', 'Implementation: Claude Sonnet 4.6 or newer / gpt-5.4'],
+    recommendedModels: ['Planning / review: Claude Opus 4.6 or newer', 'Implementation: Claude Sonnet 4.6 or newer / Composer 2'],
     layout: {
       commandsDir: '.windsurf/skills',
       agentDir: '.windsurf',
       docFile: 'AGENTS.md',
     },
     commands: {
-      spec: '`@spectra-init <what-to-build>`',
-      steering: '`@spectra-steering`',
-      steeringCustom: '`@spectra-steering-custom <what-to-create-custom-steering-document>`',
+      // v3.0 unified all skill-internal command references to /spectra-xxx.
+      // Windsurf uses /spectra-xxx in its prompt invocation just like Claude Code.
+      spec: '`/spectra-init <what-to-build>`',
+      steering: '`/spectra-steering`',
+      steeringCustom: '`/spectra-steering-custom <what-to-create-custom-steering-document>`',
     },
     completionGuide: {
       prependSteps: [

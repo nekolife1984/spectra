@@ -174,12 +174,15 @@ describe('CLI entry edge cases', () => {
     };
 
     await writeFile(join(manifestsDir, 'claude-code-skills.json'), JSON.stringify(claudeManifest), 'utf8');
-    await writeFile(join(manifestsDir, 'cursor.json'), JSON.stringify(cursorManifest), 'utf8');
+    await writeFile(join(manifestsDir, 'cursor-skills.json'), JSON.stringify(cursorManifest), 'utf8');
     await writeFile(join(templatesRoot, 'claude.tpl.md'), '# Claude {{AGENT}}', 'utf8');
     await writeFile(join(templatesRoot, 'cursor.tpl.md'), '# Cursor {{AGENT}}', 'utf8');
 
     const ctx = makeIO();
-    const code = await runCli(['--dry-run'], runtime, ctx.io, { agent: 'cursor' }, { templatesRoot });
+    // v3.0: --agent cursor was renamed to --agent cursor-skills, and the
+    // manifest file is now cursor-skills.json (the registry maps the
+    // agent key to the manifestId).
+    const code = await runCli(['--dry-run'], runtime, ctx.io, { agent: 'cursor-skills' }, { templatesRoot });
     expect(code).toBe(0);
 
     const output = ctx.logs.join('\n');

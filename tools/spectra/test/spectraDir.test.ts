@@ -15,7 +15,7 @@ describe('resolveSpecDir', () => {
   });
 
   it('trims trailing slashes', () => {
-    expect(resolveSpecDir({ flag: 'docs/spec/' })).toBe('docs/spectra');
+    expect(resolveSpecDir({ flag: 'docs/spec/' })).toBe('docs/spec');
   });
 
   it('deduplicates consecutive slashes', () => {

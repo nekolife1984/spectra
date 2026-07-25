@@ -23,7 +23,7 @@ Boundary terminology continuity:
   - Design structure is reflected end-to-end (not just per-component)
   - No orphaned code, conflicting implementations, integration seams, or boundary spillover
 
-**What This Skill Does NOT Do**: This skill is not a full replacement for task-local review during `$spectra-impl`. It does NOT re-check every individual task acceptance criterion, every per-file reality check, or every single-task spec detail unless a concrete integration finding forces it.
+**What This Skill Does NOT Do**: This skill is not a full replacement for task-local review during `/spectra-impl`. It does NOT re-check every individual task acceptance criterion, every per-file reality check, or every single-task spec detail unless a concrete integration finding forces it.
 
 This skill's main question is: when the completed tasks are viewed together, do they still respect the designed boundary seams and dependency direction?
 </background_information>
@@ -34,7 +34,7 @@ This skill's main question is: when the completed tasks are viewed together, do 
 ### 1. Detect Validation Target
 
 **If no arguments provided** (`$1` empty):
-- Parse conversation history for `$spectra-impl <feature> [tasks]` commands
+- Parse conversation history for `/spectra-impl <feature> [tasks]` commands
 - Extract feature names and task numbers from each execution
 - Aggregate all implemented tasks by feature
 - Report detected implementations (e.g., "user-auth: 1.1, 1.2, 1.3")
@@ -195,7 +195,7 @@ If NO-GO, REMEDIATION is mandatory — identify the exact issue and what needs t
 ## Safety & Fallback
 
 ### Error Scenarios
-- **No Implementation Found**: If no `$spectra-impl` in history and no `[x]` tasks, report "No implementations detected"
+- **No Implementation Found**: If no `/spectra-impl` in history and no `[x]` tasks, report "No implementations detected"
 - **Test Command Unknown**: Return `MANUAL_VERIFY_REQUIRED` and explain which validation command is missing; do not return `GO`
 - **Missing Spec Files**: Stop with error if spec.json/requirements.md/design.md missing
 
@@ -206,8 +206,8 @@ If NO-GO, REMEDIATION is mandatory — identify the exact issue and what needs t
 
 **If NO-GO Decision**:
 - Address integration issues listed
-- Re-run `$spectra-impl <feature> [tasks]` for targeted fixes
-- Re-validate with `$spectra-validate-impl [feature]`
+- Re-run `/spectra-impl <feature> [tasks]` for targeted fixes
+- Re-validate with `/spectra-validate-impl [feature]`
 
 **Session Interrupted**:
 - Safe to re-run — validation is read-only and idempotent

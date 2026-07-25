@@ -64,7 +64,7 @@ After all research completes, synthesize findings in main context before generat
    - If scope could be misread, add lightweight boundary context without introducing implementation or architecture ownership detail
    - Keep this as a draft until the review gate passes; do not write `requirements.md` yet
 
-4. **Review Requirements Draft**:
+Step 4: Review Requirements Draft:
    - Run the `Requirements Review Gate` from `rules/requirements-review-gate.md`
    - Review coverage, EARS compliance, ambiguity, adjacent expectations, and scope boundaries before finalizing
    - If issues are local to the draft, repair the requirements and review again
@@ -135,17 +135,17 @@ Provide output in the language specified in spec.json with:
 - **Incomplete Requirements**: After generation, explicitly ask user if requirements cover all expected functionality
 - **Steering Directory Empty**: Warn user that project context is missing and may affect requirement quality
 - **Non-numeric Requirement Headings**: If existing headings do not include a leading numeric ID (for example, they use "Requirement A"), normalize them to numeric IDs and keep that mapping consistent (never mix numeric and alphabetic labels).
-- **Scope Ambiguity Found During Requirements Review**: Stop execution, do not write a guessed `requirements.md`, and ask the user to clarify the missing or conflicting scope before re-running `$spectra-requirements $1`
+- **Scope Ambiguity Found During Requirements Review**: Stop execution, do not write a guessed `requirements.md`, and ask the user to clarify the missing or conflicting scope before re-running `/spectra-requirements $1`
 
 ### Next Phase: Design Generation
 
 **If Requirements Approved**:
 - Review generated requirements at `{{SPECTRA_DIR}}/specs/$1/requirements.md`
 - **Optional Gap Analysis** (for existing codebases):
-  - Run `$spectra-validate-gap $1` to analyze implementation gap with current code
+  - Run `/spectra-validate-gap $1` to analyze implementation gap with current code
   - Identifies existing components, integration points, and implementation strategy
   - Recommended for brownfield projects; skip for greenfield
-- Then `$spectra-design $1 -y` to proceed to design phase
+- Then `/spectra-design $1 -y` to proceed to design phase
 
 **If Modifications Needed**:
-- Provide feedback and re-run `$spectra-requirements $1`
+- Provide feedback and re-run `/spectra-requirements $1`

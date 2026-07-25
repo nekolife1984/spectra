@@ -31,7 +31,7 @@ description: Create complete specs (requirements, design, tasks) for all feature
    - `## Direct Implementation Candidates`
    Do not include these in dependency-wave execution; they are awareness-only inputs for sequencing and consistency review.
 4. For each pending feature in `## Specs (dependency order)`, verify `{{SPECTRA_DIR}}/specs/<feature>/brief.md` exists
-5. If any brief.md is missing, stop and report: "Missing brief.md for: [list]. Run `$spectra-discovery` to generate briefs first."
+5. If any brief.md is missing, stop and report: "Missing brief.md for: [list]. Run `/spectra-discovery` to generate briefs first."
 
 ## Step 2: Build Dependency Waves
 
@@ -145,7 +145,7 @@ Spec Batch Complete:
   Existing spec updates pending: <count or none>
   Direct implementation candidates pending: <count or none>
 
-Next: Review generated specs, then start implementation with $spectra-impl <feature>
+Next: Review generated specs, then start implementation with /spectra-impl <feature>
 ```
 
 </instructions>
@@ -164,14 +164,14 @@ Next: Review generated specs, then start implementation with $spectra-impl <feat
 - Log the error, skip the failed feature
 - Continue with remaining features in the wave
 - Report failed features in the summary
-- Suggest: "Run `$spectra-quick <feature> --auto` manually for failed features."
+- Suggest: "Run `/spectra-quick <feature> --auto` manually for failed features."
 
 **Circular dependencies**:
 - If dependency graph has cycles, report the cycle and stop
 - Suggest: "Fix dependency ordering in roadmap.md"
 
 **Roadmap not found**:
-- Stop and report: "No roadmap.md found. Run `$spectra-discovery` first."
+- Stop and report: "No roadmap.md found. Run `/spectra-discovery` first."
 
 **All specs already complete**:
 - Report: "All specs in roadmap.md are already complete. Nothing to do."

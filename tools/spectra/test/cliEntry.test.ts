@@ -43,13 +43,14 @@ describe('CLI entry', () => {
   });
 
   it('prints plan on --dry-run', async () => {
+    // v3.0: --agent gemini-cli was renamed to --agent gemini-cli-skills.
     const ctx = makeIO();
-    const code = await runCli(['--dry-run', '--agent', 'gemini-cli', '--os', 'mac'], runtime, ctx.io, {});
+    const code = await runCli(['--dry-run', '--agent', 'gemini-cli-skills', '--os', 'mac'], runtime, ctx.io, {});
     expect(code).toBe(0);
     const out = ctx.logs.join('\n');
     expect(out).toMatch(/Plan \(dry-run\)/);
     expect(out).toMatch(/Total: \d+/);
-    expect(out).toMatch(/templateDir.*templates\/agents\/gemini-cli/);
+    expect(out).toMatch(/templateDir.*templates\/agents\/gemini-cli-skills/);
   });
 
   it('shows error on invalid flag', async () => {

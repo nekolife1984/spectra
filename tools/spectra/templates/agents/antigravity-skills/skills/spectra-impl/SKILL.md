@@ -11,6 +11,8 @@ You operate in two modes:
 - **Autonomous mode** (no task numbers): Dispatch a fresh sub-agent per task, with independent review after each
 - **Manual mode** (task numbers provided): Execute selected tasks directly in the main context
 
+- **Agent tool**: Dispatches implementer and reviewer sub-agents for task implementation
+
 - **Success Criteria**:
   - All tests written before implementation code
   - Code passes all tests with no regressions
@@ -207,7 +209,7 @@ Before writing any code, read the relevant sections of requirements.md and desig
 ## Step 4: Final Validation
 
 **Autonomous mode**:
-- After all tasks complete, run `$spectra-validate-impl $1` as a GO/NO-GO gate
+- After all tasks complete, run `/spectra-validate-impl $1` as a GO/NO-GO gate
 - If validation returns GO → before reporting feature success, apply `spectra-verify-completion` to the feature-level claim using the validation result and fresh supporting evidence
 - If validation returns NO-GO:
   - Fix only concrete findings from the validation report
@@ -215,8 +217,8 @@ Before writing any code, read the relevant sections of requirements.md and desig
 - If validation returns MANUAL_VERIFY_REQUIRED → stop and report the missing verification step
 
 **Manual mode**:
-- Suggest running `$spectra-validate-impl $1` but do not auto-execute
-- If review mode is `off`, treat `$spectra-validate-impl $1` as mandatory before any feature-level success claim
+- Suggest running `/spectra-validate-impl $1` but do not auto-execute
+- If review mode is `off`, treat `/spectra-validate-impl $1` as mandatory before any feature-level success claim
 
 ## Feature Flag Protocol
 
@@ -253,7 +255,7 @@ For tasks that add or change behavior, enforce RED → GREEN with a feature flag
 
 **Tasks Not Approved or Missing Spec Files**:
 - **Stop Execution**: All spec files must exist and tasks must be approved
-- **Suggested Action**: "Complete previous phases: `$spectra-requirements`, `$spectra-design`, `$spectra-tasks`"
+- **Suggested Action**: "Complete previous phases: `/spectra-requirements`, `/spectra-design`, `/spectra-tasks`"
 
 **Test Failures**:
 - **Stop Implementation**: Fix failing tests before continuing
@@ -273,5 +275,5 @@ For tasks that add or change behavior, enforce RED → GREEN with a feature flag
 - If debug returns `NEXT_ACTION: STOP_FOR_HUMAN` because of task ordering, boundary, or decomposition problems, stop and return for human review of `tasks.md` or the approved plan instead of forcing a code workaround
 
 **Session Interrupted**:
-- Safe to re-run `$spectra-impl $1` — completed tasks are already `[x]` in tasks.md and committed to git
+- Safe to re-run `/spectra-impl $1` — completed tasks are already `[x]` in tasks.md and committed to git
 - The controller re-reads tasks.md on each iteration, so it will pick up where it left off automatically

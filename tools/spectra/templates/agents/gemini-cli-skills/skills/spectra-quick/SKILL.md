@@ -52,7 +52,7 @@ Execute these 4 phases in order:
 **Core Logic**:
 
 1. **Check for Brief**:
-   - If `{{SPECTRA_DIR}}/specs/{feature-name}/brief.md` exists (created by `$spectra-discovery`), read it for discovery context (problem, approach, scope, constraints)
+   - If `{{SPECTRA_DIR}}/specs/{feature-name}/brief.md` exists (created by `/spectra-discovery`), read it for discovery context (problem, approach, scope, constraints)
    - Use brief content as the project description instead of `$ARGUMENTS`
 
 2. **Generate Feature Name**:
@@ -102,7 +102,7 @@ Execute these 4 phases in order:
 
 #### Phase 2: Generate Requirements
 
-Invoke `$spectra-requirements {feature-name}`.
+Invoke `/spectra-requirements {feature-name}`.
 
 Wait for completion. IGNORE any "Next Step" message (it is for standalone usage).
 
@@ -118,7 +118,7 @@ Wait for completion. IGNORE any "Next Step" message (it is for standalone usage)
 
 #### Phase 3: Generate Design
 
-Invoke `$spectra-design {feature-name} -y`. The `-y` flag auto-approves requirements.
+Invoke `/spectra-design {feature-name} -y`. The `-y` flag auto-approves requirements.
 
 Wait for completion. IGNORE any "Next Step" message.
 
@@ -134,7 +134,7 @@ Wait for completion. IGNORE any "Next Step" message.
 
 #### Phase 4: Generate Tasks
 
-Invoke `$spectra-tasks {feature-name} -y`. The `-y` flag auto-approves requirements, design, and tasks.
+Invoke `/spectra-tasks {feature-name} -y`. The `-y` flag auto-approves requirements, design, and tasks.
 
 Wait for completion.
 
@@ -221,17 +221,17 @@ Quick Spec Generation Complete!
 - {{SPECTRA_DIR}}/specs/{feature}/tasks.md ({N} tasks)
 
 Quick generation skipped:
-- `$spectra-validate-gap` - Gap analysis (integration check)
-- `$spectra-validate-design` - Design review (architecture validation)
+- `/spectra-validate-gap` - Gap analysis (integration check)
+- `/spectra-validate-design` - Design review (architecture validation)
 
 Sanity review: PASSED | FOLLOW-UP REQUIRED
 
 ## Next Steps:
 1. Review generated specs (especially design.md)
 2. Optional validation:
-   - `$spectra-validate-gap {feature}` - Check integration with existing codebase
-   - `$spectra-validate-design {feature}` - Verify architecture quality
-3. Start implementation: `$spectra-impl {feature}`
+   - `/spectra-validate-gap {feature}` - Check integration with existing codebase
+   - `/spectra-validate-design {feature}` - Verify architecture quality
+3. Start implementation: `/spectra-impl {feature}`
 
 ```
 
@@ -257,7 +257,7 @@ Sanity review: PASSED | FOLLOW-UP REQUIRED
 **Sanity Review Failed**:
 - Stop workflow
 - Report the exact contradiction, missing prerequisite, or task-plan issue
-- Suggest targeted follow-up with `$spectra-design {feature}`, `$spectra-tasks {feature}`, or manual edits depending on the finding
+- Suggest targeted follow-up with `/spectra-design {feature}`, `/spectra-tasks {feature}`, or manual edits depending on the finding
 
 **User Cancellation** (Interactive Mode):
 - Stop gracefully

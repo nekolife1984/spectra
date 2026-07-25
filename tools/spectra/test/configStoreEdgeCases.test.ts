@@ -37,26 +37,27 @@ describe('config store edge cases', () => {
 
   it('saves config with proper formatting', async () => {
     const dir = await mkTmp();
+    // v3.0: --agent claude-code was renamed to --agent claude-code-skills.
     const config: UserConfig = {
-      agent: 'claude-code',
+      agent: 'claude-code-skills',
       lang: 'ja',
       agentLayouts: {
-        'claude-code': {
+        'claude-code-skills': {
           commandsDir: '.custom'
         }
       }
     };
-    
+
     await saveUserConfig(dir, config);
-    
+
     // Read raw file content to verify formatting
     const file = join(dir, '.spectra.json');
     const raw = await require('node:fs/promises').readFile(file, 'utf8');
-    
+
     expect(raw).toMatch(/^{\s*\n/); // Starts with formatted JSON
     expect(raw).toMatch(/}\n$/); // Ends with closing brace followed by newline
-    expect(raw).toContain('  "agent": "claude-code"'); // Proper indentation
-    
+    expect(raw).toContain('  "agent": "claude-code-skills"'); // Proper indentation
+
     // Verify it can be loaded back
     const loaded = await loadUserConfig(dir);
     expect(loaded).toEqual(config);
@@ -64,25 +65,27 @@ describe('config store edge cases', () => {
 
   it('handles complex nested config structures', async () => {
     const dir = await mkTmp();
+    // v3.0: agent names end in -skills. configStore round-trips any
+    // UserConfig, so the values are just strings.
     const complexConfig: UserConfig = {
-      agent: 'gemini-cli',
+      agent: 'gemini-cli-skills',
       lang: 'zh-TW',
       os: 'linux',
       spectraDir: 'docs/spectra',
       overwrite: 'force',
       backupDir: 'backups',
       agentLayouts: {
-        'claude-code': {
+        'claude-code-skills': {
           commandsDir: '.claude/custom',
           agentDir: '.claude-custom',
           docFile: 'CLAUDE_CUSTOM.md'
         },
-        'gemini-cli': {
+        'gemini-cli-skills': {
           commandsDir: '.gemini/custom'
         }
       }
     };
-    
+
     await saveUserConfig(dir, complexConfig);
     const loaded = await loadUserConfig(dir);
     expect(loaded).toEqual(complexConfig);
@@ -91,7 +94,7 @@ describe('config store edge cases', () => {
   it('handles empty object config', async () => {
     const dir = await mkTmp();
     const emptyConfig: UserConfig = {};
-    
+
     await saveUserConfig(dir, emptyConfig);
     const loaded = await loadUserConfig(dir);
     expect(loaded).toEqual({});
@@ -100,12 +103,12 @@ describe('config store edge cases', () => {
   it('creates directory structure when saving to non-existent path', async () => {
     const dir = await mkTmp();
     const nestedDir = join(dir, 'nested', 'path');
-    
+
     try {
-      await saveUserConfig(nestedDir, { agent: 'claude-code' });
+      await saveUserConfig(nestedDir, { agent: 'claude-code-skills' });
       // If this doesn't throw, the directory was created automatically
       const loaded = await loadUserConfig(nestedDir);
-      expect(loaded.agent).toBe('claude-code');
+      expect(loaded.agent).toBe('claude-code-skills');
     } catch (error) {
       // Expected behavior: should throw when trying to write to non-existent directory
       expect(error).toBeDefined();
