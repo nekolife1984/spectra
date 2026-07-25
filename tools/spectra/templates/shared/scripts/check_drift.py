@@ -6,27 +6,27 @@ reconciliation_ledger（設計判断台帳）にも対応。
 
 Usage:
   # 現在の状態のスナップショットを保存
-  python3 .agents/scripts/check_drift.py --snapshot
+  python3 .spectra/scripts/check_drift.py --snapshot
 
   # 理由付きでスナップショット保存（台帳に記録）
-  python3 .agents/scripts/check_drift.py --snapshot --reason "ログイン機能を追加"
+  python3 .spectra/scripts/check_drift.py --snapshot --reason "ログイン機能を追加"
 
   # 設計判断台帳を表示
-  python3 .agents/scripts/check_drift.py --ledger
-  python3 .agents/scripts/check_drift.py --ledger --ledger-id "2026-07-25-001"
-  python3 .agents/scripts/check_drift.py --ledger --ledger-limit 5
+  python3 .spectra/scripts/check_drift.py --ledger
+  python3 .spectra/scripts/check_drift.py --ledger --ledger-id "2026-07-25-001"
+  python3 .spectra/scripts/check_drift.py --ledger --ledger-limit 5
 
   # 現在の状態とスナップショットを比較（ドリフト検出）
-  python3 .agents/scripts/check_drift.py --check
+  python3 .spectra/scripts/check_drift.py --check
 
   # git diff ベースでドリフト検出
-  python3 .agents/scripts/check_drift.py --diff
+  python3 .spectra/scripts/check_drift.py --diff
 
   # git diff ベース + CI ゲートモード（ドリフトあり → exit 1）
-  python3 .agents/scripts/check_drift.py --diff --gate
+  python3 .spectra/scripts/check_drift.py --diff --gate
 
   # ベースブランチとの比較
-  python3 .agents/scripts/check_drift.py --diff --base origin/main
+  python3 .spectra/scripts/check_drift.py --diff --base origin/main
 """
 
 import argparse
@@ -46,7 +46,7 @@ TRACE_MAPPING_PATH = Path(".trace-mapping.yaml")
 SNAPSHOT_PATH = Path(".trace-snapshot.json")
 LEDGER_PATH = Path(".spectra/reconciliation_ledger.yaml")
 
-# このスクリプト自身のディレクトリ（.agents/scripts/）は extract_tags.py と同じ
+# このスクリプト自身のディレクトリ（.spectra/scripts/）は extract_tags.py と同じ
 _SCRIPT_DIR = Path(__file__).parent.resolve()
 _EXTRACT_TAGS = _SCRIPT_DIR / "extract_tags.py"
 
@@ -61,7 +61,7 @@ def load_mapping(path: Path = TRACE_MAPPING_PATH) -> list[dict]:
 
 
 def extract_tags_from_dir(directory: str = ".") -> list[dict]:
-    """.agents/scripts/extract_tags.py を使ってタグを抽出する。"""
+    """.spectra/scripts/extract_tags.py を使ってタグを抽出する。"""
     extractor = _EXTRACT_TAGS
     if not extractor.exists():
         print(f"WARNING: {extractor} not found", file=sys.stderr)

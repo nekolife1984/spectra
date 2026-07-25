@@ -40,7 +40,7 @@ The script automates:
 npx github:nekolife1984/spectra
 
 # CRG only (after skills install)
-bash .agents/scripts/setup-crg.sh --yes
+bash .spectra/scripts/setup-crg.sh --yes
 ```
 
 ## Features
@@ -84,7 +84,7 @@ Most skills integrate with code-review-graph for graph-aware code analysis:
 - **13 languages**: Templates rendered in your chosen language via `--lang`
 - **Japanese templates**: `--lang ja` for requirements, design, and tasks in Japanese
 - **Pre-commit hook**: Auto-updates traceability snapshot on every commit (set up by `setup-crg.sh`)
-- **CI/CD gate**: `python3 .agents/scripts/check_drift.py --diff --gate` detects spec drift in CI
+- **CI/CD gate**: `python3 .spectra/scripts/check_drift.py --diff --gate` detects spec drift in CI
 
 ## Documentation
 

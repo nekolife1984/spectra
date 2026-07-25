@@ -147,7 +147,7 @@ Once all research results return, synthesize in main context before proceeding.
 3. **Run @design/@satisfies Completeness Gate**:
    - If `.trace-mapping.yaml` exists, verify `@design` and `@satisfies` tags match the mapping:
      ```bash
-     python3 .agents/scripts/check-trace-completeness.py --check design --project-dir .
+     python3 .spectra/scripts/check-trace-completeness.py --check design --project-dir .
      ```
    - If the gate fails, fix missing `<!-- @design ComponentName -->` or `<!-- @satisfies X.Y -->` tags in design.md and re-run until it passes
    - This ensures every component has a machine-readable design tag and declares which requirements it satisfies

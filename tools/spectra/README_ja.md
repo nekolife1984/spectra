@@ -56,7 +56,7 @@ npx github:nekolife1984/spectra --cursor-skills --lang zh-TW  # Cursor IDE、繁
 インストール後、**code-review-graph** を導入するとコードグラフを活用した仕様↔コード影響分析が可能になります:
 
 ```bash
-bash .agents/scripts/setup-crg.sh
+bash .spectra/scripts/setup-crg.sh
 ```
 
 これにより以下が有効になります:
@@ -66,7 +66,7 @@ bash .agents/scripts/setup-crg.sh
 - CRG 強化された設計レビュー、ギャップ分析、完了検証など（全15スキル）
 - pre-commit hook によるコミット時の自動スナップショット更新
 
-詳細は[セットアップガイド](./.agents/scripts/README.md)を参照。
+詳細は[セットアップガイド](./.spectra/scripts/README.md)を参照。
 
 その後、エージェント上で:
 

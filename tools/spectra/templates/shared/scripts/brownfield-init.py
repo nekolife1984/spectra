@@ -7,19 +7,19 @@ spectra のトレーサビリティ設定を自動生成する。
 
 Usage:
   # コードをスキャンして .spectra/ + .trace-mapping.yaml を生成
-  python3 .agents/scripts/brownfield-init.py
+  python3 .spectra/scripts/brownfield-init.py
 
   # ドライラン（変更なし）
-  python3 .agents/scripts/brownfield-init.py --dry-run
+  python3 .spectra/scripts/brownfield-init.py --dry-run
 
   # 特定ディレクトリのみスキャン
-  python3 .agents/scripts/brownfield-init.py --scan-dir src/
+  python3 .spectra/scripts/brownfield-init.py --scan-dir src/
 
   # 言語を限定
-  python3 .agents/scripts/brownfield-init.py --lang py,ts
+  python3 .spectra/scripts/brownfield-init.py --lang py,ts
 
   # タグ挿入をスキップ（spec生成のみ）
-  python3 .agents/scripts/brownfield-init.py --no-tags
+  python3 .spectra/scripts/brownfield-init.py --no-tags
 """
 
 import argparse
@@ -366,8 +366,8 @@ def main():
     if not args.dry_run:
         print(f"\nNext steps:")
         print(f"  1. Review .spectra/specs/ and .trace-mapping.yaml")
-        print(f"  2. Run: python3 .agents/scripts/check_drift.py --snapshot")
-        print(f"  3. Run: python3 .agents/scripts/check-trace-completeness.py")
+        print(f"  2. Run: python3 .spectra/scripts/check_drift.py --snapshot")
+        print(f"  3. Run: python3 .spectra/scripts/check-trace-completeness.py")
 
 
 if __name__ == "__main__":

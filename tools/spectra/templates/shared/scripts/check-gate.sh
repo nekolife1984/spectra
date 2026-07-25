@@ -45,7 +45,7 @@ run_p0_check() {
     local label="$2"
     echo ""
     info "P0: $label"
-    if python3 .agents/scripts/check-trace-completeness.py --check "$name" 2>&1; then
+    if python3 .spectra/scripts/check-trace-completeness.py --check "$name" 2>&1; then
         ok "$label: PASS"
         CHECK_RESULTS["$name"]="caught_amber"
     else
@@ -61,7 +61,7 @@ run_p0_check "stale"      "P0-3: stale mapping entry"
 
 echo ""
 info "P0-4: CI gate bypass..."
-if python3 .agents/scripts/check-ci-bypass.py 2>&1; then
+if python3 .spectra/scripts/check-ci-bypass.py 2>&1; then
     ok "P0-4: PASS"
     CHECK_RESULTS["ci_bypass"]="caught_amber"
 else

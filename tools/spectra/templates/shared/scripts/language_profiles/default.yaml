@@ -4,7 +4,7 @@
 # カスタムプロファイルを作成するには:
 #   1. このファイルを .spectra/profiles/custom.yaml にコピー
 #   2. 必要な言語を追加・編集
-#   3. .agents/scripts/language_profiles/ に配置すると自動読み込み
+#   3. .spectra/scripts/language_profiles/ に配置すると自動読み込み
 #
 # 注: import/require/include パターンは複雑なため各スクリプトにハードコード。
 #     拡張子とテストパターンのみこのファイルで管理。

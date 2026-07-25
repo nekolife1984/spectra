@@ -2,10 +2,10 @@
 # setup-crg.sh — Install and configure code-review-graph
 #
 # Usage:
-#   bash .agents/scripts/setup-crg.sh
-#   bash .agents/scripts/setup-crg.sh --yes
-#   bash .agents/scripts/setup-crg.sh --platform claude-code
-#   bash .agents/scripts/setup-crg.sh --skip-build
+#   bash .spectra/scripts/setup-crg.sh
+#   bash .spectra/scripts/setup-crg.sh --yes
+#   bash .spectra/scripts/setup-crg.sh --platform claude-code
+#   bash .spectra/scripts/setup-crg.sh --skip-build
 #
 # This script:
 #   1. Installs code-review-graph via pip/pipx if missing

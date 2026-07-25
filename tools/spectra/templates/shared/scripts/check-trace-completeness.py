@@ -8,19 +8,19 @@ False-Green ベクターチェック（P0）を含む。
 
 Usage:
   # 全チェック実行
-  python3 .agents/scripts/check-trace-completeness.py
+  python3 .spectra/scripts/check-trace-completeness.py
 
   # 特定のチェックのみ
-  python3 .agents/scripts/check-trace-completeness.py --check impl,files,symbols,module,requirements,depends,spec,design
+  python3 .spectra/scripts/check-trace-completeness.py --check impl,files,symbols,module,requirements,depends,spec,design
 
   # P0 false-green ベクターチェック
-  python3 .agents/scripts/check-trace-completeness.py --check assertions,stale
+  python3 .spectra/scripts/check-trace-completeness.py --check assertions,stale
 
   # プロジェクトディレクトリを指定
-  python3 .agents/scripts/check-trace-completeness.py --project-dir /path/to/project
+  python3 .spectra/scripts/check-trace-completeness.py --project-dir /path/to/project
 
   # チェック一覧
-  python3 .agents/scripts/check-trace-completeness.py --list-checks
+  python3 .spectra/scripts/check-trace-completeness.py --list-checks
 
 Exit code: 0 = all passed, 1 = any check failed
 
@@ -1064,7 +1064,7 @@ def check_snapshot_freshness(project_dir: Path, mappings: list[dict]) -> list[st
     if not snapshot_path.exists():
         issues.append(
             "[snapshot] .trace-snapshot.json が見つかりません — "
-            "初回実行: python3 .agents/scripts/check_drift.py --snapshot"
+            "初回実行: python3 .spectra/scripts/check_drift.py --snapshot"
         )
         return issues
 

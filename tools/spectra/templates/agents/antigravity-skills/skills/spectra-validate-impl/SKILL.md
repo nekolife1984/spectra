@@ -106,7 +106,7 @@ For each detected feature:
 **D.5 Trace Completeness Gate**
 - Run the trace completeness gate to verify all trace elements:
   ```bash
-  python3 .agents/scripts/check-trace-completeness.py --project-dir <project-root>
+  python3 .spectra/scripts/check-trace-completeness.py --project-dir <project-root>
   ```
 - Run `check-trace-completeness.py --help` for available checks and options (9 checks including @verifies test traceability)
 - If any check fails → flag as Critical (missing traceability = features not linked to specs)

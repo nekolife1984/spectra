@@ -6,16 +6,16 @@
 
 ```bash
 # 1. 初回スナップショットを保存（ベースライン）
-python3 .agents/scripts/check_drift.py --snapshot
+python3 .spectra/scripts/check_drift.py --snapshot
 
 # 2. コード変更後にドリフトをチェック
-python3 .agents/scripts/check_drift.py --check
+python3 .spectra/scripts/check_drift.py --check
 
 # 3. 特定要件の影響範囲を確認
-python3 .agents/scripts/impact.py --spec-id 1.1
+python3 .spectra/scripts/impact.py --spec-id 1.1
 
 # 4. コード変更がどの仕様に影響するか
-python3 .agents/scripts/impact.py --file strands-chat/ui/chat.py
+python3 .spectra/scripts/impact.py --file strands-chat/ui/chat.py
 ```
 
 ## セットアップ手順
@@ -26,7 +26,7 @@ python3 .agents/scripts/impact.py --file strands-chat/ui/chat.py
 
 ```bash
 # .git/hooks/ にリンク
-ln -sf ../../.agents/scripts/pre-commit.sh .git/hooks/pre-commit
+ln -sf ../../.spectra/scripts/pre-commit.sh .git/hooks/pre-commit
 ```
 
 設定後は、`git commit` のたびに以下が自動実行される:
@@ -40,10 +40,10 @@ TRACE_FULL=1 git commit -m "message"
 
 ### 1b. pre-push hook（opt-in）
 
-プッシュ前に3段階のフルチェックを実行する（`.agents/scripts/ci-check.sh` 相当）。
+プッシュ前に3段階のフルチェックを実行する（`.spectra/scripts/ci-check.sh` 相当）。
 
 ```bash
-ln -sf ../../.agents/scripts/pre-push.sh .git/hooks/pre-push
+ln -sf ../../.spectra/scripts/pre-push.sh .git/hooks/pre-push
 ```
 
 プッシュ時に以下を自動実行:
@@ -78,14 +78,14 @@ CIと同じチェックをコミット前にローカルで実行:
 
 ```bash
 # インストール（ワンタイム）
-cp tools/spectra/templates/shared/scripts/ci-check.sh .agents/scripts/ci-check.sh
-chmod +x .agents/scripts/ci-check.sh
+cp tools/spectra/templates/shared/scripts/ci-check.sh .spectra/scripts/ci-check.sh
+chmod +x .spectra/scripts/ci-check.sh
 
 # 手動実行
-bash .agents/scripts/ci-check.sh
+bash .spectra/scripts/ci-check.sh
 
 # または pre-push hook として（任意）
-ln -sf ../../.agents/scripts/ci-check.sh .git/hooks/pre-push
+ln -sf ../../.spectra/scripts/ci-check.sh .git/hooks/pre-push
 ```
 
 ### 3. Hermes cron 定期監視
@@ -103,7 +103,7 @@ ln -sf ../../.agents/scripts/ci-check.sh .git/hooks/pre-push
 **cron プロンプト:**
 ```
 昨日のコード変更で仕様書（design.md, requirements.md）とのドリフトがあれば、
-.agents/scripts/impact.py と .agents/scripts/check_drift.py を使って
+.spectra/scripts/impact.py と .spectra/scripts/check_drift.py を使って
 影響範囲を特定し、結果を報告してください。
 ```
 
@@ -129,13 +129,13 @@ prompt=昨日のコード変更で仕様書とのドリフトがあれば検出�
 
 ```bash
 # (1) スナップショット保存
-python3 .agents/scripts/check_drift.py --snapshot
+python3 .spectra/scripts/check_drift.py --snapshot
 
 # (2) pre-commit hook
-ln -sf ../../.agents/scripts/pre-commit.sh .git/hooks/pre-commit
+ln -sf ../../.spectra/scripts/pre-commit.sh .git/hooks/pre-commit
 
 # (3) 全マッピング確認
-python3 .agents/scripts/impact.py --list
+python3 .spectra/scripts/impact.py --list
 ```
 
 ### 5. 影響度バンド（Green/Amber/Gray）
@@ -144,12 +144,12 @@ python3 .agents/scripts/impact.py --list
 
 ```bash
 # バンド表示付きで実行（自動）
-python3 .agents/scripts/impact.py --spec-id 1.1
+python3 .spectra/scripts/impact.py --spec-id 1.1
 
 # 特定バンド以上の項目だけ表示
-python3 .agents/scripts/impact.py --spec-id 1.1 --band green
-python3 .agents/scripts/impact.py --spec-id 1.1 --band amber+
-python3 .agents/scripts/impact.py --quick --diff --band amber+
+python3 .spectra/scripts/impact.py --spec-id 1.1 --band green
+python3 .spectra/scripts/impact.py --spec-id 1.1 --band amber+
+python3 .spectra/scripts/impact.py --quick --diff --band amber+
 ```
 
 | バンド | スコア | 意味 | CIでの扱い |
@@ -172,7 +172,7 @@ python3 .agents/scripts/impact.py --quick --diff --band amber+
 JSON出力には `banded` キーにバンド別の詳細と内訳が含まれる:
 
 ```bash
-python3 .agents/scripts/impact.py --spec-id 1.1 --json | jq '.band_summary'
+python3 .spectra/scripts/impact.py --spec-id 1.1 --json | jq '.band_summary'
 # {
 #   "green": 2,
 #   "amber": 1,
@@ -197,21 +197,21 @@ python3 .agents/scripts/impact.py --spec-id 1.1 --json | jq '.band_summary'
 
 ```bash
 # 全マッピングをグラフ化（ファイル保存）
-python3 .agents/scripts/impact.py --list --graph
+python3 .spectra/scripts/impact.py --list --graph
 
 # 特定の spec だけグラフ化
-python3 .agents/scripts/impact.py --spec-id 1.1 --graph spec-1.1.html
+python3 .spectra/scripts/impact.py --spec-id 1.1 --graph spec-1.1.html
 
 # ファイル名指定なしでデフォルト名
-python3 .agents/scripts/impact.py --list --graph
+python3 .spectra/scripts/impact.py --list --graph
 
 # ブラウザで即座に開く（サーバ起動）
-python3 .agents/scripts/impact.py --list --serve
-python3 .agents/scripts/impact.py --spec-id 1.1 --serve
+python3 .spectra/scripts/impact.py --list --serve
+python3 .spectra/scripts/impact.py --spec-id 1.1 --serve
 
 # Quick モードでも使える
-python3 .agents/scripts/impact.py --quick --diff --graph
-python3 .agents/scripts/impact.py --quick --spec-id 2.1 --graph
+python3 .spectra/scripts/impact.py --quick --diff --graph
+python3 .spectra/scripts/impact.py --quick --spec-id 2.1 --graph
 ```
 
 グラフの特徴:
@@ -232,7 +232,7 @@ CRG(code-review-graph)がなくても、`build-dag.py` で作成した軽量impo
 
 ```bash
 # DAGを構築（全ソースファイルのimport関係をスキャン）
-python3 .agents/scripts/build-dag.py
+python3 .spectra/scripts/build-dag.py
 
 # → .spectra/graph/dag.json が生成される
 # → 対応言語: Python, TS/JS, Go, Rust, Ruby, Java, Kotlin, Swift,
@@ -243,10 +243,10 @@ python3 .agents/scripts/build-dag.py
 
 ```bash
 # DAGを使った推移的影響分析
-python3 .agents/scripts/impact.py --spec-id 1.1 --dag
+python3 .spectra/scripts/impact.py --spec-id 1.1 --dag
 
 # Quickモードでも使える
-python3 .agents/scripts/impact.py --quick --spec-id 1.1 --dag
+python3 .spectra/scripts/impact.py --quick --spec-id 1.1 --dag
 
 # 出力例
 #   影響分析: spec-id 1.1
@@ -285,19 +285,19 @@ cp -r tools/spectra/templates/shared/quality/ .spectra/quality/
 
 ```bash
 # @impl コードのカバレッジ確認（coverage.json または .coverage が必要）
-python3 .agents/scripts/check-trace-completeness.py --check coverage
+python3 .spectra/scripts/check-trace-completeness.py --check coverage
 
 # @verifies ファイルの実アサーションチェック
-python3 .agents/scripts/check-trace-completeness.py --check assertions
+python3 .spectra/scripts/check-trace-completeness.py --check assertions
 
 # .trace-mapping.yaml 参照コードの鮮度チェック（90日ルール）
-python3 .agents/scripts/check-trace-completeness.py --check stale
+python3 .spectra/scripts/check-trace-completeness.py --check stale
 
 # CI/CD で全P0チェックと一緒に実行
-python3 .agents/scripts/check-trace-completeness.py --check coverage,assertions,stale
+python3 .spectra/scripts/check-trace-completeness.py --check coverage,assertions,stale
 
 # または一発ゲート
-bash .agents/scripts/check-gate.sh
+bash .spectra/scripts/check-gate.sh
 ```
 
 | チェック | ベクター | 検出ロジック | 準備 |
@@ -312,16 +312,16 @@ bash .agents/scripts/check-gate.sh
 
 ```bash
 # 基本チェック
-python3 .agents/scripts/check-ci-bypass.py
+python3 .spectra/scripts/check-ci-bypass.py
 
 # 詳細表示
-python3 .agents/scripts/check-ci-bypass.py --verbose
+python3 .spectra/scripts/check-ci-bypass.py --verbose
 
 # 確認期間を30日に延ばす
-CI_BYPASS_LOOKBACK=30 python3 .agents/scripts/check-ci-bypass.py
+CI_BYPASS_LOOKBACK=30 python3 .spectra/scripts/check-ci-bypass.py
 
 # bypass を許可する（エラーにしない）
-SKIP_TRACE_ALLOWED=1 python3 .agents/scripts/check-ci-bypass.py
+SKIP_TRACE_ALLOWED=1 python3 .spectra/scripts/check-ci-bypass.py
 ```
 
 チェック内容:
@@ -339,7 +339,7 @@ cron 定期実行との組み合わせ:
 action: create
 schedule: 0 6 * * *
 name: daily-ci-bypass-check
-prompt: .agents/scripts/check-ci-bypass.py --verbose を実行し、結果を報告してください
+prompt: .spectra/scripts/check-ci-bypass.py --verbose を実行し、結果を報告してください
 skills: [spectra-traceability, ci-gate-monitor]
 ```
 
@@ -347,43 +347,43 @@ skills: [spectra-traceability, ci-gate-monitor]
 
 ```bash
 # 全マッピング一覧
-python3 .agents/scripts/impact.py --list
+python3 .spectra/scripts/impact.py --list
 
 # 仕様IDから影響コードをトレース
-python3 .agents/scripts/impact.py --spec-id 6.1
+python3 .spectra/scripts/impact.py --spec-id 6.1
 
 # コード変更から影響仕様をトレース
-python3 .agents/scripts/impact.py --file strands-chat/conversation/store.py
+python3 .spectra/scripts/impact.py --file strands-chat/conversation/store.py
 
 # git diff から一括トレース
-python3 .agents/scripts/impact.py --diff
+python3 .spectra/scripts/impact.py --diff
 
 # CRG 連携（code-review-graph MCP が利用可能な場合）
-python3 .agents/scripts/impact.py --spec-id 1.1 --crg
+python3 .spectra/scripts/impact.py --spec-id 1.1 --crg
 
 # ドリフト検出（スナップショット比較）
-python3 .agents/scripts/check_drift.py --check
+python3 .spectra/scripts/check_drift.py --check
 
 # ドリフト検出（git diff ベース、CI ゲートモード）
-python3 .agents/scripts/check_drift.py --diff --gate
+python3 .spectra/scripts/check_drift.py --diff --gate
 
 # @impl タグが欠けてるファイルを警告
-python3 .agents/scripts/extract_tags.py --check-missing
+python3 .spectra/scripts/extract_tags.py --check-missing
 
 # .trace-mapping.yaml 追記形式でタグ出力
-python3 .agents/scripts/extract_tags.py --trace-mapping
+python3 .spectra/scripts/extract_tags.py --trace-mapping
 
 # 簡易影響分析（.trace-mapping.yaml 不要）
-python3 .agents/scripts/impact.py --quick --file src/auth/login.py
-python3 .agents/scripts/impact.py --quick --spec-id 1.1
-python3 .agents/scripts/impact.py --quick --diff
+python3 .spectra/scripts/impact.py --quick --file src/auth/login.py
+python3 .spectra/scripts/impact.py --quick --spec-id 1.1
+python3 .spectra/scripts/impact.py --quick --diff
 ```
 
 ## アーキテクチャ
 
 ```
 .trace-mapping.yaml         ← 仕様↔コードの対応表（真実の源泉）
-.agents/scripts/            ← 分析スクリプト群
+.spectra/scripts/            ← 分析スクリプト群
 strands-chat/**/*.py        ← @impl タグが埋め込まれたコード
 .git/hooks/pre-commit       ← pre-commit hook（check_drift.py --snapshot）
 GitHub Actions / cron       ← 定期監視（オプション）

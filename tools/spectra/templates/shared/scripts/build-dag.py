@@ -9,16 +9,16 @@ CRG (code-review-graph) がなくても推移的影響分析を可能にする�
 
 Usage:
   # DAGを構築
-  python3 .agents/scripts/build-dag.py
+  python3 .spectra/scripts/build-dag.py
 
   # 出力ファイルを指定
-  python3 .agents/scripts/build-dag.py --output .spectra/graph/dag.json
+  python3 .spectra/scripts/build-dag.py --output .spectra/graph/dag.json
 
   # プロジェクトディレクトリ指定
-  python3 .agents/scripts/build-dag.py --project-dir /path/to/project
+  python3 .spectra/scripts/build-dag.py --project-dir /path/to/project
 
   # verbose
-  python3 .agents/scripts/build-dag.py --verbose
+  python3 .spectra/scripts/build-dag.py --verbose
 
 Output:
   .spectra/graph/dag.json  — デフォルト出力先

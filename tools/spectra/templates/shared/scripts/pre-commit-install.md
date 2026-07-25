@@ -3,7 +3,7 @@
 Run this once to set up the hook:
 
 ```bash
-ln -sf ../../.agents/scripts/pre-commit.sh .git/hooks/pre-commit
+ln -sf ../../.spectra/scripts/pre-commit.sh .git/hooks/pre-commit
 ```
 
 This automatically runs on every `git commit`:
@@ -29,12 +29,12 @@ Use `--no-verify` sparingly — only when you're mid-work and know the
 checks are noise. Make a habit of running the gate manually afterward:
 
 ```bash
-python3 .agents/scripts/check-impl-completeness.py
+python3 .spectra/scripts/check-impl-completeness.py
 ```
 
 ## Related
 
-See `.agents/scripts/README.md` for full setup guide including:
+See `.spectra/scripts/README.md` for full setup guide including:
 - CI/CD gate configuration
 - Hermes cron monitoring setup
 - Detailed script usage

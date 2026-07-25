@@ -18,7 +18,7 @@ This project integrates **code-review-graph (CRG)** MCP tools for code-graph-awa
 ## Traceability
 
 Projects can maintain a `.trace-mapping.yaml` file linking spec IDs to code files, symbols, tasks, and docs.
-Scripts in `.agents/scripts/` provide automated impact analysis:
+Scripts in `.spectra/scripts/` provide automated impact analysis:
 
 | Script | Purpose |
 |--------|---------|

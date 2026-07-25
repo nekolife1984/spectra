@@ -117,7 +117,7 @@ if (-not (Test-Path $setupCrgPath)) {
     New-Item -ItemType Directory -Force -Path ".agents\scripts" | Out-Null
     Write-Info "Downloading setup-crg.ps1..."
     try {
-        Invoke-WebRequest -Uri "$RAW_BASE/.agents/scripts/setup-crg.ps1" -OutFile $setupCrgPath
+        Invoke-WebRequest -Uri "$RAW_BASE/.spectra/scripts/setup-crg.ps1" -OutFile $setupCrgPath
         Write-Ok "setup-crg.ps1 downloaded"
     } catch {
         Write-Warn "Failed to download setup-crg.ps1. Skipping CRG setup."
@@ -144,9 +144,9 @@ if (Test-Path ".trace-mapping.yaml") {
 
 # ── Step 4: Initial snapshot ──
 Write-Info "Step 4/4: Saving initial snapshot..."
-if (Test-Path ".agents/scripts/check_drift.py") {
+if (Test-Path ".spectra/scripts/check_drift.py") {
     try {
-        & $pythonCmd .agents/scripts/check_drift.py --snapshot
+        & $pythonCmd .spectra/scripts/check_drift.py --snapshot
         Write-Ok "Initial snapshot saved"
     } catch { Write-Warn "Snapshot failed" }
 } else { Write-Warn "check_drift.py not found" }
@@ -180,20 +180,20 @@ if ($ciChoice -eq "y" -or $ciChoice -eq "Y") {
         # ci-check.sh
         if (Test-Path "$templateSrc/scripts/ci-check.sh") {
             try {
-                Copy-Item "$templateSrc/scripts/ci-check.sh" ".agents/scripts/ci-check.sh"
-                Write-Ok "Copied .agents/scripts/ci-check.sh"
+                Copy-Item "$templateSrc/scripts/ci-check.sh" ".spectra/scripts/ci-check.sh"
+                Write-Ok "Copied .spectra/scripts/ci-check.sh"
             } catch { Write-Warn "Failed to copy ci-check.sh" }
         }
     } else {
         Write-Warn "Template files not found locally."
         Write-Host "  Install manually from the spectra repo:"
         Write-Host "    Copy-Item tools/spectra/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
-        Write-Host "    Copy-Item tools/spectra/templates/shared/scripts/ci-check.sh .agents/scripts/"
+        Write-Host "    Copy-Item tools/spectra/templates/shared/scripts/ci-check.sh .spectra/scripts/"
     }
 } else {
     Write-Info "Skipping CI/CD templates. Install later with:"
     Write-Host "    Copy-Item tools/spectra/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
-    Write-Host "    Copy-Item tools/spectra/templates/shared/scripts/ci-check.sh .agents/scripts/"
+    Write-Host "    Copy-Item tools/spectra/templates/shared/scripts/ci-check.sh .spectra/scripts/"
 }
 
 # ── Completion ──

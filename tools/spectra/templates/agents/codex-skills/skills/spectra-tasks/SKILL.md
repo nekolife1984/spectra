@@ -120,7 +120,7 @@ Before writing `tasks.md`, run one lightweight independent sanity review of the 
 **Run Spec Trace Completeness Gate**:
 - If `.trace-mapping.yaml` exists, verify all spec-side traceability:
   ```bash
-  python3 .agents/scripts/check-trace-completeness.py --check spec,design,requirements,depends --project-dir .
+  python3 .spectra/scripts/check-trace-completeness.py --check spec,design,requirements,depends --project-dir .
   ```
 - This checks:
   - `@spec` tags in requirements.md ↔ `.trace-mapping.yaml`

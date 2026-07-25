@@ -131,13 +131,13 @@ ok "spectra installation complete"
 # ── Step 2: CRG Setup ──────────────────────────────────
 info "Step 2/4: Setting up code-review-graph..."
 
-SETUP_CRG=".agents/scripts/setup-crg.sh"
+SETUP_CRG=".spectra/scripts/setup-crg.sh"
 if [ -f "$SETUP_CRG" ]; then
   info "setup-crg.sh already exists"
 else
-  mkdir -p .agents/scripts
+  mkdir -p .spectra/scripts
   info "Downloading setup-crg.sh..."
-  curl -sSL "$RAW_BASE/.agents/scripts/setup-crg.sh" -o "$SETUP_CRG"
+  curl -sSL "$RAW_BASE/.spectra/scripts/setup-crg.sh" -o "$SETUP_CRG"
   chmod +x "$SETUP_CRG"
   ok "setup-crg.sh downloaded"
 fi
@@ -177,8 +177,8 @@ fi
 # ── Step 4: Initial Snapshot ───────────────────────────
 info "Step 4/4: Saving initial snapshot..."
 
-if [ -f ".agents/scripts/check_drift.py" ]; then
-  $PYTHON .agents/scripts/check_drift.py --snapshot 2>/dev/null && \
+if [ -f ".spectra/scripts/check_drift.py" ]; then
+  $PYTHON .spectra/scripts/check_drift.py --snapshot 2>/dev/null && \
     ok "Initial snapshot saved" || \
     warn "Snapshot failed (rerun later when code exists)"
 else
@@ -218,22 +218,22 @@ case "${CI_CHOICE:-n}" in
 
       # ci-check.sh
       if [ -f "$TEMPLATE_SRC/scripts/ci-check.sh" ]; then
-        cp "$TEMPLATE_SRC/scripts/ci-check.sh" .agents/scripts/ci-check.sh 2>/dev/null && \
-          chmod +x .agents/scripts/ci-check.sh 2>/dev/null && \
-          ok "Copied .agents/scripts/ci-check.sh" || \
+        cp "$TEMPLATE_SRC/scripts/ci-check.sh" .spectra/scripts/ci-check.sh 2>/dev/null && \
+          chmod +x .spectra/scripts/ci-check.sh 2>/dev/null && \
+          ok "Copied .spectra/scripts/ci-check.sh" || \
           warn "Failed to copy ci-check.sh"
       fi
     else
       warn "Template files not found locally."
       echo "  To install manually, run from the spectra repo:"
       echo "    cp tools/spectra/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
-      echo "    cp tools/spectra/templates/shared/scripts/ci-check.sh .agents/scripts/"
+      echo "    cp tools/spectra/templates/shared/scripts/ci-check.sh .spectra/scripts/"
     fi
     ;;
   *)
     info "Skipping CI/CD templates. Install later with:"
     echo "  cp tools/spectra/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
-    echo "  cp tools/spectra/templates/shared/scripts/ci-check.sh .agents/scripts/"
+    echo "  cp tools/spectra/templates/shared/scripts/ci-check.sh .spectra/scripts/"
     ;;
 esac
 

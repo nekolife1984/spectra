@@ -40,7 +40,7 @@ Invoke-WebRequest -Uri https://raw.githubusercontent.com/nekolife1984/spectra/ma
 npx github:nekolife1984/spectra
 
 # CRG のみ（スキルインストール後）
-bash .agents/scripts/setup-crg.sh --yes
+bash .spectra/scripts/setup-crg.sh --yes
 ```
 
 ## 特徴
@@ -84,7 +84,7 @@ bash .agents/scripts/setup-crg.sh --yes
 - **13言語対応**: `--lang` でテンプレートを選択可能
 - **日本語テンプレート**: `--lang ja` で要件定義書・設計書・タスク計画を日本語で生成
 - **pre-commit hook**: `setup-crg.sh` がコミット時のスナップショット自動更新を設定
-- **CI/CD ゲート**: `python3 .agents/scripts/check_drift.py --diff --gate` で仕様ドリフトを自動検出
+- **CI/CD ゲート**: `python3 .spectra/scripts/check_drift.py --diff --gate` で仕様ドリフトを自動検出
 
 ## ドキュメント
 

@@ -6,19 +6,19 @@
 
 Usage:
   # デフォルト（カレントディレクトリの .trace-mapping.yaml を読む）
-  python3 .agents/scripts/check-impl-completeness.py
+  python3 .spectra/scripts/check-impl-completeness.py
 
   # 特定のプロジェクトルートを指定
-  python3 .agents/scripts/check-impl-completeness.py --project-dir strands-chat/
+  python3 .spectra/scripts/check-impl-completeness.py --project-dir strands-chat/
 
   # 全ソースファイルの @impl タグ有無もチェック（trace-mapping の有無問わず）
-  python3 .agents/scripts/check-impl-completeness.py --check-all-sources
+  python3 .spectra/scripts/check-impl-completeness.py --check-all-sources
 
   # .trace-mapping.yaml のパスを明示指定
-  python3 .agents/scripts/check-impl-completeness.py --trace-mapping /path/to/.trace-mapping.yaml
+  python3 .spectra/scripts/check-impl-completeness.py --trace-mapping /path/to/.trace-mapping.yaml
 
   # JSON 出力（CI で機械的に処理したい場合）
-  python3 .agents/scripts/check-impl-completeness.py --format json
+  python3 .spectra/scripts/check-impl-completeness.py --format json
 
 Exit codes:
   0 — All @impl tags are present and correct

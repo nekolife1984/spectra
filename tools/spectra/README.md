@@ -56,7 +56,7 @@ Supports 8 AI coding agents (Claude Code and Codex stable; Cursor, Copilot, Wind
 After installation, optionally install **code-review-graph** for code-graph-aware spec→code impact analysis:
 
 ```bash
-bash .agents/scripts/setup-crg.sh
+bash .spectra/scripts/setup-crg.sh
 ```
 
 This enables:
@@ -66,7 +66,7 @@ This enables:
 - CRG-enhanced design review, gap analysis, completion verification, and more (15 skills total)
 - Pre-commit hook for automatic snapshot updates on every commit
 
-See [Setup Guide](./.agents/scripts/README.md) for more options including `--yes` and `--platform` flags.
+See [Setup Guide](./.spectra/scripts/README.md) for more options including `--yes` and `--platform` flags.
 
 Then, in your agent:
 

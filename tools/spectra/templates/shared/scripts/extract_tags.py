@@ -2,10 +2,10 @@
 DOCSTRING = """extract_tags.py - extract tags from code and spec documents.
 
 Usage:
-  python3 .agents/scripts/extract_tags.py --dir strands-chat/
-  python3 .agents/scripts/extract_tags.py --file strands-chat/agency/engine.py
-  python3 .agents/scripts/extract_tags.py --dir strands-chat/ --format json
-  python3 .agents/scripts/extract_tags.py --dir strands-chat/ --check-missing
+  python3 .spectra/scripts/extract_tags.py --dir strands-chat/
+  python3 .spectra/scripts/extract_tags.py --file strands-chat/agency/engine.py
+  python3 .spectra/scripts/extract_tags.py --dir strands-chat/ --format json
+  python3 .spectra/scripts/extract_tags.py --dir strands-chat/ --check-missing
 
 対応タグ:
   Code tags:    # @impl 1.1    # @module auth    # @feature login    # @verifies 1.1

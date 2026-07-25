@@ -43,7 +43,7 @@
       "source": {
         "type": "templateDir",
         "fromDir": "templates/shared/scripts",
-        "toDir": ".agents/scripts"
+        "toDir": ".spectra/scripts"
       }
     }
   ]

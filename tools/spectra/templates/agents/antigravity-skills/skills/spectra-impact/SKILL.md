@@ -22,16 +22,16 @@ This skill performs **code-originated impact analysis**. When a specific file or
 1. If `.trace-mapping.yaml` exists → use standard impact analysis (Steps 2-4)
 2. If `.trace-mapping.yaml` does NOT exist → fall back to `--quick` mode:
    ```bash
-   python3 .agents/scripts/impact.py --quick --file <path> --project-dir .
+   python3 .spectra/scripts/impact.py --quick --file <path> --project-dir .
    ```
    Quick mode greps `@impl`/`@spec`/`@verifies` tags directly from the codebase
    without a mapping file (brownfield-friendly).
 3. **DAG transitive mode** (CRG replacement): If CRG MCP is not available but
    `.spectra/graph/dag.json` exists, use `--dag` for transitive import analysis:
    ```bash
-   python3 .agents/scripts/impact.py --spec-id 1.1 --dag
+   python3 .spectra/scripts/impact.py --spec-id 1.1 --dag
    ```
-   Build DAG with: `python3 .agents/scripts/build-dag.py`
+   Build DAG with: `python3 .spectra/scripts/build-dag.py`
    Supports 17 languages including C/C++/C# (// @impl syntax).
 4. Interpret target from `$1`:
    - File path (e.g., `src/ui/chat.py`) → single file analysis
@@ -40,10 +40,10 @@ This skill performs **code-originated impact analysis**. When a specific file or
 
 ## Step 2: Code→Spec Trace
 
-1. Run `python3 .agents/scripts/impact.py --file <path> --json` for baseline
+1. Run `python3 .spectra/scripts/impact.py --file <path> --json` for baseline
    (or `--quick --file <path> --json` if no `.trace-mapping.yaml`)
 2. If empty (unregistered in `.trace-mapping.yaml`), check code for `@impl` tags:
-   - Run `python3 .agents/scripts/extract_tags.py --file <path> --format json`
+   - Run `python3 .spectra/scripts/extract_tags.py --file <path> --format json`
    - If `@impl` found → warn that mapping entry is missing
    - If no tags → use CRG for indirect spec relations
 

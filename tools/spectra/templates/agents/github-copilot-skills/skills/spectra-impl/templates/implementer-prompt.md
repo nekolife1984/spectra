@@ -67,7 +67,7 @@ Before self-review, tag each changed file and update spec documents with traceab
 
 **Gate**: If `.trace-mapping.yaml` exists, run the trace completeness gate:
   ```bash
-  python3 .agents/scripts/check-trace-completeness.py
+  python3 .spectra/scripts/check-trace-completeness.py
   ```
   If it fails, fix the gaps and re-run until it passes.
 

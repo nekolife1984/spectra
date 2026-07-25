@@ -128,7 +128,7 @@ Output: CONSISTENT areas + ISSUES with (which specs, what's inconsistent, sugges
 6. **Run Spec Trace Completeness Gate**:
    - Verify all spec-side traceability across all completed specs:
      ```bash
-     python3 .agents/scripts/check-trace-completeness.py --check spec,design,requirements,depends --project-dir .
+     python3 .spectra/scripts/check-trace-completeness.py --check spec,design,requirements,depends --project-dir .
      ```
    - If the gate fails, report which specs have missing traceability tags and suggest fixes
    - This ensures every spec's `.trace-mapping.yaml` entries have matching spec-side annotations

@@ -1,14 +1,14 @@
 #!/bin/sh
 # pre-commit hook: コード変更時のトレーサビリティチェック
 #
-# 有効化: ln -sf ../../.agents/scripts/pre-commit.sh .git/hooks/pre-commit
+# 有効化: ln -sf ../../.spectra/scripts/pre-commit.sh .git/hooks/pre-commit
 #
 # 以下のチェックを実行する:
 #   1. .trace-mapping.yaml とコードの @impl タグを突き合わせ
 #   2. コード変更のスナップショットを更新
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo '.')"
-SCRIPT_DIR="$PROJECT_ROOT/.agents/scripts"
+SCRIPT_DIR="$PROJECT_ROOT/.spectra/scripts"
 EXIT_CODE=0
 
 echo "🔍 [pre-commit] Running traceability checks..."

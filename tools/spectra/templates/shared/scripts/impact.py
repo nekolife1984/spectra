@@ -11,37 +11,37 @@ grep で簡易影響分析が可能。
 
 Usage:
   # 仕様→コード影響（spec-id 指定）
-  python3 .agents/scripts/impact.py --spec-id 1.1
+  python3 .spectra/scripts/impact.py --spec-id 1.1
 
   # コード→仕様影響（ファイルパス指定）
-  python3 .agents/scripts/impact.py --file strands-chat/ui/chat.py
+  python3 .spectra/scripts/impact.py --file strands-chat/ui/chat.py
 
   # コード→仕様影響（diff 指定）
-  python3 .agents/scripts/impact.py --diff
+  python3 .spectra/scripts/impact.py --diff
 
   # 全マッピング一覧
-  python3 .agents/scripts/impact.py --list
+  python3 .spectra/scripts/impact.py --list
 
   # CRG 連携 (JSON 出力)
-  python3 .agents/scripts/impact.py --spec-id 6.1 --crg
+  python3 .spectra/scripts/impact.py --spec-id 6.1 --crg
 
   # --quick: .trace-mapping.yaml なしで @impl/@spec/@verifies タグを grep
-  python3 .agents/scripts/impact.py --quick --file src/auth/login.py
-  python3 .agents/scripts/impact.py --quick --spec-id 1.1
-  python3 .agents/scripts/impact.py --quick --diff
+  python3 .spectra/scripts/impact.py --quick --file src/auth/login.py
+  python3 .spectra/scripts/impact.py --quick --spec-id 1.1
+  python3 .spectra/scripts/impact.py --quick --diff
 
   # --band: バンドフィルターで結果を絞り込み
-  python3 .agents/scripts/impact.py --spec-id 1.1 --band green
-  python3 .agents/scripts/impact.py --quick --diff --band amber+
+  python3 .spectra/scripts/impact.py --spec-id 1.1 --band green
+  python3 .spectra/scripts/impact.py --quick --diff --band amber+
 
   # --graph: 対話的HTMLグラフを生成
-  python3 .agents/scripts/impact.py --list --graph
-  python3 .agents/scripts/impact.py --spec-id 1.1 --graph trace-1.1.html
-  python3 .agents/scripts/impact.py --quick --diff --graph
+  python3 .spectra/scripts/impact.py --list --graph
+  python3 .spectra/scripts/impact.py --spec-id 1.1 --graph trace-1.1.html
+  python3 .spectra/scripts/impact.py --quick --diff --graph
 
   # --serve: ブラウザで対話的グラフを表示
-  python3 .agents/scripts/impact.py --list --serve
-  python3 .agents/scripts/impact.py --spec-id 1.1 --serve
+  python3 .spectra/scripts/impact.py --list --serve
+  python3 .spectra/scripts/impact.py --spec-id 1.1 --serve
 """
 
 import argparse

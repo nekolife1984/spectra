@@ -8,13 +8,13 @@
 #   1. spectra で spec を生成（requirements.md に要件ID: 1, 2, 3...）
 #   2. 実装コードにコメントで # @impl 1.1 タグを追加
 #   3. このファイルにマッピングを追記
-#   4. python3 .agents/scripts/impact.py --spec-id 1.1 で影響分析
-#   5. python3 .agents/scripts/check_drift.py --snapshot でベースライン保存
+#   4. python3 .spectra/scripts/impact.py --spec-id 1.1 で影響分析
+#   5. python3 .spectra/scripts/check_drift.py --snapshot でベースライン保存
 #
 # 自動生成:
 #   /spectra-batch が spec 生成時にスケルトンを作成
 #   /spectra-impl が実装完了後に extract_tags.py を呼び出して更新
-#   手動追加: python3 .agents/scripts/extract_tags.py --trace-mapping
+#   手動追加: python3 .spectra/scripts/extract_tags.py --trace-mapping
 
 mappings:
   # ── 要件単位のマッピング ──

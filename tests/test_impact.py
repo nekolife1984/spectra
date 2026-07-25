@@ -8,7 +8,7 @@ impact.py is a 1667-line tool that drives the spectra traceability story:
   - drive CRG integration, graph rendering, HTTP serve, etc.
 
 Until this commit, the file shipped with zero tests, so any regression
-silently broke the CI gate `python3 .agents/scripts/check_drift.py --diff
+silently broke the CI gate `python3 .spectra/scripts/check_drift.py --diff
 --gate` that depends on the same tag/band logic.
 
 These tests cover the pure-function layer (no I/O, no CRG) plus a

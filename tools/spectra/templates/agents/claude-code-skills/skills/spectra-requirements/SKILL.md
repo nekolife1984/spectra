@@ -80,7 +80,7 @@ Step 4: Review Requirements Draft:
 6. **Run @spec Completeness Gate**:
    - If `.trace-mapping.yaml` exists, verify `@spec` tags match the mapping:
      ```bash
-     python3 .agents/scripts/check-trace-completeness.py --check spec --project-dir .
+     python3 .spectra/scripts/check-trace-completeness.py --check spec --project-dir .
      ```
    - If the gate fails, fix missing `<!-- @spec X.Y -->` tags in requirements.md and re-run until it passes
    - This ensures each requirement ID is declared as a machine-readable `@spec` tag

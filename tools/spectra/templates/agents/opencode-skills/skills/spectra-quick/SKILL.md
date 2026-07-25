@@ -147,7 +147,7 @@ After Phase 4, run the spec trace completeness gate, then a lightweight sanity r
 **Trace Completeness Gate**:
 - If `.trace-mapping.yaml` exists, verify all spec-side traceability:
   ```bash
-  python3 .agents/scripts/check-trace-completeness.py --check spec,design,requirements,depends --project-dir .
+  python3 .spectra/scripts/check-trace-completeness.py --check spec,design,requirements,depends --project-dir .
   ```
 - If the gate fails, fix the gaps and re-run until it passes.
 

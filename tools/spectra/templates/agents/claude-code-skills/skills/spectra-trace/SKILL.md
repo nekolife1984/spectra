@@ -21,16 +21,16 @@ This skill performs **spec-originated impact analysis**. When a specific require
 
 1. If `.trace-mapping.yaml` exists:
    - Read `.trace-mapping.yaml`
-   - Run `python3 .agents/scripts/impact.py --spec-id $1 --json` for baseline impact
+   - Run `python3 .spectra/scripts/impact.py --spec-id $1 --json` for baseline impact
 2. If `.trace-mapping.yaml` does NOT exist → fall back to `--quick` mode:
    ```bash
-   python3 .agents/scripts/impact.py --quick --spec-id $1 --project-dir .
+   python3 .spectra/scripts/impact.py --quick --spec-id $1 --project-dir .
    ```
    Quick mode greps `@impl`/`@verifies`/`@spec` tags directly from the codebase.
 3. **DAG transitive mode** (CRG replacement): If CRG MCP is not available but
    `.spectra/graph/dag.json` exists:
    ```bash
-   python3 .agents/scripts/impact.py --spec-id $1 --dag
+   python3 .spectra/scripts/impact.py --spec-id $1 --dag
    ```
    This traces transitive imports (17 languages, including C/C++/C# with `// @impl`).
 4. Extract spec ID from argument `$1` (e.g., `1.1`, `6.2`).
@@ -72,8 +72,8 @@ Output a structured report with band analysis:
 ### Recommended Actions
 - Implement/fix affected tasks: `/spectra-impl {feature} {task-id}`
 - Update affected docs: .spectra/specs/{feature}/
-- Check drift after changes: `python3 .agents/scripts/check_drift.py --snapshot`
-- Filter by band: `python3 .agents/scripts/impact.py --spec-id {spec-id} --band amber+`
+- Check drift after changes: `python3 .spectra/scripts/check_drift.py --snapshot`
+- Filter by band: `python3 .spectra/scripts/impact.py --spec-id {spec-id} --band amber+`
 ```
 
 ## Step 4: Flag Unregistered Impacts

@@ -12,9 +12,9 @@ CIゲートが正しく機能しているか、またはバイパスされた変
 Exit code: 0 = all checks pass, 1 = issues found
 
 Usage:
-  python3 .agents/scripts/check-ci-bypass.py
-  python3 .agents/scripts/check-ci-bypass.py --json
-  python3 .agents/scripts/check-ci-bypass.py --verbose
+  python3 .spectra/scripts/check-ci-bypass.py
+  python3 .spectra/scripts/check-ci-bypass.py --json
+  python3 .spectra/scripts/check-ci-bypass.py --verbose
 
 環境変数:
   SKIP_TRACE_ALLOWED=1    bypass を許可（エラーにしない）
@@ -40,7 +40,7 @@ def check_prepush_hook(project_dir: Path) -> list[str]:
             "[hook] pre-push hook が未設置 — トレーサビリティゲートがプッシュ時に実行されない"
         )
         issues.append(
-            "[hook] 設定: ln -sf ../../.agents/scripts/pre-push.sh .git/hooks/pre-push"
+            "[hook] 設定: ln -sf ../../.spectra/scripts/pre-push.sh .git/hooks/pre-push"
         )
         return issues
 
