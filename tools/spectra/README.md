@@ -1,8 +1,7 @@
-# cc-sdd: Long-running spec-driven implementation for AI coding agents
+# spectra: Long-running spec-driven implementation for AI coding agents
 
-[![npm version](https://img.shields.io/npm/v/cc-sdd?logo=npm)](https://www.npmjs.com/package/cc-sdd?activeTab=readme)
-[![install size](https://packagephobia.com/badge?p=cc-sdd)](https://packagephobia.com/result?p=cc-sdd)
 [![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)](../../LICENSE)
+[![fork of gotalab/cc-sdd](https://img.shields.io/badge/fork-gotalab%2Fcc--sdd-blue.svg)](https://github.com/gotalab/cc-sdd)
 
 <div align="center" style="margin-bottom: 1rem; font-size: 1.1rem;"><sub>
 English | <a href="./README_ja.md">日本語</a> | <a href="./README_zh-TW.md">繁體中文</a>
@@ -14,7 +13,7 @@ English | <a href="./README_ja.md">日本語</a> | <a href="./README_zh-TW.md">�
 
 ## What's new in v3.0
 
-cc-sdd v3.0 is a rework around Agent Skills and long-running autonomous implementation.
+spectra v3.0 is a rework around Agent Skills and long-running autonomous implementation. (Originally released as cc-sdd v3.0.2 by gotalab; this fork maintains the same workflow under the **spectra** name.)
 
 - **`/spectra-discovery` as the new entry point.** Discovery routes new work into one of: extend an existing spec, implement directly with no spec, create one new spec, decompose into multiple specs, or mixed decomposition. It writes `brief.md` and, when needed, `roadmap.md`, so you can resume a workstream without re-explaining scope.
 - **`/spectra-impl` for long-running autonomous implementation.** Each task gets a fresh implementer running TDD (RED → GREEN) behind a feature flag, an independent reviewer, and an auto-debug pass that investigates root causes in a clean context when the implementer is blocked or the reviewer rejects twice. Learnings from earlier tasks propagate forward via `## Implementation Notes` in `tasks.md`. 1 task per iteration, safe to re-run after interruption.
@@ -22,19 +21,19 @@ cc-sdd v3.0 is a rework around Agent Skills and long-running autonomous implemen
 - **`/spectra-batch` for multi-spec initiatives.** Turn a roadmap into multiple specs in parallel, with cross-spec review to catch contradictions, duplicated responsibilities, and interface mismatches.
 - **Agent Skills across 8 coding agents.** 17 skills per install, loaded on demand (progressive disclosure). Claude Code and Codex are stable; Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, and Antigravity are in beta. No external dependencies; subagents are spawned through each platform's native primitive.
 
-Full skills-mode workflow and `/spectra-impl` internals: [Skill Reference](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/skill-reference.md).
+Full skills-mode workflow and `/spectra-impl` internals: [Skill Reference](https://github.com/nekolife1984/spectra/blob/main/docs/guides/skill-reference.md).
 
-Upgrading from v1.x or v2.x? See the [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md#5-v2x-to-v30).
+Upgrading from v1.x or v2.x? See the [Migration Guide](https://github.com/nekolife1984/spectra/blob/main/docs/guides/migration-guide.md#5-v2x-to-v30).
 
-## Why cc-sdd?
+## Why spectra? (formerly cc-sdd)
 
-cc-sdd treats the spec as a contract between parts of the system, not a master command document handed to the agent. Code remains the source of truth. Specs make the boundaries between parts of the code explicit so humans and agents can work in parallel without constant synchronization.
+spectra treats the spec as a contract between parts of the system, not a master command document handed to the agent. Code remains the source of truth. Specs make the boundaries between parts of the code explicit so humans and agents can work in parallel without constant synchronization.
 
 The bet: explicit contracts at the right granularity let AI-driven development at team scale move faster, not slower. Agents write the spec, humans approve the contract at phase gates, code is what ships.
 
 Boundaries are not overhead. They are what lets you move freely inside while protecting the outside.
 
-Full rationale, trade-offs, and when-to-use / when-not-to-use: [Why cc-sdd? A philosophy note](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/why-cc-sdd.md).
+Full rationale, trade-offs, and when-to-use / when-not-to-use: [Why spectra? A philosophy note](./../docs/guides/why-spectra.md) (title kept for historical continuity — file rename tracked separately).
 
 ## Quick Start
 
@@ -86,7 +85,7 @@ Not sure where to start? Start with `spectra-discovery`. It routes your request 
 | Break down a large initiative | `spectra-discovery` → `spectra-batch` |
 | Implement a small change with no spec | `spectra-discovery` → direct implementation |
 
-Legacy `/spec:*` command modes are still available (`--claude`, `--cursor`, etc.) but are deprecated. See the [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md) for the upgrade path.
+Legacy `/spec:*` command modes are still available (`--claude`, `--cursor`, etc.) but are deprecated. See the [Migration Guide](https://github.com/nekolife1984/spectra/blob/main/docs/guides/migration-guide.md) for the upgrade path.
 
 For larger approved task sets, run `spectra-impl` to start autonomous implementation with per-task subagent spawn, independent review, and auto-debug on failure.
 
@@ -129,7 +128,7 @@ All 8 skills variants ship the same 17-skill set. The difference is how much rea
 | **Antigravity** | `--antigravity` | Beta (experimental) | — |
 | **Qwen Code** | — | — | `--qwen` |
 
-"Beta" does not mean "missing features", the 17 skills and templates are identical across all 8 platforms. It means the platform integration (subagent spawn behavior, ergonomics, `SKILL.md` loading) has had less real-world usage than Claude Code and Codex, and edge cases may still surface. Please [report issues](https://github.com/gotalab/cc-sdd/issues) if you hit any.
+"Beta" does not mean "missing features", the 17 skills and templates are identical across all 8 platforms. It means the platform integration (subagent spawn behavior, ergonomics, `SKILL.md` loading) has had less real-world usage than Claude Code and Codex, and edge cases may still surface. Please [report issues](https://github.com/nekolife1984/spectra/issues) if you hit any.
 
 ## Installation details
 
@@ -174,7 +173,7 @@ Edit templates and rules in `{{SPECTRA_DIR}}/settings/` to match your team's wor
 
 Common use cases: PRD-style requirements, API and database schemas, approval gates, JIRA integration, domain-specific standards.
 
-[Customization Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/customization-guide.md) has practical examples with copy-paste snippets.
+[Customization Guide](https://github.com/nekolife1984/spectra/blob/main/docs/guides/customization-guide.md) has practical examples with copy-paste snippets.
 
 ## Project structure
 
@@ -207,19 +206,19 @@ Only the directories for the agent(s) you install are created. The tree above sh
 
 ## Documentation
 
-- Skill Reference: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/skill-reference.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/skill-reference.md)
-- Command Reference: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/command-reference.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/command-reference.md)
-- Customization Guide: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/customization-guide.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/customization-guide.md)
-- Spec-Driven Guide: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/spec-driven.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/spec-driven.md)
-- Why cc-sdd?: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/why-cc-sdd.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/why-cc-sdd.md)
-- Claude Subagents Guide: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/claude-subagents.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/claude-subagents.md)
-- Migration Guide: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md)
-- [Issues & Support](https://github.com/gotalab/cc-sdd/issues) for bug reports and questions
+- Skill Reference: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/skill-reference.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/skill-reference.md)
+- Command Reference: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/command-reference.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/command-reference.md)
+- Customization Guide: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/customization-guide.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/customization-guide.md)
+- Spec-Driven Guide: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/spec-driven.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/spec-driven.md)
+- Why spectra? (formerly Why cc-sdd?): [English](./../docs/guides/why-spectra.md) | [日本語](./../docs/guides/ja/why-spectra.md)
+- Claude Subagents Guide: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/claude-subagents.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/claude-subagents.md)
+- Migration Guide: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/migration-guide.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/migration-guide.md)
+- [Issues & Support](https://github.com/nekolife1984/spectra/issues) for bug reports and questions
 - [Spec IDE](https://kiro.dev)
 
 ---
 
-**Stable Release v3.0.0.** Production-ready. [Report issues](https://github.com/gotalab/cc-sdd/issues) | MIT License
+**Stable Release v3.0.0.** Production-ready. [Report issues](https://github.com/nekolife1984/spectra/issues) | MIT License
 
 ### Platform support
 

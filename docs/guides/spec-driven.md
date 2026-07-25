@@ -1,16 +1,19 @@
 # Spec-Driven Development Workflow
 
+
+> ⚠️ **Note (this fork)**: This guide is maintained as part of the **spectra** project (forked from `gotalab/cc-sdd` at v3.0.2). Tool names and command examples have been updated to the spectra name; PR links to `gotalab/cc-sdd` are preserved as historical references. Legacy command samples using `npx cc-sdd@...` reflect the version in which the example was written and are kept for continuity.
+
 > 📖 **日本語ガイドはこちら:** [仕様駆動開発ガイド (日本語)](ja/spec-driven.md)
 
-This document explains how cc-sdd implements Spec-Driven Development (SDD) inside an agentic SDLC workflow. Use it as a reference when deciding which slash command to run, what artifact to review, and how to adapt the workflow to your team.
+This document explains how spectra implements Spec-Driven Development (SDD) inside an agentic SDLC workflow. Use it as a reference when deciding which slash command to run, what artifact to review, and how to adapt the workflow to your team.
 
 ## Core Ideas
 
-cc-sdd treats Spec-Driven Development as a practical way to make intent, boundaries, and validation legible to both humans and agents. The goal is not to produce larger documents. The goal is to create specs that let work move independently without losing architectural coherence.
+spectra treats Spec-Driven Development as a practical way to make intent, boundaries, and validation legible to both humans and agents. The goal is not to produce larger documents. The goal is to create specs that let work move independently without losing architectural coherence.
 
 ### Boundary-First by Default
 
-In cc-sdd, the primary value of a spec is that it makes responsibility boundaries and contracts explicit.
+In spectra, the primary value of a spec is that it makes responsibility boundaries and contracts explicit.
 
 A good spec should make it clear:
 
@@ -19,7 +22,7 @@ A good spec should make it clear:
 - which dependencies are allowed
 - what downstream work may need revalidation if this spec changes
 
-This is why cc-sdd carries boundary thinking across the workflow:
+This is why spectra carries boundary thinking across the workflow:
 
 - discovery surfaces **Boundary Candidates**
 - requirements clarify boundary context where needed
@@ -29,7 +32,7 @@ This is why cc-sdd carries boundary thinking across the workflow:
 
 ### Specs as Units of Independent Delivery
 
-cc-sdd treats a spec as more than a planning artifact. A spec is also a delivery and revalidation unit.
+spectra treats a spec as more than a planning artifact. A spec is also a delivery and revalidation unit.
 
 The practical goal is to let work progress asynchronously:
 
@@ -45,33 +48,33 @@ Boundary-first Spec-Driven Development only works when the underlying architectu
 
 If a system has vague ownership, shared responsibilities, circular dependencies, or poorly defined seams, writing more specs will not create independence. It will only document confusion.
 
-cc-sdd therefore treats architecture as a prerequisite, not an afterthought. Specs do not replace architecture. They make architecture operational by turning boundaries, dependencies, and invariants into everyday working artifacts.
+spectra therefore treats architecture as a prerequisite, not an afterthought. Specs do not replace architecture. They make architecture operational by turning boundaries, dependencies, and invariants into everyday working artifacts.
 
 ### Spec-Centered, Mechanically Grounded
 
-cc-sdd is intentionally spec-centered. Markdown specs are the primary working artifact for intent, scope, boundaries, exclusions, and revalidation conditions.
+spectra is intentionally spec-centered. Markdown specs are the primary working artifact for intent, scope, boundaries, exclusions, and revalidation conditions.
 
 That does not reduce the importance of mechanical validation. Tests, builds, linting, type checks, and runtime smoke checks remain essential. They provide the grounding that keeps specs honest in practice.
 
-In cc-sdd, these two layers are complementary:
+In spectra, these two layers are complementary:
 
 - specs express intent and boundaries
 - mechanical checks provide execution-level grounding
 
 ### Change-Friendly by Design
 
-cc-sdd is designed to stay simple enough to change.
+spectra is designed to stay simple enough to change.
 
 This applies at two levels:
 
 - specs should be easy to revise as understanding improves
-- cc-sdd itself should be easy for teams to adapt
+- spectra itself should be easy for teams to adapt
 
 Templates, rules, and skill workflows are meant to be customized. The goal is not to force one canonical workflow on every team. The goal is to preserve clear boundaries and validation loops while allowing teams to evolve the process around their own structure and delivery model.
 
 ### Long-Running Autonomy Depends on the Spec Harness
 
-Long-running autonomy in cc-sdd is grounded in the workflow around `tasks.md`.
+Long-running autonomy in spectra is grounded in the workflow around `tasks.md`.
 
 `/spectra-impl` can execute tasks one by one through TDD, task-local review, and bounded remediation until the final task is complete. It keeps moving when the spec, task boundary, and validation expectations are clear. It stops when human clarification, approval, or judgment is genuinely required.
 
@@ -83,25 +86,25 @@ Use this table when you are deciding how to enter the workflow, not which skill 
 
 | You want to... | Skills mode | Legacy mode |
 | --- | --- | --- |
-| Start new work (feature to initiative) | `/spectra-discovery` → `/spectra-init` → `/spectra-requirements` → `/spectra-design` → `/spectra-tasks` → `/spectra-impl` | `/spec:spectra-init` → `/spec:spectra-requirements` → `/spec:spectra-design` → `/spec:spectra-tasks` → `/spec:spectra-impl` |
-| Extend an existing system | `/spec:steering` → `/spectra-discovery` or `/spec:spectra-init` → optional `/spec:validate-gap` → `/spectra-design` → `/spectra-tasks` → `/spectra-impl` | `/spec:steering` → `/spec:spectra-init` → optional `/spec:validate-gap` → `/spec:spectra-design` → `/spec:spectra-tasks` → `/spec:spectra-impl` |
+| Start new work (feature to initiative) | `/spectra-discovery` → `/spectra-init` → `/spectra-requirements` → `/spectra-design` → `/spectra-tasks` → `/spectra-impl` | `/spectra-init` → `/spectra-requirements` → `/spectra-design` → `/spectra-tasks` → `/spectra-impl` |
+| Extend an existing system | `/spectra-steering` → `/spectra-discovery` or `/spectra-init` → optional `/spectra-validate-gap` → `/spectra-design` → `/spectra-tasks` → `/spectra-impl` | `/spectra-steering` → `/spectra-init` → optional `/spectra-validate-gap` → `/spectra-design` → `/spectra-tasks` → `/spectra-impl` |
 | Break down a large initiative | `/spectra-discovery` → `/spectra-batch` | Not available |
 | Implement a small change with no spec | `/spectra-discovery` → implement directly | Implement directly |
 
 ## Lifecycle Overview
 
 0. **Discovery (Entry Point)** – `/spectra-discovery` (skills mode only) is the recommended entry point for new work, especially for first-time users. It routes the request into one of five outcomes: extend an existing spec, implement directly with no spec, create one new spec, decompose the work into multiple specs, or use a mixed decomposition that separates existing-spec updates, new specs, and direct-implementation candidates. For new single-spec, multi-spec, or mixed work it writes `brief.md` and, when needed, `roadmap.md`, so you can resume without re-explaining the work.
-1. **Steering (Context Capture)** – `/spec:steering` and `/spec:steering-custom` gather architecture, conventions, and domain knowledge into steering docs.
-2. **Spec Initiation** – `/spec:spectra-init <feature>` creates the feature workspace (`.spectra/specs/<feature>/`).
-3. **Requirements** – `/spec:spectra-requirements <feature>` collects clarifications and produces `requirements.md`.
-4. **Design** – `/spec:spectra-design <feature>` first emits/updates `research.md` with investigation notes (skipped when no research is needed), then yields `design.md` for human approval. In 3.0, `design.md` also includes a **File Structure Plan** section that maps directory structure and file responsibilities.
-5. **Task Planning** – `/spec:spectra-tasks <feature>` creates `tasks.md`, mapping deliverables to implementable chunks and tagging each wave with `P0`, `P1`, etc. so teams know which tasks can run in parallel.
-6. **Implementation** – `/spec:spectra-impl <feature> <task-ids>` drives execution and validation. In skills mode, `/spectra-impl` replaces this command and supports both autonomous mode (subagent dispatch per task) and manual mode (TDD in main context). See the Skills Workflow section below.
-7. **Quality Gates** – optional `/spec:validate-gap` and `/spec:validate-design` commands compare requirements/design against existing code before implementation.
-8. **Validation** – `/spec:validate-impl` verifies implementation quality. In skills mode, this command focuses on **integration validation** across tasks rather than per-task checks.
-9. **Status Tracking** – `/spec:spectra-status <feature>` summarises progress and approvals.
+1. **Steering (Context Capture)** – `/spectra-steering` and `/spectra-steering-custom` gather architecture, conventions, and domain knowledge into steering docs.
+2. **Spec Initiation** – `/spectra-init <feature>` creates the feature workspace (`.spectra/specs/<feature>/`).
+3. **Requirements** – `/spectra-requirements <feature>` collects clarifications and produces `requirements.md`.
+4. **Design** – `/spectra-design <feature>` first emits/updates `research.md` with investigation notes (skipped when no research is needed), then yields `design.md` for human approval. In 3.0, `design.md` also includes a **File Structure Plan** section that maps directory structure and file responsibilities.
+5. **Task Planning** – `/spectra-tasks <feature>` creates `tasks.md`, mapping deliverables to implementable chunks and tagging each wave with `P0`, `P1`, etc. so teams know which tasks can run in parallel.
+6. **Implementation** – `/spectra-impl <feature> <task-ids>` drives execution and validation. In skills mode, `/spectra-impl` replaces this command and supports both autonomous mode (subagent dispatch per task) and manual mode (TDD in main context). See the Skills Workflow section below.
+7. **Quality Gates** – optional `/spectra-validate-gap` and `/spectra-validate-design` commands compare requirements/design against existing code before implementation.
+8. **Validation** – `/spectra-validate-impl` verifies implementation quality. In skills mode, this command focuses on **integration validation** across tasks rather than per-task checks.
+9. **Status Tracking** – `/spectra-status <feature>` summarises progress and approvals.
 
-> Need everything in one pass? `/spec:spectra-quick <feature>` orchestrates steps 2–5 with Subagent support, pausing for approval after each phase so you can refine the generated documents.
+> Need everything in one pass? `/spectra-quick <feature>` orchestrates steps 2–5 with Subagent support, pausing for approval after each phase so you can refine the generated documents.
 
 Each phase pauses for human review unless you explicitly bypass it (for example by passing `-y` or the CLI `--auto` flag). Because Spec-Driven Development relies on these gates for quality control, keep manual approvals in place for production work and only use auto-approval in tightly controlled experiments. Teams can embed their review checklists in the template files so that each gate reflects local quality standards.
 
@@ -109,31 +112,31 @@ Each phase pauses for human review unless you explicitly bypass it (for example 
 
 | Command | Purpose | Primary Artefact(s) |
 |---------|---------|---------------------|
-| `/spec:steering` | Build / refresh project memory | `.spectra/steering/*.md`
-| `/spec:steering-custom` | Add domain-specific steering | `.spectra/steering/custom/*.md`
-| `/spec:spectra-init <feature>` | Start a new feature | `.spectra/specs/<feature>/`
-| `/spec:spectra-requirements <feature>` | Capture requirements & gaps | `requirements.md`
-| `/spec:spectra-design <feature>` | Produce investigation log + implementation design | `research.md` (when needed), `design.md`
-| `/spec:spectra-tasks <feature>` | Break design into tasks with parallel waves | `tasks.md` (with P-labels)
-| `/spec:spectra-impl <feature> <task-ids>` | Implement specific tasks | Code + task updates
-| `/spec:validate-gap <feature>` | Optional gap analysis vs existing code | `gap-report.md`
-| `/spec:validate-design <feature>` | Optional design validation | `design-validation.md`
-| `/spec:spectra-status <feature>` | See phase, approvals, open tasks | CLI summary
+| `/spectra-steering` | Build / refresh project memory | `.spectra/steering/*.md`
+| `/spectra-steering-custom` | Add domain-specific steering | `.spectra/steering/custom/*.md`
+| `/spectra-init <feature>` | Start a new feature | `.spectra/specs/<feature>/`
+| `/spectra-requirements <feature>` | Capture requirements & gaps | `requirements.md`
+| `/spectra-design <feature>` | Produce investigation log + implementation design | `research.md` (when needed), `design.md`
+| `/spectra-tasks <feature>` | Break design into tasks with parallel waves | `tasks.md` (with P-labels)
+| `/spectra-impl <feature> <task-ids>` | Implement specific tasks | Code + task updates
+| `/spectra-validate-gap <feature>` | Optional gap analysis vs existing code | `gap-report.md`
+| `/spectra-validate-design <feature>` | Optional design validation | `design-validation.md`
+| `/spectra-status <feature>` | See phase, approvals, open tasks | CLI summary
 
 ## Customising the Workflow
 
-- **Templates** – adjust `{{SPECTRA_DIR}}/settings/templates/{requirements,design,tasks}.md` to mirror your review process. cc-sdd copies these into every spec.
+- **Templates** – adjust `{{SPECTRA_DIR}}/settings/templates/{requirements,design,tasks}.md` to mirror your review process. spectra copies these into every spec.
 - **Approvals** – embed checklists or required sign-offs in template headers. Agents will surface them during each phase.
 - **Artifacts** – extend templates with additional sections (risk logs, test plans, etc.) to make the generated documents match company standards.
 
 ## New vs Existing Projects
 
-- **Greenfield** – if you already have project-wide guardrails, capture them via `/spec:steering` (and `/spec:steering-custom`) first; otherwise start with `/spec:spectra-init` right away and let steering evolve as those rules become clear.
-- **Brownfield** – start with `/spec:validate-gap` and `/spec:validate-design` to ensure new specs reconcile with the existing system before implementation.
+- **Greenfield** – if you already have project-wide guardrails, capture them via `/spectra-steering` (and `/spectra-steering-custom`) first; otherwise start with `/spectra-init` right away and let steering evolve as those rules become clear.
+- **Brownfield** – start with `/spectra-validate-gap` and `/spectra-validate-design` to ensure new specs reconcile with the existing system before implementation.
 
 ## Skills Workflow (3.0)
 
-Skills mode (`--claude-skills`, `--codex-skills`, `--cursor-skills`, `--copilot-skills`, `--windsurf-skills`, `--opencode-skills`, `--gemini-skills`, `--antigravity`) provides an alternative workflow that uses skill-based commands instead of `/spec:*` slash commands. The spec phases are the same, but implementation and validation work differently. For the complete skills-mode surface, including `/spectra-impl` subagent flow and customization, see the [Skill Reference](skill-reference.md).
+Skills mode (`--claude-skills`, `--codex-skills`, `--cursor-skills`, `--copilot-skills`, `--windsurf-skills`, `--opencode-skills`, `--gemini-skills`, `--antigravity`) provides an alternative workflow that uses skill-based commands instead of `/spectra-*` slash commands. The spec phases are the same, but implementation and validation work differently. For the complete skills-mode surface, including `/spectra-impl` subagent flow and customization, see the [Skill Reference](skill-reference.md).
 
 ### Commands vs Skills Equivalents
 
@@ -141,15 +144,15 @@ Skills mode (`--claude-skills`, `--codex-skills`, `--cursor-skills`, `--copilot-
 |-------|--------------|-------------|-------|
 | Discovery | N/A | `/spectra-discovery` | Skills-mode-only routing/scoping entry point; writes brief.md and, when needed, roadmap.md |
 | Spec Batch | N/A | `/spectra-batch` | Parallel multi-spec creation with cross-spec review |
-| Steering | `/spec:steering` | `/spec:steering` | Same in both modes |
-| Spec (init through tasks) | `/spec:spectra-init` ... `/spec:spectra-tasks` | Same | Same in both modes |
-| Implementation | `/spec:spectra-impl <feature> <tasks>` | `/spectra-impl` | See below |
-| Validation | `/spec:validate-impl` | `/spectra-validate-impl` | Integration-focused in skills mode |
+| Steering | `/spectra-steering` | `/spectra-steering` | Same in both modes |
+| Spec (init through tasks) | `/spectra-init` ... `/spectra-tasks` | Same | Same in both modes |
+| Implementation | `/spectra-impl <feature> <tasks>` | `/spectra-impl` | See below |
+| Validation | `/spectra-validate-impl` | `/spectra-validate-impl` | Integration-focused in skills mode |
 
 ### `/spectra-impl` Modes
 
 - **Autonomous mode** (no task args): Spawns a fresh implementer subagent per task plus an independent reviewer subagent. If the implementer is blocked or the reviewer rejects after 2 remediation rounds, a **debug subagent** is spawned in a fresh context to investigate root causes (with web search) and produce a fix plan. A new implementer then retries with the debug findings. Max 2 debug rounds per task. Cross-cutting insights are recorded as **Implementation Notes** and injected into subsequent implementer prompts.
-- **Manual mode** (with task args): Runs TDD in the main conversation context, similar to the commands-based `/spec:spectra-impl`.
+- **Manual mode** (with task args): Runs TDD in the main conversation context, similar to the commands-based `/spectra-impl`.
 
 Both modes enforce **1-task-per-iteration** discipline for context hygiene during long runs and are **session-resume safe** -- you can re-run `/spectra-impl` after an interruption without losing progress. Both modes also follow the **Feature Flag TDD** protocol (RED then GREEN) for safe, incremental delivery.
 
@@ -173,7 +176,7 @@ Both modes enforce **1-task-per-iteration** discipline for context hygiene durin
 | Multi-spec | The work should be decomposed into multiple specs | `/spectra-batch` | `/spectra-init <first-feature>` if you want to validate the first slice before batching the rest |
 | Mixed decomposition | The request spans existing-spec updates, new specs, and/or direct implementation | Discovery writes the split into `brief.md` / `roadmap.md` before you continue | Start with the next step suggested for the new-spec portion, then come back to the remaining items |
 
-This split keeps discovery lightweight and preserves the phase gates that make cc-sdd reliable. Discovery is there to choose the right workflow, not to replace it.
+This split keeps discovery lightweight and preserves the phase gates that make spectra reliable. Discovery is there to choose the right workflow, not to replace it.
 
 ### `/spectra-validate-impl` in Skills Mode
 

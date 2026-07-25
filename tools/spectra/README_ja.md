@@ -1,8 +1,7 @@
-# cc-sdd: AIコーディングエージェント向け長時間の仕様駆動実装
+# spectra: AIコーディングエージェント向け長時間の仕様駆動実装
 
-[![npm version](https://img.shields.io/npm/v/cc-sdd?logo=npm)](https://www.npmjs.com/package/cc-sdd?activeTab=readme)
-[![install size](https://packagephobia.com/badge?p=cc-sdd)](https://packagephobia.com/result?p=cc-sdd)
 [![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)](../../LICENSE)
+[![fork of gotalab/cc-sdd](https://img.shields.io/badge/fork-gotalab%2Fcc--sdd-blue.svg)](https://github.com/gotalab/cc-sdd)
 
 <div align="center" style="margin-bottom: 1rem; font-size: 1.1rem;"><sub>
 <a href="./README.md">English</a> | 日本語 | <a href="./README_zh-TW.md">繁體中文</a>
@@ -14,7 +13,7 @@
 
 ## v3.0 の新機能
 
-cc-sdd v3.0 は Agent Skills と長時間自律実装を軸にした再構築である。
+spectra v3.0 は Agent Skills と長時間自律実装を軸にした再構築である。（元は gotalab が cc-sdd v3.0.2 として公開、本 fork は同じワークフローを **spectra** 名で保守している。）
 
 - **`/spectra-discovery` が新しいエントリポイント。** discovery が新規依頼を「既存 spec を拡張 / spec 不要で直接実装 / 1 つの新規 spec / 複数 spec に分解 / mixed decomposition」に振り分ける。`brief.md` と必要に応じて `roadmap.md` を書き出すので、セッションを再開しても scope を説明し直さずに続けられる。
 - **`/spectra-impl` による長時間自律実装。** 各タスクに対し fresh implementer が feature flag 越しに TDD (RED → GREEN) で実装、独立した reviewer が機械的検証、失敗時は auto-debug pass が新しいコンテキストで根本原因を調査する。タスク間の知見は `tasks.md` の `## Implementation Notes` で次の implementer に引き継がれる。1 iteration = 1 task、中断後の再実行も安全。
@@ -22,19 +21,19 @@ cc-sdd v3.0 は Agent Skills と長時間自律実装を軸にした再構築で
 - **`/spectra-batch` で複数 spec の並列作成。** roadmap から複数 spec を並列生成し、cross-spec review で矛盾・責務重複・インターフェースミスマッチを検出する。
 - **8 つの AI coding agent で Agent Skills を展開。** 17 skills × 8 プラットフォーム、on-demand ロード (progressive disclosure)。Claude Code と Codex は stable、Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, Antigravity は beta。外部依存なし、subagent は各プラットフォーム標準の spawn で立ち上がる。
 
-Skills モードのワークフローと `/spectra-impl` 内部の詳細は [スキルリファレンス](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/skill-reference.md) を参照。
+Skills モードのワークフローと `/spectra-impl` 内部の詳細は [スキルリファレンス](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/skill-reference.md) を参照。
 
-v1.x / v2.x からの移行は [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md#5-v2x--v30) を参照。
+v1.x / v2.x からの移行は [Migration Guide](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/migration-guide.md#5-v2x--v30) を参照。
 
-## なぜ cc-sdd なのか
+## なぜ spectra なのか（旧称: cc-sdd）
 
-cc-sdd は spec を、システムの各部分の間の契約として扱う。エージェントに手渡す「命令書」ではない。コードは依然として source of truth であり、spec はコード各部分の間の契約を明示化するために使う。そうすることで、人間とエージェントが常に同期を取らなくても並列に動けるようになる。
+spectra は spec を、システムの各部分の間の契約として扱う。エージェントに手渡す「命令書」ではない。コードは依然として source of truth であり、spec はコード各部分の間の契約を明示化するために使う。そうすることで、人間とエージェントが常に同期を取らなくても並列に動けるようになる。
 
 賭けはこうだ。適切な粒度で明示化された契約は、チーム規模の AI 駆動開発を速くする。遅くしない。エージェントが spec を書き、人間は phase gate で契約を承認し、出荷されるのはコードだ。
 
 境界はオーバーヘッドではない。境界があるから自由に動ける。
 
-設計の根拠、トレードオフ、向いている場面と向いていない場面の詳細は [cc-sdd という賭け (philosophy note)](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/why-cc-sdd.md)。
+設計の根拠、トレードオフ、向いている場面と向いていない場面の詳細は [spectra という賭け (philosophy note)](./../docs/guides/ja/why-spectra.md)（旧ファイル名のため URL はそのまま）。
 
 ## クイックスタート
 
@@ -86,7 +85,7 @@ bash .agents/scripts/setup-crg.sh
 | 大きい initiative を分解する | `spectra-discovery` → `spectra-batch` |
 | spec 不要の小変更を入れる | `spectra-discovery` → 直接実装 |
 
-レガシーの `/spec:*` コマンドモード (`--claude`, `--cursor` など) も引き続き利用可能だが、非推奨である。アップグレード手順は [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md) を参照。
+レガシーの `/spec:*` コマンドモード (`--claude`, `--cursor` など) も引き続き利用可能だが、非推奨である。アップグレード手順は [Migration Guide](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/migration-guide.md) を参照。
 
 規模の大きい承認済み task set に対しては、`spectra-impl` を走らせるとタスクごとの subagent spawn、independent review、失敗時の auto-debug 付きで自律実装が始まる。
 
@@ -129,7 +128,7 @@ spec フェーズの典型的な出力（10 分以内）:
 | **Antigravity** | `--antigravity` | Beta (experimental) | — |
 | **Qwen Code** | — | — | `--qwen` |
 
-ここでの "Beta" は「機能が不足している」という意味ではない。17 skills とテンプレートは全 8 プラットフォームで同一である。プラットフォーム統合（subagent spawn 挙動、操作感、`SKILL.md` ロード）が Claude Code と Codex に比べて実運用実績が少なく、エッジケースが残っている可能性があるという意味である。問題に遭遇した場合は [Issues](https://github.com/gotalab/cc-sdd/issues) まで報告いただけると助かる。
+ここでの "Beta" は「機能が不足している」という意味ではない。17 skills とテンプレートは全 8 プラットフォームで同一である。プラットフォーム統合（subagent spawn 挙動、操作感、`SKILL.md` ロード）が Claude Code と Codex に比べて実運用実績が少なく、エッジケースが残っている可能性があるという意味である。問題に遭遇した場合は [Issues](https://github.com/nekolife1984/spectra/issues) まで報告いただけると助かる。
 
 ## インストール詳細
 
@@ -174,7 +173,7 @@ npx github:nekolife1984/spectra --spectra-dir docs
 
 よくあるユースケース: PRD スタイルの要件、API とデータベーススキーマ、承認ゲート、JIRA 連携、ドメイン固有のスタンダード。
 
-実践例とコピペ可能なスニペットは [カスタマイズガイド](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/customization-guide.md)。
+実践例とコピペ可能なスニペットは [カスタマイズガイド](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/customization-guide.md)。
 
 ## プロジェクト構造
 
@@ -207,19 +206,19 @@ project/
 
 ## ドキュメント
 
-- スキルリファレンス: [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/skill-reference.md) | [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/skill-reference.md)
-- コマンドリファレンス: [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/command-reference.md) | [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/command-reference.md)
-- カスタマイズガイド: [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/customization-guide.md) | [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/customization-guide.md)
-- 仕様駆動開発ガイド: [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/spec-driven.md) | [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/spec-driven.md)
-- cc-sdd という賭け: [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/why-cc-sdd.md) | [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/why-cc-sdd.md)
-- Claude Subagents ガイド: [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/claude-subagents.md) | [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/claude-subagents.md)
-- マイグレーションガイド: [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md) | [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md)
-- [Issues & サポート](https://github.com/gotalab/cc-sdd/issues) - バグ報告と質問
+- スキルリファレンス: [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/skill-reference.md) | [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/skill-reference.md)
+- コマンドリファレンス: [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/command-reference.md) | [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/command-reference.md)
+- カスタマイズガイド: [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/customization-guide.md) | [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/customization-guide.md)
+- 仕様駆動開発ガイド: [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/spec-driven.md) | [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/spec-driven.md)
+- spectra という賭け（旧称: cc-sdd という賭け）: [日本語](./../docs/guides/ja/why-spectra.md) | [English](./../docs/guides/why-spectra.md)
+- Claude Subagents ガイド: [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/claude-subagents.md) | [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/claude-subagents.md)
+- マイグレーションガイド: [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/migration-guide.md) | [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/migration-guide.md)
+- [Issues & サポート](https://github.com/nekolife1984/spectra/issues) - バグ報告と質問
 - [Spec IDE](https://kiro.dev)
 
 ---
 
-**安定版リリース v3.0.0** 本番環境対応。[問題を報告](https://github.com/gotalab/cc-sdd/issues) | MIT License
+**安定版リリース v3.0.0** 本番環境対応。[問題を報告](https://github.com/nekolife1984/spectra/issues) | MIT License
 
 ### プラットフォーム対応
 

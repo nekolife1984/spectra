@@ -1,8 +1,11 @@
-# cc-sdd Migration Guide
+# spectra Migration Guide
+
+
+> ⚠️ **Note (this fork)**: This guide is maintained as part of the **spectra** project (forked from `gotalab/cc-sdd` at v3.0.2). Tool names and command examples have been updated to the spectra name; PR links to `gotalab/cc-sdd` are preserved as historical references. Legacy command samples using `npx cc-sdd@...` reflect the version in which the example was written and are kept for continuity.
 
 > 📖 **日本語ガイドはこちら:** [マイグレーションガイド (日本語)](ja/migration-guide.md)
 
-cc-sdd 1.x (especially 1.1.5) and 2.0.0 share the same agentic SDLC philosophy and command list, but the **design artifacts, templates, and steering structure were rebuilt from the ground up**. Use this guide to pick one of two clear paths—either keep running 1.1.5 as-is, or accept the discontinuity and move to 2.0.0 where templates/rules make customization instant.
+spectra 1.x (especially 1.1.5) and 2.0.0 share the same agentic SDLC philosophy and command list, but the **design artifacts, templates, and steering structure were rebuilt from the ground up**. Use this guide to pick one of two clear paths—either keep running 1.1.5 as-is, or accept the discontinuity and move to 2.0.0 where templates/rules make customization instant.
 
 ---
 
@@ -23,7 +26,7 @@ cc-sdd 1.x (especially 1.1.5) and 2.0.0 share the same agentic SDLC philosophy a
 
 ---
 
-## 1. Staying on cc-sdd 1.1.5 (fallback option)
+## 1. Staying on spectra 1.1.5 (fallback option)
 
 1.1.5 is no longer on `@latest`, but you can pin it explicitly:
 
@@ -35,7 +38,7 @@ npx cc-sdd@1.1.5 --lang ja       # legacy i18n flags still work
 - You can keep editing `.claude/commands/*`, `.cursor/prompts/*`, `.codex/prompts/*` などのエージェント別フォルダを直接編集するスタイルで運用できます。
 - Agent-specific directory layouts stay exactly as they were in v1.
 - No new features will land here—future work targets `@latest` only.
-- The validate commands (`/spec:validate-gap`, `-design`, `-impl`) do **not** exist in 1.1.5. If you rely on those gates, migrate to v2.
+- The validate commands (`/spectra-validate-gap`, `-design`, `-impl`) do **not** exist in 1.1.5. If you rely on those gates, migrate to v2.
 
 ---
 
@@ -46,7 +49,7 @@ npx cc-sdd@1.1.5 --lang ja       # legacy i18n flags still work
 - **Template & rules driven customization** – stop patching commands; edit `.spectra/settings/templates/` and `.spectra/settings/rules/` once and every agent picks it up.
 - **Spec fidelity** – Research.md captures discovery logs while Design.md becomes reviewer friendly with Summary tables, Req Coverage, Supporting References, and lighter Components/Interfaces blocks.
 - **Steering = Project Memory** – drop structured knowledge across `.spectra/steering/*.md` files and every command consumes it.
-- **Brownfield guardrails** – `/spec:validate-gap`, `validate-design`, `validate-impl` plus the research/design split make gap analysis and existing-system upgrades much safer.
+- **Brownfield guardrails** – `/spectra-validate-gap`, `validate-design`, `validate-impl` plus the research/design split make gap analysis and existing-system upgrades much safer.
 - **Unified coverage** – all 8 supported agents in v2 (Claude Code, Cursor, Codex CLI, Gemini CLI, GitHub Copilot, Qwen Code, OpenCode, Windsurf) run the same 11-command workflow, so mixing agents (e.g., Cursor + Claude) requires zero spec rewrites. Claude Code also has an optional `--claude-agent` install target that adds a subagent-accelerated `spectra-quick` flow.
 
 ---
@@ -132,7 +135,7 @@ npx cc-sdd@1.1.5 --lang ja       # legacy i18n flags still work
 
 2. **Remove legacy skill references** -- if you have custom scripts or documentation referencing `spectra-impl`, update them to `/spectra-impl`.
 
-3. **Adopt the new entry point** -- start new features with `/spectra-discovery` instead of jumping straight to `/spec:spectra-init`. Discovery now produces `brief.md` and `roadmap.md` that feed into downstream skills.
+3. **Adopt the new entry point** -- start new features with `/spectra-discovery` instead of jumping straight to `/spectra-init`. Discovery now produces `brief.md` and `roadmap.md` that feed into downstream skills.
 
 4. **Use `/spectra-batch`** for multi-feature work -- when your roadmap contains multiple specs, `/spectra-batch` creates them in parallel and runs a cross-spec review to catch contradictions.
 
@@ -155,7 +158,7 @@ npx cc-sdd@1.1.5 --lang ja       # legacy i18n flags still work
 
 **Can I switch between 1.1.5 and 2.0.0 in one repo?** – Only if you isolate `.spectra` per branch or automate swapping directories; the layouts conflict.
 
-**After editing templates, which commands should I run?** – At minimum: `/spec:steering`, `/spec:spectra-init`, `/spec:spectra-design` to regenerate Research/Design/Tasks with the new format.
+**After editing templates, which commands should I run?** – At minimum: `/spectra-steering`, `/spectra-init`, `/spectra-design` to regenerate Research/Design/Tasks with the new format.
 
 ---
 

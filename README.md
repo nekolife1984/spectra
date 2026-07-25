@@ -3,7 +3,9 @@
 **Spec** → **Trace** → **Spectra**. \
 A modern spec-driven SDLC toolchain with bidirectional traceability.
 
-Built on the foundation of [cc-sdd](https://github.com/gotalab/cc-sdd) — a philosophy of _spec-as-contract_ — and supercharged with **code-review-graph (CRG)** integration, spectra traces requirements through design, implementation, and tests via `@impl` / `@verifies` / `@spec` tags. It analyzes impact scope, detects spec drift, and validates boundaries — all across 17 languages and 8 AI coding agents.
+Built on the foundation of [cc-sdd](https://github.com/gotalab/cc-sdd) by gotalab — a philosophy of _spec-as-contract_ — and supercharged with **code-review-graph (CRG)** integration, spectra traces requirements through design, implementation, and tests via `@impl` / `@verifies` / `@spec` tags. It analyzes impact scope, detects spec drift, and validates boundaries — all across 17 languages and 8 AI coding agents.
+
+> This repository is a maintained fork of `gotalab/cc-sdd` rebranded to **spectra** (v3.0.2 → spectra). All install/usage commands below use the spectra name; the original PR history is preserved in CHANGELOG.md.
 
 ### 🏷️ About the Name
 

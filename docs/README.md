@@ -1,6 +1,8 @@
-# cc-sdd Documentation Index
+# spectra Documentation Index
 
-Quick pointers to the most relevant guides, workflows, and historical notes for cc-sdd.
+Quick pointers to the most relevant guides, workflows, and historical notes for **spectra** (forked from `gotalab/cc-sdd` at v3.0.2).
+
+> ⚠️ **Note (this fork)**: Some files in this directory are historical archives from the upstream `cc-sdd` project and are kept for continuity. They are clearly marked as "Legacy documentation (archived)" at the top. For current workflow, see the root [README.md](../README.md) and the package [README](../tools/spectra/README.md).
 
 ## Current Guides
 
@@ -11,11 +13,11 @@ Quick pointers to the most relevant guides, workflows, and historical notes for 
 
 ## Deep Dives
 
-- [Spec-Driven Development Workflow](guides/spec-driven.md) — how cc-sdd implements SDD end to end
+- [Spec-Driven Development Workflow](guides/spec-driven.md) — how spectra implements SDD end to end
 - [Skill Reference](guides/skill-reference.md) — skills-mode workflow, including `/spectra-impl` subagent flow
-- [Command Reference](guides/command-reference.md) — legacy `/spec:*` command detail
+- [Command Reference](guides/command-reference.md) — legacy `/spectra-*` command detail
 - [Customization Guide](guides/customization-guide.md) — templates and rules customization
-- [Why cc-sdd?](guides/why-cc-sdd.md) — design rationale, trade-offs, and when to use (or not use) the tool
+- [Why spectra? (formerly Why cc-sdd?)](guides/why-spectra.md) — design rationale, trade-offs, and when to use (or not use) the tool
 - [Migration Guide](guides/migration-guide.md) — v1.x → v2 → v3 upgrade paths
 - [Claude Code Subagents Workflow](guides/claude-subagents.md) — legacy `--claude-agent` spectra-quick Subagent install target
 

@@ -1,10 +1,13 @@
 # Claude Code Subagents Workflow (Spec-Quick Focus)
 
+
+> ⚠️ **Note (this fork)**: This guide is maintained as part of the **spectra** project (forked from `gotalab/cc-sdd` at v3.0.2). Tool names and command examples have been updated to the spectra name; PR links to `gotalab/cc-sdd` are preserved as historical references. Legacy command samples using `npx cc-sdd@...` reflect the version in which the example was written and are kept for continuity.
+
 > 📖 **日本語ガイドはこちら:** [Claude サブエージェントガイド (日本語)](ja/claude-subagents.md)
 
 > **Scope:** this page covers the legacy **`--claude-agent` / `--claude-code-agent`** install target, which uses static Subagent files under `.claude/agents/spec/*.md` to accelerate `spectra-quick`. If you installed with `--claude-skills` (or any other `--*-skills` flag) and are looking for how skills mode dispatches implementer / reviewer / debugger roles, see the [Skill Reference](skill-reference.md) — specifically the "Inside `/spectra-impl`" and "Skills mode vs `--claude-agent`" sections.
 
-This guide explains how the **Claude Code Subagents** install target (`--claude-agent` / `--claude-code-agent`) accelerates the spec workflow via the `spectra-quick` command. Other `/spec:*` commands reuse the same Subagents, but this document focuses on the spectra-quick orchestration because it is the only Subagent-enabled command with its own control logic.
+This guide explains how the **Claude Code Subagents** install target (`--claude-agent` / `--claude-code-agent`) accelerates the spec workflow via the `spectra-quick` command. Other `/spectra-*` commands reuse the same Subagents, but this document focuses on the spectra-quick orchestration because it is the only Subagent-enabled command with its own control logic.
 
 ## Installation Recap
 
@@ -23,16 +26,16 @@ This guide explains how the **Claude Code Subagents** install target (`--claude-
 - **Interactive (default)** – Stops after each phase and asks whether to continue. Ideal for first-time runs or complex features.
 - **Automatic (`--auto`)** – Runs all phases without pausing, using TodoWrite to track progress. Best for quick drafts or low-risk features.
 
-Both modes skip `/spec:validate-gap` and `/spec:validate-design`. The completion message reminds you to run these manually if the feature is risky.
+Both modes skip `/spectra-validate-gap` and `/spectra-validate-design`. The completion message reminds you to run these manually if the feature is risky.
 
 ### Phase Breakdown
 
 | Phase | Triggered Subagent | What happens |
 |-------|--------------------|--------------|
 | 1. Initialize | Inline instructions (no Subagent) | Creates `.spectra/specs/{feature}/`, writes `spec.json` + `requirements.md` skeleton from templates. TodoWrite marks "Initialize spec" as complete. |
-| 2. Requirements | `agents/spectra-requirements.md` | Runs `/spec:spectra-requirements {feature}` to fill out requirements.md. In automatic mode, ignores "Next step" prompts from this Subagent and proceeds immediately. |
-| 3. Design | `agents/spectra-design.md` | Executes `/spec:spectra-design {feature} -y`, which generates/updates `research.md` (if needed) and `design.md`. TodoWrite now marks three phases complete. |
-| 4. Tasks | `agents/spectra-tasks.md` | Calls `/spec:spectra-tasks {feature} -y` to build `tasks.md` with Req coverage and P-wave labels. When finished, TodoWrite hits 4/4 complete and spectra-quick prints the final summary. |
+| 2. Requirements | `agents/spectra-requirements.md` | Runs `/spectra-requirements {feature}` to fill out requirements.md. In automatic mode, ignores "Next step" prompts from this Subagent and proceeds immediately. |
+| 3. Design | `agents/spectra-design.md` | Executes `/spectra-design {feature} -y`, which generates/updates `research.md` (if needed) and `design.md`. TodoWrite now marks three phases complete. |
+| 4. Tasks | `agents/spectra-tasks.md` | Calls `/spectra-tasks {feature} -y` to build `tasks.md` with Req coverage and P-wave labels. When finished, TodoWrite hits 4/4 complete and spectra-quick prints the final summary. |
 
 In automatic mode the command never pauses, even when Subagents emit “次のステップ” instructions intended for standalone usage. Interactive mode prompts after each phase (“Continue to requirements?”, “Continue to design?”, etc.).
 
@@ -46,9 +49,9 @@ Upon completion you get:
 - `tasks.md` (parallel-ready plan)
 
 What it **doesn’t** do:
-- No `/spec:validate-gap` integration check
-- No `/spec:validate-design` quality gate
-- No `/spec:validate-impl` (implementation hasn’t started)
+- No `/spectra-validate-gap` integration check
+- No `/spectra-validate-design` quality gate
+- No `/spectra-validate-impl` (implementation hasn’t started)
 
 Plan to run at least the first two validation commands manually for brownfield work.
 
@@ -59,10 +62,10 @@ Need to re-run just one phase? Mention `@agents-spectra-design`, `@agents-spectr
 ## Recommended Usage Pattern
 
 1. Run `npx cc-sdd@latest --claude-agent --lang <code>` to ensure Subagent assets exist.
-2. Prepare Project Memory via `/spec:steering` (and optionally `/spec:steering-custom`) so Subagents inherit accurate architecture/product rules.
+2. Prepare Project Memory via `/spectra-steering` (and optionally `/spectra-steering-custom`) so Subagents inherit accurate architecture/product rules.
 3. Use `spectra-quick <feature> [--auto]` for rapid drafts, then review `requirements.md`, `design.md`, `tasks.md` just like the manual flow.
 4. Run validation commands manually if the feature touches existing systems or critical boundaries.
-5. Proceed with `/spec:spectra-impl` and `/spec:spectra-status` once the spec is approved.
+5. Proceed with `/spectra-impl` and `/spectra-status` once the spec is approved.
 
 ## Customising Subagent Behaviour
 

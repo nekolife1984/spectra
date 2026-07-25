@@ -1,6 +1,8 @@
 # Release Notes
 
-New features and improvements for cc-sdd. See [CHANGELOG.md](../../CHANGELOG.md) for technical changes.
+New features and improvements for spectra (forked from cc-sdd). See [CHANGELOG.md](../../CHANGELOG.md) for technical changes.
+
+> ⚠️ **Note (this fork)**: These release notes reflect the historical evolution of the project from v0.1.0 through v3.0.2 under the original `cc-sdd` name. As of this fork, the project is published as **spectra** (v3.0.2 baseline). Command examples using `npx cc-sdd@latest` are historical; the current install command is `npx github:nekolife1984/spectra`. PR links still point to `gotalab/cc-sdd` because that is where the original work was submitted.
 
 ---
 
@@ -16,13 +18,13 @@ No unreleased features at this time. The latest stable release is v3.0.2.
 Patch release that keeps the Codex `spectra-reviewer` role valid for cross-spec review and removes a README reference that no longer aligns with cc-sdd.
 
 ### Fixed
-- Added the missing `description` field to the Codex `spectra-reviewer` template so Codex keeps the custom role available instead of ignoring it as malformed ([#160](https://github.com/gotalab/cc-sdd/pull/160))
+- Added the missing `description` field to the Codex `spectra-reviewer` template so Codex keeps the custom role available instead of ignoring it as malformed ([#160](https://github.com/nekolife1984/spectra/pull/160))
 
 ### Documentation
-- Removed the README Amazon book reference after the linked title shifted to promote `ai-sdd`, a closed-source clone of cc-sdd without attribution ([#157](https://github.com/gotalab/cc-sdd/pull/157))
+- Removed the README Amazon book reference after the linked title shifted to promote `ai-sdd`, a closed-source clone of cc-sdd without attribution ([#157](https://github.com/nekolife1984/spectra/pull/157))
 
 ### Resources
-- **Pull Requests**: [#157](https://github.com/gotalab/cc-sdd/pull/157), [#160](https://github.com/gotalab/cc-sdd/pull/160)
+- **Pull Requests**: [#157](https://github.com/nekolife1984/spectra/pull/157), [#160](https://github.com/nekolife1984/spectra/pull/160)
 - **Full Changelog**: [CHANGELOG.md](../../CHANGELOG.md#302---2026-04-14)
 - **Release Notes**: [English](./RELEASE_NOTES_en.md) | [日本語](./RELEASE_NOTES_ja.md)
 
@@ -39,17 +41,17 @@ npx cc-sdd@latest
 Patch release focused on safer filesystem handling in `cc-sdd`, plus a small follow-up fix for mojibake and English wording.
 
 ### Fixed
-- Fixed the mojibake in the Claude Code Skills `spectra-impl` template so the feature-flag protocol renders the `→` arrow correctly ([#154](https://github.com/gotalab/cc-sdd/pull/154))
+- Fixed the mojibake in the Claude Code Skills `spectra-impl` template so the feature-flag protocol renders the `→` arrow correctly ([#154](https://github.com/nekolife1984/spectra/pull/154))
 
 ### Security
 - Hardened manifest, template, and shared-rule path handling so generated file operations stay within their expected roots
-- Rejected unsafe traversal-style inputs and writes through symlinked destinations during execution ([#155](https://github.com/gotalab/cc-sdd/pull/155))
+- Rejected unsafe traversal-style inputs and writes through symlinked destinations during execution ([#155](https://github.com/nekolife1984/spectra/pull/155))
 
 ### Documentation
-- Updated a few English docs lines to replace `team-scale AI-driven development` with the more natural `AI-driven development at team scale` ([#155](https://github.com/gotalab/cc-sdd/pull/155))
+- Updated a few English docs lines to replace `team-scale AI-driven development` with the more natural `AI-driven development at team scale` ([#155](https://github.com/nekolife1984/spectra/pull/155))
 
 ### Resources
-- **Pull Requests**: [#154](https://github.com/gotalab/cc-sdd/pull/154), [#155](https://github.com/gotalab/cc-sdd/pull/155)
+- **Pull Requests**: [#154](https://github.com/nekolife1984/spectra/pull/154), [#155](https://github.com/nekolife1984/spectra/pull/155)
 - **Full Changelog**: [CHANGELOG.md](../../CHANGELOG.md#301---2026-04-11)
 - **Release Notes**: [English](./RELEASE_NOTES_en.md) | [日本語](./RELEASE_NOTES_ja.md)
 
@@ -68,18 +70,18 @@ npx cc-sdd@latest
 - **Native subagent dispatch**: autonomous implementation, review, and debug loops now live inside cc-sdd without relying on the external Ralph Loop project.
 
 ### ✨ Added
-- Skills-based agents for Cursor, GitHub Copilot, OpenCode, Gemini CLI, Windsurf, and Antigravity, alongside upgraded Claude Code Skills and Codex Skills support ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- Skills-based agents for Cursor, GitHub Copilot, OpenCode, Gemini CLI, Windsurf, and Antigravity, alongside upgraded Claude Code Skills and Codex Skills support ([#141](https://github.com/nekolife1984/spectra/pull/141))
 - New workflow entry points:
   - `/spectra-discovery` for idea triage and roadmap routing
   - `/spectra-batch` for parallel multi-spec creation
-  - `/spectra-impl` for autonomous implementation with reviewer/debugger loops ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- New rules/templates for boundary-first planning, design synthesis, review gates, task decomposition, and steering customization under `.spectra/settings/` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- `cc-sdd-new-agent`, a SOP-style skill for adding or migrating supported agents ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+  - `/spectra-impl` for autonomous implementation with reviewer/debugger loops ([#141](https://github.com/nekolife1984/spectra/pull/141))
+- New rules/templates for boundary-first planning, design synthesis, review gates, task decomposition, and steering customization under `.spectra/settings/` ([#141](https://github.com/nekolife1984/spectra/pull/141))
+- `cc-sdd-new-agent`, a SOP-style skill for adding or migrating supported agents ([#141](https://github.com/nekolife1984/spectra/pull/141))
 
 ### 🔧 Changed
-- Default install target is now `claude-code-skills`, making skills mode the out-of-the-box experience ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- Documentation, onboarding, and positioning have been rewritten around the v3 workflow and “long-running autonomous implementation” model ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- Issue auto-close automation now activates only when maintainers intentionally apply the `awaiting-response` label ([#138](https://github.com/gotalab/cc-sdd/pull/138))
+- Default install target is now `claude-code-skills`, making skills mode the out-of-the-box experience ([#141](https://github.com/nekolife1984/spectra/pull/141))
+- Documentation, onboarding, and positioning have been rewritten around the v3 workflow and “long-running autonomous implementation” model ([#141](https://github.com/nekolife1984/spectra/pull/141))
+- Issue auto-close automation now activates only when maintainers intentionally apply the `awaiting-response` label ([#138](https://github.com/nekolife1984/spectra/pull/138))
 
 ### ⚠️ Breaking / Migration Notes
 - Skills mode is now the primary path. Command-based installs remain deprecated and should be migrated to `--*-skills`.
@@ -90,7 +92,7 @@ npx cc-sdd@latest
 - See [docs/guides/migration-guide.md](../guides/migration-guide.md) for upgrade guidance.
 
 ### 🔗 Resources
-- **Pull Requests**: [#141](https://github.com/gotalab/cc-sdd/pull/141), [#138](https://github.com/gotalab/cc-sdd/pull/138)
+- **Pull Requests**: [#141](https://github.com/nekolife1984/spectra/pull/141), [#138](https://github.com/nekolife1984/spectra/pull/138)
 - **Full Changelog**: [CHANGELOG.md](../../CHANGELOG.md#300---2026-04-10)
 - **Release Notes**: [English](./RELEASE_NOTES_en.md) | [日本語](./RELEASE_NOTES_ja.md)
 
@@ -112,7 +114,7 @@ npx cc-sdd@latest
 ### New Contributors
 * @hiiamkazuto made their first contribution in #134
 
-- Resources: [CHANGELOG.md](../../CHANGELOG.md#211---2026-02-02), PRs: [#134](https://github.com/gotalab/cc-sdd/pull/134), [#135](https://github.com/gotalab/cc-sdd/pull/135)
+- Resources: [CHANGELOG.md](../../CHANGELOG.md#211---2026-02-02), PRs: [#134](https://github.com/nekolife1984/spectra/pull/134), [#135](https://github.com/nekolife1984/spectra/pull/135)
 
 ---
 
@@ -123,14 +125,14 @@ npx cc-sdd@latest
 - **Model Updates**: Updated recommended models to Opus 4.5, GPT-5.2, and Gemini 3 Flash for improved performance.
 
 ### ✨ Added
-- **OpenCode** ([#117](https://github.com/gotalab/cc-sdd/pull/117), [#127](https://github.com/gotalab/cc-sdd/pull/127))
+- **OpenCode** ([#117](https://github.com/nekolife1984/spectra/pull/117), [#127](https://github.com/nekolife1984/spectra/pull/127))
   - `.opencode/commands/` with all 11 spec commands
   - OpenCode Agents (subagent version) in `.opencode/agents/`
   - OPENCODE.md project memory template
   - Installation: `npx cc-sdd@latest --opencode` or `--opencode-agent`
 
 ### 🔧 Changed
-- Updated recommended models ([#128](https://github.com/gotalab/cc-sdd/pull/128), [#129](https://github.com/gotalab/cc-sdd/pull/129))
+- Updated recommended models ([#128](https://github.com/nekolife1984/spectra/pull/128), [#129](https://github.com/nekolife1984/spectra/pull/129))
   - Claude: Opus 4.5
   - OpenAI: GPT-5.2
   - Google: Gemini 3 Flash
@@ -144,7 +146,7 @@ npx cc-sdd@latest
 ### 🙏 New Contributors
 * @inovue made their first contribution in #117
 
-- Resources: [CHANGELOG.md](../../CHANGELOG.md#210---2026-02-01), PRs: [#117](https://github.com/gotalab/cc-sdd/pull/117), [#127](https://github.com/gotalab/cc-sdd/pull/127), [#128](https://github.com/gotalab/cc-sdd/pull/128), [#129](https://github.com/gotalab/cc-sdd/pull/129)
+- Resources: [CHANGELOG.md](../../CHANGELOG.md#210---2026-02-01), PRs: [#117](https://github.com/nekolife1984/spectra/pull/117), [#127](https://github.com/nekolife1984/spectra/pull/127), [#128](https://github.com/nekolife1984/spectra/pull/128), [#129](https://github.com/nekolife1984/spectra/pull/129)
 
 ---
 
@@ -156,7 +158,7 @@ npx cc-sdd@latest
 ### New Contributors
 * @tpapamichail made their first contribution in #121
 
-- Resources: [CHANGELOG.md](../../CHANGELOG.md#205---2026-01-08), PR: [#121](https://github.com/gotalab/cc-sdd/pull/121)
+- Resources: [CHANGELOG.md](../../CHANGELOG.md#205---2026-01-08), PR: [#121](https://github.com/nekolife1984/spectra/pull/121)
 
 ---
 
@@ -174,7 +176,7 @@ npx cc-sdd@latest
 * @leosamp made their first contribution in #109
 * @Kakenyan made their first contribution in #107
 
-- Resources: [CHANGELOG.md](../../CHANGELOG.md#204---2026-01-07), PRs: [#118](https://github.com/gotalab/cc-sdd/pull/118), [#109](https://github.com/gotalab/cc-sdd/pull/109), [#107](https://github.com/gotalab/cc-sdd/pull/107)
+- Resources: [CHANGELOG.md](../../CHANGELOG.md#204---2026-01-07), PRs: [#118](https://github.com/nekolife1984/spectra/pull/118), [#109](https://github.com/nekolife1984/spectra/pull/109), [#107](https://github.com/nekolife1984/spectra/pull/107)
 
 ---
 
@@ -183,7 +185,7 @@ npx cc-sdd@latest
 - Refined recommended OpenAI models for Codex CLI, Cursor, GitHub Copilot, and Windsurf to explicitly include `gpt-5.1-codex medium/high` as the primary code-focused option, with `gpt-5.1 medium/high` as a general-purpose fallback.
 - Updated DEV_GUIDELINES-related tests so they match the stricter language-handling rules introduced in v2.0.2, keeping runtime behavior unchanged while ensuring `npm test` passes cleanly for v2.0.3.
 
-- Resources: [CHANGELOG.md](../../CHANGELOG.md#203---2025-11-15), PR: [#104](https://github.com/gotalab/cc-sdd/pull/104)
+- Resources: [CHANGELOG.md](../../CHANGELOG.md#203---2025-11-15), PR: [#104](https://github.com/nekolife1984/spectra/pull/104)
 
 ---
 
@@ -193,7 +195,7 @@ npx cc-sdd@latest
 - Tightened language handling so all generated Markdown (requirements, design, tasks, research, validation) uses the spec’s target language and falls back to English (`en`) when `spec.json.language` is not set.
 - Made EARS patterns and traceability more consistent by keeping EARS trigger phrases in English, localizing only the variable slots, and enforcing numeric requirement IDs (e.g. `Requirement 1`, `1.1`, `2.3`) so requirements → design → tasks mappings are stable and fail fast when IDs are missing or invalid.
 
-- Resources: [CHANGELOG.md](../../CHANGELOG.md#202---2025-11-15), PR: [#102](https://github.com/gotalab/cc-sdd/pull/102)
+- Resources: [CHANGELOG.md](../../CHANGELOG.md#202---2025-11-15), PR: [#102](https://github.com/nekolife1984/spectra/pull/102)
 
 ---
 
@@ -203,7 +205,7 @@ npx cc-sdd@latest
 Documentation-only release improving README clarity and visual consistency.
 
 ### Resources
-- PRs: [#93](https://github.com/gotalab/cc-sdd/pull/93), [#94](https://github.com/gotalab/cc-sdd/pull/94)
+- PRs: [#93](https://github.com/nekolife1984/spectra/pull/93), [#94](https://github.com/nekolife1984/spectra/pull/94)
 - [CHANGELOG.md](../../CHANGELOG.md#201---2025-11-10)
 
 ---
@@ -213,7 +215,7 @@ Documentation-only release improving README clarity and visual consistency.
 ### Highlights at a Glance
 - **`npx cc-sdd@latest` = full stack SDD**: all alpha capabilities (research.md, validation commands, Subagents, Windsurf) are now GA.
 - **Spec-to-impl fidelity**: Research/Design/Tasks templates now enforce requirement IDs, component density rules, and Supporting References for long-form details.
-- **Brownfield guardrails**: `/spec:validate-*` commands, parallel-task analysis, and steering-wide project memory reduce drift before any code change.
+- **Brownfield guardrails**: `/spectra-validate-*` commands, parallel-task analysis, and steering-wide project memory reduce drift before any code change.
 - **Global parity**: 7 AI agents × 13 languages share the same templates, prompts, and installation flow.
 
 ### Upgrade Essentials
@@ -246,11 +248,11 @@ Once your project templates are regenerated on v2.0.0, all spec/todo automation 
 - **Enhanced Documentation**: Improved user experience with clarified installation instructions and npm badge addition.
 
 ### 🔧 Improvements
-- Updated EARS format to lowercase syntax ([#88](https://github.com/gotalab/cc-sdd/pull/88))
+- Updated EARS format to lowercase syntax ([#88](https://github.com/nekolife1984/spectra/pull/88))
   - Changed from "WHILE/WHEN/WHERE/IF" to "while/when/where/if"
   - More natural and readable requirements description
-- Clarified installation documentation ([#87](https://github.com/gotalab/cc-sdd/pull/87))
-- Added npm `next` version badge to README files ([#86](https://github.com/gotalab/cc-sdd/pull/86))
+- Clarified installation documentation ([#87](https://github.com/nekolife1984/spectra/pull/87))
+- Added npm `next` version badge to README files ([#86](https://github.com/nekolife1984/spectra/pull/86))
 
 ---
 
@@ -260,18 +262,18 @@ Once your project templates are regenerated on v2.0.0, all spec/todo automation 
 - **Comprehensive Customization Guide**: Added customization guide with 7 practical examples and complete command reference, making it easier to tailor templates to your project needs.
 
 ### 📖 New Documentation
-- **Customization Guide** ([#83](https://github.com/gotalab/cc-sdd/pull/83))
+- **Customization Guide** ([#83](https://github.com/nekolife1984/spectra/pull/83))
   - Template customization patterns
   - Agent-specific workflow examples
   - Project-specific rule examples
   - 7 practical customization examples
-- **Command Reference** ([#83](https://github.com/gotalab/cc-sdd/pull/83))
-  - Detailed usage for all 11 `/spec:*` commands
+- **Command Reference** ([#83](https://github.com/nekolife1984/spectra/pull/83))
+  - Detailed usage for all 11 `/spectra-*` commands
   - Parameter descriptions and practical examples
 
 ### 🔧 Improvements
-- Clarified template customization instructions ([#85](https://github.com/gotalab/cc-sdd/pull/85))
-- Customization guide review improvements ([#84](https://github.com/gotalab/cc-sdd/pull/84))
+- Clarified template customization instructions ([#85](https://github.com/nekolife1984/spectra/pull/85))
+- Customization guide review improvements ([#84](https://github.com/nekolife1984/spectra/pull/84))
 
 ---
 
@@ -281,10 +283,10 @@ Once your project templates are regenerated on v2.0.0, all spec/todo automation 
 - **Automated GitHub Issue Management**: Automatically closes inactive issues after 10 days, streamlining project management.
 
 ### ⚙️ Automation
-- Automated GitHub issue lifecycle management ([#80](https://github.com/gotalab/cc-sdd/pull/80))
+- Automated GitHub issue lifecycle management ([#80](https://github.com/nekolife1984/spectra/pull/80))
   - Auto-close stale issues after 10 days of inactivity
   - Configurable stale detection workflow
-  - English-only workflow messaging ([#81](https://github.com/gotalab/cc-sdd/pull/81))
+  - English-only workflow messaging ([#81](https://github.com/nekolife1984/spectra/pull/81))
 
 ### 🔧 Improvements
 - Updated stale detection period to 10 days
@@ -334,10 +336,10 @@ Once your project templates are regenerated on v2.0.0, all spec/todo automation 
 Enhanced spec-driven development for existing projects
 
 **New Quality Validation Commands**
-- 🔍 **`/spec:validate-gap`** - Gap analysis between existing functionality and requirements
+- 🔍 **`/spectra-validate-gap`** - Gap analysis between existing functionality and requirements
   - Execute before spectra-design to clarify differences between current implementation and new requirements
   - Identify existing system understanding and integration points for new features
-- ✅ **`/spec:validate-design`** - Design compatibility verification with existing architecture
+- ✅ **`/spectra-validate-design`** - Design compatibility verification with existing architecture
   - Execute after spectra-design to confirm design integration feasibility
   - Pre-detect conflicts and incompatibilities with existing systems
 
@@ -406,8 +408,8 @@ Fundamental review of entire spec-driven development workflow
 ### Major Spec Spec-Driven Development Command Improvements
 
 **Workflow Efficiency**
-- Added `-y` flag: `/spec:spectra-design feature-name -y` skips requirements approval and generates design
-- `/spec:spectra-tasks feature-name -y` skips requirements+design approval and generates tasks  
+- Added `-y` flag: `/spectra-design feature-name -y` skips requirements approval and generates design
+- `/spectra-tasks feature-name -y` skips requirements+design approval and generates tasks  
 - Added argument-hint: Commands now auto-display `<feature-name> [-y]` during input
 - Traditional step-by-step approval still available (spec.json editing or interactive approval)
 
@@ -517,7 +519,7 @@ Fundamental review of entire spec-driven development workflow
 - Added detailed usage recommendations and guidance
 
 **Unified Steering Management Functions**
-- `/spec:steering` command now properly handles existing files
+- `/spectra-steering` command now properly handles existing files
 - More intuitive steering document management
 
 **Improved System Stability**
@@ -569,8 +571,8 @@ Significantly improved generation quality of requirements, design, and tasks doc
 ## Usage
 
 1. Copy **`.claude/commands/` directory** and **`CLAUDE.md` file** to your project
-2. Run `/spec:steering` in Claude Code to configure project information
-3. Create new specifications with `/spec:spectra-init [feature-name]`
+2. Run `/spectra-steering` in Claude Code to configure project information
+3. Create new specifications with `/spectra-init [feature-name]`
 4. Progress through development step by step: requirements → design → tasks
 
 For detailed usage instructions, see [README_en.md](README_en.md).

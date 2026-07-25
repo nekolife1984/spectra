@@ -1,12 +1,15 @@
 # Customization Guide
 
+
+> ⚠️ **Note (this fork)**: This guide is maintained as part of the **spectra** project (forked from `gotalab/cc-sdd` at v3.0.2). Tool names and command examples have been updated to the spectra name; PR links to `gotalab/cc-sdd` are preserved as historical references. Legacy command samples using `npx cc-sdd@...` reflect the version in which the example was written and are kept for continuity.
+
 > 📖 日本語版はこちら: [カスタマイゼーションガイド](ja/customization-guide.md)
 
-This guide explains how to edit cc-sdd's templates and rules to adapt to your team's specific workflow.
+This guide explains how to edit spectra's templates and rules to adapt to your team's specific workflow.
 
 ## Introduction
 
-cc-sdd provides two customization points:
+spectra provides two customization points:
 
 - **templates/** - Define the **structure and format** of AI-generated documents
 - **rules/** - Define the **judgment criteria and generation principles** for AI
@@ -57,7 +60,7 @@ Both are located under `{{SPECTRA_DIR}}/settings/` and are shared across the ent
 
 ## 🚨 Structure That Must Be Maintained
 
-cc-sdd commands read and understand documents through AI agents. The following elements **must be maintained**:
+spectra commands read and understand documents through AI agents. The following elements **must be maintained**:
 
 | File | Required Elements | Reason |
 |------|-------------------|--------|
@@ -247,10 +250,10 @@ ls -la {{SPECTRA_DIR}}/settings/rules/
 
 ```bash
 # Test with new spec
-/spec:spectra-init Test customization feature
-/spec:spectra-requirements test-customization
-/spec:spectra-design test-customization
-/spec:spectra-tasks test-customization
+/spectra-init Test customization feature
+/spectra-requirements test-customization
+/spectra-design test-customization
+/spectra-tasks test-customization
 
 # Check generated files
 cat {{SPECTRA_DIR}}/specs/test-customization/requirements.md
@@ -470,14 +473,14 @@ Always include NFR sections for:
 
 ### ✅ Behavior After Completion
 
-When you run `/spec:spectra-requirements my-feature`:
+When you run `/spectra-requirements my-feature`:
 
 1. **Product Context** section is automatically generated
 2. Each requirement includes **Business Priority**, **Dependencies**, **Risk Level**
 3. **Verification Method** and **Success Threshold** are added to each requirement
 4. **Non-Functional Requirements** section is automatically generated
 5. **Compliance & Approvals** checklist is added
-6. Requirement numbering and acceptance criteria structure are maintained (compatible with `/spec:spectra-impl` and its skills mode equivalent `/spectra-impl`)
+6. Requirement numbering and acceptance criteria structure are maintained (compatible with `/spectra-impl` and its skills mode equivalent `/spectra-impl`)
 
 ### 🧪 Testing Method
 
@@ -489,8 +492,8 @@ vim {{SPECTRA_DIR}}/settings/templates/specs/requirements.md
 vim {{SPECTRA_DIR}}/settings/rules/ears-format.md
 
 # 3. Check with new spec
-/spec:spectra-init Test PRD-style requirements with business context
-/spec:spectra-requirements test-prd-feature
+/spectra-init Test PRD-style requirements with business context
+/spectra-requirements test-prd-feature
 
 # 4. Check generated requirements.md
 cat {{SPECTRA_DIR}}/specs/test-prd-feature/requirements.md
@@ -1024,7 +1027,7 @@ graph TB
 
 ### ✅ Behavior After Completion
 
-When you run `/spec:spectra-design my-backend-feature`:
+When you run `/spectra-design my-backend-feature`:
 
 1. **API Specification** generates detailed specs for all endpoints
 2. **Database Schema** explicitly defines tables, indexes, and constraints
@@ -1040,9 +1043,9 @@ When you run `/spec:spectra-design my-backend-feature`:
 vim {{SPECTRA_DIR}}/settings/templates/specs/design.md
 
 # 2. Check with new spec
-/spec:spectra-init Build RESTful API for user management
-/spec:spectra-requirements user-api
-/spec:spectra-design user-api
+/spectra-init Build RESTful API for user management
+/spectra-requirements user-api
+/spectra-design user-api
 
 # 3. Check generated design.md
 cat {{SPECTRA_DIR}}/specs/user-api/design.md
@@ -1059,7 +1062,7 @@ grep -A 10 "## Security" {{SPECTRA_DIR}}/specs/user-api/design.md
 
 ### 📋 Customization Target
 
-- **Create**: Create new with `/spec:steering-custom` command
+- **Create**: Create new with `/spectra-steering-custom` command
 - **Save to**: `{{SPECTRA_DIR}}/steering/{{domain-name}}.md`
 - **Rules adjustment**: `{{SPECTRA_DIR}}/settings/rules/steering-principles.md` (Optional)
 
@@ -1073,7 +1076,7 @@ grep -A 10 "## Security" {{SPECTRA_DIR}}/specs/user-api/design.md
 
 #### Step 1: Create Steering Document
 
-**Command**: `/spec:steering-custom`
+**Command**: `/spectra-steering-custom`
 
 **Prompt Example**:
 ```
@@ -1989,31 +1992,31 @@ class ErrorBoundary extends React.Component {
 When you create a steering document:
 
 1. **All spec generation commands** automatically reference the rules
-2. `/spec:spectra-design` automatically applies standard format during API design
-3. `/spec:spectra-requirements` automatically includes error handling requirements
-4. `/spec:spectra-tasks` generates authentication and testing-related tasks according to standards
+2. `/spectra-design` automatically applies standard format during API design
+3. `/spectra-requirements` automatically includes error handling requirements
+4. `/spectra-tasks` generates authentication and testing-related tasks according to standards
 
 ### 🧪 Testing Method
 
 ```bash
 # 1. Create steering document
-/spec:steering-custom
+/spectra-steering-custom
 # Prompt: Create API standards steering document for REST conventions
 
 # 2. Check generated file
 cat {{SPECTRA_DIR}}/steering/api-standards.md
 
 # 3. Check steering application with new spec
-/spec:spectra-init Build user management API
-/spec:spectra-design user-management-api
+/spectra-init Build user management API
+/spectra-design user-management-api
 
 # 4. Check if API standards are reflected in generated design.md
 grep -A 10 "## API Specification" {{SPECTRA_DIR}}/specs/user-management-api/design.md
 # Verify endpoint structure and error response format match steering
 
 # 5. Verify same standards are applied to other features
-/spec:spectra-init Build order processing API
-/spec:spectra-design order-processing-api
+/spectra-init Build order processing API
+/spectra-design order-processing-api
 diff \
   <(grep "Error Response" {{SPECTRA_DIR}}/specs/user-management-api/design.md) \
   <(grep "Error Response" {{SPECTRA_DIR}}/specs/order-processing-api/design.md)
@@ -2092,10 +2095,10 @@ git commit -m "Add team-wide templates"
 
 ```bash
 # 1. Try with a small feature
-/spec:spectra-init Small feature for testing custom templates
-/spec:spectra-requirements test-feature
-/spec:spectra-design test-feature
-/spec:spectra-tasks test-feature
+/spectra-init Small feature for testing custom templates
+/spectra-requirements test-feature
+/spectra-design test-feature
+/spectra-tasks test-feature
 
 # 2. Team review
 # - Check output quality

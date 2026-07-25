@@ -1,6 +1,8 @@
 # リリースノート
 
-cc-sddの新機能・改善情報をお届けします。技術的な変更履歴は [CHANGELOG.md](../../CHANGELOG.md) をご覧ください。
+spectra（旧称: cc-sdd）の新機能・改善情報をお届けします。技術的な変更履歴は [CHANGELOG.md](../../CHANGELOG.md) をご覧ください。
+
+> ⚠️ **本フォーク注記**: このリリースノートは v0.1.0〜v3.0.2 における `cc-sdd` 時代の歴史的進化を反映しています。本フォークでは **spectra** として公開されています（v3.0.2 をベースにリブランド）。`npx cc-sdd@latest` のコマンド例は歴史的のもので、現行のインストールは `npx github:nekolife1984/spectra` です。PRリンクは元の作業が投稿された `gotalab/cc-sdd` を指したままです。
 
 ---
 
@@ -16,13 +18,13 @@ cc-sddの新機能・改善情報をお届けします。技術的な変更履�
 Codex の `spectra-reviewer` role を有効な状態に保つ修正と、cc-sdd の方針に合わなくなった README 参照の整理を含む patch release です。
 
 ### 修正
-- Codex の `spectra-reviewer` テンプレートに不足していた `description` フィールドを追加し、malformed として無視されず cross-spec review 用の custom role が利用されるようにしました ([#160](https://github.com/gotalab/cc-sdd/pull/160))
+- Codex の `spectra-reviewer` テンプレートに不足していた `description` フィールドを追加し、malformed として無視されず cross-spec review 用の custom role が利用されるようにしました ([#160](https://github.com/nekolife1984/spectra/pull/160))
 
 ### ドキュメント
-- README の Amazon 書籍参照を削除しました。リンク先の書籍タイトルと内容が、帰属なしの closed-source clone である `ai-sdd` を宣伝する形に変わっていたためです ([#157](https://github.com/gotalab/cc-sdd/pull/157))
+- README の Amazon 書籍参照を削除しました。リンク先の書籍タイトルと内容が、帰属なしの closed-source clone である `ai-sdd` を宣伝する形に変わっていたためです ([#157](https://github.com/nekolife1984/spectra/pull/157))
 
 ### リソース
-- **Pull Requests**: [#157](https://github.com/gotalab/cc-sdd/pull/157), [#160](https://github.com/gotalab/cc-sdd/pull/160)
+- **Pull Requests**: [#157](https://github.com/nekolife1984/spectra/pull/157), [#160](https://github.com/nekolife1984/spectra/pull/160)
 - **Full Changelog**: [CHANGELOG.md](../../CHANGELOG.md#302---2026-04-14)
 - **Release Notes**: [English](./RELEASE_NOTES_en.md) | [日本語](./RELEASE_NOTES_ja.md)
 
@@ -39,17 +41,17 @@ npx cc-sdd@latest
 `cc-sdd` のファイルシステム安全性を高める patch release です。あわせて、mojibake の修正と英語ドキュメントの軽微な表現改善を含みます。
 
 ### 修正
-- Claude Code Skills の `spectra-impl` テンプレートで発生していた mojibake を修正し、Feature Flag Protocol の `→` が正しく表示されるようにしました ([#154](https://github.com/gotalab/cc-sdd/pull/154))
+- Claude Code Skills の `spectra-impl` テンプレートで発生していた mojibake を修正し、Feature Flag Protocol の `→` が正しく表示されるようにしました ([#154](https://github.com/nekolife1984/spectra/pull/154))
 
 ### セキュリティ
 - manifest、template、shared-rules 由来のパス処理を強化し、生成されるファイル操作が許可されたルート内に限定されるよう改善
-- path traversal 的な入力や symlink 経由の書き込みを実行時に拒否するように変更 ([#155](https://github.com/gotalab/cc-sdd/pull/155))
+- path traversal 的な入力や symlink 経由の書き込みを実行時に拒否するように変更 ([#155](https://github.com/nekolife1984/spectra/pull/155))
 
 ### ドキュメント
-- 英語ドキュメントの一部で、`team-scale AI-driven development` をより自然な `AI-driven development at team scale` に修正しました ([#155](https://github.com/gotalab/cc-sdd/pull/155))
+- 英語ドキュメントの一部で、`team-scale AI-driven development` をより自然な `AI-driven development at team scale` に修正しました ([#155](https://github.com/nekolife1984/spectra/pull/155))
 
 ### リソース
-- **Pull Requests**: [#154](https://github.com/gotalab/cc-sdd/pull/154), [#155](https://github.com/gotalab/cc-sdd/pull/155)
+- **Pull Requests**: [#154](https://github.com/nekolife1984/spectra/pull/154), [#155](https://github.com/nekolife1984/spectra/pull/155)
 - **Full Changelog**: [CHANGELOG.md](../../CHANGELOG.md#301---2026-04-11)
 - **Release Notes**: [English](./RELEASE_NOTES_en.md) | [日本語](./RELEASE_NOTES_ja.md)
 
@@ -68,18 +70,18 @@ npx cc-sdd@latest
 - **ネイティブな subagent dispatch**: 自律実装・レビュー・デバッグのループが cc-sdd 内に統合され、外部の Ralph Loop 依存が不要になりました。
 
 ### ✨ 追加
-- Cursor / GitHub Copilot / OpenCode / Gemini CLI / Windsurf / Antigravity 向けの skills-based agents を追加し、Claude Code Skills / Codex Skills も強化 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- Cursor / GitHub Copilot / OpenCode / Gemini CLI / Windsurf / Antigravity 向けの skills-based agents を追加し、Claude Code Skills / Codex Skills も強化 ([#141](https://github.com/nekolife1984/spectra/pull/141))
 - 新しい workflow entry points:
   - `/spectra-discovery` でアイデアを triage して roadmap に分岐
   - `/spectra-batch` で複数 spec を並列作成
-  - `/spectra-impl` で reviewer/debugger loop 付きの autonomous implementation ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- boundary-first planning、design synthesis、review gates、task decomposition、steering customization のための `.spectra/settings/` rules/templates を追加 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- 新しい `cc-sdd-new-agent` skill を追加し、対応 agent の追加や skills mode への移行手順を SOP 化 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+  - `/spectra-impl` で reviewer/debugger loop 付きの autonomous implementation ([#141](https://github.com/nekolife1984/spectra/pull/141))
+- boundary-first planning、design synthesis、review gates、task decomposition、steering customization のための `.spectra/settings/` rules/templates を追加 ([#141](https://github.com/nekolife1984/spectra/pull/141))
+- 新しい `cc-sdd-new-agent` skill を追加し、対応 agent の追加や skills mode への移行手順を SOP 化 ([#141](https://github.com/nekolife1984/spectra/pull/141))
 
 ### 🔧 変更
-- デフォルトのインストール対象を `claude-code-skills` に変更し、skills mode を標準体験にしました ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- ドキュメント、オンボーディング、メッセージングを v3 workflow と “long-running autonomous implementation” に合わせて再構成しました ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- issue の自動クローズは、maintainer が `awaiting-response` ラベルを明示的に付けた場合だけ発動するように変更しました ([#138](https://github.com/gotalab/cc-sdd/pull/138))
+- デフォルトのインストール対象を `claude-code-skills` に変更し、skills mode を標準体験にしました ([#141](https://github.com/nekolife1984/spectra/pull/141))
+- ドキュメント、オンボーディング、メッセージングを v3 workflow と “long-running autonomous implementation” に合わせて再構成しました ([#141](https://github.com/nekolife1984/spectra/pull/141))
+- issue の自動クローズは、maintainer が `awaiting-response` ラベルを明示的に付けた場合だけ発動するように変更しました ([#138](https://github.com/nekolife1984/spectra/pull/138))
 
 ### ⚠️ Breaking / Migration Notes
 - 今後は skills mode が主ルートです。command-based installs は deprecated なので `--*-skills` へ移行してください。
@@ -90,7 +92,7 @@ npx cc-sdd@latest
 - アップグレード手順は [docs/guides/migration-guide.md](../guides/migration-guide.md) を参照してください。
 
 ### 🔗 リソース
-- **Pull Requests**: [#141](https://github.com/gotalab/cc-sdd/pull/141), [#138](https://github.com/gotalab/cc-sdd/pull/138)
+- **Pull Requests**: [#141](https://github.com/nekolife1984/spectra/pull/141), [#138](https://github.com/nekolife1984/spectra/pull/138)
 - **Full Changelog**: [CHANGELOG.md](../../CHANGELOG.md#300---2026-04-10)
 - **Release Notes**: [English](./RELEASE_NOTES_en.md) | [日本語](./RELEASE_NOTES_ja.md)
 
@@ -112,7 +114,7 @@ npx cc-sdd@latest
 ### 新規コントリビューター
 * @hiiamkazuto が #134 で初コントリビュート
 
-- リソース: [CHANGELOG.md](../../CHANGELOG.md#211---2026-02-02), PR: [#134](https://github.com/gotalab/cc-sdd/pull/134), [#135](https://github.com/gotalab/cc-sdd/pull/135)
+- リソース: [CHANGELOG.md](../../CHANGELOG.md#211---2026-02-02), PR: [#134](https://github.com/nekolife1984/spectra/pull/134), [#135](https://github.com/nekolife1984/spectra/pull/135)
 
 ---
 
@@ -123,14 +125,14 @@ npx cc-sdd@latest
 - **推奨モデル更新**: Opus 4.5、GPT-5.2、Gemini 3 Flashに更新し、パフォーマンスを向上。
 
 ### ✨ 追加
-- **OpenCode** ([#117](https://github.com/gotalab/cc-sdd/pull/117), [#127](https://github.com/gotalab/cc-sdd/pull/127))
+- **OpenCode** ([#117](https://github.com/nekolife1984/spectra/pull/117), [#127](https://github.com/nekolife1984/spectra/pull/127))
   - `.opencode/commands/` に全11個のspecコマンド
   - `.opencode/agents/` にOpenCode Agents（サブエージェント版）
   - OPENCODE.md プロジェクトメモリテンプレート
   - インストール: `npx cc-sdd@latest --opencode` または `--opencode-agent`
 
 ### 🔧 変更
-- 推奨モデルを更新 ([#128](https://github.com/gotalab/cc-sdd/pull/128), [#129](https://github.com/gotalab/cc-sdd/pull/129))
+- 推奨モデルを更新 ([#128](https://github.com/nekolife1984/spectra/pull/128), [#129](https://github.com/nekolife1984/spectra/pull/129))
   - Claude: Opus 4.5
   - OpenAI: GPT-5.2
   - Google: Gemini 3 Flash
@@ -144,7 +146,7 @@ npx cc-sdd@latest
 ### 🙏 新規コントリビューター
 * @inovue が #117 で初コントリビュート
 
-- リソース: [CHANGELOG.md](../../CHANGELOG.md#210---2026-02-01), PR: [#117](https://github.com/gotalab/cc-sdd/pull/117), [#127](https://github.com/gotalab/cc-sdd/pull/127), [#128](https://github.com/gotalab/cc-sdd/pull/128), [#129](https://github.com/gotalab/cc-sdd/pull/129)
+- リソース: [CHANGELOG.md](../../CHANGELOG.md#210---2026-02-01), PR: [#117](https://github.com/nekolife1984/spectra/pull/117), [#127](https://github.com/nekolife1984/spectra/pull/127), [#128](https://github.com/nekolife1984/spectra/pull/128), [#129](https://github.com/nekolife1984/spectra/pull/129)
 
 ---
 
@@ -156,7 +158,7 @@ npx cc-sdd@latest
 ### 新規コントリビューター
 * @tpapamichail が #121 で初コントリビュート
 
-- リソース: [CHANGELOG.md](../../CHANGELOG.md#205---2026-01-08), PR: [#121](https://github.com/gotalab/cc-sdd/pull/121)
+- リソース: [CHANGELOG.md](../../CHANGELOG.md#205---2026-01-08), PR: [#121](https://github.com/nekolife1984/spectra/pull/121)
 
 ---
 
@@ -174,7 +176,7 @@ npx cc-sdd@latest
 * @leosamp が #109 で初コントリビュート
 * @Kakenyan が #107 で初コントリビュート
 
-- リソース: [CHANGELOG.md](../../CHANGELOG.md#204---2026-01-07), PR: [#118](https://github.com/gotalab/cc-sdd/pull/118), [#109](https://github.com/gotalab/cc-sdd/pull/109), [#107](https://github.com/gotalab/cc-sdd/pull/107)
+- リソース: [CHANGELOG.md](../../CHANGELOG.md#204---2026-01-07), PR: [#118](https://github.com/nekolife1984/spectra/pull/118), [#109](https://github.com/nekolife1984/spectra/pull/109), [#107](https://github.com/nekolife1984/spectra/pull/107)
 
 ---
 
@@ -183,7 +185,7 @@ npx cc-sdd@latest
 - Codex CLI / Cursor / GitHub Copilot / Windsurf 向けの推奨モデルに `gpt-5.1-codex medium/high` を明示的に追加し、コード中心のワークロードでは Codex 系モデルを優先しつつ、`gpt-5.1 medium/high` を汎用用途のフォールバックとして維持しました。
 - DEV_GUIDELINES 関連のテスト期待値を v2.0.2 で導入した厳密な言語ハンドリング仕様に合わせて修正し、ランタイム挙動を変えずに `npm test` がクリーンに通るようにしました。
 
-- リソース: [CHANGELOG.md](../../CHANGELOG.md#203---2025-11-15), PR: [#104](https://github.com/gotalab/cc-sdd/pull/104)
+- リソース: [CHANGELOG.md](../../CHANGELOG.md#203---2025-11-15), PR: [#104](https://github.com/nekolife1984/spectra/pull/104)
 
 ---
 
@@ -193,7 +195,7 @@ npx cc-sdd@latest
 - requirements/design/tasks/research/validation などのMarkdown出力について、`spec.json.language` の言語を必ず用い、未設定時は英語（`en`）に統一。
 - EARSパターンとトレース性の一貫性を高めるため、EARSのトリガー句（`When/If/While/Where/The system shall/The [system] shall`）は英語固定とし可変部分のみターゲット言語で生成しつつ、`Requirement 1`, `1.1`, `2.3` のような数値IDだけを許可して requirements → design → tasks の対応関係を安定化。
 
-- リソース: [CHANGELOG.md](../../CHANGELOG.md#202---2025-11-15), PR: [#102](https://github.com/gotalab/cc-sdd/pull/102)
+- リソース: [CHANGELOG.md](../../CHANGELOG.md#202---2025-11-15), PR: [#102](https://github.com/nekolife1984/spectra/pull/102)
 
 ---
 
@@ -203,7 +205,7 @@ npx cc-sdd@latest
 ドキュメントのみの更新。READMEの明確性と視覚的一貫性を改善。
 
 ### リソース
-- PR: [#93](https://github.com/gotalab/cc-sdd/pull/93), [#94](https://github.com/gotalab/cc-sdd/pull/94)
+- PR: [#93](https://github.com/nekolife1984/spectra/pull/93), [#94](https://github.com/nekolife1984/spectra/pull/94)
 - [CHANGELOG.md](../../CHANGELOG.md#201---2025-11-10)
 
 ---
@@ -213,7 +215,7 @@ npx cc-sdd@latest
 ### ハイライト
 - **`npx cc-sdd@latest`で全機能開放**：alpha.1〜alpha.6で試験投入したResearch.md、検証コマンド、Subagents、Windsurf統合をすべてGA化。
 - **設計〜実装の一貫性強化**：要約表・Req Coverage・Supporting Referencesを備えた新designテンプレでSSoTを堅持。
-- **Brownfield向けガードレール**：`/spec:validate-*`、並列タスク分析、Steeringプロジェクトメモリでデグレを未然に防止。
+- **Brownfield向けガードレール**：`/spectra-validate-*`、並列タスク分析、Steeringプロジェクトメモリでデグレを未然に防止。
 - **グローバル対応**：7エージェント×12言語が同一テンプレートとコマンド体系を共有。
 
 ### アップグレード要点
@@ -249,11 +251,11 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - **ドキュメント充実**：インストール手順の明確化とnpmバッジの追加で、ユーザー体験が改善されました。
 
 ### 🔧 改善
-- EARS形式を小文字構文に更新（[#88](https://github.com/gotalab/cc-sdd/pull/88)）
+- EARS形式を小文字構文に更新（[#88](https://github.com/nekolife1984/spectra/pull/88)）
   - "WHILE/WHEN/WHERE/IF" → "while/when/where/if"
   - より自然で読みやすい要件記述が可能に
-- インストールドキュメントの明確化（[#87](https://github.com/gotalab/cc-sdd/pull/87)）
-- npm `next`バージョンバッジをREADMEに追加（[#86](https://github.com/gotalab/cc-sdd/pull/86)）
+- インストールドキュメントの明確化（[#87](https://github.com/nekolife1984/spectra/pull/87)）
+- npm `next`バージョンバッジをREADMEに追加（[#86](https://github.com/nekolife1984/spectra/pull/86)）
 
 ---
 
@@ -263,18 +265,18 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - **包括的なカスタマイズガイド**：7つの実践例を含むカスタマイズガイドと完全なコマンドリファレンスを追加し、プロジェクトに合わせたテンプレート調整が容易になりました。
 
 ### 📖 新ドキュメント
-- **カスタマイズガイド**（[#83](https://github.com/gotalab/cc-sdd/pull/83)）
+- **カスタマイズガイド**（[#83](https://github.com/nekolife1984/spectra/pull/83)）
   - テンプレートカスタマイズパターン
   - エージェント固有のワークフロー例
   - プロジェクト固有のルール例
   - 7つの実践的なカスタマイズ例
-- **コマンドリファレンス**（[#83](https://github.com/gotalab/cc-sdd/pull/83)）
-  - 全11個の`/spec:*`コマンドの詳細な使用方法
+- **コマンドリファレンス**（[#83](https://github.com/nekolife1984/spectra/pull/83)）
+  - 全11個の`/spectra-*`コマンドの詳細な使用方法
   - パラメータ説明と実例
 
 ### 🔧 改善
-- テンプレートカスタマイズ手順の明確化（[#85](https://github.com/gotalab/cc-sdd/pull/85)）
-- カスタマイズガイドのレビュー改善（[#84](https://github.com/gotalab/cc-sdd/pull/84)）
+- テンプレートカスタマイズ手順の明確化（[#85](https://github.com/nekolife1984/spectra/pull/85)）
+- カスタマイズガイドのレビュー改善（[#84](https://github.com/nekolife1984/spectra/pull/84)）
 
 ---
 
@@ -284,10 +286,10 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - **GitHub Issue自動管理**：10日間非アクティブなissueを自動クローズし、プロジェクト管理が効率化されました。
 
 ### ⚙️ 自動化
-- GitHub issueライフサイクル管理の自動化（[#80](https://github.com/gotalab/cc-sdd/pull/80)）
+- GitHub issueライフサイクル管理の自動化（[#80](https://github.com/nekolife1984/spectra/pull/80)）
   - 10日間非アクティブなissueを自動クローズ
   - 設定可能なstale検出ワークフロー
-  - 英語専用ワークフローメッセージング（[#81](https://github.com/gotalab/cc-sdd/pull/81)）
+  - 英語専用ワークフローメッセージング（[#81](https://github.com/nekolife1984/spectra/pull/81)）
 
 ### 🔧 改善
 - stale検出期間を10日に更新
@@ -330,15 +332,15 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - **ドキュメント整備**：README（英語/日本語/繁体字）およびリポジトリ README を更新し、対応エージェント、コマンド数、ディレクトリ構造、CLI 例を最新状態に反映。
 
 ### 🔄 関連プルリクエスト
-- **[#74](https://github.com/gotalab/cc-sdd/pull/74)** - Claude Code Subagentsモードの追加（実装中）
+- **[#74](https://github.com/nekolife1984/spectra/pull/74)** - Claude Code Subagentsモードの追加（実装中）
   - コンテキスト最適化のため、SDD コマンドを専用サブエージェントへ委譲
   - メイン会話のコンテキストウィンドウを保護し、セッション寿命を延長
   - 各コマンド専用のシステムプロンプトによる品質向上
-  - 関連Issue: [#68](https://github.com/gotalab/cc-sdd/issues/68)
-- **[#73](https://github.com/gotalab/cc-sdd/pull/73)** - CLAUDE.mdドキュメントの追加
-- **[#72](https://github.com/gotalab/cc-sdd/pull/72)** - エージェントメタデータの中央レジストリへのリファクタリング
-- **[#71](https://github.com/gotalab/cc-sdd/pull/71)** - アルファバージョン情報の追加と言語テーブルの改善
-- **[#70](https://github.com/gotalab/cc-sdd/pull/70)** - cc-sdd v2.0.0-alphaリリース
+  - 関連Issue: [#68](https://github.com/nekolife1984/spectra/issues/68)
+- **[#73](https://github.com/nekolife1984/spectra/pull/73)** - CLAUDE.mdドキュメントの追加
+- **[#72](https://github.com/nekolife1984/spectra/pull/72)** - エージェントメタデータの中央レジストリへのリファクタリング
+- **[#71](https://github.com/nekolife1984/spectra/pull/71)** - アルファバージョン情報の追加と言語テーブルの改善
+- **[#70](https://github.com/nekolife1984/spectra/pull/70)** - cc-sdd v2.0.0-alphaリリース
 
 ### 📈 主要メトリクス
 - **対応プラットフォーム**: 6 (Claude Code, Cursor IDE, Gemini CLI, Codex CLI, GitHub Copilot, Qwen Code)
@@ -353,10 +355,10 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 既存プロジェクトに対する仕様駆動開発をより効果的に実現
 
 **品質検証コマンドの新規追加**
-- 🔍 **`/spec:validate-gap`** - 既存機能と要件のギャップ分析
+- 🔍 **`/spectra-validate-gap`** - 既存機能と要件のギャップ分析
   - spectra-design前に実行し、現在の実装と新要件の差分を明確化
   - 既存システムの理解と新機能の統合ポイントを特定
-- ✅ **`/spec:validate-design`** - 設計の既存アーキテクチャとの互換性検証
+- ✅ **`/spectra-validate-design`** - 設計の既存アーキテクチャとの互換性検証
   - spectra-design後に実行し、設計の統合可能性を確認
   - 既存システムとの衝突や非互換性を事前に検出
 
@@ -425,8 +427,8 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 ### Spec spec-driven developmentコマンド大幅改善
 
 **ワークフロー効率化**
-- `-y`フラグ追加: `/spec:spectra-design feature-name -y`で要件承認をスキップして設計生成
-- `/spec:spectra-tasks feature-name -y`で要件+設計承認をスキップしてタスク生成
+- `-y`フラグ追加: `/spectra-design feature-name -y`で要件承認をスキップして設計生成
+- `/spectra-tasks feature-name -y`で要件+設計承認をスキップしてタスク生成
 - argument-hint追加: コマンド入力時に`<feature-name> [-y]`が自動表示
 - 従来の段階的承認も維持（spec.json編集またはインタラクティブ承認）
 
@@ -536,7 +538,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - 詳細な使用推奨事項とガイダンスを追加しました
 
 **ステアリング管理機能の統一**
-- `/spec:steering`コマンドが既存ファイルを適切に処理するようになりました
+- `/spectra-steering`コマンドが既存ファイルを適切に処理するようになりました
 - ステアリング文書の管理がより直感的になりました
 
 **システム安定性の向上**
@@ -596,8 +598,8 @@ requirements、design、tasksの各文書生成品質を大幅改善、過剰な
 
 ### 基本フロー（全プラットフォーム共通）
 1. 選択したプラットフォームのファイルをプロジェクトにコピー
-2. `/spec:steering`でプロジェクト情報を設定
-3. `/spec:spectra-init [機能説明]`で新しい仕様書を作成
+2. `/spectra-steering`でプロジェクト情報を設定
+3. `/spectra-init [機能説明]`で新しい仕様書を作成
 4. 要件→設計→タスク→実装の順で段階的に開発を進める
 
 詳細な使用方法は[README_ja.md](docs/README/README_ja.md)をご覧ください。

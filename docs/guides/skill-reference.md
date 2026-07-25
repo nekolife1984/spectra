@@ -1,10 +1,13 @@
 # Skill Reference
 
+
+> ⚠️ **Note (this fork)**: This guide is maintained as part of the **spectra** project (forked from `gotalab/cc-sdd` at v3.0.2). Tool names and command examples have been updated to the spectra name; PR links to `gotalab/cc-sdd` are preserved as historical references. Legacy command samples using `npx cc-sdd@...` reflect the version in which the example was written and are kept for continuity.
+
 > 📖 **日本語ガイドはこちら:** [スキルリファレンス (日本語)](ja/skill-reference.md)
 
-Reference for the skills-mode workflow in cc-sdd. Use this guide when you installed a skills-mode agent such as `--claude-skills`, `--codex-skills`, `--cursor-skills`, `--copilot-skills`, `--windsurf-skills`, `--opencode-skills`, `--gemini-skills`, or `--antigravity`.
+Reference for the skills-mode workflow in spectra. Use this guide when you installed a skills-mode agent such as `--claude-skills`, `--codex-skills`, `--cursor-skills`, `--copilot-skills`, `--windsurf-skills`, `--opencode-skills`, `--gemini-skills`, or `--antigravity`.
 
-If you are using legacy `/spec:*` commands, use the [Command Reference](command-reference.md) instead.
+If you are using legacy `/spectra-*` commands, use the [Command Reference](command-reference.md) instead.
 
 ## Start Here
 
@@ -156,7 +159,7 @@ Skills mode and the legacy `--claude-agent` install target take fundamentally di
 | Cross-platform | Claude Code only | 8 platforms |
 | Spec generation (`spectra-quick`) | Four-phase Subagent orchestration | Inline `spectra-quick` skill that sequences the four spec skills |
 | Parallel spec batch | Not available | `/spectra-batch` with cross-spec review |
-| Implementation | Manual via `/spec:spectra-impl` | Autonomous or manual via `/spectra-impl` |
+| Implementation | Manual via `/spectra-impl` | Autonomous or manual via `/spectra-impl` |
 | Review process | Manual or via `validate-impl` | Built-in independent reviewer pass |
 | Debug on failure | Not available | Auto debug pass (max 2 rounds) with web search |
 | Session resume | Start fresh | Safe to re-run after interruption |
@@ -178,8 +181,8 @@ Because skills mode generates prompts dynamically, customization works different
 | --- | --- | --- |
 | New-work entry point | `/spectra-discovery` | none |
 | Multi-spec creation | `/spectra-batch` | none |
-| Implementation | `/spectra-impl` | `/spec:spectra-impl` |
-| Integration validation | `/spectra-validate-impl` | `/spec:validate-impl` |
+| Implementation | `/spectra-impl` | `/spectra-impl` |
+| Integration validation | `/spectra-validate-impl` | `/spectra-validate-impl` |
 | Review/debug/completion gates | explicit skills | embedded in command flow or external process |
 
 ## Recommended Reading Order

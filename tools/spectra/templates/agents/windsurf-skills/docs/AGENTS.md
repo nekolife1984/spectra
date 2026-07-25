@@ -25,7 +25,7 @@ Project memory keeps persistent guidance (steering, specs notes, component docs)
 - Use `@spectra-status [feature-name]` to check progress
 
 ## Development Guidelines
-<!-- DEV_GUIDELINES: injected at install time with language-specific guidelines (npx cc-sdd@latest --lang <code>) -->
+<!-- DEV_GUIDELINES: injected at install time with language-specific guidelines (npx github:nekolife1984/spectra --lang <code>) -->
 {{DEV_GUIDELINES}}
 
 ## Minimal Workflow

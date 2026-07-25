@@ -1,4 +1,7 @@
-# cc-sdd マイグレーションガイド
+# spectra マイグレーションガイド
+
+
+> ⚠️ **本フォーク注記**: このガイドは **spectra** プロジェクト（`gotalab/cc-sdd` v3.0.2 からフォーク）の一部として保守されています。ツール名とコマンド例は spectra 名に更新済みです。`gotalab/cc-sdd` への PR リンクは歴史的参照として残しています。`npx cc-sdd@...` 形式の legacy コマンド例は書かれた当時のバージョンを反映しており、連続性のためにそのまま残しています。
 
 > 📖 **English guide:** [Migration Guide](../migration-guide.md)
 
@@ -23,7 +26,7 @@ v1系（特に1.1.5）とv2.0.0は、**コマンドや agentic SDLC の基本思
 
 ---
 
-## 1. cc-sdd 1.1.5 を使い続ける (フォールバック)
+## 1. spectra 1.1.5 を使い続ける (フォールバック)
 
 1.1.5は `@latest` タグの対象外だが、バージョンを直接指定することで呼び出し可能である。
 
@@ -35,7 +38,7 @@ npx cc-sdd@1.1.5 --lang ja      # 旧来の言語オプション
 - `.claude/commands/*` や `.cursor/prompts/*` といったエージェント固有のディレクトリを直接編集する、従来の運用を継続できる。
 - エージェント固有のディレクトリ（例: `.claude/commands/*`）も、v1の構造がそのまま維持される。
 - ただし、新機能は `@latest`（v2系）にのみ追加され、v1.1.5へのバックポートは行われない。
-- `/spec:validate-gap`、`/spec:validate-design`、`/spec:validate-impl` といった検証コマンドはv1.1.5には存在しない。これらの機能が必要な場合は、v2への移行が必須となる。
+- `/spectra-validate-gap`、`/spectra-validate-design`、`/spectra-validate-impl` といった検証コマンドはv1.1.5には存在しない。これらの機能が必要な場合は、v2への移行が必須となる。
 
 ---
 
@@ -46,7 +49,7 @@ npx cc-sdd@1.1.5 --lang ja      # 旧来の言語オプション
 - **テンプレートとルールによる一元的なカスタマイズ**: コマンドのプロンプトを直接編集する必要はなくなり、`.spectra/settings/templates/` と `.spectra/settings/rules/` を修正するだけで、すべてのエージェントに設定が反映される。
 - **仕様駆動開発（Spec-Driven Development）の一貫性向上**: `research.md` が調査ログ、`design.md` がレビュー可能な一次情報（要約、要件カバレッジ、参考文献、適切な粒度に調整されたコンポーネント定義など）として、それぞれの役割を明確に担う。
 - **プロジェクトメモリとしてのステアリング**: `.spectra/steering/*.md` のように、ドメイン知識を複数のファイルに分割して体系的に管理できるようになった。
-- **既存プロジェクト（Brownfield）への安全な機能追加**: `/spec:validate-gap`、`validate-design`、`validate-impl` といった検証コマンドや、調査と設計の分離により、既存機能の追加・改修時の安全性が向上する。
+- **既存プロジェクト（Brownfield）への安全な機能追加**: `/spectra-validate-gap`、`validate-design`、`validate-impl` といった検証コマンドや、調査と設計の分離により、既存機能の追加・改修時の安全性が向上する。
 - **v2で対応する8種類のエージェントで共通の体験**: Claude Code、Cursor、Codex CLI、Gemini CLI、GitHub Copilot、Qwen Code、OpenCode、Windsurfが同じ11個のコマンドを共有する。これにより、例えばClaudeとCursorを併用する場合でも、追加のテンプレート修正は不要である。Claude Code では、`spectra-quick` に Subagent を組み込む `--claude-agent` オプションも選択できる。
 
 ---
@@ -140,7 +143,7 @@ npx cc-sdd@1.1.5 --lang ja      # 旧来の言語オプション
 `.spectra` ディレクトリの構成が両バージョンで異なるため、バージョンごとにブランチを分けるか、`.spectra` ディレクトリ自体を切り替えるスクリプトを用意する必要がある。
 
 **Q. テンプレート更新後に最低限実行すべきコマンドは？**  
-`/spec:steering`、`/spec:spectra-init`、`/spec:spectra-design` の順に一度実行し、新しい書式の調査・設計・タスクファイルが生成されることを確認する。
+`/spectra-steering`、`/spectra-init`、`/spectra-design` の順に一度実行し、新しい書式の調査・設計・タスクファイルが生成されることを確認する。
 
 ---
 

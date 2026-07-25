@@ -586,8 +586,9 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 
 ## Links
 
-- **Repository**: [gotalab/cc-sdd](https://github.com/gotalab/cc-sdd)
-- **npm Package**: [cc-sdd](https://www.npmjs.com/package/cc-sdd)
+- **Repository (this fork)**: [nekolife1984/spectra](https://github.com/nekolife1984/spectra)
+- **Upstream**: [gotalab/cc-sdd](https://github.com/gotalab/cc-sdd) — original project by gotalab, pre-rebrand (v3.0.2 and earlier)
+- **Install**: `npx github:nekolife1984/spectra` (formerly `npx cc-sdd@latest`)
 - **Release Notes**:
   - [Japanese](docs/RELEASE_NOTES/RELEASE_NOTES_ja.md)
   - [English](docs/RELEASE_NOTES/RELEASE_NOTES_en.md)
@@ -595,6 +596,8 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
   - [English](tools/spectra/README.md)
   - [Japanese](tools/spectra/README_ja.md)
   - [Traditional Chinese](docs/README/README_zh-TW.md)
+
+> **Note**: PR links throughout this changelog still point to `gotalab/cc-sdd` because that is where the work was originally submitted. Treat them as historical references; the actual code now lives at `nekolife1984/spectra`.
 
 ---
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),

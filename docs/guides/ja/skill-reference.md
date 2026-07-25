@@ -1,10 +1,13 @@
 # スキルリファレンス
 
+
+> ⚠️ **本フォーク注記**: このガイドは **spectra** プロジェクト（`gotalab/cc-sdd` v3.0.2 からフォーク）の一部として保守されています。ツール名とコマンド例は spectra 名に更新済みです。`gotalab/cc-sdd` への PR リンクは歴史的参照として残しています。`npx cc-sdd@...` 形式の legacy コマンド例は書かれた当時のバージョンを反映しており、連続性のためにそのまま残しています。
+
 > 📖 **English guide:** [Skill Reference](../skill-reference.md)
 
-cc-sdd の Skills モード向けリファレンスである。`--claude-skills`、`--codex-skills`、`--cursor-skills`、`--copilot-skills`、`--windsurf-skills`、`--opencode-skills`、`--gemini-skills`、`--antigravity` を使っている場合は、このページを参照する。
+spectra の Skills モード向けリファレンスである。`--claude-skills`、`--codex-skills`、`--cursor-skills`、`--copilot-skills`、`--windsurf-skills`、`--opencode-skills`、`--gemini-skills`、`--antigravity` を使っている場合は、このページを参照する。
 
-レガシーの `/spec:*` コマンドを使っている場合は、[コマンドリファレンス](command-reference.md) を参照すること。
+レガシーの `/spectra-*` コマンドを使っている場合は、[コマンドリファレンス](command-reference.md) を参照すること。
 
 ## まずどこから始めるか
 
@@ -153,7 +156,7 @@ Skills モードとレガシーの `--claude-agent` は subagent の扱いが根
 | クロスプラットフォーム | Claude Code のみ | 8 プラットフォーム |
 | Spec 生成 (`spectra-quick`) | 4 フェーズを Subagent で調整 | `spectra-quick` skill が 4 つの spec skill を順に呼ぶ |
 | 並列 spec batch | なし | `/spectra-batch` + cross-spec review |
-| 実装 | `/spec:spectra-impl` で手動 | `/spectra-impl` の自律 or マニュアル |
+| 実装 | `/spectra-impl` で手動 | `/spectra-impl` の自律 or マニュアル |
 | レビュー | 手動 or `validate-impl` | 内蔵 independent reviewer pass |
 | 失敗時のデバッグ | なし | 自動 debug pass（最大 2 ラウンド、Web 検索あり） |
 | セッション再開 | 最初から | 中断後の再実行が安全 |
@@ -175,8 +178,8 @@ Skills モードはプロンプトを動的に生成するため、`.claude/agen
 | --- | --- | --- |
 | 新規 work の入口 | `/spectra-discovery` | なし |
 | 複数 spec の生成 | `/spectra-batch` | なし |
-| 実装 | `/spectra-impl` | `/spec:spectra-impl` |
-| integration validation | `/spectra-validate-impl` | `/spec:validate-impl` |
+| 実装 | `/spectra-impl` | `/spectra-impl` |
+| integration validation | `/spectra-validate-impl` | `/spectra-validate-impl` |
 | review/debug/completion gate | 明示的な skill として存在 | コマンド内や外部プロセスに埋め込まれがち |
 
 ## 読む順番のおすすめ

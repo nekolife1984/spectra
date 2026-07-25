@@ -44,10 +44,10 @@
 3. **執行初始指令**（各平台通用）：
    ```bash
    # 選用：建立 steering 文件
-   /spec:steering
+   /spectra-steering
    
    # 建立第一個功能規格
-   /spec:spectra-init "請詳細描述你的專案"
+   /spectra-init "請詳細描述你的專案"
    ```
 
 ### 必要目錄結構
@@ -76,22 +76,22 @@ your-project/
 
 ```bash
 # 選用：產生 steering 文件（建議但非必須）
-/spec:steering
+/spectra-steering
 
 # 步驟1：建立新功能規格（請詳細描述需求）
-/spec:spectra-init "我想建立一個讓使用者上傳 PDF，從中擷取圖表並由 AI 解釋內容的功能。技術棧：Next.js、TypeScript、Tailwind CSS。"
+/spectra-init "我想建立一個讓使用者上傳 PDF，從中擷取圖表並由 AI 解釋內容的功能。技術棧：Next.js、TypeScript、Tailwind CSS。"
 
 # 步驟2：需求定義（使用自動產生的功能名稱）
-/spec:spectra-requirements pdf-diagram-extractor
+/spectra-requirements pdf-diagram-extractor
 # → 編輯 .spectra/specs/pdf-diagram-extractor/requirements.md
 
 # 步驟3：技術設計（互動式核准）
-/spec:spectra-design pdf-diagram-extractor
+/spectra-design pdf-diagram-extractor
 # → 回應「您已檢閱 requirements.md 了嗎？ [y/N]」
 # → 編輯 .spectra/specs/pdf-diagram-extractor/design.md
 
 # 步驟4：產生實作任務（互動式核准）
-/spec:spectra-tasks pdf-diagram-extractor
+/spectra-tasks pdf-diagram-extractor
 # → 回應 requirements 與 design 的檢閱確認
 # → 編輯 .spectra/specs/pdf-diagram-extractor/tasks.md
 
@@ -103,10 +103,10 @@ your-project/
 ```bash
 # 選用：建立或更新 steering
 # 同一指令可處理新建與更新
-/spec:steering
+/spectra-steering
 
 # 步驟1：建立新功能規格
-/spec:spectra-init "請詳細描述新功能"
+/spectra-init "請詳細描述新功能"
 # 後續步驟同新專案
 ```
 
@@ -114,7 +114,7 @@ your-project/
 
 ```bash
 # 查詢特定功能進度
-/spec:spectra-status my-feature
+/spectra-status my-feature
 
 # 顯示目前階段、審核狀態與任務進度
 ```
@@ -130,25 +130,25 @@ your-project/
 ```mermaid
 graph TD
     A["專案開始"] --> B{"建立<br/>Steering？"}
-    B -->|是| C["/spec:steering"]
-    B -->|否| D["/spec:spectra-init"]
+    B -->|是| C["/spectra-steering"]
+    B -->|否| D["/spectra-init"]
     C --> D
     
-    D --> E["/spec:spectra-requirements"]
+    D --> E["/spectra-requirements"]
     E --> F["requirements.md"]
     F --> G{"滿意？"}
     G -->|否| G1["編輯修正"]
     G1 --> F
     G -->|是| H["進入下階段"]
     
-    H --> I["/spec:spectra-design"]
+    H --> I["/spectra-design"]
     I --> J["design.md"]
     J --> K{"滿意？"}
     K -->|否| K1["編輯修正"]
     K1 --> J
     K -->|是| L["進入下階段"]
     
-    L --> M["/spec:spectra-tasks"]
+    L --> M["/spectra-tasks"]
     M --> N["tasks.md"]
     N --> O{"滿意？"}
     O -->|否| O1["編輯修正"]
@@ -156,13 +156,13 @@ graph TD
     O -->|是| P["準備實作"]
     
     P --> Q["開始實作"]
-    Q --> R["/spec:spectra-status"]
+    Q --> R["/spectra-status"]
     R --> S{"完成？"}
     S -->|否| Q
     S -->|是| T["功能完成"]
     
     T --> U{"更新<br/>Steering？"}
-    U -->|是| V["/spec:steering"]
+    U -->|是| V["/spectra-steering"]
     U -->|否| W["結束"]
     V --> W
     
@@ -192,8 +192,8 @@ graph TD
 
 | 指令 | 目的 | 使用時機 |
 |------|------|----------|
-| `/spec:steering` | 智慧建立或更新 steering 文件 | 所有情況（新建和更新） |
-| `/spec:steering-custom` | 建立自訂 steering 文件 | 需特殊規範或指引時 |
+| `/spectra-steering` | 智慧建立或更新 steering 文件 | 所有情況（新建和更新） |
+| `/spectra-steering-custom` | 建立自訂 steering 文件 | 需特殊規範或指引時 |
 
 **備註**：Steering 文件建議建立，但非強制。小型功能或實驗性開發可省略。
 
@@ -207,16 +207,16 @@ graph TD
 
 | 指令 | 目的 | 使用時機 |
 |------|------|----------|
-| `/spec:spectra-init [詳細專案描述]` | 根據描述初始化規格結構 | 新功能開發啟動時 |
-| `/spec:spectra-requirements [功能名稱]` | 產生需求文件 | 規格初始化後立即執行 |
-| `/spec:spectra-design [功能名稱]` | 產生技術設計文件 | 需求審核通過後 |
-| `/spec:spectra-tasks [功能名稱]` | 產生實作任務 | 設計審核通過後 |
+| `/spectra-init [詳細專案描述]` | 根據描述初始化規格結構 | 新功能開發啟動時 |
+| `/spectra-requirements [功能名稱]` | 產生需求文件 | 規格初始化後立即執行 |
+| `/spectra-design [功能名稱]` | 產生技術設計文件 | 需求審核通過後 |
+| `/spectra-tasks [功能名稱]` | 產生實作任務 | 設計審核通過後 |
 
 ### 📊 階段2：進度管理
 
 | 指令 | 目的 | 使用時機 |
 |------|------|----------|
-| `/spec:spectra-status [功能名稱]` | 查詢目前進度與階段 | 開發過程中定期查詢 |
+| `/spectra-status [功能名稱]` | 查詢目前進度與階段 | 開發過程中定期查詢 |
 
 ## 三階段審核流程
 
@@ -228,13 +228,13 @@ sequenceDiagram
     participant C as Claude Code
     participant H as 人工審核者
     
-    D->>C: "/spec:spectra-requirements feature"
+    D->>C: "/spectra-requirements feature"
     C->>C: "產生需求文件"
     C->>D: "requirements.md"
     D->>H: "請求審核"
     H->>H: "審查與編輯"
     
-    D->>C: "/spec:spectra-design feature"
+    D->>C: "/spectra-design feature"
     C->>D: "檢閱確認：您已檢閱 requirements.md 了嗎？"
     D->>C: "y"
     C->>C: "根據需求產生設計"
@@ -242,7 +242,7 @@ sequenceDiagram
     D->>H: "請求審核"
     H->>H: "審查與編輯"
     
-    D->>C: "/spec:spectra-tasks feature"
+    D->>C: "/spectra-tasks feature"
     C->>D: "檢閱確認：requirements/design 確認"
     D->>C: "y"
     C->>C: "根據設計產生任務"
@@ -258,7 +258,7 @@ sequenceDiagram
 ### ✅ 建議事項
 
 1. **務必從 steering 開始**
-   - 所有情況都使用 `/spec:steering`（智慧處理新建和更新）
+   - 所有情況都使用 `/spectra-steering`（智慧處理新建和更新）
    - 統一指令會適當保護現有文件並妥善處理
 
 2. **不可跳過階段**
@@ -266,11 +266,11 @@ sequenceDiagram
    - 每階段都需人工審核
 
 3. **定期檢查進度**
-   - 用 `/spec:spectra-status` 掌握現況
+   - 用 `/spectra-status` 掌握現況
    - 任務完成狀態要及時更新
 
 4. **維護 steering 文件**
-   - 重大變更後執行 `/spec:steering`（自動判斷更新策略）
+   - 重大變更後執行 `/spectra-steering`（自動判斷更新策略）
    - 隨專案成長持續更新
 
 ### ❌ 避免事項
@@ -337,7 +337,7 @@ sequenceDiagram
 ### 卡在審核流程時
 1. 確認是否正確回應檢閱確認提示
 2. 確認前一階段已核准
-3. 用 `/spec:spectra-status` 診斷目前狀態
+3. 用 `/spectra-status` 診斷目前狀態
 4. 必要時手動檢查/編輯 spec.json
 
 ## 摘要

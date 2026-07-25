@@ -1,8 +1,11 @@
 # Command Reference
 
+
+> ⚠️ **Note (this fork)**: This guide is maintained as part of the **spectra** project (forked from `gotalab/cc-sdd` at v3.0.2). Tool names and command examples have been updated to the spectra name; PR links to `gotalab/cc-sdd` are preserved as historical references. Legacy command samples using `npx cc-sdd@...` reflect the version in which the example was written and are kept for continuity.
+
 > 📖 **日本語ガイドはこちら:** [コマンドリファレンス (日本語)](ja/command-reference.md)
 
-Complete reference for the legacy `/spec:*` commands in cc-sdd with detailed usage, examples, and troubleshooting.
+Complete reference for the legacy `/spectra-*` commands in spectra with detailed usage, examples, and troubleshooting.
 
 If you are using skills mode, start with the [Skill Reference](skill-reference.md) instead.
 
@@ -13,23 +16,23 @@ If you are using skills mode, start with the [Skill Reference](skill-reference.m
 ## Quick Index
 
 ### Steering Commands
-- [`/spec:steering`](#specsteering) - Create/update project memory
-- [`/spec:steering-custom`](#specsteering-custom) - Add domain-specific steering
+- [`/spectra-steering`](#specsteering) - Create/update project memory
+- [`/spectra-steering-custom`](#specsteering-custom) - Add domain-specific steering
 
 ### Spec Workflow Commands
-- [`/spec:spectra-init`](#specspectra-init) - Initialize new feature spec
-- [`/spec:spectra-requirements`](#specspectra-requirements) - Generate requirements
-- [`/spec:spectra-design`](#specspectra-design) - Create technical design
-- [`/spec:spectra-tasks`](#specspectra-tasks) - Break down into tasks
-- [`/spec:spectra-impl`](#specspectra-impl) - Execute implementation
+- [`/spectra-init`](#specspectra-init) - Initialize new feature spec
+- [`/spectra-requirements`](#specspectra-requirements) - Generate requirements
+- [`/spectra-design`](#specspectra-design) - Create technical design
+- [`/spectra-tasks`](#specspectra-tasks) - Break down into tasks
+- [`/spectra-impl`](#specspectra-impl) - Execute implementation
 
 ### Validation Commands
-- [`/spec:validate-gap`](#specvalidate-gap) - Analyze existing vs requirements
-- [`/spec:validate-design`](#specvalidate-design) - Review design quality
-- [`/spec:validate-impl`](#specvalidate-impl) - Validate implementation
+- [`/spectra-validate-gap`](#specvalidate-gap) - Analyze existing vs requirements
+- [`/spectra-validate-design`](#specvalidate-design) - Review design quality
+- [`/spectra-validate-impl`](#specvalidate-impl) - Validate implementation
 
 ### Status & Utility
-- [`/spec:spectra-status`](#specspectra-status) - Check feature progress
+- [`/spectra-status`](#specspectra-status) - Check feature progress
 
 ---
 
@@ -43,23 +46,23 @@ If you are using skills mode, start with the [Skill Reference](skill-reference.m
 
 | Command | Parameters | Primary Purpose | Typical Next Step |
 |---------|------------|-----------------|-------------------|
-| `/spec:steering` | – | Bootstrap or sync project memory | `/spec:spectra-init` |
-| `/spec:steering-custom` | – (interactive) | Capture domain-specific patterns | `/spec:spectra-init` or rerun steering |
-| `/spec:spectra-init` | `<project-description>` | Create new spec folder & metadata | `/spec:spectra-requirements <feature>` |
-| `/spec:spectra-requirements` | `<feature-name>` | Generate EARS requirements | `/spec:spectra-design <feature>` |
-| `/spec:validate-gap` | `<feature-name>` | (Optional) Analyze existing code gaps | `/spec:spectra-design <feature>` |
-| `/spec:spectra-design` | `<feature-name> [-y]` | Produce `research.md` (when needed) + technical design | `/spec:spectra-tasks <feature>` |
-| `/spec:validate-design` | `<feature-name>` | (Optional) Review design quality | `/spec:spectra-tasks <feature>` |
-| `/spec:spectra-tasks` | `<feature-name> [-y]` | Break design into implementation tasks w/ parallel-safe blocks (P#) | `/spec:spectra-impl <feature> [tasks]` |
-| `/spec:spectra-impl` | `<feature-name> [task-numbers]` | Execute tasks with TDD | `/spec:validate-impl [feature] [tasks]` |
-| `/spec:validate-impl` | `[feature-name] [task-numbers]` | Verify implementation quality | `/spec:spectra-status <feature>` |
-| `/spec:spectra-status` | `<feature-name>` | Summarize workflow progress | Resume with suggested command |
+| `/spectra-steering` | – | Bootstrap or sync project memory | `/spectra-init` |
+| `/spectra-steering-custom` | – (interactive) | Capture domain-specific patterns | `/spectra-init` or rerun steering |
+| `/spectra-init` | `<project-description>` | Create new spec folder & metadata | `/spectra-requirements <feature>` |
+| `/spectra-requirements` | `<feature-name>` | Generate EARS requirements | `/spectra-design <feature>` |
+| `/spectra-validate-gap` | `<feature-name>` | (Optional) Analyze existing code gaps | `/spectra-design <feature>` |
+| `/spectra-design` | `<feature-name> [-y]` | Produce `research.md` (when needed) + technical design | `/spectra-tasks <feature>` |
+| `/spectra-validate-design` | `<feature-name>` | (Optional) Review design quality | `/spectra-tasks <feature>` |
+| `/spectra-tasks` | `<feature-name> [-y]` | Break design into implementation tasks w/ parallel-safe blocks (P#) | `/spectra-impl <feature> [tasks]` |
+| `/spectra-impl` | `<feature-name> [task-numbers]` | Execute tasks with TDD | `/spectra-validate-impl [feature] [tasks]` |
+| `/spectra-validate-impl` | `[feature-name] [task-numbers]` | Verify implementation quality | `/spectra-status <feature>` |
+| `/spectra-status` | `<feature-name>` | Summarize workflow progress | Resume with suggested command |
 
 ---
 
 ## Steering Commands
 
-### `/spec:steering`
+### `/spectra-steering`
 
 **Purpose**: Create or update project memory (steering) so every command can reference shared rules, architecture guardrails, and product-wide guidelines. It is *not* for feature-specific implementation notes.
 
@@ -67,7 +70,7 @@ If you are using skills mode, start with the [Skill Reference](skill-reference.m
 
 **Usage**:
 ```bash
-/spec:steering
+/spectra-steering
 ```
 
 **What it does**:
@@ -117,7 +120,7 @@ Review and approve as Source of Truth.
 |-------|-------|----------|
 | ❌ "No codebase found" | Running in empty directory | Run from project root with actual code |
 | ❌ "Permission denied" | Insufficient file permissions | Check write permissions on `.spectra/` directory |
-| ⚠️ Steering too generic | Small/new codebase | Add custom steering with `/spec:steering-custom` |
+| ⚠️ Steering too generic | Small/new codebase | Add custom steering with `/spectra-steering-custom` |
 | ⚠️ Updates overwrite my edits | User customizations lost | Steering preserves user content - report if not working |
 
 **Pro Tips**:
@@ -128,12 +131,12 @@ Review and approve as Source of Truth.
 - 💡 Re-run periodically to keep AI context fresh
 
 **Related Commands**:
-- [`/spec:steering-custom`](#specsteering-custom) - Add specialized domain knowledge
-- [`/spec:spectra-init`](#specspectra-init) - Next step after steering
+- [`/spectra-steering-custom`](#specsteering-custom) - Add specialized domain knowledge
+- [`/spectra-init`](#specspectra-init) - Next step after steering
 
 ---
 
-### `/spec:steering-custom`
+### `/spectra-steering-custom`
 
 **Purpose**: Create specialized steering documents for domain-specific patterns (API standards, testing initiatives, UI/UX playbooks, etc.).
 
@@ -141,7 +144,7 @@ Review and approve as Source of Truth.
 
 **Usage**:
 ```bash
-/spec:steering-custom
+/spectra-steering-custom
 ```
 
 **What it does**:
@@ -224,13 +227,13 @@ AI: Analyzing existing API patterns...
 - 💡 Update custom steering as standards evolve
 
 **Related Commands**:
-- [`/spec:steering`](#specsteering) - Core project memory
+- [`/spectra-steering`](#specsteering) - Core project memory
 
 ---
 
 ## Spec Workflow Commands
 
-### `/spec:spectra-init`
+### `/spectra-init`
 
 **Purpose**: Initialize a new feature specification with directory structure and metadata.
 
@@ -238,7 +241,7 @@ AI: Analyzing existing API patterns...
 
 **Usage**:
 ```bash
-/spec:spectra-init <project-description>
+/spectra-init <project-description>
 ```
 
 **Arguments**:
@@ -252,7 +255,7 @@ AI: Analyzing existing API patterns...
 
 **Example**:
 ```bash
-/spec:spectra-init User authentication with OAuth 2.0 and JWT tokens for a Next.js app
+/spectra-init User authentication with OAuth 2.0 and JWT tokens for a Next.js app
 ```
 
 **Output**:
@@ -272,7 +275,7 @@ OAuth 2.0 authentication system with JWT token management for Next.js applicatio
 ## Next Step
 Run this command to generate comprehensive requirements:
 ```bash
-/spec:spectra-requirements user-auth-oauth
+/spectra-requirements user-auth-oauth
 ```
 
 ## Notes
@@ -283,7 +286,7 @@ proper separation of concerns and allow for focused, high-quality requirement an
 
 **When to use**:
 - ✅ Starting a **new feature** or enhancement
-- ✅ After running `/spec:steering` (recommended for existing projects)
+- ✅ After running `/spectra-steering` (recommended for existing projects)
 - ✅ When you have a **clear feature description** to provide
 
 **Feature Naming**:
@@ -297,7 +300,7 @@ proper separation of concerns and allow for focused, high-quality requirement an
 |-------|-------|----------|
 | ❌ "Ambiguous feature name" | Vague description | Provide more specific description or choose from AI's suggestions |
 | ❌ "Feature already exists" | Name conflict | AI auto-appends number (e.g., `-2`), or choose different name |
-| ❌ "Template missing" | Corrupted installation | Reinstall cc-sdd: `npx cc-sdd@latest` |
+| ❌ "Template missing" | Corrupted installation | Reinstall spectra: `npx cc-sdd@latest` |
 | ⚠️ Generated name unclear | Short description | Provide longer, more detailed feature description |
 
 **Pro Tips**:
@@ -307,12 +310,12 @@ proper separation of concerns and allow for focused, high-quality requirement an
 - 💡 You can rename the directory later if needed (update `spec.json` accordingly)
 
 **Related Commands**:
-- [`/spec:spectra-requirements`](#specspectra-requirements) - Next step: generate requirements
-- [`/spec:spectra-status`](#specspectra-status) - Check initialization status
+- [`/spectra-requirements`](#specspectra-requirements) - Next step: generate requirements
+- [`/spectra-status`](#specspectra-status) - Check initialization status
 
 ---
 
-### `/spec:spectra-requirements`
+### `/spectra-requirements`
 
 **Purpose**: Generate comprehensive, testable requirements in EARS format based on feature description.
 
@@ -320,11 +323,11 @@ proper separation of concerns and allow for focused, high-quality requirement an
 
 **Usage**:
 ```bash
-/spec:spectra-requirements <feature-name>
+/spectra-requirements <feature-name>
 ```
 
 **Arguments**:
-- `<feature-name>` (required): Feature directory name from `/spec:spectra-init`
+- `<feature-name>` (required): Feature directory name from `/spectra-init`
 
 **What it does**:
 1. Loads project context from ALL steering files
@@ -342,7 +345,7 @@ THE <system> SHALL <action>
 
 **Example**:
 ```bash
-/spec:spectra-requirements user-auth-oauth
+/spectra-requirements user-auth-oauth
 ```
 
 <details>
@@ -362,7 +365,7 @@ THE <system> SHALL <action>
 
 ## Next Steps
 1. Review requirements.md and verify all expected functionality is covered
-2. Approve by running: /spec:spectra-design user-auth-oauth
+2. Approve by running: /spectra-design user-auth-oauth
   Or refine requirements and run this command again
 ```
 
@@ -395,7 +398,7 @@ THE <system> SHALL <action>
 </details>
 
 **When to use**:
-- ✅ After `/spec:spectra-init` completes
+- ✅ After `/spectra-init` completes
 - ✅ When you need to **clarify requirements** before design
 - ✅ To **iterate** on requirements (run multiple times to refine)
 
@@ -405,7 +408,7 @@ THE <system> SHALL <action>
 |-------|-------|----------|
 | ❌ "Missing project description" | Empty requirements.md | Provide feature details when prompted |
 | ❌ "Spec not found" | Wrong feature name | Check `.spectra/specs/` for correct name |
-| ⚠️ Requirements too generic | No steering context | Run `/spec:steering` first for better context |
+| ⚠️ Requirements too generic | No steering context | Run `/spectra-steering` first for better context |
 | ⚠️ Missing some requirements | Incomplete description | Review and run again, or manually add to requirements.md |
 | ⚠️ Not using EARS format | Template issue | Check `{{SPECTRA_DIR}}/settings/rules/ears-format.md` |
 
@@ -416,13 +419,13 @@ THE <system> SHALL <action>
 - 💡 Edit `requirements.md` directly if needed - AI preserves your edits
 
 **Related Commands**:
-- [`/spec:validate-gap`](#specvalidate-gap) - Optional: analyze existing code gaps
-- [`/spec:spectra-design`](#specspectra-design) - Next: create technical design
-- [`/spec:spectra-status`](#specspectra-status) - Check requirements progress
+- [`/spectra-validate-gap`](#specvalidate-gap) - Optional: analyze existing code gaps
+- [`/spectra-design`](#specspectra-design) - Next: create technical design
+- [`/spectra-status`](#specspectra-status) - Check requirements progress
 
 ---
 
-### `/spec:spectra-design`
+### `/spectra-design`
 
 **Purpose**: Create comprehensive technical design that translates requirements (WHAT) into architectural design (HOW).
 
@@ -430,7 +433,7 @@ THE <system> SHALL <action>
 
 **Usage**:
 ```bash
-/spec:spectra-design <feature-name> [-y]
+/spectra-design <feature-name> [-y]
 ```
 
 **Arguments**:
@@ -454,10 +457,10 @@ The command automatically determines research depth based on feature complexity 
 **Example**:
 ```bash
 # Standard flow with approval prompt
-/spec:spectra-design user-auth-oauth
+/spectra-design user-auth-oauth
 
 # Fast-track with auto-approval
-/spec:spectra-design user-auth-oauth -y
+/spectra-design user-auth-oauth -y
 ```
 
 <details>
@@ -487,7 +490,7 @@ Summary:
 ## Next Steps
 Review design.md and approve to continue:
 ```bash
-/spec:spectra-tasks user-auth-oauth
+/spectra-tasks user-auth-oauth
 ```
 ```
 
@@ -543,7 +546,7 @@ Review design.md and approve to continue:
 | ❌ "Design phase failed" | Network issues during research | Check internet connection for WebSearch/WebFetch |
 | ⚠️ Design too shallow | Simple feature auto-detected | Manually request more detail if needed |
 | ⚠️ Missing diagrams | Complex architecture | Verify Mermaid syntax, manually add if needed |
-| ⚠️ Design doesn't fit codebase | Incomplete steering | Update `/spec:steering` with current patterns |
+| ⚠️ Design doesn't fit codebase | Incomplete steering | Update `/spectra-steering` with current patterns |
 
 **Auto-Approval (`-y` flag)**:
 - ⚠️ **Use carefully** - skips human review of requirements
@@ -557,13 +560,13 @@ Review design.md and approve to continue:
 - 💡 Integration points show **how new code fits** existing system
 
 **Related Commands**:
-- [`/spec:validate-design`](#specvalidate-design) - Optional: quality review before tasks
-- [`/spec:spectra-tasks`](#specspectra-tasks) - Next: break into implementation tasks
-- [`/spec:spectra-status`](#specspectra-status) - Check design progress
+- [`/spectra-validate-design`](#specvalidate-design) - Optional: quality review before tasks
+- [`/spectra-tasks`](#specspectra-tasks) - Next: break into implementation tasks
+- [`/spectra-status`](#specspectra-status) - Check design progress
 
 ---
 
-### `/spec:spectra-tasks`
+### `/spectra-tasks`
 
 **Purpose**: Generate detailed, actionable implementation tasks that translate design into executable work items, including parallel-friendly waves labeled `P0`, `P1`, etc.
 
@@ -571,7 +574,7 @@ Review design.md and approve to continue:
 
 **Usage**:
 ```bash
-/spec:spectra-tasks <feature-name> [-y]
+/spectra-tasks <feature-name> [-y]
 ```
 
 **Arguments**:
@@ -600,10 +603,10 @@ P1 — Parallel wave (multiple majors can run concurrently)
 **Example**:
 ```bash
 # Standard flow with approval prompt
-/spec:spectra-tasks user-auth-oauth
+/spectra-tasks user-auth-oauth
 
 # Fast-track with auto-approval
-/spec:spectra-tasks user-auth-oauth -y
+/spectra-tasks user-auth-oauth -y
 ```
 
 <details>
@@ -622,7 +625,7 @@ P1 — Parallel wave (multiple majors can run concurrently)
 ## Next Steps
 Review tasks.md and start implementation:
 ```bash
-/spec:spectra-impl user-auth-oauth 1.1,1.2
+/spectra-impl user-auth-oauth 1.1,1.2
 ```
 ```
 
@@ -696,18 +699,18 @@ P1 — Service Integration
 
 **Pro Tips**:
 - 💡 **Review task order** - should follow logical implementation sequence
-- 💡 Tasks are **checkboxes** - `[ ]` unchecked, `[x]` completed by `/spec:spectra-impl`
+- 💡 Tasks are **checkboxes** - `[ ]` unchecked, `[x]` completed by `/spectra-impl`
 - 💡 **Edit freely** - add, remove, or reorder tasks as needed
-- 💡 Run `/spec:spectra-status` to track completion progress
+- 💡 Run `/spectra-status` to track completion progress
 
 **Related Commands**:
-- [`/spec:spectra-impl`](#specspectra-impl) - Next: execute implementation tasks
-- [`/spec:spectra-status`](#specspectra-status) - Track task completion
-- [`/spec:validate-impl`](#specvalidate-impl) - Validate after implementation
+- [`/spectra-impl`](#specspectra-impl) - Next: execute implementation tasks
+- [`/spectra-status`](#specspectra-status) - Track task completion
+- [`/spectra-validate-impl`](#specvalidate-impl) - Validate after implementation
 
 ---
 
-### `/spec:spectra-impl`
+### `/spectra-impl`
 
 > **Skills mode equivalent**: `/spectra-impl`. Skills mode supports autonomous (subagent spawn per task) and manual (TDD in main context) modes. See [Skills Mode Reference](#skills-mode-reference).
 
@@ -717,7 +720,7 @@ P1 — Service Integration
 
 **Usage**:
 ```bash
-/spec:spectra-impl <feature-name> [task-numbers]
+/spectra-impl <feature-name> [task-numbers]
 ```
 
 **Arguments**:
@@ -737,16 +740,16 @@ Executes tasks following **Kent Beck's TDD cycle**:
 **Examples**:
 ```bash
 # Execute specific tasks
-/spec:spectra-impl user-auth-oauth 1.1,1.2,1.3
+/spectra-impl user-auth-oauth 1.1,1.2,1.3
 
 # Execute all pending tasks in feature
-/spec:spectra-impl user-auth-oauth
+/spectra-impl user-auth-oauth
 
 # Execute single task
-/spec:spectra-impl user-auth-oauth 2.1
+/spectra-impl user-auth-oauth 2.1
 
 # Execute major task (all sub-tasks)
-/spec:spectra-impl user-auth-oauth 1
+/spectra-impl user-auth-oauth 1
 ```
 
 <details>
@@ -848,16 +851,16 @@ class User {
 **Task Selection**:
 ```bash
 # Specific sub-tasks
-/spec:spectra-impl feature 1.1,1.2,1.3
+/spectra-impl feature 1.1,1.2,1.3
 
 # All sub-tasks of major task 1
-/spec:spectra-impl feature 1
+/spectra-impl feature 1
 
 # Mix of major and sub-tasks
-/spec:spectra-impl feature 1,2.1,2.2,3
+/spectra-impl feature 1,2.1,2.2,3
 
 # All pending tasks (empty checkboxes)
-/spec:spectra-impl feature
+/spectra-impl feature
 ```
 
 **Validation Steps**:
@@ -873,19 +876,19 @@ For each task completion:
 - 💡 **TDD is mandatory** - Tests written before implementation
 - 💡 **Check regressions** - Existing tests must continue passing
 - 💡 **Incremental commits** - Commit after each task or small group
-- 💡 Run `/spec:spectra-status` frequently to track progress
-- 💡 Use `/spec:validate-impl` after completing tasks
+- 💡 Run `/spectra-status` frequently to track progress
+- 💡 Use `/spectra-validate-impl` after completing tasks
 
 **Related Commands**:
-- [`/spec:validate-impl`](#specvalidate-impl) - Validate completed implementation
-- [`/spec:spectra-status`](#specspectra-status) - Check implementation progress
-- [`/spec:spectra-tasks`](#specspectra-tasks) - Review task list
+- [`/spectra-validate-impl`](#specvalidate-impl) - Validate completed implementation
+- [`/spectra-status`](#specspectra-status) - Check implementation progress
+- [`/spectra-tasks`](#specspectra-tasks) - Review task list
 
 ---
 
 ## Validation Commands
 
-### `/spec:validate-gap`
+### `/spectra-validate-gap`
 
 **Purpose**: Analyze the gap between requirements and existing codebase to inform implementation strategy (optional quality gate for brownfield projects).
 
@@ -893,7 +896,7 @@ For each task completion:
 
 **Usage**:
 ```bash
-/spec:validate-gap <feature-name>
+/spectra-validate-gap <feature-name>
 ```
 
 **Arguments**:
@@ -914,7 +917,7 @@ For each task completion:
 
 **Example**:
 ```bash
-/spec:validate-gap user-auth-oauth
+/spectra-validate-gap user-auth-oauth
 ```
 
 <details>
@@ -967,7 +970,7 @@ Risk: Low
 ## Next Steps
 Proceed to design phase with this analysis:
 ```bash
-/spec:spectra-design user-auth-oauth
+/spectra-design user-auth-oauth
 ```
 ```
 
@@ -984,9 +987,9 @@ Proceed to design phase with this analysis:
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
-| ❌ "Requirements not found" | Wrong feature name or phase | Run `/spec:spectra-requirements` first |
+| ❌ "Requirements not found" | Wrong feature name or phase | Run `/spectra-requirements` first |
 | ⚠️ Analysis too shallow | Small codebase | Provide more context manually if needed |
-| ⚠️ Missing integration points | Incomplete steering | Update `/spec:steering` with current architecture |
+| ⚠️ Missing integration points | Incomplete steering | Update `/spectra-steering` with current architecture |
 | 💡 "Can I skip this?" | Greenfield project | Yes - this is optional for new codebases |
 
 **Pro Tips**:
@@ -997,13 +1000,13 @@ Proceed to design phase with this analysis:
 - 💡 Flags areas needing **further research** before design
 
 **Related Commands**:
-- [`/spec:spectra-requirements`](#specspectra-requirements) - Must run before gap analysis
-- [`/spec:spectra-design`](#specspectra-design) - Next step after gap analysis
-- [`/spec:validate-design`](#specvalidate-design) - Design validation after creation
+- [`/spectra-requirements`](#specspectra-requirements) - Must run before gap analysis
+- [`/spectra-design`](#specspectra-design) - Next step after gap analysis
+- [`/spectra-validate-design`](#specvalidate-design) - Design validation after creation
 
 ---
 
-### `/spec:validate-design`
+### `/spectra-validate-design`
 
 **Purpose**: Interactive technical design quality review to ensure readiness for implementation (optional quality gate).
 
@@ -1011,7 +1014,7 @@ Proceed to design phase with this analysis:
 
 **Usage**:
 ```bash
-/spec:validate-design <feature-name>
+/spectra-validate-design <feature-name>
 ```
 
 **Arguments**:
@@ -1032,7 +1035,7 @@ Proceed to design phase with this analysis:
 
 **Example**:
 ```bash
-/spec:validate-design user-auth-oauth
+/spectra-validate-design user-auth-oauth
 ```
 
 <details>
@@ -1083,7 +1086,7 @@ Estimated fix time: 2-3 hours of design refinement.
 ### Next Steps
 1. Update design.md to address the 3 issues above
 2. Re-run validation or proceed directly to tasks if confident
-3. Generate tasks: `/spec:spectra-tasks user-auth-oauth`
+3. Generate tasks: `/spectra-tasks user-auth-oauth`
 ```
 
 </details>
@@ -1106,7 +1109,7 @@ Estimated fix time: 2-3 hours of design refinement.
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
-| ❌ "Design not found" | Wrong feature name or phase | Run `/spec:spectra-design` first |
+| ❌ "Design not found" | Wrong feature name or phase | Run `/spectra-design` first |
 | ⚠️ Too many critical issues | Complex or incomplete design | Address issues and re-run validation |
 | ⚠️ Review too lenient | Simple feature | Validation focuses on critical risks only |
 | 💡 "Do I need this?" | Unsure if required | Optional - use for complex/risky designs |
@@ -1125,13 +1128,13 @@ Estimated fix time: 2-3 hours of design refinement.
 - 💡 Use for **peer review** - Structured format for team discussions
 
 **Related Commands**:
-- [`/spec:spectra-design`](#specspectra-design) - Must run before design validation
-- [`/spec:spectra-tasks`](#specspectra-tasks) - Next step after GO decision
-- [`/spec:validate-gap`](#specvalidate-gap) - Optional pre-design validation
+- [`/spectra-design`](#specspectra-design) - Must run before design validation
+- [`/spectra-tasks`](#specspectra-tasks) - Next step after GO decision
+- [`/spectra-validate-gap`](#specvalidate-gap) - Optional pre-design validation
 
 ---
 
-### `/spec:validate-impl`
+### `/spectra-validate-impl`
 
 > **Skills mode equivalent**: `/spectra-validate-impl`. In skills mode, validation focuses on **integration** concerns (cross-task consistency, boundary correctness via `git diff`, mechanical enforcement) rather than per-task checks. See [Skills Mode Reference](#skills-mode-reference).
 
@@ -1141,7 +1144,7 @@ Estimated fix time: 2-3 hours of design refinement.
 
 **Usage**:
 ```bash
-/spec:validate-impl [feature-name] [task-numbers]
+/spectra-validate-impl [feature-name] [task-numbers]
 ```
 
 **Arguments**:
@@ -1163,14 +1166,14 @@ Estimated fix time: 2-3 hours of design refinement.
 
 **Examples**:
 ```bash
-# Auto-detect from recent /spec:spectra-impl commands
-/spec:validate-impl
+# Auto-detect from recent /spectra-impl commands
+/spectra-validate-impl
 
 # Validate specific feature (all completed tasks)
-/spec:validate-impl user-auth-oauth
+/spectra-validate-impl user-auth-oauth
 
 # Validate specific tasks
-/spec:validate-impl user-auth-oauth 1.1,1.2,1.3
+/spectra-validate-impl user-auth-oauth 1.1,1.2,1.3
 ```
 
 <details>
@@ -1256,7 +1259,7 @@ From conversation history:
 
 ### Next Steps
 1. Fix Task 1.3 race condition
-2. Re-run validation: `/spec:validate-impl user-auth-oauth 1.3`
+2. Re-run validation: `/spectra-validate-impl user-auth-oauth 1.3`
 3. Continue with Task 2.x when ready
 ```
 
@@ -1291,7 +1294,7 @@ From conversation history:
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
-| ❌ "No implementation found" | No completed tasks | Run `/spec:spectra-impl` first |
+| ❌ "No implementation found" | No completed tasks | Run `/spectra-impl` first |
 | ❌ "Tests failing" | Implementation incomplete/broken | Fix failing tests before validation passes |
 | ⚠️ Missing requirements | Incomplete implementation | Implement missing functionality |
 | ⚠️ Design mismatch | Code doesn't follow design | Refactor to match design.md specifications |
@@ -1300,7 +1303,7 @@ From conversation history:
 **Auto-Detection**:
 Scans conversation history for:
 ```bash
-/spec:spectra-impl user-auth-oauth 1.1,1.2,1.3
+/spectra-impl user-auth-oauth 1.1,1.2,1.3
 ```
 Extracts: `user-auth-oauth` and tasks `1.1, 1.2, 1.3`
 
@@ -1309,18 +1312,18 @@ Extracts: `user-auth-oauth` and tasks `1.1, 1.2, 1.3`
 - 💡 **Auto-detection** works great in continuous conversation
 - 💡 Use as **quality gate** before moving to next major task
 - 💡 **Regressions** are flagged - existing tests must still pass
-- 💡 Pair with `/spec:spectra-status` for complete progress view
+- 💡 Pair with `/spectra-status` for complete progress view
 
 **Related Commands**:
-- [`/spec:spectra-impl`](#specspectra-impl) - Implementation execution
-- [`/spec:spectra-status`](#specspectra-status) - Overall feature progress
-- [`/spec:spectra-tasks`](#specspectra-tasks) - View task list
+- [`/spectra-impl`](#specspectra-impl) - Implementation execution
+- [`/spectra-status`](#specspectra-status) - Overall feature progress
+- [`/spectra-tasks`](#specspectra-tasks) - View task list
 
 ---
 
 ## Status & Utility
 
-### `/spec:spectra-status`
+### `/spectra-status`
 
 **Purpose**: Display comprehensive status and progress for a specification across all phases.
 
@@ -1328,7 +1331,7 @@ Extracts: `user-auth-oauth` and tasks `1.1, 1.2, 1.3`
 
 **Usage**:
 ```bash
-/spec:spectra-status <feature-name>
+/spectra-status <feature-name>
 ```
 
 **Arguments**:
@@ -1343,7 +1346,7 @@ Extracts: `user-auth-oauth` and tasks `1.1, 1.2, 1.3`
 
 **Example**:
 ```bash
-/spec:spectra-status user-auth-oauth
+/spectra-status user-auth-oauth
 ```
 
 <details>
@@ -1423,19 +1426,19 @@ Extracts: `user-auth-oauth` and tasks `1.1, 1.2, 1.3`
 ## Next Action
 Continue implementation with remaining tasks:
 ```bash
-/spec:spectra-impl user-auth-oauth 4.3,4.4,5.1
+/spectra-impl user-auth-oauth 4.3,4.4,5.1
 ```
 
 Or implement all remaining tasks:
 ```bash
-/spec:spectra-impl user-auth-oauth
+/spectra-impl user-auth-oauth
 ```
 
 ---
 
 ## Issues
 ⚠️ **Warning**: Task 3.x completed but validation not run.  
-  Recommended: `/spec:validate-impl user-auth-oauth` to verify quality
+  Recommended: `/spectra-validate-impl user-auth-oauth` to verify quality
 
 ---
 
@@ -1481,8 +1484,8 @@ Or implement all remaining tasks:
 - 💡 Great for **status updates** in team meetings
 
 **Related Commands**:
-- [`/spec:spectra-impl`](#specspectra-impl) - Continue implementation
-- [`/spec:validate-impl`](#specvalidate-impl) - Validate completed work
+- [`/spectra-impl`](#specspectra-impl) - Continue implementation
+- [`/spectra-validate-impl`](#specvalidate-impl) - Validate completed work
 - All other spec commands based on current phase
 
 ---
@@ -1494,30 +1497,30 @@ Or implement all remaining tasks:
 
 ```bash
 # 1. Project setup
-/spec:steering
+/spectra-steering
 
 # 2. Initialize feature
-/spec:spectra-init User authentication with OAuth 2.0 and JWT tokens
+/spectra-init User authentication with OAuth 2.0 and JWT tokens
 
 # 3. Generate requirements
-/spec:spectra-requirements user-auth-oauth
+/spectra-requirements user-auth-oauth
 
 # 4. Create design
-/spec:spectra-design user-auth-oauth
+/spectra-design user-auth-oauth
 
 # 5. Break into tasks
-/spec:spectra-tasks user-auth-oauth
+/spectra-tasks user-auth-oauth
 
 # 6. Implement incrementally
-/spec:spectra-impl user-auth-oauth 1.1,1.2
-/spec:spectra-impl user-auth-oauth 1.3,1.4
-/spec:spectra-impl user-auth-oauth 2
+/spectra-impl user-auth-oauth 1.1,1.2
+/spectra-impl user-auth-oauth 1.3,1.4
+/spectra-impl user-auth-oauth 2
 
 # 7. Check progress
-/spec:spectra-status user-auth-oauth
+/spectra-status user-auth-oauth
 
 # 8. Validate implementation
-/spec:validate-impl user-auth-oauth
+/spectra-validate-impl user-auth-oauth
 ```
 
 </details>
@@ -1527,30 +1530,30 @@ Or implement all remaining tasks:
 
 ```bash
 # 1. Establish project context
-/spec:steering
-/spec:steering-custom  # Add domain-specific patterns
+/spectra-steering
+/spectra-steering-custom  # Add domain-specific patterns
 
 # 2. Initialize enhancement
-/spec:spectra-init Add OAuth to existing auth system
+/spectra-init Add OAuth to existing auth system
 
 # 3. Generate requirements
-/spec:spectra-requirements oauth-enhancement
+/spectra-requirements oauth-enhancement
 
 # 4. Analyze integration gaps
-/spec:validate-gap oauth-enhancement
+/spectra-validate-gap oauth-enhancement
 
 # 5. Create design (informed by gap analysis)
-/spec:spectra-design oauth-enhancement
+/spectra-design oauth-enhancement
 
 # 6. Validate design against existing system
-/spec:validate-design oauth-enhancement
+/spectra-validate-design oauth-enhancement
 
 # 7. Break into tasks
-/spec:spectra-tasks oauth-enhancement
+/spectra-tasks oauth-enhancement
 
 # 8. Implement and validate
-/spec:spectra-impl oauth-enhancement 1.1,1.2
-/spec:validate-impl oauth-enhancement
+/spectra-impl oauth-enhancement 1.1,1.2
+/spectra-validate-impl oauth-enhancement
 ```
 
 </details>
@@ -1560,21 +1563,21 @@ Or implement all remaining tasks:
 
 ```bash
 # 1. Quick setup
-/spec:steering
+/spectra-steering
 
 # 2. Initialize with description
-/spec:spectra-init Add user profile page with avatar upload
+/spectra-init Add user profile page with avatar upload
 
 # 3. Auto-approve through design
-/spec:spectra-requirements user-profile
-/spec:spectra-design user-profile -y
-/spec:spectra-tasks user-profile -y
+/spectra-requirements user-profile
+/spectra-design user-profile -y
+/spectra-tasks user-profile -y
 
 # 4. Implement all at once
-/spec:spectra-impl user-profile
+/spectra-impl user-profile
 
 # 5. Final validation
-/spec:validate-impl user-profile
+/spectra-validate-impl user-profile
 ```
 
 </details>
@@ -1588,14 +1591,14 @@ Or implement all remaining tasks:
 
 ```bash
 # Generate initial version
-/spec:spectra-requirements feature
+/spectra-requirements feature
 
 # Review and refine (run multiple times)
-/spec:spectra-requirements feature  # Updates based on feedback
+/spectra-requirements feature  # Updates based on feedback
 
 # Same for design and tasks
-/spec:spectra-design feature
-/spec:spectra-design feature  # Refine based on review
+/spectra-design feature
+/spectra-design feature  # Refine based on review
 ```
 
 </details>
@@ -1605,14 +1608,14 @@ Or implement all remaining tasks:
 
 ```bash
 # Implement one major task at a time
-/spec:spectra-impl feature 1
-/spec:validate-impl feature
+/spectra-impl feature 1
+/spectra-validate-impl feature
 
-/spec:spectra-impl feature 2
-/spec:validate-impl feature
+/spectra-impl feature 2
+/spectra-validate-impl feature
 
 # Check overall progress
-/spec:spectra-status feature
+/spectra-status feature
 ```
 
 </details>
@@ -1620,16 +1623,16 @@ Or implement all remaining tasks:
 ### Quality Gates
 ```bash
 # Optional gates at each phase
-/spec:spectra-requirements feature
-/spec:validate-gap feature          # Optional: brownfield only
+/spectra-requirements feature
+/spectra-validate-gap feature          # Optional: brownfield only
 
-/spec:spectra-design feature
-/spec:validate-design feature       # Optional: complex designs
+/spectra-design feature
+/spectra-validate-design feature       # Optional: complex designs
 
-/spec:spectra-tasks feature
+/spectra-tasks feature
 
-/spec:spectra-impl feature 1.1,1.2
-/spec:validate-impl feature         # Optional: after each session
+/spectra-impl feature 1.1,1.2
+/spectra-validate-impl feature         # Optional: after each session
 ```
 
 ---
@@ -1643,9 +1646,9 @@ Or implement all remaining tasks:
 - 🎯 **Review before approve** - don't auto-approve (`-y`) production features
 
 ### Steering
-- 💡 Run `/spec:steering` **first** for existing projects
+- 💡 Run `/spectra-steering` **first** for existing projects
 - 💡 Re-run after **major refactoring** to update context
-- 💡 Use `/spec:steering-custom` for **repeated domain patterns**
+- 💡 Use `/spectra-steering-custom` for **repeated domain patterns**
 - 💡 Steering is **additive** - preserves your customizations
 
 ### Requirements
@@ -1670,8 +1673,8 @@ Or implement all remaining tasks:
 - 💡 **TDD is mandatory** - tests before code
 - 💡 Start with **small batches** - 1-2 tasks initially
 - 💡 Watch for **regressions** - existing tests must pass
-- 💡 Run `/spec:spectra-status` **frequently** to track progress
-- 💡 Use `/spec:validate-impl` after **each session**
+- 💡 Run `/spectra-status` **frequently** to track progress
+- 💡 Use `/spectra-validate-impl` after **each session**
 
 ### Validation
 - 💡 **validate-gap**: Use for brownfield, skip for greenfield
@@ -1693,7 +1696,7 @@ Or implement all remaining tasks:
 
 ### "Template missing"
 **Cause**: Corrupted or incomplete installation  
-**Solution**: Reinstall cc-sdd: `npx cc-sdd@latest`
+**Solution**: Reinstall spectra: `npx cc-sdd@latest`
 
 ### Tasks not completing
 **Cause**: Checkbox format incorrect in tasks.md  
@@ -1705,11 +1708,11 @@ Or implement all remaining tasks:
 
 ### Steering seems outdated
 **Cause**: Codebase changed since last steering update  
-**Solution**: Re-run `/spec:steering` to sync with current code
+**Solution**: Re-run `/spectra-steering` to sync with current code
 
 ### AI suggestions don't match project
 **Cause**: Incomplete or missing steering context  
-**Solution**: Run `/spec:steering` and `/spec:steering-custom` for domain patterns
+**Solution**: Run `/spectra-steering` and `/spectra-steering-custom` for domain patterns
 
 ---
 
@@ -1720,23 +1723,23 @@ Or implement all remaining tasks:
 │ cc-sdd Command Quick Reference                              │
 ├─────────────────────────────────────────────────────────────┤
 │ STEERING                                                    │
-│  /spec:steering              Create/update project memory   │
-│  /spec:steering-custom       Add domain-specific context    │
+│  /spectra-steering              Create/update project memory   │
+│  /spectra-steering-custom       Add domain-specific context    │
 ├─────────────────────────────────────────────────────────────┤
 │ SPEC WORKFLOW                                               │
-│  /spec:spectra-init <desc>      Initialize feature             │
-│  /spec:spectra-requirements <f> Generate requirements          │
-│  /spec:spectra-design <f> [-y]  Create technical design        │
-│  /spec:spectra-tasks <f> [-y]   Break into implementation      │
-│  /spec:spectra-impl <f> [tasks] Execute with TDD               │
+│  /spectra-init <desc>      Initialize feature             │
+│  /spectra-requirements <f> Generate requirements          │
+│  /spectra-design <f> [-y]  Create technical design        │
+│  /spectra-tasks <f> [-y]   Break into implementation      │
+│  /spectra-impl <f> [tasks] Execute with TDD               │
 ├─────────────────────────────────────────────────────────────┤
 │ VALIDATION (Optional)                                       │
-│  /spec:validate-gap <f>      Analyze existing vs required   │
-│  /spec:validate-design <f>   Review design quality          │
-│  /spec:validate-impl [f] [t] Validate implementation        │
+│  /spectra-validate-gap <f>      Analyze existing vs required   │
+│  /spectra-validate-design <f>   Review design quality          │
+│  /spectra-validate-impl [f] [t] Validate implementation        │
 ├─────────────────────────────────────────────────────────────┤
 │ STATUS                                                      │
-│  /spec:spectra-status <f>       Check progress                 │
+│  /spectra-status <f>       Check progress                 │
 └─────────────────────────────────────────────────────────────┘
 
 Legend: <f> = feature-name, [t] = task-numbers, [-y] = auto-approve

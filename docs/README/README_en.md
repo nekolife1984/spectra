@@ -45,10 +45,10 @@ Copy the appropriate directory based on your AI development platform:
 3. **Run initial commands** (common across platforms):
    ```bash
    # Optional: Create steering documents
-   /spec:steering
+   /spectra-steering
    
    # Create your first feature specification
-   /spec:spectra-init "Detailed description of your project"
+   /spectra-init "Detailed description of your project"
    ```
 
 ### Required Directory Structure
@@ -77,22 +77,22 @@ your-project/
 
 ```bash
 # Optional: Generate project steering (recommended but not required)
-/spec:steering
+/spectra-steering
 
 # Step 1: Start creating new feature specification (include detailed description)
-/spec:spectra-init "I want to create a feature where users can upload PDFs, extract diagrams and charts from them, and have AI explain the content. Tech stack: Next.js, TypeScript, Tailwind CSS."
+/spectra-init "I want to create a feature where users can upload PDFs, extract diagrams and charts from them, and have AI explain the content. Tech stack: Next.js, TypeScript, Tailwind CSS."
 
 # Step 2: Requirements definition (use auto-generated feature-name)
-/spec:spectra-requirements pdf-diagram-extractor
+/spectra-requirements pdf-diagram-extractor
 # → Review and edit .spectra/specs/pdf-diagram-extractor/requirements.md
 
 # Step 3: Technical design (interactive approval)
-/spec:spectra-design pdf-diagram-extractor
+/spectra-design pdf-diagram-extractor
 # → Respond to "Have you reviewed requirements.md? [y/N]"
 # → Review and edit .spectra/specs/pdf-diagram-extractor/design.md
 
 # Step 4: Task generation (interactive approval)
-/spec:spectra-tasks pdf-diagram-extractor
+/spectra-tasks pdf-diagram-extractor
 # → Respond to review confirmation for requirements and design
 # → Review and edit .spectra/specs/pdf-diagram-extractor/tasks.md
 
@@ -104,10 +104,10 @@ your-project/
 ```bash
 # Optional: Create or update steering
 # Same command handles both new creation and updates
-/spec:steering
+/spectra-steering
 
 # Step 1: Start creating new feature specification
-/spec:spectra-init "Detailed description of the new feature here"
+/spectra-init "Detailed description of the new feature here"
 # Following steps are the same as for new projects
 ```
 
@@ -115,7 +115,7 @@ your-project/
 
 ```bash
 # Check progress of a specific feature
-/spec:spectra-status my-feature
+/spectra-status my-feature
 
 # Displays current phase, approval status, and task progress
 ```
@@ -131,25 +131,25 @@ In this flow, each phase requires "Review & Approval".
 ```mermaid
 graph TD
     A["Project Start"] --> B{"Document<br/>Steering?"}
-    B -->|Yes| C["/spec:steering"]
-    B -->|No| D["/spec:spectra-init"]
+    B -->|Yes| C["/spectra-steering"]
+    B -->|No| D["/spectra-init"]
     C --> D
     
-    D --> E["/spec:spectra-requirements"]
+    D --> E["/spectra-requirements"]
     E --> F["requirements.md"]
     F --> G{"Satisfied?"}
     G -->|No| G1["Edit & Revise"]
     G1 --> F
     G -->|Yes| H["To Next Phase"]
     
-    H --> I["/spec:spectra-design"]
+    H --> I["/spectra-design"]
     I --> J["design.md"]
     J --> K{"Satisfied?"}
     K -->|No| K1["Edit & Revise"]
     K1 --> J
     K -->|Yes| L["To Next Phase"]
     
-    L --> M["/spec:spectra-tasks"]
+    L --> M["/spectra-tasks"]
     M --> N["tasks.md"]
     N --> O{"Satisfied?"}
     O -->|No| O1["Edit & Revise"]
@@ -157,13 +157,13 @@ graph TD
     O -->|Yes| P["Ready for Implementation"]
     
     P --> Q["Start Implementation"]
-    Q --> R["/spec:spectra-status"]
+    Q --> R["/spectra-status"]
     R --> S{"Complete?"}
     S -->|No| Q
     S -->|Yes| T["Feature Complete"]
     
     T --> U{"Update<br/>Steering?"}
-    U -->|Yes| V["/spec:steering"]
+    U -->|Yes| V["/spectra-steering"]
     U -->|No| W["Done"]
     V --> W
     
@@ -193,8 +193,8 @@ graph TD
 
 | Command | Purpose | When to Use |
 |---------|---------|-------------|
-| `/spec:steering` | Smart creation or update of steering documents | All scenarios (both new and updates) |
-| `/spec:steering-custom` | Create custom steering documents | When special conventions or guidelines are needed |
+| `/spectra-steering` | Smart creation or update of steering documents | All scenarios (both new and updates) |
+| `/spectra-steering-custom` | Create custom steering documents | When special conventions or guidelines are needed |
 
 **Note**: Steering documents are recommended but not required. They can be omitted for small feature additions or experimental development.
 
@@ -208,16 +208,16 @@ graph TD
 
 | Command | Purpose | When to Use |
 |---------|---------|-------------|
-| `/spec:spectra-init [detailed project description]` | Initialize specification structure from project description | When starting new feature development |
-| `/spec:spectra-requirements [feature-name]` | Generate requirements document | Immediately after spec initialization |
-| `/spec:spectra-design [feature-name]` | Generate technical design document | After requirements approval |
-| `/spec:spectra-tasks [feature-name]` | Generate implementation tasks | After design approval |
+| `/spectra-init [detailed project description]` | Initialize specification structure from project description | When starting new feature development |
+| `/spectra-requirements [feature-name]` | Generate requirements document | Immediately after spec initialization |
+| `/spectra-design [feature-name]` | Generate technical design document | After requirements approval |
+| `/spectra-tasks [feature-name]` | Generate implementation tasks | After design approval |
 
 ### 📊 Phase 2: Progress Management
 
 | Command | Purpose | When to Use |
 |---------|---------|-------------|
-| `/spec:spectra-status [feature-name]` | Check current progress and phase | Regularly during development |
+| `/spectra-status [feature-name]` | Check current progress and phase | Regularly during development |
 
 ## 3-Phase Approval Workflow
 
@@ -229,13 +229,13 @@ sequenceDiagram
     participant C as Claude Code
     participant H as Human Reviewer
     
-    D->>C: "/spec:spectra-requirements feature"
+    D->>C: "/spectra-requirements feature"
     C->>C: "Generate Requirements"
     C->>D: "requirements.md"
     D->>H: "Request Review"
     H->>H: "Review & Edit"
     
-    D->>C: "/spec:spectra-design feature"
+    D->>C: "/spectra-design feature"
     C->>D: "Review confirmation: Have you reviewed requirements.md?"
     D->>C: "y"
     C->>C: "Generate Design (based on requirements)"
@@ -243,7 +243,7 @@ sequenceDiagram
     D->>H: "Request Review"
     H->>H: "Review & Edit"
     
-    D->>C: "/spec:spectra-tasks feature"
+    D->>C: "/spectra-tasks feature"
     C->>D: "Review confirmation: requirements/design check"
     D->>C: "y"
     C->>C: "Generate Tasks (based on design)"
@@ -259,7 +259,7 @@ sequenceDiagram
 ### ✅ Recommendations
 
 1. **Always start with steering**
-   - Use `/spec:steering` for all scenarios (intelligently handles both creation and updates)
+   - Use `/spectra-steering` for all scenarios (intelligently handles both creation and updates)
    - The unified command protects existing files while handling them appropriately
 
 2. **Don't skip phases**
@@ -267,11 +267,11 @@ sequenceDiagram
    - Ensure human review at each phase
 
 3. **Regular progress checks**
-   - Use `/spec:spectra-status` to understand current situation
+   - Use `/spectra-status` to understand current situation
    - Update task completion status appropriately
 
 4. **Maintain steering**
-   - Run `/spec:steering` after major changes (automatically determines update strategy)
+   - Run `/spectra-steering` after major changes (automatically determines update strategy)
    - Update as the project grows
 
 ### ❌ Things to Avoid
@@ -338,7 +338,7 @@ The following are automated through Claude Code's hook functionality:
 ### When stuck in approval flow
 1. Check that you're responding correctly to review confirmation prompts
 2. Verify previous phase approval is complete
-3. Use `/spec:spectra-status` to diagnose current state
+3. Use `/spectra-status` to diagnose current state
 4. Manually check/edit `spec.json` if needed
 
 ## Summary

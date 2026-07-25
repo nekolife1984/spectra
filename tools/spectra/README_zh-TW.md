@@ -1,8 +1,7 @@
-# cc-sdd: 面向 AI 程式代理的長時間規格驅動實作
+# spectra: 面向 AI 程式代理的長時間規格驅動實作
 
-[![npm version](https://img.shields.io/npm/v/cc-sdd?logo=npm)](https://www.npmjs.com/package/cc-sdd?activeTab=readme)
-[![install size](https://packagephobia.com/badge?p=cc-sdd)](https://packagephobia.com/result?p=cc-sdd)
 [![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)](../../LICENSE)
+[![fork of gotalab/cc-sdd](https://img.shields.io/badge/fork-gotalab%2Fcc--sdd-blue.svg)](https://github.com/gotalab/cc-sdd)
 
 <div align="center" style="margin-bottom: 1rem; font-size: 1.1rem;"><sub>
 <a href="./README.md">English</a> | <a href="./README_ja.md">日本語</a> | 繁體中文
@@ -14,7 +13,7 @@
 
 ## v3.0 的新功能
 
-cc-sdd v3.0 是圍繞 Agent Skills 與長時間自律實作的重寫。
+spectra v3.0 是圍繞 Agent Skills 與長時間自律實作的重寫。（原為 gotalab 以 cc-sdd v3.0.2 名義發佈，本 fork 在 **spectra** 名下維護同一工作流。）
 
 - **`/spectra-discovery` 作為新入口。** discovery 把新需求路由到「擴充既有 spec / 直接實作 / 建立一個新 spec / 拆成多個 spec / mixed decomposition」其中之一。它會寫入 `brief.md` 以及必要時的 `roadmap.md`，讓你可以在不重新說明 scope 的情況下恢復工作。
 - **`/spectra-impl` 執行長時間自律實作。** 每個任務由 fresh implementer 在 feature flag 後執行 TDD (RED → GREEN)，獨立的 reviewer 做機械驗證，失敗時由 auto-debug pass 在乾淨 context 中調查根本原因。任務間的知見透過 `tasks.md` 的 `## Implementation Notes` 傳給下一個 implementer。每次迭代處理 1 個任務，中斷後再執行也安全。
@@ -22,19 +21,19 @@ cc-sdd v3.0 是圍繞 Agent Skills 與長時間自律實作的重寫。
 - **`/spectra-batch` 支援多 spec initiative。** 從 roadmap 並行產生多個 spec，並執行 cross-spec review 以捕捉 spec 間矛盾、責務重複與介面不一致。
 - **Agent Skills 橫跨 8 個 AI coding agent。** 每次安裝 17 個 skills、按需載入（progressive disclosure）。Claude Code 與 Codex 為 stable；Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, Antigravity 為 beta。零外部依賴，subagent 透過各平台原生 spawn 啟動。
 
-Skills 模式完整工作流與 `/spectra-impl` 內部細節請參考 [Skill Reference](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/skill-reference.md)。
+Skills 模式完整工作流與 `/spectra-impl` 內部細節請參考 [Skill Reference](https://github.com/nekolife1984/spectra/blob/main/docs/guides/skill-reference.md)。
 
-從 v1.x 或 v2.x 升級？請參考 [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md#5-v2x-to-v30)。
+從 v1.x 或 v2.x 升級？請參考 [Migration Guide](https://github.com/nekolife1984/spectra/blob/main/docs/guides/migration-guide.md#5-v2x-to-v30)。
 
-## 為什麼選 cc-sdd
+## 為什麼選 spectra（原名: cc-sdd）
 
-cc-sdd 把 spec 視為系統各部分之間的契約，不是交給代理的「命令文件」。程式碼仍然是 source of truth，spec 是用來讓程式碼各部分之間的契約變得明確，讓人類與代理可以平行工作而不需要持續同步。
+spectra 把 spec 視為系統各部分之間的契約，不是交給代理的「命令文件」。程式碼仍然是 source of truth，spec 是用來讓程式碼各部分之間的契約變得明確，讓人類與代理可以平行工作而不需要持續同步。
 
 賭注很簡單: 適當粒度的明確契約會讓團隊規模的 AI 驅動開發變得更快，而不是更慢。代理寫 spec，人類在 phase gate 核准契約，真正出貨的是程式碼。
 
 邊界不是額外負擔，邊界的存在讓你可以在內部自由移動，同時保護外部。
 
-完整的設計理由、取捨、適用與不適用情境: [Why cc-sdd? A philosophy note](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/why-cc-sdd.md)（英文版）。
+完整的設計理由、取捨、適用與不適用情境: [Why spectra? A philosophy note](./../docs/guides/why-spectra.md)（英文版，檔名保留以維持歷史連結）。
 
 ## 快速開始
 
@@ -69,7 +68,7 @@ npx github:nekolife1984/spectra --cursor-skills --lang zh-TW  # Cursor IDE, 繁�
 | 分解大型 initiative | `spectra-discovery` → `spectra-batch` |
 | 不需要 spec 的小改動 | `spectra-discovery` → 直接實作 |
 
-舊版 `/spec:*` 指令模式（`--claude`, `--cursor` 等）仍然可用但已棄用。升級方式請參考 [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md)。
+舊版 `/spec:*` 指令模式（`--claude`, `--cursor` 等）仍然可用但已棄用。升級方式請參考 [Migration Guide](https://github.com/nekolife1984/spectra/blob/main/docs/guides/migration-guide.md)。
 
 對較大規模的已核准任務集合，執行 `spectra-impl` 會以任務級別的 subagent spawn、independent review、失敗時 auto-debug 開始自律實作。
 
@@ -112,7 +111,7 @@ spec 階段的典型產出（10 分鐘以內）:
 | **Antigravity** | `--antigravity` | Beta (experimental) | — |
 | **Qwen Code** | — | — | `--qwen` |
 
-這裡的 "Beta" 不代表「功能不完整」。所有 8 個平台共用相同的 17 skills 與模板。Beta 指的是平台整合（subagent spawn 行為、操作感、`SKILL.md` 載入）相較於 Claude Code 與 Codex 的實戰驗證較少，可能仍有邊界狀況。若遇到問題請至 [Issues](https://github.com/gotalab/cc-sdd/issues) 回報。
+這裡的 "Beta" 不代表「功能不完整」。所有 8 個平台共用相同的 17 skills 與模板。Beta 指的是平台整合（subagent spawn 行為、操作感、`SKILL.md` 載入）相較於 Claude Code 與 Codex 的實戰驗證較少，可能仍有邊界狀況。若遇到問題請至 [Issues](https://github.com/nekolife1984/spectra/issues) 回報。
 
 ## 安裝詳情
 
@@ -157,7 +156,7 @@ npx github:nekolife1984/spectra --spectra-dir docs
 
 常見使用情境: PRD 風格需求、API 與資料庫 schema、核准關卡、JIRA 整合、領域特定標準。
 
-實用範例與可複製程式碼片段請參考 [自訂指南](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/customization-guide.md)。
+實用範例與可複製程式碼片段請參考 [自訂指南](https://github.com/nekolife1984/spectra/blob/main/docs/guides/customization-guide.md)。
 
 ## 專案結構
 
@@ -190,19 +189,19 @@ project/
 
 ## 文件
 
-- Skill 參考: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/skill-reference.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/skill-reference.md)
-- 指令參考: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/command-reference.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/command-reference.md)
-- 自訂指南: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/customization-guide.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/customization-guide.md)
-- 規格驅動開發指南: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/spec-driven.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/spec-driven.md)
-- Why cc-sdd? 哲學說明: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/why-cc-sdd.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/why-cc-sdd.md)
-- Claude 子代理指南: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/claude-subagents.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/claude-subagents.md)
-- 遷移指南: [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md) | [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md)
-- [問題與支援](https://github.com/gotalab/cc-sdd/issues) - 問題回報與提問
+- Skill 參考: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/skill-reference.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/skill-reference.md)
+- 指令參考: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/command-reference.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/command-reference.md)
+- 自訂指南: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/customization-guide.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/customization-guide.md)
+- 規格驅動開發指南: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/spec-driven.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/spec-driven.md)
+- Why spectra? 哲學說明（原: Why cc-sdd?）: [English](./../docs/guides/why-spectra.md) | [日本語](./../docs/guides/ja/why-spectra.md)
+- Claude 子代理指南: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/claude-subagents.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/claude-subagents.md)
+- 遷移指南: [English](https://github.com/nekolife1984/spectra/blob/main/docs/guides/migration-guide.md) | [日本語](https://github.com/nekolife1984/spectra/blob/main/docs/guides/ja/migration-guide.md)
+- [問題與支援](https://github.com/nekolife1984/spectra/issues) - 問題回報與提問
 - [Spec IDE](https://kiro.dev)
 
 ---
 
-**穩定版 v3.0.0** 生產環境就緒。[回報問題](https://github.com/gotalab/cc-sdd/issues) | MIT License
+**穩定版 v3.0.0** 生產環境就緒。[回報問題](https://github.com/nekolife1984/spectra/issues) | MIT License
 
 ### 平台支援
 

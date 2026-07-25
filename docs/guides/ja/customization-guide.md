@@ -1,12 +1,15 @@
 # カスタマイズガイド
 
+
+> ⚠️ **本フォーク注記**: このガイドは **spectra** プロジェクト（`gotalab/cc-sdd` v3.0.2 からフォーク）の一部として保守されています。ツール名とコマンド例は spectra 名に更新済みです。`gotalab/cc-sdd` への PR リンクは歴史的参照として残しています。`npx cc-sdd@...` 形式の legacy コマンド例は書かれた当時のバージョンを反映しており、連続性のためにそのまま残しています。
+
 > 📖 **English guide:** [Customization Guide](../customization-guide.md)
 
-cc-sdd のテンプレートとルールを編集して、チーム固有のワークフローに適合させる方法を解説します。
+spectra のテンプレートとルールを編集して、チーム固有のワークフローに適合させる方法を解説します。
 
 ## はじめに
 
-cc-sdd は2つのカスタマイズポイントを提供しています：
+spectra は2つのカスタマイズポイントを提供しています：
 
 - **templates/** - AIが生成するドキュメントの**構造・フォーマット**を定義
 - **rules/** - AIの**判断基準・生成原則**を定義
@@ -57,7 +60,7 @@ cc-sdd は2つのカスタマイズポイントを提供しています：
 
 ## 🚨 絶対に維持すべき構造
 
-cc-sdd のコマンドはAIエージェントを通じてドキュメントを読み取り、理解します。以下の要素は**絶対に維持**してください：
+spectra のコマンドはAIエージェントを通じてドキュメントを読み取り、理解します。以下の要素は**絶対に維持**してください：
 
 | ファイル | 必須要素 | 理由 |
 |---------|---------|------|
@@ -242,10 +245,10 @@ ls -la {{SPECTRA_DIR}}/settings/rules/
 
 ```bash
 # 新規specでテスト
-/spec:spectra-init Test customization feature
-/spec:spectra-requirements test-customization
-/spec:spectra-design test-customization
-/spec:spectra-tasks test-customization
+/spectra-init Test customization feature
+/spectra-requirements test-customization
+/spectra-design test-customization
+/spectra-tasks test-customization
 
 # 生成されたファイルを確認
 cat {{SPECTRA_DIR}}/specs/test-customization/requirements.md
@@ -465,14 +468,14 @@ Always include NFR sections for:
 
 ### ✅ 完成後の動作
 
-`/spec:spectra-requirements my-feature` を実行すると:
+`/spectra-requirements my-feature` を実行すると:
 
 1. **Product Context** セクションが自動生成される
 2. 各要件に **Business Priority**、**Dependencies**、**Risk Level** が含まれる
 3. **Verification Method** と **Success Threshold** が各要件に追加される
 4. **Non-Functional Requirements** セクションが自動的に生成される
 5. **Compliance & Approvals** チェックリストが追加される
-6. 要件番号と受け入れ基準の構造は維持される（`/spec:spectra-impl` および Skills モードの `/spectra-impl` と互換性あり）
+6. 要件番号と受け入れ基準の構造は維持される（`/spectra-impl` および Skills モードの `/spectra-impl` と互換性あり）
 
 ### 🧪 テスト方法
 
@@ -484,8 +487,8 @@ vim {{SPECTRA_DIR}}/settings/templates/specs/requirements.md
 vim {{SPECTRA_DIR}}/settings/rules/ears-format.md
 
 # 3. 新規specで確認
-/spec:spectra-init Test PRD-style requirements with business context
-/spec:spectra-requirements test-prd-feature
+/spectra-init Test PRD-style requirements with business context
+/spectra-requirements test-prd-feature
 
 # 4. 生成されたrequirements.mdを確認
 cat {{SPECTRA_DIR}}/specs/test-prd-feature/requirements.md
@@ -1192,7 +1195,7 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains
 
 ### ✅ 完成後の動作
 
-`/spec:spectra-design my-backend-feature` を実行すると:
+`/spectra-design my-backend-feature` を実行すると:
 
 1. **API Specification** で全エンドポイントの詳細仕様が生成される
 2. **Database Schema** でテーブル定義、インデックス、制約が明記される
@@ -1208,9 +1211,9 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains
 vim {{SPECTRA_DIR}}/settings/templates/specs/design.md
 
 # 2. 新規specで確認
-/spec:spectra-init Build RESTful API for user management
-/spec:spectra-requirements user-api
-/spec:spectra-design user-api
+/spectra-init Build RESTful API for user management
+/spectra-requirements user-api
+/spectra-design user-api
 
 # 3. 生成されたdesign.mdを確認
 cat {{SPECTRA_DIR}}/specs/user-api/design.md
@@ -1227,7 +1230,7 @@ grep -A 10 "## Security" {{SPECTRA_DIR}}/specs/user-api/design.md
 
 ### 📋 カスタマイズ対象
 
-- **作成**: `/spec:steering-custom` コマンドで新規作成
+- **作成**: `/spectra-steering-custom` コマンドで新規作成
 - **保存先**: `{{SPECTRA_DIR}}/steering/{{domain-name}}.md`
 - **ルール調整**: `{{SPECTRA_DIR}}/settings/rules/steering-principles.md` (オプション)
 
@@ -1241,7 +1244,7 @@ grep -A 10 "## Security" {{SPECTRA_DIR}}/specs/user-api/design.md
 
 #### Step 1: Steering文書の作成
 
-**コマンド**: `/spec:steering-custom`
+**コマンド**: `/spectra-steering-custom`
 
 **プロンプト例**:
 ```
@@ -2157,31 +2160,31 @@ class ErrorBoundary extends React.Component {
 Steering文書を作成すると:
 
 1. **全てのspec生成コマンド**で自動的にルールが参照される
-2. `/spec:spectra-design`でAPI設計時に標準フォーマットが自動適用される
-3. `/spec:spectra-requirements`でエラーハンドリング要件が自動的に含まれる
-4. `/spec:spectra-tasks`で認証・テスト関連タスクが標準に沿って生成される
+2. `/spectra-design`でAPI設計時に標準フォーマットが自動適用される
+3. `/spectra-requirements`でエラーハンドリング要件が自動的に含まれる
+4. `/spectra-tasks`で認証・テスト関連タスクが標準に沿って生成される
 
 ### 🧪 テスト方法
 
 ```bash
 # 1. Steering文書を作成
-/spec:steering-custom
+/spectra-steering-custom
 # プロンプト: Create API standards steering document for REST conventions
 
 # 2. 生成されたファイルを確認
 cat {{SPECTRA_DIR}}/steering/api-standards.md
 
 # 3. 新規specでSteering適用を確認
-/spec:spectra-init Build user management API
-/spec:spectra-design user-management-api
+/spectra-init Build user management API
+/spectra-design user-management-api
 
 # 4. 生成されたdesign.mdにAPI標準が反映されているか確認
 grep -A 10 "## API Specification" {{SPECTRA_DIR}}/specs/user-management-api/design.md
 # エンドポイント構造、エラーレスポンス形式がsteering通りか確認
 
 # 5. 別の機能でも同じ標準が適用されることを確認
-/spec:spectra-init Build order processing API
-/spec:spectra-design order-processing-api
+/spectra-init Build order processing API
+/spectra-design order-processing-api
 diff \
   <(grep "Error Response" {{SPECTRA_DIR}}/specs/user-management-api/design.md) \
   <(grep "Error Response" {{SPECTRA_DIR}}/specs/order-processing-api/design.md)
@@ -2260,10 +2263,10 @@ git commit -m "Add team-wide templates"
 
 ```bash
 # 1. 小規模な機能で試す
-/spec:spectra-init Small feature for testing custom templates
-/spec:spectra-requirements test-feature
-/spec:spectra-design test-feature
-/spec:spectra-tasks test-feature
+/spectra-init Small feature for testing custom templates
+/spectra-requirements test-feature
+/spectra-design test-feature
+/spectra-tasks test-feature
 
 # 2. チームでレビュー
 # - 出力品質を確認

@@ -101,7 +101,7 @@ try {
     Write-Warn "npx github: failed. Falling back to git clone..."
     $tmpDir = "$env:TEMP\spectra-$(Get-Random)"
     git clone --depth 1 "https://github.com/$GITHUB_REPO.git" $tmpDir
-    Push-Location "$tmpDir\tools\cc-sdd"
+    Push-Location "$tmpDir\tools\spectra"
     npm install; npm run build
     node dist\cli.js $agentFlag $langFlag
     Pop-Location
