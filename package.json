@@ -6,7 +6,7 @@
     "spectra": "./bin/spectra.js"
   },
   "scripts": {
-    "postinstall": "cd tools/cc-sdd && npm install && npm run build"
+    "postinstall": "cd tools/spectra && npm install && npm run build"
   },
   "private": true
 }

@@ -201,11 +201,11 @@ case "${CI_CHOICE:-n}" in
     # Try to find template files
     TEMPLATE_SRC=""
     # Check if we're in a clone of the repo
-    if [ -f "tools/cc-sdd/templates/shared/.github/workflows/traceability-check.yml" ]; then
-      TEMPLATE_SRC="tools/cc-sdd/templates/shared"
+    if [ -f "tools/spectra/templates/shared/.github/workflows/traceability-check.yml" ]; then
+      TEMPLATE_SRC="tools/spectra/templates/shared"
     # Check if it was installed via npx (look in common locations)
     elif [ -f ".agents/skills/.gitattributes" ] && [ -d "tools" ]; then
-      TEMPLATE_SRC="tools/cc-sdd/templates/shared"
+      TEMPLATE_SRC="tools/spectra/templates/shared"
     fi
 
     if [ -n "$TEMPLATE_SRC" ]; then
@@ -226,14 +226,14 @@ case "${CI_CHOICE:-n}" in
     else
       warn "Template files not found locally."
       echo "  To install manually, run from the spectra repo:"
-      echo "    cp tools/cc-sdd/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
-      echo "    cp tools/cc-sdd/templates/shared/scripts/ci-check.sh .agents/scripts/"
+      echo "    cp tools/spectra/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
+      echo "    cp tools/spectra/templates/shared/scripts/ci-check.sh .agents/scripts/"
     fi
     ;;
   *)
     info "Skipping CI/CD templates. Install later with:"
-    echo "  cp tools/cc-sdd/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
-    echo "  cp tools/cc-sdd/templates/shared/scripts/ci-check.sh .agents/scripts/"
+    echo "  cp tools/spectra/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
+    echo "  cp tools/spectra/templates/shared/scripts/ci-check.sh .agents/scripts/"
     ;;
 esac
 

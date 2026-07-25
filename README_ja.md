@@ -86,9 +86,9 @@ bash .agents/scripts/setup-crg.sh --yes
 
 ## ドキュメント
 
-- [Package README (English)](./tools/cc-sdd/README.md)
-- [Package README (日本語)](./tools/cc-sdd/README_ja.md)
-- [Package README (繁體中文)](./tools/cc-sdd/README_zh-TW.md)
+- [Package README (English)](./tools/spectra/README.md)
+- [Package README (日本語)](./tools/spectra/README_ja.md)
+- [Package README (繁體中文)](./tools/spectra/README_zh-TW.md)
 - [セットアップガイド](./.agents/scripts/README.md)
 
 ## ライセンス

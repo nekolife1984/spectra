@@ -5,8 +5,8 @@ Quick pointers to the most relevant guides, workflows, and historical notes for 
 ## Current Guides
 
 - [Project README (English)](../README.md)
-- [Project README (日本語)](../tools/cc-sdd/README_ja.md)
-- [Project README (繁體中文)](../tools/cc-sdd/README_zh-TW.md)
+- [Project README (日本語)](../tools/spectra/README_ja.md)
+- [Project README (繁體中文)](../tools/spectra/README_zh-TW.md)
 - [Release Notes](RELEASE_NOTES)
 
 ## Deep Dives

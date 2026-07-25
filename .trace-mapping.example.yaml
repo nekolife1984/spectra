@@ -1,11 +1,11 @@
 # .trace-mapping.yaml — 仕様 ↔ コード トレーサビリティマッピング
 #
-# cc-sdd で生成した specs と実装コードを紐付けるためのファイル。
+# spectra で生成した specs と実装コードを紐付けるためのファイル。
 # このファイルをプロジェクトルートに配置し、コードに @impl タグを
 # 追加することで、仕様変更時の影響分析が可能になります。
 #
 # 使い方:
-#   1. cc-sdd で spec を生成（requirements.md に要件ID: 1, 2, 3...）
+#   1. spectra で spec を生成（requirements.md に要件ID: 1, 2, 3...）
 #   2. 実装コードにコメントで # @impl 1.1 タグを追加
 #   3. このファイルにマッピングを追記
 #   4. python3 .agents/scripts/impact.py --spec-id 1.1 で影響分析

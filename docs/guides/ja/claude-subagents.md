@@ -16,7 +16,7 @@
 
 ## spectra-quick による Subagent の連携フロー
 
-`spectra-quick` は、`spectra-init`（インライン実装）、`spectra-requirements`、`spectra-design`、`spectra-tasks` の4つのフェーズを自動で連続実行するマクロコマンドである。この機能の実装は `tools/cc-sdd/templates/agents/claude-code-agent/commands/spectra-quick.md` に定義されている。
+`spectra-quick` は、`spectra-init`（インライン実装）、`spectra-requirements`、`spectra-design`、`spectra-tasks` の4つのフェーズを自動で連続実行するマクロコマンドである。この機能の実装は `tools/spectra/templates/agents/claude-code-agent/commands/spectra-quick.md` に定義されている。
 
 ### モード
 

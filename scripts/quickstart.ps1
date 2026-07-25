@@ -166,8 +166,8 @@ if (-not $Yes) {
 }
 if ($ciChoice -eq "y" -or $ciChoice -eq "Y") {
     $templateSrc = ""
-    if (Test-Path "tools/cc-sdd/templates/shared/.github/workflows/traceability-check.yml") {
-        $templateSrc = "tools/cc-sdd/templates/shared"
+    if (Test-Path "tools/spectra/templates/shared/.github/workflows/traceability-check.yml") {
+        $templateSrc = "tools/spectra/templates/shared"
     }
     if ($templateSrc -ne "") {
         # GitHub Actions workflow
@@ -187,13 +187,13 @@ if ($ciChoice -eq "y" -or $ciChoice -eq "Y") {
     } else {
         Write-Warn "Template files not found locally."
         Write-Host "  Install manually from the spectra repo:"
-        Write-Host "    Copy-Item tools/cc-sdd/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
-        Write-Host "    Copy-Item tools/cc-sdd/templates/shared/scripts/ci-check.sh .agents/scripts/"
+        Write-Host "    Copy-Item tools/spectra/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
+        Write-Host "    Copy-Item tools/spectra/templates/shared/scripts/ci-check.sh .agents/scripts/"
     }
 } else {
     Write-Info "Skipping CI/CD templates. Install later with:"
-    Write-Host "    Copy-Item tools/cc-sdd/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
-    Write-Host "    Copy-Item tools/cc-sdd/templates/shared/scripts/ci-check.sh .agents/scripts/"
+    Write-Host "    Copy-Item tools/spectra/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
+    Write-Host "    Copy-Item tools/spectra/templates/shared/scripts/ci-check.sh .agents/scripts/"
 }
 
 # ── Completion ──

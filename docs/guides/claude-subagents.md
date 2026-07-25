@@ -16,7 +16,7 @@ This guide explains how the **Claude Code Subagents** install target (`--claude-
 
 ## How `spectra-quick` Orchestrates Subagents
 
-`spectra-quick` is a macro-command that calls four Subagents in sequence—`spectra-init` (inline), `spectra-requirements`, `spectra-design`, and `spectra-tasks`—to generate a brand-new spec in one run. Internally、the command follows the same instructions defined in `tools/cc-sdd/templates/agents/claude-code-agent/commands/spectra-quick.md`.
+`spectra-quick` is a macro-command that calls four Subagents in sequence—`spectra-init` (inline), `spectra-requirements`, `spectra-design`, and `spectra-tasks`—to generate a brand-new spec in one run. Internally、the command follows the same instructions defined in `tools/spectra/templates/agents/claude-code-agent/commands/spectra-quick.md`.
 
 ### Modes
 
