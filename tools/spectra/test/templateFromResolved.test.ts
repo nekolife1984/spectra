@@ -22,10 +22,10 @@ describe('contextFromResolved', () => {
   });
 
   it('creates template context with custom configuration', () => {
-    const args = parseArgs(['--lang', 'ja', '--spectra-dir', 'docs/spectra', '--agent', 'gemini-cli']);
+    const args = parseArgs(['--lang', 'ja', '--spectra-dir', 'docs/spectra', '--agent', 'gemini-cli-skills']);
     const config = {
       agentLayouts: {
-        'gemini-cli': { commandsDir: '.custom/commands' }
+        'gemini-cli-skills': { commandsDir: '.custom/commands' }
       }
     };
     const resolved = mergeConfigAndArgs(args, config, runtimeDarwin);

@@ -4,14 +4,14 @@ import { parseArgs, type ParsedArgs } from '../src/cli/args';
 describe('parseArgs', () => {
   it('parses basic flags with explicit values', () => {
     const args = parseArgs([
-      '--agent', 'claude-code',
+      '--agent', 'claude-code-skills',
       '--lang', 'ja',
       '--os', 'auto',
       '--overwrite', 'prompt',
       '--spectra-dir', '.spectra',
     ]);
     const expected: ParsedArgs = {
-      agent: 'claude-code',
+      agent: 'claude-code-skills',
       lang: 'ja',
       os: 'auto',
       overwrite: 'prompt',
@@ -38,16 +38,17 @@ describe('parseArgs', () => {
   });
 
   it('supports agent alias flags and detects conflicts', () => {
-    expect(parseArgs(['--gemini-cli']).agent).toBe('gemini-cli');
+    // v3.0 renamed all command-based agent installs to --*-skills.
+    // The legacy bare aliases (--gemini-cli, --claude-code) were deprecated
+    // in v3.0.0 and are no longer registered. Tests target the current names.
+    expect(parseArgs(['--gemini-skills']).agent).toBe('gemini-cli-skills');
     expect(parseArgs(['--qwen-code']).agent).toBe('qwen-code');
-    expect(parseArgs(['--claude-code']).agent).toBe('claude-code');
-    expect(parseArgs(['--claude-agent']).agent).toBe('claude-code-agent');
-    expect(parseArgs(['--claude-code-agent']).agent).toBe('claude-code-agent');
+    expect(parseArgs(['--claude-code-skills']).agent).toBe('claude-code-skills');
     expect(parseArgs(['--codex-skills']).agent).toBe('codex-skills');
-    expect(parseArgs(['--windsurf']).agent).toBe('windsurf');
+    expect(parseArgs(['--windsurf-skills']).agent).toBe('windsurf-skills');
 
-    expect(() => parseArgs(['--agent', 'qwen-code', '--gemini-cli'])).toThrowError(/agent.*conflict/i);
-    expect(() => parseArgs(['--gemini-cli', '--qwen-code'])).toThrowError(/agent.*conflict/i);
+    expect(() => parseArgs(['--agent', 'qwen-code', '--gemini-skills'])).toThrowError(/agent.*conflict/i);
+    expect(() => parseArgs(['--gemini-skills', '--qwen-code'])).toThrowError(/agent.*conflict/i);
   });
 
   it('validates enum values for os/lang/overwrite/agent', () => {

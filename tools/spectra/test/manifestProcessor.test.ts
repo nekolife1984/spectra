@@ -4,6 +4,10 @@ import type { AgentType } from '../src/resolvers/agentLayout';
 import type { OSType } from '../src/resolvers/os';
 import { buildTemplateContext } from '../src/template/context';
 
+// v3.0 renamed all command-based agent installs to --*-skills. These
+// tests previously used the legacy names ('claude-code', 'gemini-cli')
+// which are no longer registered AgentTypes. Update to the v3.0 names.
+
 const manifest = {
   version: 1,
   artifacts: [
@@ -14,21 +18,21 @@ const manifest = {
         from: 'templates/agents/{{AGENT}}/commands',
         toDir: '{{AGENT_COMMANDS_DIR}}',
       },
-      when: { agent: ['claude-code', 'qwen-code'] as AgentType[] },
+      when: { agent: ['claude-code-skills', 'qwen-code'] as AgentType[] },
     },
   ],
 };
 
 describe('processManifest', () => {
   it('filters by when.agent and resolves placeholders in from/toDir', () => {
-    const agent: AgentType = 'claude-code';
+    const agent: AgentType = 'claude-code-skills';
     const ctx = buildTemplateContext({ agent, lang: 'en' });
     const result = processManifest(manifest, agent, ctx, 'mac' as OSType);
     expect(result).toHaveLength(1);
     const art = result[0] as any;
     expect(art.id).toBe('commands_static_all');
-    expect(art.source.from).toBe('templates/agents/claude-code/commands');
-    expect(art.source.toDir).toBe('.claude/commands/spec');
+    expect(art.source.from).toBe('templates/agents/claude-code-skills/commands');
+    expect(art.source.toDir).toBe('.claude/skills');
   });
 
   it('supports templateDir planning with placeholders', () => {
@@ -45,18 +49,18 @@ describe('processManifest', () => {
         },
       ],
     };
-    const agent: AgentType = 'claude-code';
+    const agent: AgentType = 'claude-code-skills';
     const ctx = buildTemplateContext({ agent, lang: 'en' });
     const result = processManifest(m, agent, ctx, 'mac' as OSType);
     expect(result).toHaveLength(1);
     const dir = result[0] as any;
     expect(dir.source.type).toBe('templateDir');
-    expect(dir.source.fromDir).toBe('templates/agents/claude-code/docs');
+    expect(dir.source.fromDir).toBe('templates/agents/claude-code-skills/docs');
     expect(dir.source.toDir).toBe('.claude');
   });
 
   it('excludes artifacts when agent does not match', () => {
-    const agent: AgentType = 'gemini-cli';
+    const agent: AgentType = 'gemini-cli-skills';
     const ctx = buildTemplateContext({ agent, lang: 'en' });
     const result = processManifest(manifest, agent, ctx, 'mac' as OSType);
     expect(result).toHaveLength(0);
@@ -74,11 +78,11 @@ describe('processManifest', () => {
             toDir: '{{AGENT_DIR}}',
             rename: '{{AGENT_DOC}}',
           },
-          when: { agent: 'claude-code' as AgentType },
+          when: { agent: 'claude-code-skills' as AgentType },
         },
       ],
     };
-    const agent: AgentType = 'claude-code';
+    const agent: AgentType = 'claude-code-skills';
     const ctx = buildTemplateContext({ agent, lang: 'en' });
     const result = processManifest(m, agent, ctx, 'mac' as OSType);
     expect(result).toHaveLength(1);
@@ -111,7 +115,7 @@ describe('processManifest', () => {
         },
       ],
     };
-    const agent: AgentType = 'claude-code';
+    const agent: AgentType = 'claude-code-skills';
     const ctx = buildTemplateContext({ agent, lang: 'en' });
     const result = processManifest(m, agent, ctx, 'mac' as OSType);
     expect(result).toHaveLength(2);

@@ -238,6 +238,31 @@ export const agentDefinitions = {
     },
     manifestId: 'antigravity-skills',
   },
+  // qwen-code is a legacy agent (added in v1.1.5). It has no skills-mode
+  // manifest — only the legacy `.qwen/commands/spec` layout, sharing
+  // gemini-cli templates. CHANGELOG v1.1.5: "Qwen Code support - Reuse
+  // gemini-cli templates to minimize code duplication".
+  'qwen-code': {
+    label: 'Qwen Code (legacy)',
+    description:
+      'Legacy Qwen Code agent using `.qwen/commands/spec/` and shared gemini-cli templates. New installs should pick a skills-mode target instead.',
+    aliasFlags: ['--qwen-code', '--qwen'],
+    layout: {
+      commandsDir: '.qwen/commands/spec',
+      agentDir: '.qwen',
+      docFile: 'QWEN.md',
+    },
+    commands: {
+      spec: '`/spectra-init <what-to-build>`',
+      steering: '`/spectra-steering`',
+      steeringCustom: '`/spectra-steering-custom <what-to-create-custom-steering-document>`',
+    },
+    completionGuide: {
+      appendSteps: [
+        'qwen-code is a legacy target. Consider switching to a skills-mode agent (e.g. `claude-code-skills`, `codex-skills`).',
+      ],
+    },
+  },
 } as const satisfies Record<string, AgentDefinition>;
 
 export type AgentType = keyof typeof agentDefinitions;

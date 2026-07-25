@@ -1,0 +1,73 @@
+name: test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  node-test:
+    name: node ${{ matrix.node }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['22', '24', '25']
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'npm'
+          cache-dependency-path: tools/spectra/package-lock.json
+
+      # The actual npm-managed package lives in tools/spectra/, not at the
+      # repo root. The root package.json only carries a postinstall hook
+      # that delegates there. We install + test + build inside
+      # tools/spectra, matching the existing publish.yml pattern.
+      - name: Install dependencies (tools/spectra)
+        working-directory: tools/spectra
+        run: npm ci
+
+      - name: Build (catches shebang-write regressions via postbuild)
+        working-directory: tools/spectra
+        run: npm run build
+
+      - name: Verify shebang on dist/cli.js
+        working-directory: tools/spectra
+        run: |
+          head -1 dist/cli.js | grep -q '^#!/usr/bin/env node$' || {
+            echo "ERROR: dist/cli.js is missing the shebang line."
+            echo "First line was:"
+            head -1 dist/cli.js
+            exit 1
+          }
+
+      - name: Run vitest
+        working-directory: tools/spectra
+        run: npm test
+
+  python-test:
+    name: python impact.py tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          # We deliberately do not `pip install` anything; tests use
+          # stdlib unittest + the system pyyaml that ships with most
+          # runners. If pyyaml is missing on the runner image, install
+          # it here.
+      - name: Install pyyaml if missing
+        run: |
+          python3 -c 'import yaml' 2>/dev/null || pip install pyyaml
+
+      - name: Run impact.py tests
+        run: python3 -m unittest tests.test_impact -v

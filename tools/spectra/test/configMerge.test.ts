@@ -38,7 +38,7 @@ describe('mergeConfigAndArgs', () => {
     ]);
 
     const cfg: UserConfig = {
-      agent: 'gemini-cli',
+      agent: 'gemini-cli-skills',  // v3.0 name; was 'gemini-cli' in v1.x.
       os: 'linux',
       lang: 'en',
       spectraDir: 'docs/spectra',
