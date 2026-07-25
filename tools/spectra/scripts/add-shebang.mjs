@@ -17,5 +17,9 @@ try {
   console.log(`Ensured shebang and exec bit on ${cliPath}`);
 } catch (e) {
   console.error(`Failed to add shebang: ${e?.message || e}`);
-  process.exitCode = 0; // do not fail build hard
+  // Fail the build if shebang cannot be written. Publishing a CLI without
+  // `#!/usr/bin/env node` makes the package unrunnable via `npx` / direct
+  // invocation; it is cheaper to surface this at install time than to ship
+  // a broken binary.
+  process.exitCode = 1;
 }
