@@ -1,13 +1,13 @@
 import path from 'node:path';
 
-export type SpecDirOptions = {
+export type SpectraDirOptions = {
   flag?: string;
   config?: string;
 };
 
 export const defaultSpecDir = '.spectra';
 
-export const resolveSpecDir = (opts: SpecDirOptions = {}): string => {
+export const resolveSpecDir = (opts: SpectraDirOptions = {}): string => {
   const candidate = opts.flag ?? opts.config ?? defaultSpecDir;
 
   if (!candidate || typeof candidate !== 'string') {

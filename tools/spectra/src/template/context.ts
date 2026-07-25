@@ -1,11 +1,11 @@
-import { resolveSpecDir, type SpecDirOptions } from '../resolvers/spectraDir.js';
+import { resolveSpecDir, type SpectraDirOptions } from '../resolvers/spectraDir.js';
 import { resolveAgentLayout, type AgentLayout, type AgentType, type CCSddConfig } from '../resolvers/agentLayout.js';
 import type { SupportedLanguage } from '../constants/languages.js';
 
 export interface BuildTemplateContextOptions {
   agent: AgentType;
   lang: SupportedLanguage;
-  spectraDir?: SpecDirOptions;
+  spectraDir?: SpectraDirOptions;
   config?: CCSddConfig;
 }
 
@@ -53,5 +53,5 @@ export const createTemplateContext = (
 export const buildTemplateContext = (opts: BuildTemplateContextOptions): TemplateContext => {
   const spectra = resolveSpecDir(opts.spectraDir ?? {});
   const layout = resolveAgentLayout(opts.agent, opts.config);
-  return createTemplateContext(opts.lang, spec, layout);
+  return createTemplateContext(opts.lang, spectra, layout);
 };
