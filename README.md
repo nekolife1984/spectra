@@ -89,7 +89,7 @@ Most skills integrate with code-review-graph for graph-aware code analysis:
 - [Package README (English)](./tools/spectra/README.md)
 - [Package README (日本語)](./tools/spectra/README_ja.md)
 - [Package README (繁體中文)](./tools/spectra/README_zh-TW.md)
-- [Setup Guide](./.agents/scripts/README.md)
+- [Setup Guide](./tools/spectra/templates/shared/scripts/README.md)
 
 ## License
 
