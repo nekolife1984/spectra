@@ -1,48 +1,40 @@
-# Traceability Git Hooks
+# pre-commit hook installation
 
-Run these once to set up the hooks:
-
-## 1. pre-commit hook（軽量・推奨）
+Run this once to set up the hook:
 
 ```bash
 ln -sf ../../.agents/scripts/pre-commit.sh .git/hooks/pre-commit
 ```
 
-コミットごとに自動実行:
-- ✅ Trace snapshot update (`check_drift.py --snapshot`)
-- ✅ Missing `@impl` tag check (`extract_tags.py --check-missing`)
+This automatically runs on every `git commit`:
+1. **`@impl` tag completeness check** — verifies that `.trace-mapping.yaml` entries have corresponding `@impl` tags in the code (blocks commit if missing)
+2. **Traceability snapshot update** — records code changes for drift detection
 
-フルチェックを有効にするには（全9チェックを含む）:
-```bash
-TRACE_FULL=1 git commit -m "message"
-```
-またはエイリアス設定:
-```bash
-git config alias.c "commit -a -S"
-git config alias.cf "!TRACE_FULL=1 git commit"
-```
+## Verification
 
-## 2. pre-push hook（本格チェック・opt-in）
+After installation, test the hook:
 
 ```bash
-ln -sf ../../.agents/scripts/pre-push.sh .git/hooks/pre-push
+# Try committing — should show the checks
+git add -A && git commit -m "test pre-commit hook"
+
+# On first run with existing code, you may see @impl warnings.
+# Fix those, or bypass once with:
+git commit --no-verify -m "bypass hook temporarily"
 ```
 
-プッシュごとに3段階のトレーサビリティチェックを実行:
-1. ❌ Trace Completeness Gate — 全9チェック（`check-trace-completeness.py`）
-2. ❌ Drift Check — コードと仕様書の乖離検出（`check_drift.py --diff --gate`）
-3. ✅ Impact Summary — 影響範囲レポート（参考、非ブロッキング）
+## Bypassing
 
-全て通過でプッシュ続行、失敗で中断。
-
-スキップする場合:
-```bash
-SKIP_TRACE=1 git push
-```
-
-## 削除
+Use `--no-verify` sparingly — only when you're mid-work and know the
+checks are noise. Make a habit of running the gate manually afterward:
 
 ```bash
-rm .git/hooks/pre-commit
-rm .git/hooks/pre-push
+python3 .agents/scripts/check-impl-completeness.py
 ```
+
+## Related
+
+See `.agents/scripts/README.md` for full setup guide including:
+- CI/CD gate configuration
+- Hermes cron monitoring setup
+- Detailed script usage
