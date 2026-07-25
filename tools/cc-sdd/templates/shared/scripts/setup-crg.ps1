@@ -138,9 +138,9 @@ Write-Host "  Setup Complete!" -ForegroundColor Green
 Write-Host "═══════════════════════════════════════" -ForegroundColor Green
 Write-Host ""
 Write-Host "  Next steps:"
-Write-Host "    • spec-trace 1.1        — Trace spec→code impact"
-Write-Host "    • spec-impact           — Trace code→spec impact"
-Write-Host "    • spec-validate-boundary — Verify task boundaries"
+Write-Host "    • spectra-trace 1.1        — Trace spec→code impact"
+Write-Host "    • spectra-impact           — Trace code→spec impact"
+Write-Host "    • spectra-validate-boundary — Verify task boundaries"
 Write-Host "    • code-review-graph build   — Rebuild the code graph"
 Write-Host "    • code-review-graph serve   — Check MCP server status"
 Write-Host ""

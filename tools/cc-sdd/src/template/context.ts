@@ -1,18 +1,18 @@
-import { resolveSpecDir, type SpecDirOptions } from '../resolvers/specDir.js';
+import { resolveSpecDir, type SpecDirOptions } from '../resolvers/spectraDir.js';
 import { resolveAgentLayout, type AgentLayout, type AgentType, type CCSddConfig } from '../resolvers/agentLayout.js';
 import type { SupportedLanguage } from '../constants/languages.js';
 
 export interface BuildTemplateContextOptions {
   agent: AgentType;
   lang: SupportedLanguage;
-  specDir?: SpecDirOptions;
+  spectraDir?: SpecDirOptions;
   config?: CCSddConfig;
 }
 
 export type TemplateContext = {
   LANG_CODE: string;
   DEV_GUIDELINES: string;
-  SPEC_DIR: string;
+  SPECTRA_DIR: string;
   AGENT_DIR: string;
   AGENT_DOC: string;
   AGENT_COMMANDS_DIR: string;
@@ -39,19 +39,19 @@ export const getDevGuidelines = (lang: SupportedLanguage): string => guidelinesM
 
 export const createTemplateContext = (
   lang: SupportedLanguage,
-  specDir: string,
+  spectraDir: string,
   layout: AgentLayout,
 ): TemplateContext => ({
   LANG_CODE: lang,
   DEV_GUIDELINES: getDevGuidelines(lang),
-  SPEC_DIR: specDir,
+  SPECTRA_DIR: spectraDir,
   AGENT_DIR: layout.agentDir,
   AGENT_DOC: layout.docFile,
   AGENT_COMMANDS_DIR: layout.commandsDir,
 });
 
 export const buildTemplateContext = (opts: BuildTemplateContextOptions): TemplateContext => {
-  const spec = resolveSpecDir(opts.specDir ?? {});
+  const spectra = resolveSpecDir(opts.spectraDir ?? {});
   const layout = resolveAgentLayout(opts.agent, opts.config);
   return createTemplateContext(opts.lang, spec, layout);
 };

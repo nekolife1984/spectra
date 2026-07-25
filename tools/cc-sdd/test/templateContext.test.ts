@@ -3,18 +3,18 @@ import { buildTemplateContext } from '../src/template/context';
 import type { AgentType, CCSddConfig } from '../src/resolvers/agentLayout';
 
 describe('buildTemplateContext', () => {
-  it('includes LANG_CODE and SPEC_DIR (default)', () => {
+  it('includes LANG_CODE and SPECTRA_DIR (default)', () => {
     const ctx = buildTemplateContext({ agent: 'claude-code', lang: 'ja' });
     expect(ctx.LANG_CODE).toBe('ja');
-    expect(ctx.SPEC_DIR).toBe('.spec');
+    expect(ctx.SPECTRA_DIR).toBe('.spectra');
     expect(ctx.DEV_GUIDELINES).toBe(
       '- Think in English, generate responses in Japanese. All Markdown content written to project files (e.g., requirements.md, design.md, tasks.md, research.md, validation reports) MUST be written in the target language configured for this specification (see spec.json.language).',
     );
   });
 
-  it('uses spec-dir flag when provided', () => {
-    const ctx = buildTemplateContext({ agent: 'claude-code', lang: 'en', specDir: { flag: 'docs/spec' } });
-    expect(ctx.SPEC_DIR).toBe('docs/spec');
+  it('uses spectra-dir flag when provided', () => {
+    const ctx = buildTemplateContext({ agent: 'claude-code', lang: 'en', spectraDir: { flag: 'docs/spectra' } });
+    expect(ctx.SPECTRA_DIR).toBe('docs/spectra');
   });
 
   it('includes agent layout variables for claude-code', () => {

@@ -64,7 +64,7 @@ except ImportError:
 
 # ── 定数 ──
 TRACE_MAPPING_PATH = Path(".trace-mapping.yaml")
-TASKS_MD_PATH = Path(".spec/specs")
+TASKS_MD_PATH = Path(".spectra/specs")
 
 # 言語プロファイルを読み込み
 try:
@@ -87,7 +87,7 @@ except ImportError:
         "**/*Test*.cs", "**/*Tests.cs",
     ]
     EXCLUDE_DIRS = {".git", "node_modules", ".venv", "__pycache__", "dist",
-                    "build", ".artgraph", ".trace", ".spec"}
+                    "build", ".artgraph", ".trace", ".spectra"}
 
 # タグパターン（extract_tags.py と同一）
 # # @impl / // @impl / <!-- @spec --> の全形式に対応
@@ -1166,7 +1166,7 @@ def check_satisfies_mapped(project_dir: Path, mappings: list[dict]) -> list[str]
         r'<!--\s*@satisfies\s+(.+?)\s*-->', re.MULTILINE
     )
 
-    spec_dir = project_dir / ".spec" / "specs"
+    spec_dir = project_dir / ".spectra" / "specs"
     if not spec_dir.exists():
         return []
 

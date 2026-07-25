@@ -12,16 +12,16 @@ Use this table when you are deciding which skill to run first.
 
 | You want to... | Start with | Typical next step |
 | --- | --- | --- |
-| Route a new request | `/spec-discovery` | `spec-init`, `spec-batch`, or direct implementation |
-| Create one new spec | `/spec-init` | `/spec-requirements` |
-| Create many specs from one initiative | `/spec-batch` | Review generated specs, then `/spec-impl` on the approved one(s) |
-| Implement approved tasks | `/spec-impl` | `/spec-validate-impl` |
-| Validate feature integration | `/spec-validate-impl` | Fix findings or report `GO` / `NO-GO` / `MANUAL_VERIFY_REQUIRED` |
-| Capture project memory | `/spec-steering` or `/spec-steering-custom` | Start or resume spec work |
+| Route a new request | `/spectra-discovery` | `spectra-init`, `spectra-batch`, or direct implementation |
+| Create one new spec | `/spectra-init` | `/spectra-requirements` |
+| Create many specs from one initiative | `/spectra-batch` | Review generated specs, then `/spectra-impl` on the approved one(s) |
+| Implement approved tasks | `/spectra-impl` | `/spectra-validate-impl` |
+| Validate feature integration | `/spectra-validate-impl` | Fix findings or report `GO` / `NO-GO` / `MANUAL_VERIFY_REQUIRED` |
+| Capture project memory | `/spectra-steering` or `/spectra-steering-custom` | Start or resume spec work |
 
 ## Workflow Skills
 
-### `/spec-discovery`
+### `/spectra-discovery`
 
 Use when you have new work but do not yet know whether it should become one spec, multiple specs, or no spec at all.
 
@@ -36,7 +36,7 @@ Use when you have new work but do not yet know whether it should become one spec
   - create one new spec
   - decompose into multiple specs
 
-### `/spec-batch`
+### `/spectra-batch`
 
 Use when discovery or a roadmap already tells you the work should be split into multiple specs.
 
@@ -48,7 +48,7 @@ Use when discovery or a roadmap already tells you the work should be split into 
   - review the generated specs
   - continue with the approved spec(s)
 
-### `/spec-impl`
+### `/spectra-impl`
 
 Use when `tasks.md` is approved and you want to execute implementation.
 
@@ -57,10 +57,10 @@ Use when `tasks.md` is approved and you want to execute implementation.
   - manual mode: task args provided, TDD in main context with review gate
 - Guarantees:
   - reviewer approval before completion
-  - `spec-verify-completion` before success claims
+  - `spectra-verify-completion` before success claims
   - bounded remediation and debug loops
 
-### `/spec-validate-impl`
+### `/spectra-validate-impl`
 
 Use after implementation when you need feature-level validation across tasks.
 
@@ -76,9 +76,9 @@ Use after implementation when you need feature-level validation across tasks.
 
 ## Supporting Skills
 
-These are real skills, but many users meet them indirectly through `/spec-impl`.
+These are real skills, but many users meet them indirectly through `/spectra-impl`.
 
-### `spec-review`
+### `spectra-review`
 
 Task-local adversarial review protocol.
 
@@ -91,7 +91,7 @@ Task-local adversarial review protocol.
   - mechanical verification
   - RED-phase evidence where required
 
-### `spec-debug`
+### `spectra-debug`
 
 Root-cause-first debug protocol.
 
@@ -105,7 +105,7 @@ Root-cause-first debug protocol.
   - `FIX_PLAN`
   - `NEXT_ACTION`
 
-### `spec-verify-completion`
+### `spectra-verify-completion`
 
 Fresh-evidence gate before success claims.
 
@@ -118,25 +118,25 @@ Fresh-evidence gate before success claims.
   - `NOT_VERIFIED`
   - `MANUAL_VERIFY_REQUIRED`
 
-## Inside `/spec-impl`: Dispatch and Iteration
+## Inside `/spectra-impl`: Dispatch and Iteration
 
-Most of the "what is a subagent here?" question lives inside `/spec-impl`. Unlike the legacy `--claude-agent` install target, skills mode does not rely on pre-defined subagent files under `.claude/agents/spec/`. Implementation dispatch is owned by the skill itself.
+Most of the "what is a subagent here?" question lives inside `/spectra-impl`. Unlike the legacy `--claude-agent` install target, skills mode does not rely on pre-defined subagent files under `.claude/agents/spec/`. Implementation dispatch is owned by the skill itself.
 
 ### Dynamic dispatch, not static agent files
 
 - There is no `tdd-task-implementer.md` or similar file under `.claude/agents/`.
-- `/spec-impl` spawns fresh execution contexts on demand through each platform's native subagent primitive (for example, Claude Code's Task tool), using prompt templates kept under the skill.
-- This is what lets the same `/spec-impl` skill work across Claude Code, Codex, Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, and Antigravity without maintaining a separate agent file per platform.
+- `/spectra-impl` spawns fresh execution contexts on demand through each platform's native subagent primitive (for example, Claude Code's Task tool), using prompt templates kept under the skill.
+- This is what lets the same `/spectra-impl` skill work across Claude Code, Codex, Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, and Antigravity without maintaining a separate agent file per platform.
 
 ### Per-task role trio
 
-Each task may involve up to three roles dispatched by `/spec-impl`:
+Each task may involve up to three roles dispatched by `/spectra-impl`:
 
 - **Implementer** — fresh execution context that builds a Task Brief from the spec, then implements with TDD (RED → GREEN under the Feature Flag Protocol).
 - **Reviewer** — independent pass that runs `git diff`, greps for TODOs, runs the test suite, and checks task-boundary compliance.
 - **Debugger** — triggered when the implementer is BLOCKED, or when the reviewer rejects after 2 remediation rounds. Investigates root causes in a clean context (with web search), produces a fix plan, and hands off to a new implementer. Max 2 debug rounds per task.
 
-These three roles correspond to the three supporting skills above (`spec-review`, `spec-debug`, `spec-verify-completion`). The dispatch is dynamic — no file under `.claude/agents/` needs to exist.
+These three roles correspond to the three supporting skills above (`spectra-review`, `spectra-debug`, `spectra-verify-completion`). The dispatch is dynamic — no file under `.claude/agents/` needs to exist.
 
 ### Learnings propagation
 
@@ -144,7 +144,7 @@ When a task reveals cross-cutting insights (for example "better-sqlite3 needs El
 
 ### 1 task per iteration
 
-Each iteration processes a single task. This keeps context hygiene across long autonomous runs, makes `/spec-impl` safe to re-run after interruption, and bounds the scope of review and debug passes.
+Each iteration processes a single task. This keeps context hygiene across long autonomous runs, makes `/spectra-impl` safe to re-run after interruption, and bounds the scope of review and debug passes.
 
 ## Skills mode vs `--claude-agent`
 
@@ -154,9 +154,9 @@ Skills mode and the legacy `--claude-agent` install target take fundamentally di
 | --- | --- | --- |
 | Subagent definitions | Static `.claude/agents/spec/*.md` files | Prompt templates inside skills, dispatched dynamically |
 | Cross-platform | Claude Code only | 8 platforms |
-| Spec generation (`spec-quick`) | Four-phase Subagent orchestration | Inline `spec-quick` skill that sequences the four spec skills |
-| Parallel spec batch | Not available | `/spec-batch` with cross-spec review |
-| Implementation | Manual via `/spec:spec-impl` | Autonomous or manual via `/spec-impl` |
+| Spec generation (`spectra-quick`) | Four-phase Subagent orchestration | Inline `spectra-quick` skill that sequences the four spec skills |
+| Parallel spec batch | Not available | `/spectra-batch` with cross-spec review |
+| Implementation | Manual via `/spec:spectra-impl` | Autonomous or manual via `/spectra-impl` |
 | Review process | Manual or via `validate-impl` | Built-in independent reviewer pass |
 | Debug on failure | Not available | Auto debug pass (max 2 rounds) with web search |
 | Session resume | Start fresh | Safe to re-run after interruption |
@@ -168,18 +168,18 @@ For the `--claude-agent` details, see [Claude Code Subagents Workflow](claude-su
 
 Because skills mode generates prompts dynamically, customization works differently than editing `.claude/agents/spec/*.md` files.
 
-1. **Steering documents** — the primary lever. Implementer and reviewer contexts inherit rules from steering, so update `{{SPEC_DIR}}/steering/*.md` for architecture and convention changes.
-2. **Templates and rules** — update `{{SPEC_DIR}}/settings/templates/*.md` and `{{SPEC_DIR}}/settings/rules/*.md` to influence the Task Brief and review criteria.
+1. **Steering documents** — the primary lever. Implementer and reviewer contexts inherit rules from steering, so update `{{SPECTRA_DIR}}/steering/*.md` for architecture and convention changes.
+2. **Templates and rules** — update `{{SPECTRA_DIR}}/settings/templates/*.md` and `{{SPECTRA_DIR}}/settings/rules/*.md` to influence the Task Brief and review criteria.
 3. **Skill files** — advanced users can edit the installed `SKILL.md` files under `.claude/skills/` (or the equivalent per platform) to adjust dispatch behaviour, review gates, or iteration strategy.
 
 ## Skills vs Commands
 
 | Area | Skills mode | Legacy commands |
 | --- | --- | --- |
-| New-work entry point | `/spec-discovery` | none |
-| Multi-spec creation | `/spec-batch` | none |
-| Implementation | `/spec-impl` | `/spec:spec-impl` |
-| Integration validation | `/spec-validate-impl` | `/spec:validate-impl` |
+| New-work entry point | `/spectra-discovery` | none |
+| Multi-spec creation | `/spectra-batch` | none |
+| Implementation | `/spectra-impl` | `/spec:spectra-impl` |
+| Integration validation | `/spectra-validate-impl` | `/spec:validate-impl` |
 | Review/debug/completion gates | explicit skills | embedded in command flow or external process |
 
 ## Recommended Reading Order

@@ -271,7 +271,7 @@ def main():
             for f in findings:
                 print(f"  [{f['type']}] {f['detail']}")
         else:
-            print("✅ No spec-impacting changes detected.")
+            print("✅ No spectra-impacting changes detected.")
         sys.exit(0)
 
 

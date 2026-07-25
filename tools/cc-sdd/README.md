@@ -16,13 +16,13 @@ English | <a href="./README_ja.md">日本語</a> | <a href="./README_zh-TW.md">�
 
 cc-sdd v3.0 is a rework around Agent Skills and long-running autonomous implementation.
 
-- **`/spec-discovery` as the new entry point.** Discovery routes new work into one of: extend an existing spec, implement directly with no spec, create one new spec, decompose into multiple specs, or mixed decomposition. It writes `brief.md` and, when needed, `roadmap.md`, so you can resume a workstream without re-explaining scope.
-- **`/spec-impl` for long-running autonomous implementation.** Each task gets a fresh implementer running TDD (RED → GREEN) behind a feature flag, an independent reviewer, and an auto-debug pass that investigates root causes in a clean context when the implementer is blocked or the reviewer rejects twice. Learnings from earlier tasks propagate forward via `## Implementation Notes` in `tasks.md`. 1 task per iteration, safe to re-run after interruption.
+- **`/spectra-discovery` as the new entry point.** Discovery routes new work into one of: extend an existing spec, implement directly with no spec, create one new spec, decompose into multiple specs, or mixed decomposition. It writes `brief.md` and, when needed, `roadmap.md`, so you can resume a workstream without re-explaining scope.
+- **`/spectra-impl` for long-running autonomous implementation.** Each task gets a fresh implementer running TDD (RED → GREEN) behind a feature flag, an independent reviewer, and an auto-debug pass that investigates root causes in a clean context when the implementer is blocked or the reviewer rejects twice. Learnings from earlier tasks propagate forward via `## Implementation Notes` in `tasks.md`. 1 task per iteration, safe to re-run after interruption.
 - **Boundary-first spec discipline.** `design.md` now includes a File Structure Plan that drives task boundaries. Tasks carry `_Boundary:_` and `_Depends:_` annotations. Review and validation look for boundary violations, not just style issues.
-- **`/spec-batch` for multi-spec initiatives.** Turn a roadmap into multiple specs in parallel, with cross-spec review to catch contradictions, duplicated responsibilities, and interface mismatches.
+- **`/spectra-batch` for multi-spec initiatives.** Turn a roadmap into multiple specs in parallel, with cross-spec review to catch contradictions, duplicated responsibilities, and interface mismatches.
 - **Agent Skills across 8 coding agents.** 17 skills per install, loaded on demand (progressive disclosure). Claude Code and Codex are stable; Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, and Antigravity are in beta. No external dependencies; subagents are spawned through each platform's native primitive.
 
-Full skills-mode workflow and `/spec-impl` internals: [Skill Reference](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/skill-reference.md).
+Full skills-mode workflow and `/spectra-impl` internals: [Skill Reference](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/skill-reference.md).
 
 Upgrading from v1.x or v2.x? See the [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md#5-v2x-to-v30).
 
@@ -61,9 +61,9 @@ bash .agents/scripts/setup-crg.sh
 ```
 
 This enables:
-- `/spec-trace <spec-id>` — trace spec changes to code impact
-- `/spec-impact <file>` — trace code changes back to affected specs
-- `/spec-validate-boundary` — mechanically verify `_Boundary:_` against code graph
+- `/spectra-trace <spec-id>` — trace spec changes to code impact
+- `/spectra-impact <file>` — trace code changes back to affected specs
+- `/spectra-validate-boundary` — mechanically verify `_Boundary:_` against code graph
 - CRG-enhanced design review, gap analysis, completion verification, and more (15 skills total)
 - Pre-commit hook for automatic snapshot updates on every commit
 
@@ -72,36 +72,36 @@ See [Setup Guide](./.agents/scripts/README.md) for more options including `--yes
 Then, in your agent:
 
 ```bash
-/spec-discovery <idea>
+/spectra-discovery <idea>
 ```
 
-Not sure where to start? Start with `spec-discovery`. It routes your request and tells you what command to run next.
+Not sure where to start? Start with `spectra-discovery`. It routes your request and tells you what command to run next.
 
 ### Common workflows
 
 | You want to... | Skills mode |
 |---|---|
-| Start a new feature or product-sized idea | `spec-discovery` → `spec-init` → `spec-requirements` → `spec-design` → `spec-tasks` → `spec-impl` |
-| Extend an existing system | `spec-steering` → `spec-discovery` or `spec-init` → optional `spec-validate-gap` → `spec-design` → `spec-tasks` → `spec-impl` |
-| Break down a large initiative | `spec-discovery` → `spec-batch` |
-| Implement a small change with no spec | `spec-discovery` → direct implementation |
+| Start a new feature or product-sized idea | `spectra-discovery` → `spectra-init` → `spectra-requirements` → `spectra-design` → `spectra-tasks` → `spectra-impl` |
+| Extend an existing system | `spectra-steering` → `spectra-discovery` or `spectra-init` → optional `spectra-validate-gap` → `spectra-design` → `spectra-tasks` → `spectra-impl` |
+| Break down a large initiative | `spectra-discovery` → `spectra-batch` |
+| Implement a small change with no spec | `spectra-discovery` → direct implementation |
 
 Legacy `/spec:*` command modes are still available (`--claude`, `--cursor`, etc.) but are deprecated. See the [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md) for the upgrade path.
 
-For larger approved task sets, run `spec-impl` to start autonomous implementation with per-task subagent spawn, independent review, and auto-debug on failure.
+For larger approved task sets, run `spectra-impl` to start autonomous implementation with per-task subagent spawn, independent review, and auto-debug on failure.
 
 ## See It In Action
 
 Example: build a new Photo Albums feature.
 
 ```bash
-/spec-discovery Photo albums with upload, tagging, and sharing
+/spectra-discovery Photo albums with upload, tagging, and sharing
 # discovery writes brief.md (and roadmap.md when multi-spec) and suggests the next command
-/spec-init photo-albums
-/spec-requirements photo-albums
-/spec-design photo-albums
-/spec-tasks photo-albums
-/spec-impl photo-albums
+/spectra-init photo-albums
+/spectra-requirements photo-albums
+/spectra-design photo-albums
+/spectra-tasks photo-albums
+/spectra-impl photo-albums
 # autonomous: fresh implementer, independent reviewer, and auto-debug per task
 ```
 
@@ -111,7 +111,7 @@ Typical spec outputs (under 10 minutes):
 - `design.md`: architecture with Mermaid diagrams and a File Structure Plan.
 - `tasks.md`: implementation tasks with boundaries and dependency annotations.
 
-Then `/spec-impl` runs the tasks autonomously with TDD (RED → GREEN) behind feature flags, an independent reviewer pass, and auto-debug on failure.
+Then `/spectra-impl` runs the tasks autonomously with TDD (RED → GREEN) behind feature flags, an independent reviewer pass, and auto-debug on failure.
 
 ## Supported Agents
 
@@ -162,12 +162,12 @@ npx github:nekolife1984/spectra --qwen          # Qwen Code
 npx github:nekolife1984/spectra --dry-run --backup
 
 # Custom specs directory
-npx github:nekolife1984/spectra --spec-dir docs
+npx github:nekolife1984/spectra --spectra-dir docs
 ```
 
 ## Customization
 
-Edit templates and rules in `{{SPEC_DIR}}/settings/` to match your team's workflow.
+Edit templates and rules in `{{SPECTRA_DIR}}/settings/` to match your team's workflow.
 
 - `templates/`: document structure for requirements, design, tasks.
 - `rules/`: AI generation principles and judgment criteria.
@@ -196,10 +196,10 @@ project/
 ├── .github/prompts/          # 11 prompt commands (--copilot)
 ├── .windsurf/workflows/      # 11 workflow files (--windsurf)
 # Shared project memory and spec state
-├── .spec/settings/templates/ # Shared templates (variables resolved with {{SPEC_DIR}})
-├── .spec/settings/rules/     # Shared rules (used by non-skills agents)
-├── .spec/specs/              # Feature specifications
-├── .spec/steering/           # AI guidance documents
+├── .spectra/settings/templates/ # Shared templates (variables resolved with {{SPECTRA_DIR}})
+├── .spectra/settings/rules/     # Shared rules (used by non-skills agents)
+├── .spectra/specs/              # Feature specifications
+├── .spectra/steering/           # AI guidance documents
 └── CLAUDE.md / AGENTS.md     # Project configuration (per agent)
 ```
 

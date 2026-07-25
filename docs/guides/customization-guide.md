@@ -11,7 +11,7 @@ cc-sdd provides two customization points:
 - **templates/** - Define the **structure and format** of AI-generated documents
 - **rules/** - Define the **judgment criteria and generation principles** for AI
 
-Both are located under `{{SPEC_DIR}}/settings/` and are shared across the entire project.
+Both are located under `{{SPECTRA_DIR}}/settings/` and are shared across the entire project.
 
 ---
 
@@ -19,7 +19,7 @@ Both are located under `{{SPEC_DIR}}/settings/` and are shared across the entire
 
 ### 📄 templates/ - Customize Output Format
 
-**Location**: `{{SPEC_DIR}}/settings/templates/specs/`
+**Location**: `{{SPECTRA_DIR}}/settings/templates/specs/`
 
 **Role**: Defines the **document structure** that AI generates. Sections and fields added to templates will be automatically filled in by the AI.
 
@@ -37,7 +37,7 @@ Both are located under `{{SPEC_DIR}}/settings/` and are shared across the entire
 
 ### 📋 rules/ - Customize AI Judgment Criteria
 
-**Location**: `{{SPEC_DIR}}/settings/rules/`
+**Location**: `{{SPECTRA_DIR}}/settings/rules/`
 
 **Role**: Defines AI's **generation rules and principles**. Editing rules changes AI's judgment criteria and generation style.
 
@@ -179,7 +179,7 @@ requirements.md is very flexible for customization:
 - ✅ **Add/remove sections**: Add team-specific review items, remove unnecessary sections
 - ✅ **Format changes**: Tables, bullet points, diagrams, etc. can be freely chosen
 
-**About Mermaid diagrams**: Basic syntax rules are defined in `{{SPEC_DIR}}/settings/rules/design-principles.md`, not in template constraints. You can change diagram requirements by editing the rules file.
+**About Mermaid diagrams**: Basic syntax rules are defined in `{{SPECTRA_DIR}}/settings/rules/design-principles.md`, not in template constraints. You can change diagram requirements by editing the rules file.
 
 **File Structure Plan (3.0)**: In skills mode, `design.md` includes a **File Structure Plan** section that maps directory structure and file responsibilities. This section is recommended but not mandatory -- commands-based workflows can also benefit from adding it manually to their design template.
 
@@ -234,8 +234,8 @@ requirements.md is very flexible for customization:
 
 ```bash
 # Check template location
-ls -la {{SPEC_DIR}}/settings/templates/specs/
-ls -la {{SPEC_DIR}}/settings/rules/
+ls -la {{SPECTRA_DIR}}/settings/templates/specs/
+ls -la {{SPECTRA_DIR}}/settings/rules/
 ```
 
 ### Step 2: Add/Edit While Maintaining Structure
@@ -247,15 +247,15 @@ ls -la {{SPEC_DIR}}/settings/rules/
 
 ```bash
 # Test with new spec
-/spec:spec-init Test customization feature
-/spec:spec-requirements test-customization
-/spec:spec-design test-customization
-/spec:spec-tasks test-customization
+/spec:spectra-init Test customization feature
+/spec:spectra-requirements test-customization
+/spec:spectra-design test-customization
+/spec:spectra-tasks test-customization
 
 # Check generated files
-cat {{SPEC_DIR}}/specs/test-customization/requirements.md
-cat {{SPEC_DIR}}/specs/test-customization/design.md
-cat {{SPEC_DIR}}/specs/test-customization/tasks.md
+cat {{SPECTRA_DIR}}/specs/test-customization/requirements.md
+cat {{SPECTRA_DIR}}/specs/test-customization/design.md
+cat {{SPECTRA_DIR}}/specs/test-customization/tasks.md
 ```
 
 ---
@@ -270,8 +270,8 @@ We present 3 representative customization scenarios tailored to team-specific ne
 
 ### 📋 Customization Target
 
-- **templates**: `{{SPEC_DIR}}/settings/templates/specs/requirements.md`
-- **rules**: `{{SPEC_DIR}}/settings/rules/ears-format.md` (Optional)
+- **templates**: `{{SPECTRA_DIR}}/settings/templates/specs/requirements.md`
+- **rules**: `{{SPECTRA_DIR}}/settings/rules/ears-format.md` (Optional)
 
 ### 🎯 Use Cases
 
@@ -283,7 +283,7 @@ We present 3 representative customization scenarios tailored to team-specific ne
 
 #### Step 1: Template Editing (Required)
 
-**File to Edit**: `{{SPEC_DIR}}/settings/templates/specs/requirements.md`
+**File to Edit**: `{{SPECTRA_DIR}}/settings/templates/specs/requirements.md`
 
 **🔒 Structure to Maintain**:
 - Numbered heading pattern (e.g., `### Requirement N:`, `### REQ-N:`, or localized equivalents)
@@ -415,7 +415,7 @@ We present 3 representative customization scenarios tailored to team-specific ne
 
 #### Step 2: Rules Adjustment (Optional - for stricter control)
 
-**File to Edit**: `{{SPEC_DIR}}/settings/rules/ears-format.md`
+**File to Edit**: `{{SPECTRA_DIR}}/settings/rules/ears-format.md`
 
 **Content to Add**:
 
@@ -470,35 +470,35 @@ Always include NFR sections for:
 
 ### ✅ Behavior After Completion
 
-When you run `/spec:spec-requirements my-feature`:
+When you run `/spec:spectra-requirements my-feature`:
 
 1. **Product Context** section is automatically generated
 2. Each requirement includes **Business Priority**, **Dependencies**, **Risk Level**
 3. **Verification Method** and **Success Threshold** are added to each requirement
 4. **Non-Functional Requirements** section is automatically generated
 5. **Compliance & Approvals** checklist is added
-6. Requirement numbering and acceptance criteria structure are maintained (compatible with `/spec:spec-impl` and its skills mode equivalent `/spec-impl`)
+6. Requirement numbering and acceptance criteria structure are maintained (compatible with `/spec:spectra-impl` and its skills mode equivalent `/spectra-impl`)
 
 ### 🧪 Testing Method
 
 ```bash
 # 1. Edit template
-vim {{SPEC_DIR}}/settings/templates/specs/requirements.md
+vim {{SPECTRA_DIR}}/settings/templates/specs/requirements.md
 
 # 2. (Optional) Edit rules
-vim {{SPEC_DIR}}/settings/rules/ears-format.md
+vim {{SPECTRA_DIR}}/settings/rules/ears-format.md
 
 # 3. Check with new spec
-/spec:spec-init Test PRD-style requirements with business context
-/spec:spec-requirements test-prd-feature
+/spec:spectra-init Test PRD-style requirements with business context
+/spec:spectra-requirements test-prd-feature
 
 # 4. Check generated requirements.md
-cat {{SPEC_DIR}}/specs/test-prd-feature/requirements.md
+cat {{SPECTRA_DIR}}/specs/test-prd-feature/requirements.md
 
 # 5. Verify Product Context, Priority, NFR sections are included
-grep -A 5 "## Product Context" {{SPEC_DIR}}/specs/test-prd-feature/requirements.md
-grep "Business Priority" {{SPEC_DIR}}/specs/test-prd-feature/requirements.md
-grep -A 3 "## Non-Functional Requirements" {{SPEC_DIR}}/specs/test-prd-feature/requirements.md
+grep -A 5 "## Product Context" {{SPECTRA_DIR}}/specs/test-prd-feature/requirements.md
+grep "Business Priority" {{SPECTRA_DIR}}/specs/test-prd-feature/requirements.md
+grep -A 3 "## Non-Functional Requirements" {{SPECTRA_DIR}}/specs/test-prd-feature/requirements.md
 ```
 
 ---
@@ -507,8 +507,8 @@ grep -A 3 "## Non-Functional Requirements" {{SPEC_DIR}}/specs/test-prd-feature/r
 
 ### 📋 Customization Target
 
-- **templates**: `{{SPEC_DIR}}/settings/templates/specs/design.md`
-- **rules**: `{{SPEC_DIR}}/settings/rules/design-principles.md` (Optional)
+- **templates**: `{{SPECTRA_DIR}}/settings/templates/specs/design.md`
+- **rules**: `{{SPECTRA_DIR}}/settings/rules/design-principles.md` (Optional)
 
 ### 🎯 Use Cases
 
@@ -520,7 +520,7 @@ grep -A 3 "## Non-Functional Requirements" {{SPEC_DIR}}/specs/test-prd-feature/r
 
 #### Step 1: Template Editing (Required)
 
-**File to Edit**: `{{SPEC_DIR}}/settings/templates/specs/design.md`
+**File to Edit**: `{{SPECTRA_DIR}}/settings/templates/specs/design.md`
 
 **🔒 Structure to Maintain**:
 - **File existence only** - Heading names, order, and formats are all free
@@ -930,7 +930,7 @@ graph TB
 
 #### Step 2: Rules Adjustment (Optional)
 
-**File to Edit**: `{{SPEC_DIR}}/settings/rules/design-principles.md`
+**File to Edit**: `{{SPECTRA_DIR}}/settings/rules/design-principles.md`
 
 **Content to Add**:
 
@@ -1024,7 +1024,7 @@ graph TB
 
 ### ✅ Behavior After Completion
 
-When you run `/spec:spec-design my-backend-feature`:
+When you run `/spec:spectra-design my-backend-feature`:
 
 1. **API Specification** generates detailed specs for all endpoints
 2. **Database Schema** explicitly defines tables, indexes, and constraints
@@ -1037,20 +1037,20 @@ When you run `/spec:spec-design my-backend-feature`:
 
 ```bash
 # 1. Edit template
-vim {{SPEC_DIR}}/settings/templates/specs/design.md
+vim {{SPECTRA_DIR}}/settings/templates/specs/design.md
 
 # 2. Check with new spec
-/spec:spec-init Build RESTful API for user management
-/spec:spec-requirements user-api
-/spec:spec-design user-api
+/spec:spectra-init Build RESTful API for user management
+/spec:spectra-requirements user-api
+/spec:spectra-design user-api
 
 # 3. Check generated design.md
-cat {{SPEC_DIR}}/specs/user-api/design.md
+cat {{SPECTRA_DIR}}/specs/user-api/design.md
 
 # 4. Verify backend-focused sections are included
-grep -A 20 "## API Specification" {{SPEC_DIR}}/specs/user-api/design.md
-grep -A 15 "## Database Schema" {{SPEC_DIR}}/specs/user-api/design.md
-grep -A 10 "## Security" {{SPEC_DIR}}/specs/user-api/design.md
+grep -A 20 "## API Specification" {{SPECTRA_DIR}}/specs/user-api/design.md
+grep -A 15 "## Database Schema" {{SPECTRA_DIR}}/specs/user-api/design.md
+grep -A 10 "## Security" {{SPECTRA_DIR}}/specs/user-api/design.md
 ```
 
 ---
@@ -1060,8 +1060,8 @@ grep -A 10 "## Security" {{SPEC_DIR}}/specs/user-api/design.md
 ### 📋 Customization Target
 
 - **Create**: Create new with `/spec:steering-custom` command
-- **Save to**: `{{SPEC_DIR}}/steering/{{domain-name}}.md`
-- **Rules adjustment**: `{{SPEC_DIR}}/settings/rules/steering-principles.md` (Optional)
+- **Save to**: `{{SPECTRA_DIR}}/steering/{{domain-name}}.md`
+- **Rules adjustment**: `{{SPECTRA_DIR}}/settings/rules/steering-principles.md` (Optional)
 
 ### 🎯 Use Cases
 
@@ -1085,7 +1085,7 @@ Create domain-specific steering for REST API standards:
 - Pagination
 ```
 
-**Generated File**: `{{SPEC_DIR}}/steering/api-standards.md`
+**Generated File**: `{{SPECTRA_DIR}}/steering/api-standards.md`
 
 **Complete Template Example**:
 
@@ -1676,7 +1676,7 @@ X-API-Replacement: /api/v2/users
 <details>
 <summary><strong>Authentication Standards</strong></summary>
 
-`{{SPEC_DIR}}/steering/authentication.md`
+`{{SPECTRA_DIR}}/steering/authentication.md`
 
 ```markdown
 # Authentication Standards
@@ -1767,7 +1767,7 @@ X-API-Replacement: /api/v2/users
 <details>
 <summary><strong>Testing Standards</strong></summary>
 
-`{{SPEC_DIR}}/steering/testing.md`
+`{{SPECTRA_DIR}}/steering/testing.md`
 
 ```markdown
 # Testing Standards
@@ -1857,7 +1857,7 @@ describe('ComponentName', () => {
 <details>
 <summary><strong>Error Handling Standards</strong></summary>
 
-`{{SPEC_DIR}}/steering/error-handling.md`
+`{{SPECTRA_DIR}}/steering/error-handling.md`
 
 ```markdown
 # Error Handling Standards
@@ -1989,9 +1989,9 @@ class ErrorBoundary extends React.Component {
 When you create a steering document:
 
 1. **All spec generation commands** automatically reference the rules
-2. `/spec:spec-design` automatically applies standard format during API design
-3. `/spec:spec-requirements` automatically includes error handling requirements
-4. `/spec:spec-tasks` generates authentication and testing-related tasks according to standards
+2. `/spec:spectra-design` automatically applies standard format during API design
+3. `/spec:spectra-requirements` automatically includes error handling requirements
+4. `/spec:spectra-tasks` generates authentication and testing-related tasks according to standards
 
 ### 🧪 Testing Method
 
@@ -2001,22 +2001,22 @@ When you create a steering document:
 # Prompt: Create API standards steering document for REST conventions
 
 # 2. Check generated file
-cat {{SPEC_DIR}}/steering/api-standards.md
+cat {{SPECTRA_DIR}}/steering/api-standards.md
 
 # 3. Check steering application with new spec
-/spec:spec-init Build user management API
-/spec:spec-design user-management-api
+/spec:spectra-init Build user management API
+/spec:spectra-design user-management-api
 
 # 4. Check if API standards are reflected in generated design.md
-grep -A 10 "## API Specification" {{SPEC_DIR}}/specs/user-management-api/design.md
+grep -A 10 "## API Specification" {{SPECTRA_DIR}}/specs/user-management-api/design.md
 # Verify endpoint structure and error response format match steering
 
 # 5. Verify same standards are applied to other features
-/spec:spec-init Build order processing API
-/spec:spec-design order-processing-api
+/spec:spectra-init Build order processing API
+/spec:spectra-design order-processing-api
 diff \
-  <(grep "Error Response" {{SPEC_DIR}}/specs/user-management-api/design.md) \
-  <(grep "Error Response" {{SPEC_DIR}}/specs/order-processing-api/design.md)
+  <(grep "Error Response" {{SPECTRA_DIR}}/specs/user-management-api/design.md) \
+  <(grep "Error Response" {{SPECTRA_DIR}}/specs/order-processing-api/design.md)
 # Verify both specs use the same error format
 ```
 
@@ -2027,7 +2027,7 @@ diff \
 ### Custom Templates Not Reflected
 
 **Check Items**:
-- File path: Is it placed in `{{SPEC_DIR}}/settings/templates/specs/`?
+- File path: Is it placed in `{{SPECTRA_DIR}}/settings/templates/specs/`?
 - Required structure: Are numbering patterns maintained (`### ... N:`, `1.`, `- [ ] N.`)?
 - Markdown syntax: Are heading levels and code blocks correct?
 
@@ -2052,9 +2052,9 @@ npx cc-sdd@latest --overwrite=force
 
 ### Different Templates Across Teams
 
-**Solution**: Manage `{{SPEC_DIR}}/settings/` with git
+**Solution**: Manage `{{SPECTRA_DIR}}/settings/` with git
 ```bash
-git add {{SPEC_DIR}}/settings/
+git add {{SPECTRA_DIR}}/settings/
 git commit -m "Add team-wide templates"
 ```
 
@@ -2066,7 +2066,7 @@ git commit -m "Add team-wide templates"
 
 - **Gradual customization**: Change and test one file at a time
 - **Maintain required structure**: Keep numbering patterns and hierarchical structure
-- **Version control**: Manage `{{SPEC_DIR}}/settings/` with git
+- **Version control**: Manage `{{SPECTRA_DIR}}/settings/` with git
 - **Strong rules**: "MUST" + 3+ specific examples
 
 ### ❌ Not Recommended
@@ -2092,10 +2092,10 @@ git commit -m "Add team-wide templates"
 
 ```bash
 # 1. Try with a small feature
-/spec:spec-init Small feature for testing custom templates
-/spec:spec-requirements test-feature
-/spec:spec-design test-feature
-/spec:spec-tasks test-feature
+/spec:spectra-init Small feature for testing custom templates
+/spec:spectra-requirements test-feature
+/spec:spectra-design test-feature
+/spec:spectra-tasks test-feature
 
 # 2. Team review
 # - Check output quality

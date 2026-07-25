@@ -23,8 +23,8 @@ ok()    { echo -e "${GREEN}✅ $1${NC}"; }
 warn()  { echo -e "${YELLOW}⚠️  $1${NC}"; }
 err()   { echo -e "${RED}❌ $1${NC}"; }
 
-MATRIX_FILE=".spec/quality/false_green_matrix.md"
-RESULTS_FILE=".spec/quality/.gate-results.json"
+MATRIX_FILE=".spectra/quality/false_green_matrix.md"
+RESULTS_FILE=".spectra/quality/.gate-results.json"
 
 mkdir -p "$(dirname "$MATRIX_FILE")" "$(dirname "$RESULTS_FILE")"
 
@@ -75,7 +75,7 @@ echo ""
 # ── Matrix 更新 ──
 if [ ! -f "$MATRIX_FILE" ]; then
     warn "Matrix file not found at $MATRIX_FILE"
-    info "Run: cp tools/cc-sdd/templates/shared/quality/false_green_matrix.md .spec/quality/"
+    info "Run: cp tools/cc-sdd/templates/shared/quality/false_green_matrix.md .spectra/quality/"
     exit 1
 fi
 

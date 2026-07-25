@@ -16,13 +16,13 @@
 
 cc-sdd v3.0 是圍繞 Agent Skills 與長時間自律實作的重寫。
 
-- **`/spec-discovery` 作為新入口。** discovery 把新需求路由到「擴充既有 spec / 直接實作 / 建立一個新 spec / 拆成多個 spec / mixed decomposition」其中之一。它會寫入 `brief.md` 以及必要時的 `roadmap.md`，讓你可以在不重新說明 scope 的情況下恢復工作。
-- **`/spec-impl` 執行長時間自律實作。** 每個任務由 fresh implementer 在 feature flag 後執行 TDD (RED → GREEN)，獨立的 reviewer 做機械驗證，失敗時由 auto-debug pass 在乾淨 context 中調查根本原因。任務間的知見透過 `tasks.md` 的 `## Implementation Notes` 傳給下一個 implementer。每次迭代處理 1 個任務，中斷後再執行也安全。
+- **`/spectra-discovery` 作為新入口。** discovery 把新需求路由到「擴充既有 spec / 直接實作 / 建立一個新 spec / 拆成多個 spec / mixed decomposition」其中之一。它會寫入 `brief.md` 以及必要時的 `roadmap.md`，讓你可以在不重新說明 scope 的情況下恢復工作。
+- **`/spectra-impl` 執行長時間自律實作。** 每個任務由 fresh implementer 在 feature flag 後執行 TDD (RED → GREEN)，獨立的 reviewer 做機械驗證，失敗時由 auto-debug pass 在乾淨 context 中調查根本原因。任務間的知見透過 `tasks.md` 的 `## Implementation Notes` 傳給下一個 implementer。每次迭代處理 1 個任務，中斷後再執行也安全。
 - **邊界優先的 spec discipline。** `design.md` 新增 File Structure Plan，成為任務邊界的依據。任務帶有 `_Boundary:_` / `_Depends:_` 標註。review 與 validation 尋找邊界違規而非僅看風格。
-- **`/spec-batch` 支援多 spec initiative。** 從 roadmap 並行產生多個 spec，並執行 cross-spec review 以捕捉 spec 間矛盾、責務重複與介面不一致。
+- **`/spectra-batch` 支援多 spec initiative。** 從 roadmap 並行產生多個 spec，並執行 cross-spec review 以捕捉 spec 間矛盾、責務重複與介面不一致。
 - **Agent Skills 橫跨 8 個 AI coding agent。** 每次安裝 17 個 skills、按需載入（progressive disclosure）。Claude Code 與 Codex 為 stable；Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, Antigravity 為 beta。零外部依賴，subagent 透過各平台原生 spawn 啟動。
 
-Skills 模式完整工作流與 `/spec-impl` 內部細節請參考 [Skill Reference](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/skill-reference.md)。
+Skills 模式完整工作流與 `/spectra-impl` 內部細節請參考 [Skill Reference](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/skill-reference.md)。
 
 從 v1.x 或 v2.x 升級？請參考 [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md#5-v2x-to-v30)。
 
@@ -55,36 +55,36 @@ npx github:nekolife1984/spectra --cursor-skills --lang zh-TW  # Cursor IDE, 繁�
 然後在你的代理裡執行:
 
 ```bash
-/spec-discovery <想做的事情>
+/spectra-discovery <想做的事情>
 ```
 
-不確定從哪裡開始？先執行 `spec-discovery`。它會幫你整理需求並告訴你下一步該用什麼指令。
+不確定從哪裡開始？先執行 `spectra-discovery`。它會幫你整理需求並告訴你下一步該用什麼指令。
 
 ### 常見工作流
 
 | 你想做的事 | Skills 模式 |
 |---|---|
-| 開始新功能或產品規模的構想 | `spec-discovery` → `spec-init` → `spec-requirements` → `spec-design` → `spec-tasks` → `spec-impl` |
-| 擴充既有系統 | `spec-steering` → `spec-discovery` 或 `spec-init` → 可選 `spec-validate-gap` → `spec-design` → `spec-tasks` → `spec-impl` |
-| 分解大型 initiative | `spec-discovery` → `spec-batch` |
-| 不需要 spec 的小改動 | `spec-discovery` → 直接實作 |
+| 開始新功能或產品規模的構想 | `spectra-discovery` → `spectra-init` → `spectra-requirements` → `spectra-design` → `spectra-tasks` → `spectra-impl` |
+| 擴充既有系統 | `spectra-steering` → `spectra-discovery` 或 `spectra-init` → 可選 `spectra-validate-gap` → `spectra-design` → `spectra-tasks` → `spectra-impl` |
+| 分解大型 initiative | `spectra-discovery` → `spectra-batch` |
+| 不需要 spec 的小改動 | `spectra-discovery` → 直接實作 |
 
 舊版 `/spec:*` 指令模式（`--claude`, `--cursor` 等）仍然可用但已棄用。升級方式請參考 [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md)。
 
-對較大規模的已核准任務集合，執行 `spec-impl` 會以任務級別的 subagent spawn、independent review、失敗時 auto-debug 開始自律實作。
+對較大規模的已核准任務集合，執行 `spectra-impl` 會以任務級別的 subagent spawn、independent review、失敗時 auto-debug 開始自律實作。
 
 ## 實際操作
 
 範例: 建立一個新的 Photo Albums 功能。
 
 ```bash
-/spec-discovery Photo albums with upload, tagging, and sharing
+/spectra-discovery Photo albums with upload, tagging, and sharing
 # discovery 會寫入 brief.md（多 spec 時還會寫 roadmap.md）並提示下一個指令
-/spec-init photo-albums
-/spec-requirements photo-albums
-/spec-design photo-albums
-/spec-tasks photo-albums
-/spec-impl photo-albums
+/spectra-init photo-albums
+/spectra-requirements photo-albums
+/spectra-design photo-albums
+/spectra-tasks photo-albums
+/spectra-impl photo-albums
 # 自律執行: 每個任務使用 fresh implementer, independent reviewer, auto-debug
 ```
 
@@ -94,7 +94,7 @@ spec 階段的典型產出（10 分鐘以內）:
 - `design.md`: 附有 Mermaid 圖與 File Structure Plan 的架構文件。
 - `tasks.md`: 帶有邊界與相依性標註的實作任務。
 
-接著 `/spec-impl` 會以 feature flag 後的 TDD (RED → GREEN)、獨立的 reviewer pass 以及失敗時的 auto-debug 自律執行任務。
+接著 `/spectra-impl` 會以 feature flag 後的 TDD (RED → GREEN)、獨立的 reviewer pass 以及失敗時的 auto-debug 自律執行任務。
 
 ## 支援的代理
 
@@ -145,12 +145,12 @@ npx github:nekolife1984/spectra --qwen          # Qwen Code
 npx github:nekolife1984/spectra --dry-run --backup
 
 # 自訂 specs 目錄
-npx github:nekolife1984/spectra --spec-dir docs
+npx github:nekolife1984/spectra --spectra-dir docs
 ```
 
 ## 自訂
 
-編輯 `{{SPEC_DIR}}/settings/` 下的模板與規則以符合團隊工作流。
+編輯 `{{SPECTRA_DIR}}/settings/` 下的模板與規則以符合團隊工作流。
 
 - `templates/`: requirements, design, tasks 的文件結構。
 - `rules/`: AI 生成原則與判斷基準。
@@ -179,10 +179,10 @@ project/
 ├── .github/prompts/          # 11 提示指令（--copilot）
 ├── .windsurf/workflows/      # 11 工作流程檔案（--windsurf）
 # 共用的專案記憶與 spec 狀態
-├── .spec/settings/templates/ # 共用模板（以 {{SPEC_DIR}} 展開）
-├── .spec/settings/rules/     # 共用規則（非 skills 代理使用）
-├── .spec/specs/              # 功能規格文件
-├── .spec/steering/           # AI 指導文件
+├── .spectra/settings/templates/ # 共用模板（以 {{SPECTRA_DIR}} 展開）
+├── .spectra/settings/rules/     # 共用規則（非 skills 代理使用）
+├── .spectra/specs/              # 功能規格文件
+├── .spectra/steering/           # AI 指導文件
 └── CLAUDE.md / AGENTS.md     # 專案設定（依代理而異）
 ```
 

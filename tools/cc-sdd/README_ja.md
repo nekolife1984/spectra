@@ -16,13 +16,13 @@
 
 cc-sdd v3.0 は Agent Skills と長時間自律実装を軸にした再構築である。
 
-- **`/spec-discovery` が新しいエントリポイント。** discovery が新規依頼を「既存 spec を拡張 / spec 不要で直接実装 / 1 つの新規 spec / 複数 spec に分解 / mixed decomposition」に振り分ける。`brief.md` と必要に応じて `roadmap.md` を書き出すので、セッションを再開しても scope を説明し直さずに続けられる。
-- **`/spec-impl` による長時間自律実装。** 各タスクに対し fresh implementer が feature flag 越しに TDD (RED → GREEN) で実装、独立した reviewer が機械的検証、失敗時は auto-debug pass が新しいコンテキストで根本原因を調査する。タスク間の知見は `tasks.md` の `## Implementation Notes` で次の implementer に引き継がれる。1 iteration = 1 task、中断後の再実行も安全。
+- **`/spectra-discovery` が新しいエントリポイント。** discovery が新規依頼を「既存 spec を拡張 / spec 不要で直接実装 / 1 つの新規 spec / 複数 spec に分解 / mixed decomposition」に振り分ける。`brief.md` と必要に応じて `roadmap.md` を書き出すので、セッションを再開しても scope を説明し直さずに続けられる。
+- **`/spectra-impl` による長時間自律実装。** 各タスクに対し fresh implementer が feature flag 越しに TDD (RED → GREEN) で実装、独立した reviewer が機械的検証、失敗時は auto-debug pass が新しいコンテキストで根本原因を調査する。タスク間の知見は `tasks.md` の `## Implementation Notes` で次の implementer に引き継がれる。1 iteration = 1 task、中断後の再実行も安全。
 - **境界中心の spec discipline。** `design.md` に File Structure Plan が入り、タスク境界の根拠になる。タスクには `_Boundary:_` / `_Depends:_` アノテーションが付く。review と validation はスタイルではなく境界違反を見る。
-- **`/spec-batch` で複数 spec の並列作成。** roadmap から複数 spec を並列生成し、cross-spec review で矛盾・責務重複・インターフェースミスマッチを検出する。
+- **`/spectra-batch` で複数 spec の並列作成。** roadmap から複数 spec を並列生成し、cross-spec review で矛盾・責務重複・インターフェースミスマッチを検出する。
 - **8 つの AI coding agent で Agent Skills を展開。** 17 skills × 8 プラットフォーム、on-demand ロード (progressive disclosure)。Claude Code と Codex は stable、Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, Antigravity は beta。外部依存なし、subagent は各プラットフォーム標準の spawn で立ち上がる。
 
-Skills モードのワークフローと `/spec-impl` 内部の詳細は [スキルリファレンス](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/skill-reference.md) を参照。
+Skills モードのワークフローと `/spectra-impl` 内部の詳細は [スキルリファレンス](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/skill-reference.md) を参照。
 
 v1.x / v2.x からの移行は [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md#5-v2x--v30) を参照。
 
@@ -61,9 +61,9 @@ bash .agents/scripts/setup-crg.sh
 ```
 
 これにより以下が有効になります:
-- `/spec-trace <spec-id>` — 仕様変更がコードに与える影響をトレース
-- `/spec-impact <file>` — コード変更が仕様に与える影響をトレース
-- `/spec-validate-boundary` — `_Boundary:_` とコードグラフを機械検証
+- `/spectra-trace <spec-id>` — 仕様変更がコードに与える影響をトレース
+- `/spectra-impact <file>` — コード変更が仕様に与える影響をトレース
+- `/spectra-validate-boundary` — `_Boundary:_` とコードグラフを機械検証
 - CRG 強化された設計レビュー、ギャップ分析、完了検証など（全15スキル）
 - pre-commit hook によるコミット時の自動スナップショット更新
 
@@ -72,36 +72,36 @@ bash .agents/scripts/setup-crg.sh
 その後、エージェント上で:
 
 ```bash
-/spec-discovery <やりたいこと>
+/spectra-discovery <やりたいこと>
 ```
 
-どこから始めれば良いか分からない場合は、まず `spec-discovery` を実行する。依頼を整理して、次に叩くコマンドを教えてくれる。
+どこから始めれば良いか分からない場合は、まず `spectra-discovery` を実行する。依頼を整理して、次に叩くコマンドを教えてくれる。
 
 ### よくあるワークフロー
 
 | やりたいこと | Skills モード |
 |---|---|
-| 新しい機能やプロダクトサイズの構想を始める | `spec-discovery` → `spec-init` → `spec-requirements` → `spec-design` → `spec-tasks` → `spec-impl` |
-| 既存のシステムを拡張する | `spec-steering` → `spec-discovery` または `spec-init` → 任意で `spec-validate-gap` → `spec-design` → `spec-tasks` → `spec-impl` |
-| 大きい initiative を分解する | `spec-discovery` → `spec-batch` |
-| spec 不要の小変更を入れる | `spec-discovery` → 直接実装 |
+| 新しい機能やプロダクトサイズの構想を始める | `spectra-discovery` → `spectra-init` → `spectra-requirements` → `spectra-design` → `spectra-tasks` → `spectra-impl` |
+| 既存のシステムを拡張する | `spectra-steering` → `spectra-discovery` または `spectra-init` → 任意で `spectra-validate-gap` → `spectra-design` → `spectra-tasks` → `spectra-impl` |
+| 大きい initiative を分解する | `spectra-discovery` → `spectra-batch` |
+| spec 不要の小変更を入れる | `spectra-discovery` → 直接実装 |
 
 レガシーの `/spec:*` コマンドモード (`--claude`, `--cursor` など) も引き続き利用可能だが、非推奨である。アップグレード手順は [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md) を参照。
 
-規模の大きい承認済み task set に対しては、`spec-impl` を走らせるとタスクごとの subagent spawn、independent review、失敗時の auto-debug 付きで自律実装が始まる。
+規模の大きい承認済み task set に対しては、`spectra-impl` を走らせるとタスクごとの subagent spawn、independent review、失敗時の auto-debug 付きで自律実装が始まる。
 
 ## 実際の動き
 
 例: 新規の Photo Albums 機能を作る。
 
 ```bash
-/spec-discovery Photo albums with upload, tagging, and sharing
+/spectra-discovery Photo albums with upload, tagging, and sharing
 # discovery が brief.md（マルチスペックなら roadmap.md も）を書いて、次のコマンドを提案する
-/spec-init photo-albums
-/spec-requirements photo-albums
-/spec-design photo-albums
-/spec-tasks photo-albums
-/spec-impl photo-albums
+/spectra-init photo-albums
+/spectra-requirements photo-albums
+/spectra-design photo-albums
+/spectra-tasks photo-albums
+/spectra-impl photo-albums
 # 自律実行: タスクごとに fresh implementer, independent reviewer, auto-debug
 ```
 
@@ -111,7 +111,7 @@ spec フェーズの典型的な出力（10 分以内）:
 - `design.md`: Mermaid 図と File Structure Plan 付きアーキテクチャ。
 - `tasks.md`: 境界と依存関係のアノテーション付き実装タスク。
 
-その後 `/spec-impl` が feature flag 越しの TDD (RED → GREEN), 独立した reviewer pass, 失敗時の auto-debug と共にタスクを自律実行する。
+その後 `/spectra-impl` が feature flag 越しの TDD (RED → GREEN), 独立した reviewer pass, 失敗時の auto-debug と共にタスクを自律実行する。
 
 ## 対応エージェント
 
@@ -162,12 +162,12 @@ npx github:nekolife1984/spectra --qwen          # Qwen Code
 npx github:nekolife1984/spectra --dry-run --backup
 
 # カスタム specs ディレクトリ
-npx github:nekolife1984/spectra --spec-dir docs
+npx github:nekolife1984/spectra --spectra-dir docs
 ```
 
 ## カスタマイズ
 
-`{{SPEC_DIR}}/settings/` 以下のテンプレートとルールを編集して、チームのワークフローに合わせる。
+`{{SPECTRA_DIR}}/settings/` 以下のテンプレートとルールを編集して、チームのワークフローに合わせる。
 
 - `templates/`: requirements, design, tasks のドキュメント構造。
 - `rules/`: AI の生成原則と判断基準。
@@ -196,10 +196,10 @@ project/
 ├── .github/prompts/          # 11 プロンプトコマンド（--copilot）
 ├── .windsurf/workflows/      # 11 ワークフローファイル（--windsurf）
 # プロジェクトメモリと spec 状態（共通）
-├── .spec/settings/templates/ # 共通テンプレート（{{SPEC_DIR}} を展開）
-├── .spec/settings/rules/     # 共通ルール（非 skills エージェントが使用）
-├── .spec/specs/              # 機能仕様書
-├── .spec/steering/           # AI 指導ドキュメント
+├── .spectra/settings/templates/ # 共通テンプレート（{{SPECTRA_DIR}} を展開）
+├── .spectra/settings/rules/     # 共通ルール（非 skills エージェントが使用）
+├── .spectra/specs/              # 機能仕様書
+├── .spectra/steering/           # AI 指導ドキュメント
 └── CLAUDE.md / AGENTS.md     # プロジェクト設定（エージェントごと）
 ```
 

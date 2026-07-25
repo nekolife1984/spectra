@@ -112,7 +112,7 @@ ln -sf ../../.agents/scripts/ci-check.sh .git/hooks/pre-push
 hermes cron create \
   --schedule "0 6 * * *" \
   --prompt "$(cat cron-prompt.md)" \
-  --skills "spec-traceability" \
+  --skills "spectra-traceability" \
   --name "traceability-daily-check"
 ```
 
@@ -234,7 +234,7 @@ CRG(code-review-graph)がなくても、`build-dag.py` で作成した軽量impo
 # DAGを構築（全ソースファイルのimport関係をスキャン）
 python3 .agents/scripts/build-dag.py
 
-# → .spec/graph/dag.json が生成される
+# → .spectra/graph/dag.json が生成される
 # → 対応言語: Python, TS/JS, Go, Rust, Ruby, Java, Kotlin, Swift,
 #                C, C++, C#, Cヘッダ（17言語）
 ```
@@ -271,7 +271,7 @@ python3 .agents/scripts/impact.py --quick --spec-id 1.1 --dag
 
 ```bash
 # プロジェクトにコピーして使う
-cp -r tools/cc-sdd/templates/shared/quality/ .spec/quality/
+cp -r tools/cc-sdd/templates/shared/quality/ .spectra/quality/
 ```
 
 | ファイル | 内容 |
@@ -340,7 +340,7 @@ action: create
 schedule: 0 6 * * *
 name: daily-ci-bypass-check
 prompt: .agents/scripts/check-ci-bypass.py --verbose を実行し、結果を報告してください
-skills: [spec-traceability, ci-gate-monitor]
+skills: [spectra-traceability, ci-gate-monitor]
 ```
 
 ## よくある使い方

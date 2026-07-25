@@ -30,7 +30,7 @@ spec は開発を遅くする、というのが一般的な前提である。cc-
 
 ### monolith ではなく right-sized spec
 
-spec は数時間から数日で出荷できる単位に収まるべきである。1 spec に収まらない規模の仕事は `/spec-discovery` が分解し、`/spec-batch` が複数 spec を並列生成する。一つの巨大計画にコミットするのではなく、一つ出して、学んで、次に進む、を繰り返す。
+spec は数時間から数日で出荷できる単位に収まるべきである。1 spec に収まらない規模の仕事は `/spectra-discovery` が分解し、`/spectra-batch` が複数 spec を並列生成する。一つの巨大計画にコミットするのではなく、一つ出して、学んで、次に進む、を繰り返す。
 
 ### 連邦的な責務分担
 
@@ -38,7 +38,7 @@ spec は数時間から数日で出荷できる単位に収まるべきである
 
 ### 継続的な機械的検証
 
-契約はテスト、lint、independent reviewer pass、境界チェック、`/spec-validate-impl` によって開発中ずっと検証される。最後の統合工程でまとめて確認するのではない。
+契約はテスト、lint、independent reviewer pass、境界チェック、`/spectra-validate-impl` によって開発中ずっと検証される。最後の統合工程でまとめて確認するのではない。
 
 ### エージェントが spec を書き、人間は契約をレビューする
 
@@ -65,12 +65,12 @@ spec は数時間から数日で出荷できる単位に収まるべきである
 - 境界を書き下す必要がないプロトタイプ、使い捨てコード。
 - 契約を明示化するより「vibe coding」の方が本当に速い仕事。
 
-cc-sdd を使う場合でも、`/spec-discovery` は *「spec 不要、直接実装して OK」* を valid な出力として返せる。全ての変更に formal な spec を付けようとしているわけではなく、システム各部分間の契約が実際にコストに見合うケースだけを対象にしている。
+cc-sdd を使う場合でも、`/spectra-discovery` は *「spec 不要、直接実装して OK」* を valid な出力として返せる。全ての変更に formal な spec を付けようとしているわけではなく、システム各部分間の契約が実際にコストに見合うケースだけを対象にしている。
 
 > ディシプリンがオーバーヘッドに感じるなら、多分 spec が大きすぎる。もっと小さく分解しよう。
 
 ## 関連ドキュメント
 
 - [Spec-Driven Development ワークフロー](spec-driven.md): ここで述べた考え方を cc-sdd がどのように実装しているか、end-to-end のワークフロー。
-- [スキルリファレンス](skill-reference.md): Skills モードの workflow、`/spec-impl` の内部 dispatch 詳細。
+- [スキルリファレンス](skill-reference.md): Skills モードの workflow、`/spectra-impl` の内部 dispatch 詳細。
 - [マイグレーションガイド](migration-guide.md): cc-sdd v1.x または v2.x からの移行。

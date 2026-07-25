@@ -43,39 +43,39 @@ bash .agents/scripts/setup-crg.sh --yes
 
 ## 特徴
 
-### 20の spec スキル
+### 20の spectra スキル
 | フェーズ | スキル |
 |---------|--------|
-| 企画 | `spec-discovery`, `spec-steering` |
-| 仕様定義 | `spec-init`, `spec-requirements`, `spec-design`, `spec-tasks` |
-| 一括生成 | `spec-batch`, `spec-quick` |
-| 実装 | `spec-impl` |
-| レビュー | `spec-review`, `spec-validate-design`, `spec-validate-gap`, `spec-validate-impl` |
-| デバッグ | `spec-debug` |
-| 完了検証 | `spec-verify-completion` |
-| 進捗 | `spec-status` |
-| **CRG トレーサビリティ** | **`spec-trace`**, **`spec-impact`**, **`spec-validate-boundary`** |
+| 企画 | `spectra-discovery`, `spectra-steering` |
+| 仕様定義 | `spectra-init`, `spectra-requirements`, `spectra-design`, `spectra-tasks` |
+| 一括生成 | `spectra-batch`, `spectra-quick` |
+| 実装 | `spectra-impl` |
+| レビュー | `spectra-review`, `spectra-validate-design`, `spectra-validate-gap`, `spectra-validate-impl` |
+| デバッグ | `spectra-debug` |
+| 完了検証 | `spectra-verify-completion` |
+| 進捗 | `spectra-status` |
+| **CRG トレーサビリティ** | **`spectra-trace`**, **`spectra-impact`**, **`spectra-validate-boundary`** |
 
 ### CRG 対応スキル（20中15）
 ほとんどのスキルが code-review-graph と連携し、コードグラフを活用した分析・検証を実行します:
 
 | スキル | CRG 連携 |
 |--------|---------|
-| `spec-discovery` | 既存拡張時に影響範囲を自動表示 |
-| `spec-design` | コードグラフ分析で設計を強化 |
-| `spec-tasks` | `_Boundary:_` を CRG で機械検証 |
-| `spec-init` | `.trace-mapping.yaml` スケルトン自動生成 |
-| `spec-batch` | `.trace-mapping.yaml` 一括生成 |
-| `spec-review` | CRG 強化された境界検証 |
-| `spec-impl` | `@impl` タグ自動スキャン + `.trace-mapping.yaml` 更新 |
-| `spec-validate-impl` | CRG フロー検証 |
-| `spec-debug` | CRG グラフ調査 |
-| `spec-verify-completion` | CRG アーキテクチャ整合性チェック |
-| `spec-validate-design` | 設計書コンポーネントの実在検証 |
-| `spec-validate-gap` | `@impl` タグ vs コードのギャップ検出 |
-| `spec-trace` | 仕様ID → コード影響トレース |
-| `spec-impact` | コード変更 → 仕様影響トレース |
-| `spec-validate-boundary` | `_Boundary:_` と CRG グラフの機械検証 |
+| `spectra-discovery` | 既存拡張時に影響範囲を自動表示 |
+| `spectra-design` | コードグラフ分析で設計を強化 |
+| `spectra-tasks` | `_Boundary:_` を CRG で機械検証 |
+| `spectra-init` | `.trace-mapping.yaml` スケルトン自動生成 |
+| `spectra-batch` | `.trace-mapping.yaml` 一括生成 |
+| `spectra-review` | CRG 強化された境界検証 |
+| `spectra-impl` | `@impl` タグ自動スキャン + `.trace-mapping.yaml` 更新 |
+| `spectra-validate-impl` | CRG フロー検証 |
+| `spectra-debug` | CRG グラフ調査 |
+| `spectra-verify-completion` | CRG アーキテクチャ整合性チェック |
+| `spectra-validate-design` | 設計書コンポーネントの実在検証 |
+| `spectra-validate-gap` | `@impl` タグ vs コードのギャップ検出 |
+| `spectra-trace` | 仕様ID → コード影響トレース |
+| `spectra-impact` | コード変更 → 仕様影響トレース |
+| `spectra-validate-boundary` | `_Boundary:_` と CRG グラフの機械検証 |
 
 ### その他
 - **8エージェント対応**: Claude Code, Codex, Cursor, Copilot, Gemini CLI, Windsurf, OpenCode, Antigravity

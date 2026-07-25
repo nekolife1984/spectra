@@ -1,5 +1,5 @@
 ---
-name: spec-reviewer
+name: spectra-reviewer
 description: Cross-spec consistency reviewer for multi-feature projects
 tools:
   - read_file
@@ -22,9 +22,9 @@ compatible as a system.
 ### Step 1: Load all specifications
 
 Use `glob` to find all spec files:
-- `{{SPEC_DIR}}/specs/*/requirements.md`
-- `{{SPEC_DIR}}/specs/*/design.md`
-- `{{SPEC_DIR}}/specs/*/tasks.md`
+- `{{SPECTRA_DIR}}/specs/*/requirements.md`
+- `{{SPECTRA_DIR}}/specs/*/design.md`
+- `{{SPECTRA_DIR}}/specs/*/tasks.md`
 
 Use `read_file` to read each file found.
 

@@ -117,10 +117,10 @@ esac
 echo ""
 echo "  Spec directory (where specs and settings are stored):"
 echo -n "  Path (Enter=.spec): "
-read -r SPEC_DIR_INPUT
+read -r SPECTRA_DIR_INPUT
 SPEC_FLAG=""
-if [ -n "$SPEC_DIR_INPUT" ]; then
-  SPEC_FLAG="--spec-dir $SPEC_DIR_INPUT"
+if [ -n "$SPECTRA_DIR_INPUT" ]; then
+  SPEC_FLAG="--spectra-dir $SPECTRA_DIR_INPUT"
 fi
 
 echo ""
@@ -251,17 +251,17 @@ case "${AGENT_CHOICE:-1}" in
   *) PREFIX='/';;
 esac
 
-echo "    ${PREFIX}spec-discovery \"your idea\""
-echo "    ${PREFIX}spec-init my-feature"
-echo "    ${PREFIX}spec-requirements my-feature"
-echo "    ${PREFIX}spec-design my-feature"
-echo "    ${PREFIX}spec-tasks my-feature"
-echo "    ${PREFIX}spec-impl my-feature"
+echo "    ${PREFIX}spectra-discovery \"your idea\""
+echo "    ${PREFIX}spectra-init my-feature"
+echo "    ${PREFIX}spectra-requirements my-feature"
+echo "    ${PREFIX}spectra-design my-feature"
+echo "    ${PREFIX}spectra-tasks my-feature"
+echo "    ${PREFIX}spectra-impl my-feature"
 echo ""
 echo "  CRG Traceability:"
-echo "    ${PREFIX}spec-trace 1.1"
-echo "    ${PREFIX}spec-impact src/my-file.py"
-echo "    ${PREFIX}spec-validate-boundary"
+echo "    ${PREFIX}spectra-trace 1.1"
+echo "    ${PREFIX}spectra-impact src/my-file.py"
+echo "    ${PREFIX}spectra-validate-boundary"
 echo ""
 echo "  Rebuild code graph:"
 echo "    code-review-graph build"

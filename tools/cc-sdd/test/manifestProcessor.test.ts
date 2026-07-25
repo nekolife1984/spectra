@@ -98,7 +98,7 @@ describe('processManifest', () => {
           source: {
             type: 'templateFile' as const,
             from: 'templates/meta/config.tpl.json',
-            toDir: '{{SPEC_DIR}}',
+            toDir: '{{SPECTRA_DIR}}',
           },
         },
         {
@@ -116,7 +116,7 @@ describe('processManifest', () => {
     const result = processManifest(m, agent, ctx, 'mac' as OSType);
     expect(result).toHaveLength(2);
     const json = result.find((a: any) => a.id === 'json_tpl') as any;
-    expect(json.source.toDir).toBe('.spec');
+    expect(json.source.toDir).toBe('.spectra');
     expect(json.source.outFile).toBe('config.json');
     const md = result.find((a: any) => a.id === 'md_tpl') as any;
     expect(md.source.toDir).toBe('.claude');

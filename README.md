@@ -43,39 +43,39 @@ bash .agents/scripts/setup-crg.sh --yes
 
 ## Features
 
-### 20 spec Skills
+### 20 spectra Skills
 | Phase | Skills |
 |-------|--------|
-| Discovery | `spec-discovery`, `spec-steering` |
-| Specification | `spec-init`, `spec-requirements`, `spec-design`, `spec-tasks` |
-| Batch | `spec-batch`, `spec-quick` |
-| Implementation | `spec-impl` |
-| Review | `spec-review`, `spec-validate-design`, `spec-validate-gap`, `spec-validate-impl` |
-| Debug | `spec-debug` |
-| Completion | `spec-verify-completion` |
-| Status | `spec-status` |
-| **CRG Traceability** | **`spec-trace`**, **`spec-impact`**, **`spec-validate-boundary`** |
+| Discovery | `spectra-discovery`, `spectra-steering` |
+| Specification | `spectra-init`, `spectra-requirements`, `spectra-design`, `spectra-tasks` |
+| Batch | `spectra-batch`, `spectra-quick` |
+| Implementation | `spectra-impl` |
+| Review | `spectra-review`, `spectra-validate-design`, `spectra-validate-gap`, `spectra-validate-impl` |
+| Debug | `spectra-debug` |
+| Completion | `spectra-verify-completion` |
+| Status | `spectra-status` |
+| **CRG Traceability** | **`spectra-trace`**, **`spectra-impact`**, **`spectra-validate-boundary`** |
 
 ### CRG-Enhanced Skills (15 of 20)
 Most skills integrate with code-review-graph for graph-aware code analysis:
 
 | Skill | CRG Integration |
 |-------|----------------|
-| `spec-discovery` | Auto-assess impact scope when extending existing specs |
-| `spec-design` | Code graph analysis to inform architecture design |
-| `spec-tasks` | Machine-verify `_Boundary:_` against actual code graph |
-| `spec-init` | Auto-generate `.trace-mapping.yaml` skeleton |
-| `spec-batch` | Auto-generate `.trace-mapping.yaml` for all specs |
-| `spec-review` | CRG-enhanced boundary respect check |
-| `spec-impl` | Auto-scan `@impl` tags and update `.trace-mapping.yaml` |
-| `spec-validate-impl` | CRG flow validation |
-| `spec-debug` | CRG graph investigation |
-| `spec-verify-completion` | CRG architecture alignment check |
-| `spec-validate-design` | Verify design components exist in code |
-| `spec-validate-gap` | Detect code without spec / spec without code |
-| `spec-trace` | Spec ID → code impact trace |
-| `spec-impact` | Code change → spec impact trace |
-| `spec-validate-boundary` | Machine-verify `_Boundary:_` vs CRG graph |
+| `spectra-discovery` | Auto-assess impact scope when extending existing specs |
+| `spectra-design` | Code graph analysis to inform architecture design |
+| `spectra-tasks` | Machine-verify `_Boundary:_` against actual code graph |
+| `spectra-init` | Auto-generate `.trace-mapping.yaml` skeleton |
+| `spectra-batch` | Auto-generate `.trace-mapping.yaml` for all specs |
+| `spectra-review` | CRG-enhanced boundary respect check |
+| `spectra-impl` | Auto-scan `@impl` tags and update `.trace-mapping.yaml` |
+| `spectra-validate-impl` | CRG flow validation |
+| `spectra-debug` | CRG graph investigation |
+| `spectra-verify-completion` | CRG architecture alignment check |
+| `spectra-validate-design` | Verify design components exist in code |
+| `spectra-validate-gap` | Detect code without spec / spec without code |
+| `spectra-trace` | Spec ID → code impact trace |
+| `spectra-impact` | Code change → spec impact trace |
+| `spectra-validate-boundary` | Machine-verify `_Boundary:_` vs CRG graph |
 
 ### Other
 - **8 agents**: Claude Code, Codex, Cursor, Copilot, Gemini CLI, Windsurf, OpenCode, Antigravity

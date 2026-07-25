@@ -13,10 +13,10 @@ cc-sddの新機能・改善情報をお届けします。技術的な変更履�
 ## 🔧 Ver 3.0.2 (2026-04-14) - パッチ修正とドキュメント整理
 
 ### 概要
-Codex の `spec-reviewer` role を有効な状態に保つ修正と、cc-sdd の方針に合わなくなった README 参照の整理を含む patch release です。
+Codex の `spectra-reviewer` role を有効な状態に保つ修正と、cc-sdd の方針に合わなくなった README 参照の整理を含む patch release です。
 
 ### 修正
-- Codex の `spec-reviewer` テンプレートに不足していた `description` フィールドを追加し、malformed として無視されず cross-spec review 用の custom role が利用されるようにしました ([#160](https://github.com/gotalab/cc-sdd/pull/160))
+- Codex の `spectra-reviewer` テンプレートに不足していた `description` フィールドを追加し、malformed として無視されず cross-spec review 用の custom role が利用されるようにしました ([#160](https://github.com/gotalab/cc-sdd/pull/160))
 
 ### ドキュメント
 - README の Amazon 書籍参照を削除しました。リンク先の書籍タイトルと内容が、帰属なしの closed-source clone である `ai-sdd` を宣伝する形に変わっていたためです ([#157](https://github.com/gotalab/cc-sdd/pull/157))
@@ -39,7 +39,7 @@ npx cc-sdd@latest
 `cc-sdd` のファイルシステム安全性を高める patch release です。あわせて、mojibake の修正と英語ドキュメントの軽微な表現改善を含みます。
 
 ### 修正
-- Claude Code Skills の `spec-impl` テンプレートで発生していた mojibake を修正し、Feature Flag Protocol の `→` が正しく表示されるようにしました ([#154](https://github.com/gotalab/cc-sdd/pull/154))
+- Claude Code Skills の `spectra-impl` テンプレートで発生していた mojibake を修正し、Feature Flag Protocol の `→` が正しく表示されるようにしました ([#154](https://github.com/gotalab/cc-sdd/pull/154))
 
 ### セキュリティ
 - manifest、template、shared-rules 由来のパス処理を強化し、生成されるファイル操作が許可されたルート内に限定されるよう改善
@@ -64,16 +64,16 @@ npx cc-sdd@latest
 
 ### 🎯 ハイライト
 - **Agent Skills が主軸に**: cc-sdd は `--*-skills` インストールと、8プラットフォーム共通の17-skillワークフローを中心に再構成されました。
-- **実行できる spec**: `/spec-discovery`、`/spec-batch`、長時間実行の `/spec-impl` により、承認済み spec を単なる文書ではなく実行の control plane として扱えます。
+- **実行できる spec**: `/spectra-discovery`、`/spectra-batch`、長時間実行の `/spectra-impl` により、承認済み spec を単なる文書ではなく実行の control plane として扱えます。
 - **ネイティブな subagent dispatch**: 自律実装・レビュー・デバッグのループが cc-sdd 内に統合され、外部の Ralph Loop 依存が不要になりました。
 
 ### ✨ 追加
 - Cursor / GitHub Copilot / OpenCode / Gemini CLI / Windsurf / Antigravity 向けの skills-based agents を追加し、Claude Code Skills / Codex Skills も強化 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 - 新しい workflow entry points:
-  - `/spec-discovery` でアイデアを triage して roadmap に分岐
-  - `/spec-batch` で複数 spec を並列作成
-  - `/spec-impl` で reviewer/debugger loop 付きの autonomous implementation ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- boundary-first planning、design synthesis、review gates、task decomposition、steering customization のための `.spec/settings/` rules/templates を追加 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+  - `/spectra-discovery` でアイデアを triage して roadmap に分岐
+  - `/spectra-batch` で複数 spec を並列作成
+  - `/spectra-impl` で reviewer/debugger loop 付きの autonomous implementation ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- boundary-first planning、design synthesis、review gates、task decomposition、steering customization のための `.spectra/settings/` rules/templates を追加 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 - 新しい `cc-sdd-new-agent` skill を追加し、対応 agent の追加や skills mode への移行手順を SOP 化 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 
 ### 🔧 変更
@@ -84,7 +84,7 @@ npx cc-sdd@latest
 ### ⚠️ Breaking / Migration Notes
 - 今後は skills mode が主ルートです。command-based installs は deprecated なので `--*-skills` へ移行してください。
 - `--codex` prompts mode は非対応になりました。`--codex-skills` を使ってください。
-- これまで外部の Ralph Loop を前提にしていた場合は、組み込みの `/spec-impl` autonomous flow に移行してください。
+- これまで外部の Ralph Loop を前提にしていた場合は、組み込みの `/spectra-impl` autonomous flow に移行してください。
 
 ### 📖 Migration Guide
 - アップグレード手順は [docs/guides/migration-guide.md](../guides/migration-guide.md) を参照してください。
@@ -217,7 +217,7 @@ npx cc-sdd@latest
 - **グローバル対応**：7エージェント×12言語が同一テンプレートとコマンド体系を共有。
 
 ### アップグレード要点
-1. 必ず [移行ガイド](../guides/migration-guide.md) を参照し、`.spec/settings/templates/*` の再配置とSteeringのディレクトリ読込変更を反映。
+1. 必ず [移行ガイド](../guides/migration-guide.md) を参照し、`.spectra/settings/templates/*` の再配置とSteeringのディレクトリ読込変更を反映。
 2. 自動化やREADMEの実行例を `npx cc-sdd@latest` 基準に統一（`@next`は今後のプレビュー専用）。
 3. steering / research / design / tasks テンプレートを再生成し、Research.md・Supporting References・(P)マーカーを取り込む。
 
@@ -319,14 +319,14 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - **ガイド付きCLIインストーラー**：`npx cc-sdd@latest` 実行時に、作成/更新されるファイルを Commands / Project Memory / Settings で整理表示し、プロジェクトメモリ文書は上書き・追記・維持を対話的に選べるようになりました。再インストール時の安心感とスピードが向上します。
 - **Spec-Drivenコマンドの再設計**：全エージェントの 11 コマンド（`spec-*`, `validate-*`, `steering*`）をコンテキストを再設計。仕様書・詳細設計・タスク計画などの成果物をチームやプロジェクトに合わせて柔軟に調整しやすくしました。
 - **Steeringの強化**：ステアリングをプロジェクト全体で適用すべきルールやパターン、例、ガイドラインのプロジェクトメモリとして適切に機能するように改修しました。`product/tech/structure` 中心だったステアリングの読み込みを`steering/` 配下のそれ以外のドキュメントも同じ重みで採用。
-- **設定/テンプレートのカスタマイズ性向上**：`{{SPEC_DIR}}/settings` へ共通ルール/テンプレートを展開。プロジェクトに合わせた設計・タスクのフォーマット調整が容易になりました。1回のカスタマイズで、別のコーディングエージェントでも同様の設定を引き継ぐことが可能になりました。
+- **設定/テンプレートのカスタマイズ性向上**：`{{SPECTRA_DIR}}/settings` へ共通ルール/テンプレートを展開。プロジェクトに合わせた設計・タスクのフォーマット調整が容易になりました。1回のカスタマイズで、別のコーディングエージェントでも同様の設定を引き継ぐことが可能になりました。
 - **Codex CLI正式対応**：`.codex/prompts/` へ 11 個のプロンプトを提供し、Spec-Driven Development ワークフローを正式サポート。
 - **GitHub Copilot正式対応**：`.github/prompts/` に 11 個のプロンプトを自動配置。Codex CLI と同じステアリング/テンプレート構造を共有し、クロスプラットフォームで共通運用可能に。
 
 ### 🛠️ 内部改善
 - **テンプレート構造刷新**：各エージェントの `os-mac / os-windows` ディレクトリを廃止し、単一の `commands/` 構成へ統一。すべてのテンプレートを `.md` / `.prompt.md` / `.toml` といった実拡張子で管理。
 - **マニフェストと CLI の更新**：全マニフェストを新構造に合わせて再定義し、Codex / GitHub Copilot 用マニフェストを追加。CLI も `--codex`, `--github-copilot` フラグとヘルプを拡張し、`resolveAgentLayout` に新ディレクトリを登録。
-- **テスト体制の強化**：既存エージェント向けリアルマニフェストテストを刷新し、`.spec/settings` 展開を含む動作を検証。Codex / GitHub Copilot 用 E2E テストを追加。
+- **テスト体制の強化**：既存エージェント向けリアルマニフェストテストを刷新し、`.spectra/settings` 展開を含む動作を検証。Codex / GitHub Copilot 用 E2E テストを追加。
 - **ドキュメント整備**：README（英語/日本語/繁体字）およびリポジトリ README を更新し、対応エージェント、コマンド数、ディレクトリ構造、CLI 例を最新状態に反映。
 
 ### 🔄 関連プルリクエスト
@@ -354,10 +354,10 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 
 **品質検証コマンドの新規追加**
 - 🔍 **`/spec:validate-gap`** - 既存機能と要件のギャップ分析
-  - spec-design前に実行し、現在の実装と新要件の差分を明確化
+  - spectra-design前に実行し、現在の実装と新要件の差分を明確化
   - 既存システムの理解と新機能の統合ポイントを特定
 - ✅ **`/spec:validate-design`** - 設計の既存アーキテクチャとの互換性検証
-  - spec-design後に実行し、設計の統合可能性を確認
+  - spectra-design後に実行し、設計の統合可能性を確認
   - 既存システムとの衝突や非互換性を事前に検出
 
 ### 🚀 Cursor IDE完全サポート
@@ -425,15 +425,15 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 ### Spec spec-driven developmentコマンド大幅改善
 
 **ワークフロー効率化**
-- `-y`フラグ追加: `/spec:spec-design feature-name -y`で要件承認をスキップして設計生成
-- `/spec:spec-tasks feature-name -y`で要件+設計承認をスキップしてタスク生成
+- `-y`フラグ追加: `/spec:spectra-design feature-name -y`で要件承認をスキップして設計生成
+- `/spec:spectra-tasks feature-name -y`で要件+設計承認をスキップしてタスク生成
 - argument-hint追加: コマンド入力時に`<feature-name> [-y]`が自動表示
 - 従来の段階的承認も維持（spec.json編集またはインタラクティブ承認）
 
 **コマンド軽量化**
-- spec-init.md: 162行→104行（36%削減、project_description削除とテンプレート簡素化）
-- spec-requirements.md: 177行→124行（30%削減、冗長な説明とテンプレート簡素化）  
-- spec-tasks.md: 295行→198行（33%削減、"Phase X:"廃止、機能ベース命名、粒度最適化）
+- spectra-init.md: 162行→104行（36%削減、project_description削除とテンプレート簡素化）
+- spectra-requirements.md: 177行→124行（30%削減、冗長な説明とテンプレート簡素化）  
+- spectra-tasks.md: 295行→198行（33%削減、"Phase X:"廃止、機能ベース命名、粒度最適化）
 
 **タスク構造最適化**
 - セクション見出しによる機能グループ化
@@ -461,7 +461,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - インタラクティブ承認の動作に影響なし
 
 **マイナー更新**
-- spec-requirements.mdに「think」キーワードを追加
+- spectra-requirements.mdに「think」キーワードを追加
 
 ---
 
@@ -470,8 +470,8 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 ### インタラクティブ承認システムの追加
 
 **承認フローの改善**
-- `/spec-design [feature-name]`実行時に「requirements.mdをレビューしましたか？ [y/N]」の確認プロンプトを表示
-- `/spec-tasks [feature-name]`実行時に requirements と design の両方のレビュー確認を表示
+- `/spectra-design [feature-name]`実行時に「requirements.mdをレビューしましたか？ [y/N]」の確認プロンプトを表示
+- `/spectra-tasks [feature-name]`実行時に requirements と design の両方のレビュー確認を表示
 - 'y'で承認すると自動的にspec.jsonを更新し、次のフェーズに進行
 - 'N'を選択すると実行を停止し、レビューを促す
 
@@ -502,7 +502,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 ### 修正された問題
 
 **ディレクトリハンドリングの改善**
-- `.spec/steering/`ディレクトリが存在しない場合でも正常に動作するようになりました
+- `.spectra/steering/`ディレクトリが存在しない場合でも正常に動作するようになりました
 - エラーメッセージがより分かりやすくなりました
 
 **内部ファイル管理の改善**
@@ -572,7 +572,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 ## 開発の歩み
 
 **2025年7月17日〜18日：基盤構築期**
-プロジェクトの初期化とspec-style仕様書駆動開発の核となるフレームワークを実装
+プロジェクトの初期化とspectra-style仕様書駆動開発の核となるフレームワークを実装
 
 **2025年7月18日〜24日：多言語化・機能拡張期**  
 英語・繁体中文対応の追加、GitHub Actions統合、ドキュメント充実
@@ -597,7 +597,7 @@ requirements、design、tasksの各文書生成品質を大幅改善、過剰な
 ### 基本フロー（全プラットフォーム共通）
 1. 選択したプラットフォームのファイルをプロジェクトにコピー
 2. `/spec:steering`でプロジェクト情報を設定
-3. `/spec:spec-init [機能説明]`で新しい仕様書を作成
+3. `/spec:spectra-init [機能説明]`で新しい仕様書を作成
 4. 要件→設計→タスク→実装の順で段階的に開発を進める
 
 詳細な使用方法は[README_ja.md](docs/README/README_ja.md)をご覧ください。

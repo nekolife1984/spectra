@@ -37,8 +37,8 @@ def load_profile(name: str = "default") -> dict:
         _DEFAULT_PROFILE,
     ]
     if name != "default":
-        # カスタムプロファイルは .spec/profiles/ も探す
-        for base in [Path.cwd() / ".spec" / "profiles",
+        # カスタムプロファイルは .spectra/profiles/ も探す
+        for base in [Path.cwd() / ".spectra" / "profiles",
                      Path(os.environ.get("HOME", "/tmp")) / ".config" / "spectra" / "profiles"]:
             search_order.insert(0, base / f"{name}.yaml")
             search_order.insert(1, base / f"{name}.yml")

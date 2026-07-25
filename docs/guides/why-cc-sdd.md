@@ -30,7 +30,7 @@ The usual assumption about specs is that they slow you down. cc-sdd is built on 
 
 ### Right-sized specs, not monolithic plans
 
-A spec should be small enough to ship as a unit in hours or days. When a piece of work is too big for one spec, `/spec-discovery` decomposes it and `/spec-batch` creates multiple specs in parallel. You ship, you learn from that slice, you move to the next one, instead of committing to one large plan up front.
+A spec should be small enough to ship as a unit in hours or days. When a piece of work is too big for one spec, `/spectra-discovery` decomposes it and `/spectra-batch` creates multiple specs in parallel. You ship, you learn from that slice, you move to the next one, instead of committing to one large plan up front.
 
 ### Federated ownership
 
@@ -38,7 +38,7 @@ Each spec has its own scope and owners. Cross-spec review catches inconsistencie
 
 ### Continuous mechanical verification
 
-Contracts are checked by tests, linting, the independent reviewer pass, boundary checks, and `/spec-validate-impl` throughout the work, not at a single integration step at the end.
+Contracts are checked by tests, linting, the independent reviewer pass, boundary checks, and `/spectra-validate-impl` throughout the work, not at a single integration step at the end.
 
 ### Agents write the spec, humans review the contract
 
@@ -65,12 +65,12 @@ Inside a boundary, you are free to refactor, invent, and iterate. Across boundar
 - Prototype or throwaway code where writing down boundaries is overkill.
 - Work where "vibe coding" is genuinely faster than making the contract explicit.
 
-Even inside cc-sdd, `/spec-discovery` can legitimately return *"no spec needed, implement directly"* as a valid route. cc-sdd is not trying to put a formal spec around every change, only the ones where the contract between parts of the system actually earns its cost.
+Even inside cc-sdd, `/spectra-discovery` can legitimately return *"no spec needed, implement directly"* as a valid route. cc-sdd is not trying to put a formal spec around every change, only the ones where the contract between parts of the system actually earns its cost.
 
 > If the discipline feels like overhead, your specs are probably too big. Break them smaller.
 
 ## See also
 
 - [Spec-Driven Development Workflow](spec-driven.md): how the ideas here are implemented as an end-to-end workflow in cc-sdd.
-- [Skill Reference](skill-reference.md): the skills-mode surface, including `/spec-impl` dispatch internals.
+- [Skill Reference](skill-reference.md): the skills-mode surface, including `/spectra-impl` dispatch internals.
 - [Migration Guide](migration-guide.md): if you are coming from cc-sdd v1.x or v2.x.

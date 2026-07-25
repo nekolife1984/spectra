@@ -77,7 +77,7 @@ BLOG.md
 docs/cc-sdd/
 docs/spec/prompt/
 docs/spec/
-# .spec/
+# .spectra/
 # Agent configurations
 .claude/agents/
 .claude/hooks/
@@ -90,5 +90,5 @@ docs/spec/
 # AGENTS.md
 
 # Local dev tooling (not part of the project)
-.entire/.spec/graph/
-.spec/graph/
+.entire/.spectra/graph/
+.spectra/graph/

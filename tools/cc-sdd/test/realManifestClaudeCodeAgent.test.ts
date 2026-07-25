@@ -41,7 +41,7 @@ describe('real claude-code-agent manifest', () => {
     expect(out).toContain('[templateDir] commands: templates/agents/claude-code-agent/commands -> .claude/commands/spec');
     expect(out).toContain('[templateDir] agents_library: templates/agents/claude-code-agent/agents -> .claude/agents/spec');
     expect(out).toContain('[templateFile] doc_main: templates/agents/claude-code-agent/docs/CLAUDE.md -> ./CLAUDE.md');
-    expect(out).toContain('[templateDir] settings_common: templates/shared/settings -> .spec/settings');
+    expect(out).toContain('[templateDir] settings_common: templates/shared/settings -> .spectra/settings');
   });
 
   it('apply writes CLAUDE.md, command files, and agent library docs to cwd', async () => {
@@ -55,15 +55,15 @@ describe('real claude-code-agent manifest', () => {
     const text = await readFile(doc, 'utf8');
     expect(text).toMatch(/# Agentic SDLC and Spec-Driven Development/);
 
-    const cmd = join(cwd, '.claude/commands/spec/spec-init.md');
+    const cmd = join(cwd, '.claude/commands/spec/spectra-init.md');
     expect(await exists(cmd)).toBe(true);
 
-    const agentSpecImpl = join(cwd, '.claude/agents/spec/spec-impl.md');
+    const agentSpecImpl = join(cwd, '.claude/agents/spec/spectra-impl.md');
     expect(await exists(agentSpecImpl)).toBe(true);
     const agentSpecImplText = await readFile(agentSpecImpl, 'utf8');
     expect(agentSpecImplText).toMatch(/Subagent/);
 
-    const settingsRule = join(cwd, '.spec/settings/rules/design-principles.md');
+    const settingsRule = join(cwd, '.spectra/settings/rules/design-principles.md');
     expect(await exists(settingsRule)).toBe(true);
 
     expect(ctx.logs.join('\n')).toMatch(/\d+\/\d+ files written/);

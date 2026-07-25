@@ -12,8 +12,8 @@
 #   5. python3 .agents/scripts/check_drift.py --snapshot でベースライン保存
 #
 # 自動生成:
-#   /spec-batch が spec 生成時にスケルトンを作成
-#   /spec-impl が実装完了後に extract_tags.py を呼び出して更新
+#   /spectra-batch が spec 生成時にスケルトンを作成
+#   /spectra-impl が実装完了後に extract_tags.py を呼び出して更新
 #   手動追加: python3 .agents/scripts/extract_tags.py --trace-mapping
 
 mappings:
@@ -21,31 +21,31 @@ mappings:
   # id は requirements.md の要件見出し番号と一致させる
   - id: "1.1"
     description: "要件の説明（1行）"
-    spec: .spec/specs/{feature}/requirements.md#要件-1
-    design: .spec/specs/{feature}/design.md#ComponentName
+    spec: .spectra/specs/{feature}/requirements.md#要件-1
+    design: .spectra/specs/{feature}/design.md#ComponentName
     code:
       files:
         - src/feature/file.py
       symbols:
         - ClassName.method_name
     tasks:
-      - .spec/specs/{feature}/tasks.md#X.Y
+      - .spectra/specs/{feature}/tasks.md#X.Y
     docs:
-      - .spec/specs/{feature}/design.md#ComponentName
+      - .spectra/specs/{feature}/design.md#ComponentName
     tags: ["@impl"]
 
   # ── モジュールレベルのマッピング（アーキテクチャ検証用） ──
   - id: "module-{name}"
     description: "モジュールの説明"
-    spec: .spec/specs/{feature}/requirements.md
-    design: .spec/specs/{feature}/design.md#{module}
+    spec: .spectra/specs/{feature}/requirements.md
+    design: .spectra/specs/{feature}/design.md#{module}
     code:
       files:
         - src/{module}/**/*.py
       symbols:
         - ModuleClass
     docs:
-      - .spec/specs/{feature}/design.md#{module}
+      - .spectra/specs/{feature}/design.md#{module}
     tags: ["@module"]
 
 # 参考: コード内のタグ記法

@@ -6,11 +6,11 @@
 #   bash tools/cc-sdd/scripts/sync-skill.sh --all
 #
 #   # 特定のスキルのみ同期
-#   bash tools/cc-sdd/scripts/sync-skill.sh spec-trace
-#   bash tools/cc-sdd/scripts/sync-skill.sh spec-trace spec-impact
+#   bash tools/cc-sdd/scripts/sync-skill.sh spectra-trace
+#   bash tools/cc-sdd/scripts/sync-skill.sh spectra-trace spectra-impact
 #
 #   # dry-run（何がコピーされるか確認）
-#   bash tools/cc-sdd/scripts/sync-skill.sh --dry-run spec-trace
+#   bash tools/cc-sdd/scripts/sync-skill.sh --dry-run spectra-trace
 #
 # 動作:
 #   codex-skills/skills/<skill>/ を基準として、全 *-skills エージェントの

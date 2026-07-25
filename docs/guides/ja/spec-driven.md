@@ -73,7 +73,7 @@ templates、rules、skill workflows はカスタマイズされる前提で設�
 
 cc-sdd における長時間自律は抽象的な約束ではない。`tasks.md` を中心にした workflow に支えられている。
 
-`/spec-impl` は task を 1 つずつ TDD、task-local review、bounded remediation で進め、最後の task まで実行できる。spec、task boundary、validation expectation が明確なときは進み、人間の確認・承認・判断が本当に必要なところでは止まる。
+`/spectra-impl` は task を 1 つずつ TDD、task-local review、bounded remediation で進め、最後の task まで実行できる。spec、task boundary、validation expectation が明確なときは進み、人間の確認・承認・判断が本当に必要なところでは止まる。
 
 つまり自律は spec の代替ではない。強い spec harness の上でのみ成立する。
 
@@ -83,22 +83,22 @@ skill 名を覚えることより、どの workstream に入るかを先に決�
 
 | やりたいこと | Skills モード | レガシーモード |
 | --- | --- | --- |
-| 新しい仕事を始める（機能から大きな構想まで） | `/spec-discovery` → `/spec-init` → `/spec-requirements` → `/spec-design` → `/spec-tasks` → `/spec-impl` | `/spec:spec-init` → `/spec:spec-requirements` → `/spec:spec-design` → `/spec:spec-tasks` → `/spec:spec-impl` |
-| 既存システムを拡張する | `/spec:steering` → `/spec-discovery` または `/spec:spec-init` → 任意で `/spec:validate-gap` → `/spec-design` → `/spec-tasks` → `/spec-impl` | `/spec:steering` → `/spec:spec-init` → 任意で `/spec:validate-gap` → `/spec:spec-design` → `/spec:spec-tasks` → `/spec:spec-impl` |
-| 大きい initiative を分解する | `/spec-discovery` → `/spec-batch` | 非対応 |
-| spec 不要の小変更を入れる | `/spec-discovery` → 直接実装 | 直接実装 |
+| 新しい仕事を始める（機能から大きな構想まで） | `/spectra-discovery` → `/spectra-init` → `/spectra-requirements` → `/spectra-design` → `/spectra-tasks` → `/spectra-impl` | `/spec:spectra-init` → `/spec:spectra-requirements` → `/spec:spectra-design` → `/spec:spectra-tasks` → `/spec:spectra-impl` |
+| 既存システムを拡張する | `/spec:steering` → `/spectra-discovery` または `/spec:spectra-init` → 任意で `/spec:validate-gap` → `/spectra-design` → `/spectra-tasks` → `/spectra-impl` | `/spec:steering` → `/spec:spectra-init` → 任意で `/spec:validate-gap` → `/spec:spectra-design` → `/spec:spectra-tasks` → `/spec:spectra-impl` |
+| 大きい initiative を分解する | `/spectra-discovery` → `/spectra-batch` | 非対応 |
+| spec 不要の小変更を入れる | `/spectra-discovery` → 直接実装 | 直接実装 |
 
 ## ライフサイクル概要
 
-0. **ディスカバリー (Discovery / エントリポイント)**: Skills モードで新しい依頼に入るときの推奨入口である（`/spec-discovery`、Skills モード専用）。依頼を5つの結果に振り分ける: 既存 spec の拡張、spec 不要の直接実装、1つの新規 spec、複数 spec への分解、あるいは既存 spec 更新・新規 spec・直接実装候補が混在する mixed decomposition。新規の single/multi/mixed では `brief.md` と必要に応じて `roadmap.md` を書き出すので、後からセッションを再開しても scope を説明し直す必要がない。
-1. **ステアリング (Steering / コンテキスト収集)**: `/spec:steering` および `/spec:steering-custom` コマンドを使用し、アーキテクチャ、命名規則、ドメイン知識などを `.spec/steering/*.md` ファイル群に収集する。これらはプロジェクトメモリ（Project Memory）として、後続の全コマンドから参照される。
-2. **仕様策定の開始 (Spec Initiation)**: `/spec:spec-init <feature>` コマンドが `.spec/specs/<feature>/` ディレクトリを生成し、機能単位のワークスペースを確保する。
-3. **要件定義 (Requirements)**: `/spec:spec-requirements <feature>` コマンドが、AIとの対話を通じて `requirements.md` を作成する。ここにはEARS形式の要件や未解決の課題が記録される。
-4. **設計 (Design)**: `/spec:spec-design <feature>` コマンドが、まず調査ログとして `research.md` を生成・更新する（調査が不要な場合はスキップされる）。その内容に基づき、詳細設計書 `design.md` が出力される。この設計書は、要件カバレッジ、コンポーネントとインターフェース定義、参考文献などを備えた、レビューに適したドキュメントである。v3.0.0では、`design.md` に **File Structure Plan**（ディレクトリ構造とファイル責務の定義）が含まれるようになった。行数上限は1500行に拡大されている。
-5. **タスク計画 (Task Planning)**: `/spec:spec-tasks <feature>` コマンドで、実装タスクを `tasks.md` ファイルにTODO形式で分解する。各タスクは要件IDと紐付けられ、ドメインやレイヤーごとのブロックに標準化される。同時に、`P0`（逐次実行）や `P1`（並列実行可）といった実行順序ラベルが付与され、並行開発の境界が示される。
-6. **実装 (Implementation)**: `/spec:spec-impl <feature> <task-ids>` コマンド（コマンドモード）、または `/spec-impl`（Skills モード）が、指定されたタスク単位での実装とテストのプロセスを支援する。Skills モードでは、自律モード（タスク引数なし）とマニュアルモード（タスク引数あり）の2つの動作形態がある（詳細は後述の「Skills ワークフロー」セクションを参照）。
-7. **品質ゲート (Quality Gates)**: `/spec:validate-gap`、`/spec:validate-design`、`/spec:validate-impl` といった検証コマンドが、既存コードとの整合性や、設計・実装の品質をチェックする。v3.0.0では、`/spec:validate-impl`（および Skills モードの `/spec-validate-impl`）は**インテグレーション検証**（タスク横断の整合性チェック）に焦点が移り、個別タスクの検証はレビューア Subagent が担当する。
-8. **進捗追跡 (Status Tracking)**: `/spec:spec-status <feature>` コマンドが、各開発フェーズの承認状況と未完了のタスクを要約して表示する。
+0. **ディスカバリー (Discovery / エントリポイント)**: Skills モードで新しい依頼に入るときの推奨入口である（`/spectra-discovery`、Skills モード専用）。依頼を5つの結果に振り分ける: 既存 spec の拡張、spec 不要の直接実装、1つの新規 spec、複数 spec への分解、あるいは既存 spec 更新・新規 spec・直接実装候補が混在する mixed decomposition。新規の single/multi/mixed では `brief.md` と必要に応じて `roadmap.md` を書き出すので、後からセッションを再開しても scope を説明し直す必要がない。
+1. **ステアリング (Steering / コンテキスト収集)**: `/spec:steering` および `/spec:steering-custom` コマンドを使用し、アーキテクチャ、命名規則、ドメイン知識などを `.spectra/steering/*.md` ファイル群に収集する。これらはプロジェクトメモリ（Project Memory）として、後続の全コマンドから参照される。
+2. **仕様策定の開始 (Spec Initiation)**: `/spec:spectra-init <feature>` コマンドが `.spectra/specs/<feature>/` ディレクトリを生成し、機能単位のワークスペースを確保する。
+3. **要件定義 (Requirements)**: `/spec:spectra-requirements <feature>` コマンドが、AIとの対話を通じて `requirements.md` を作成する。ここにはEARS形式の要件や未解決の課題が記録される。
+4. **設計 (Design)**: `/spec:spectra-design <feature>` コマンドが、まず調査ログとして `research.md` を生成・更新する（調査が不要な場合はスキップされる）。その内容に基づき、詳細設計書 `design.md` が出力される。この設計書は、要件カバレッジ、コンポーネントとインターフェース定義、参考文献などを備えた、レビューに適したドキュメントである。v3.0.0では、`design.md` に **File Structure Plan**（ディレクトリ構造とファイル責務の定義）が含まれるようになった。行数上限は1500行に拡大されている。
+5. **タスク計画 (Task Planning)**: `/spec:spectra-tasks <feature>` コマンドで、実装タスクを `tasks.md` ファイルにTODO形式で分解する。各タスクは要件IDと紐付けられ、ドメインやレイヤーごとのブロックに標準化される。同時に、`P0`（逐次実行）や `P1`（並列実行可）といった実行順序ラベルが付与され、並行開発の境界が示される。
+6. **実装 (Implementation)**: `/spec:spectra-impl <feature> <task-ids>` コマンド（コマンドモード）、または `/spectra-impl`（Skills モード）が、指定されたタスク単位での実装とテストのプロセスを支援する。Skills モードでは、自律モード（タスク引数なし）とマニュアルモード（タスク引数あり）の2つの動作形態がある（詳細は後述の「Skills ワークフロー」セクションを参照）。
+7. **品質ゲート (Quality Gates)**: `/spec:validate-gap`、`/spec:validate-design`、`/spec:validate-impl` といった検証コマンドが、既存コードとの整合性や、設計・実装の品質をチェックする。v3.0.0では、`/spec:validate-impl`（および Skills モードの `/spectra-validate-impl`）は**インテグレーション検証**（タスク横断の整合性チェック）に焦点が移り、個別タスクの検証はレビューア Subagent が担当する。
+8. **進捗追跡 (Status Tracking)**: `/spec:spectra-status <feature>` コマンドが、各開発フェーズの承認状況と未完了のタスクを要約して表示する。
 
 > すべてのフェーズは、開発者によるレビューのために一旦停止する。`-y` オプションや `--auto` フラグでこの確認をスキップすることも可能だが、本番環境向けの作業では手動での承認プロセスを維持することが推奨される。テンプレートにチェックリストを埋め込んでおくことで、一貫した品質ゲートを毎回強制することができる。
 
@@ -106,60 +106,60 @@ skill 名を覚えることより、どの workstream に入るかを先に決�
 
 | コマンド | 役割 | 主な成果物 |
 | --- | --- | --- |
-| `/spec:steering` | プロジェクトメモリ生成 | `.spec/steering/*.md` |
-| `/spec:steering-custom` | ドメイン固有のステアリング情報追加 | `.spec/steering/custom/*.md` |
-| `/spec-discovery` (Skills) | 新しい仕事の入口（任意） | `brief.md` / `roadmap.md` と次のアクション |
-| `/spec:spec-init <feature>` | 新規仕様策定の開始 | `.spec/specs/<feature>/` |
-| `/spec:spec-requirements <feature>` | 要件定義 | `requirements.md` |
-| `/spec:spec-design <feature>` | 調査と詳細設計 | `research.md` (必要な場合), `design.md` (File Structure Plan 含む) |
-| `/spec:spec-tasks <feature>` | 実装タスクの分解（実行順序ラベル付き） | `tasks.md` |
-| `/spec:spec-impl <feature> <task-ids>` | 実装の実行（コマンドモード） | コード変更とタスク進捗の更新 |
-| `/spec-impl` (Skills) | 実装の実行（自律/マニュアル） | コード変更とタスク進捗の更新 |
+| `/spec:steering` | プロジェクトメモリ生成 | `.spectra/steering/*.md` |
+| `/spec:steering-custom` | ドメイン固有のステアリング情報追加 | `.spectra/steering/custom/*.md` |
+| `/spectra-discovery` (Skills) | 新しい仕事の入口（任意） | `brief.md` / `roadmap.md` と次のアクション |
+| `/spec:spectra-init <feature>` | 新規仕様策定の開始 | `.spectra/specs/<feature>/` |
+| `/spec:spectra-requirements <feature>` | 要件定義 | `requirements.md` |
+| `/spec:spectra-design <feature>` | 調査と詳細設計 | `research.md` (必要な場合), `design.md` (File Structure Plan 含む) |
+| `/spec:spectra-tasks <feature>` | 実装タスクの分解（実行順序ラベル付き） | `tasks.md` |
+| `/spec:spectra-impl <feature> <task-ids>` | 実装の実行（コマンドモード） | コード変更とタスク進捗の更新 |
+| `/spectra-impl` (Skills) | 実装の実行（自律/マニュアル） | コード変更とタスク進捗の更新 |
 | `/spec:validate-gap <feature>` | ギャップ分析 | `gap-report.md` |
 | `/spec:validate-design <feature>` | 設計レビュー | `design-validation.md` |
 | `/spec:validate-impl [feature] [task-ids]` | インテグレーション検証 | `impl-validation.md` |
-| `/spec:spec-status <feature>` | 進捗可視化 | CLI サマリー |
+| `/spec:spectra-status <feature>` | 進捗可視化 | CLI サマリー |
 
 ## Skills ワークフロー（v3.0.0）
 
-`--claude-skills`、`--codex-skills`、`--cursor-skills`、`--copilot-skills`、`--windsurf-skills`、`--opencode-skills`、`--gemini-skills`、`--antigravity` でインストールした場合、コマンド（`/spec:*`）の代わりに **Skills**（`/spec-*`）を使用する。Skills モードでは、外部プラグインに依存せず、各プラットフォーム標準の subagent primitive のみで動作する。Skills モードの完全なリファレンス（`/spec-impl` の subagent flow、カスタマイズ方法を含む）は [スキルリファレンス](skill-reference.md) を参照。
+`--claude-skills`、`--codex-skills`、`--cursor-skills`、`--copilot-skills`、`--windsurf-skills`、`--opencode-skills`、`--gemini-skills`、`--antigravity` でインストールした場合、コマンド（`/spec:*`）の代わりに **Skills**（`/spec-*`）を使用する。Skills モードでは、外部プラグインに依存せず、各プラットフォーム標準の subagent primitive のみで動作する。Skills モードの完全なリファレンス（`/spectra-impl` の subagent flow、カスタマイズ方法を含む）は [スキルリファレンス](skill-reference.md) を参照。
 
 ### コマンドモードと Skills モードの対応
 
 | コマンドモード | Skills モード | 備考 |
 | --- | --- | --- |
-| （なし） | `/spec-discovery` | 任意。新しい依頼を 1 spec / 複数 spec / mixed decomposition / spec不要 に振り分ける |
-| `/spec:spec-impl <feature> <task-ids>` | `/spec-impl` | 自律モード/マニュアルモードの切り替えが可能 |
-| `/spec:validate-impl` | `/spec-validate-impl` | インテグレーション検証（タスク横断）に特化 |
+| （なし） | `/spectra-discovery` | 任意。新しい依頼を 1 spec / 複数 spec / mixed decomposition / spec不要 に振り分ける |
+| `/spec:spectra-impl <feature> <task-ids>` | `/spectra-impl` | 自律モード/マニュアルモードの切り替えが可能 |
+| `/spec:validate-impl` | `/spectra-validate-impl` | インテグレーション検証（タスク横断）に特化 |
 
-> その他の Steering、spec-init、spec-requirements、spec-design、spec-tasks の各コマンドは、コマンドモードと Skills モードで共通である。
+> その他の Steering、spectra-init、spectra-requirements、spectra-design、spectra-tasks の各コマンドは、コマンドモードと Skills モードで共通である。
 
-### `/spec-impl` の2つのモード
+### `/spectra-impl` の2つのモード
 
 - **自律モード（タスク引数なし）**: タスクごとに Subagent を spawn し、独立した実装とレビューを行う。各タスクについて、実装者 Subagent がタスクブリーフ（Task Brief: 仕様から導出された具体的な受け入れ基準）を作成してからコーディングに入る。レビューア Subagent は、TODO 残存チェック、テスト実行、git diff による境界確認などの機械的な検証を行う。実装者が BLOCKED を返した場合やレビューアが2回連続で REJECTED した場合、**デバッグ Subagent** が新しいコンテキストで起動し、Web検索を使って根本原因を調査する（最大2ラウンド）。タスク間で得られた知見は **Implementation Notes** として次の実装者に引き継がれる。1タスク1イテレーションの規律により、長時間実行時のコンテキスト衛生を維持する。
-- **マニュアルモード（タスク引数あり）**: メインコンテキスト内で TDD ベースの実装を行う。コマンドモードの `/spec:spec-impl` と同等の動作である。
+- **マニュアルモード（タスク引数あり）**: メインコンテキスト内で TDD ベースの実装を行う。コマンドモードの `/spec:spectra-impl` と同等の動作である。
 
 ### セッション再開
 
-`/spec-impl` は中断後の再実行に対応している。`tasks.md` の進捗状態に基づいて未完了タスクから処理を再開する。
+`/spectra-impl` は中断後の再実行に対応している。`tasks.md` の進捗状態に基づいて未完了タスクから処理を再開する。
 
 ## Discovery の後
 
-`/spec-discovery` は auto-runner ではなく router である。新しい依頼が、1 spec、複数 spec、mixed decomposition、spec 不要のどれに当たるかを判断し、必要なら `brief.md` / `roadmap.md` を書き、正しい次コマンドを示して止まる。
+`/spectra-discovery` は auto-runner ではなく router である。新しい依頼が、1 spec、複数 spec、mixed decomposition、spec 不要のどれに当たるかを判断し、必要なら `brief.md` / `roadmap.md` を書き、正しい次コマンドを示して止まる。
 
 | Discovery の結果 | 意味 | 既定の次ステップ | 補足 |
 | --- | --- | --- | --- |
-| Existing spec | 既存 spec に入るべき依頼 | `/spec-requirements {feature}` | なし |
+| Existing spec | 既存 spec に入るべき依頼 | `/spectra-requirements {feature}` | なし |
 | Spec 不要 | 直接実装した方がよい小変更 | 直接実装 | なし |
-| Single spec | 1つの新規 spec にすべき依頼 | `/spec-init <feature>` | 明示的に fast path を取りたいときだけ `/spec-quick <feature>` |
-| Multi-spec | 複数 spec に分割すべき依頼 | `/spec-batch` | 最初の 1 spec だけ先に確認したいなら `/spec-init <first-feature>` |
+| Single spec | 1つの新規 spec にすべき依頼 | `/spectra-init <feature>` | 明示的に fast path を取りたいときだけ `/spectra-quick <feature>` |
+| Multi-spec | 複数 spec に分割すべき依頼 | `/spectra-batch` | 最初の 1 spec だけ先に確認したいなら `/spectra-init <first-feature>` |
 | Mixed decomposition | 既存 spec 更新・新規 spec・直接実装候補が混在する依頼 | `brief.md` / `roadmap.md` に分解結果を書いてから進む | 新規 spec 側の次ステップから始め、残りは順に回収する |
 
 ## 複数 spec にまたがる不具合の責務と再検証
 
 ある spec で症状が見えていても、真因が upstream、foundation、shared spec 側にあることは珍しくない。その場合は downstream spec に回避策を積まず、まず責務を持つ upstream spec を修正するべきである。
 
-upstream 修正後は、その変更に依存している spec を対象に `/spec-validate-impl` と必要な runtime smoke を再実行し、システム全体として健全かを確認する。運用上は次を守る。
+upstream 修正後は、その変更に依存している spec を対象に `/spectra-validate-impl` と必要な runtime smoke を再実行し、システム全体として健全かを確認する。運用上は次を守る。
 
 - failure が current spec の責務か、upstream spec の責務か、不明かを切り分ける
 - upstream 起因の defect は downstream remediation に押し込まず、所有している spec に戻す
@@ -167,14 +167,14 @@ upstream 修正後は、その変更に依存している spec を対象に `/sp
 
 ## ワークフローをカスタマイズするには
 
-- **テンプレート**: `.spec/settings/templates/{requirements,design,tasks}.md` を修正することで、各開発フェーズの生成物のアウトラインやチェックリストを、自社のプロセスに合わせて調整できる。v2.0.0の設計テンプレートは、要約テーブル、コンポーネント密度に関するルール、参考文献といった要素を備えており、レビュー担当者の認知負荷を軽減するよう設計されている。
-- **ルール**: `.spec/settings/rules/*.md` ファイルに、「すべきこと（DO）」「すべきでないこと（DO NOT）」や評価基準などを記述すると、それらはすべてのエージェントおよびコマンドで共通のガイドラインとして読み込まれる。旧バージョンのように、コマンドのプロンプトへ直接指示を記述する必要はない。
+- **テンプレート**: `.spectra/settings/templates/{requirements,design,tasks}.md` を修正することで、各開発フェーズの生成物のアウトラインやチェックリストを、自社のプロセスに合わせて調整できる。v2.0.0の設計テンプレートは、要約テーブル、コンポーネント密度に関するルール、参考文献といった要素を備えており、レビュー担当者の認知負荷を軽減するよう設計されている。
+- **ルール**: `.spectra/settings/rules/*.md` ファイルに、「すべきこと（DO）」「すべきでないこと（DO NOT）」や評価基準などを記述すると、それらはすべてのエージェントおよびコマンドで共通のガイドラインとして読み込まれる。旧バージョンのように、コマンドのプロンプトへ直接指示を記述する必要はない。
 - **承認フロー**: テンプレートのヘッダー部分に、レビュー担当者（Reviewer）や承認者（Approver）の欄、チェックリスト、トレーサビリティを確保するためのカラムなどを追加することで、各品質ゲートでの確認事項を単一のドキュメントに集約できる。
 
 ## 新規案件 vs 既存案件
 
-- **新規プロジェクト (Greenfield)**: 共有すべきルールや原則が既に存在する場合は、`/spec:steering`（や`/spec:steering-custom`）を実行してプロジェクトメモリに保存する。まだルールが整備されていない場合は、まず `/spec:spec-init` で開発を開始し、プロセスを進めながら徐々にステアリング情報を充実させていくのがよい。
-- **既存プロジェクト (Brownfield)**: `/spec:validate-gap`、`/spec:spec-requirements`、`/spec:spec-design` の順でプロセスを進めることで、既存コードとの整合性を早期に確認できる。設計テンプレート内の要件カバレッジ（Req Coverage）や参考文献（Supporting References）セクションが、既存の仕様書との関連性を担保する役割を果たす。
+- **新規プロジェクト (Greenfield)**: 共有すべきルールや原則が既に存在する場合は、`/spec:steering`（や`/spec:steering-custom`）を実行してプロジェクトメモリに保存する。まだルールが整備されていない場合は、まず `/spec:spectra-init` で開発を開始し、プロセスを進めながら徐々にステアリング情報を充実させていくのがよい。
+- **既存プロジェクト (Brownfield)**: `/spec:validate-gap`、`/spec:spectra-requirements`、`/spec:spectra-design` の順でプロセスを進めることで、既存コードとの整合性を早期に確認できる。設計テンプレート内の要件カバレッジ（Req Coverage）や参考文献（Supporting References）セクションが、既存の仕様書との関連性を担保する役割を果たす。
 
 ## 関連リソース
 

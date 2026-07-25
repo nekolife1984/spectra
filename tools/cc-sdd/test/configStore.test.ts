@@ -25,7 +25,7 @@ describe('config store', () => {
       agent: 'gemini-cli',
       lang: 'en',
       os: 'linux',
-      specDir: '.work/spec',
+      spectraDir: '.work/spectra',
       overwrite: 'skip',
       backupDir: 'bk',
       agentLayouts: {

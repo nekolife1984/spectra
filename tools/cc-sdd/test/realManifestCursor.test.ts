@@ -35,7 +35,7 @@ describe('real cursor manifest', () => {
     expect(out).toMatch(/Plan \(dry-run\)/);
     expect(out).toContain('[templateDir] commands: templates/agents/cursor/commands -> .cursor/commands/spec');
     expect(out).toContain('[templateFile] doc_main: templates/agents/cursor/docs/AGENTS.md -> ./AGENTS.md');
-    expect(out).toContain('[templateDir] settings_common: templates/shared/settings -> .spec/settings');
+    expect(out).toContain('[templateDir] settings_common: templates/shared/settings -> .spectra/settings');
   });
   it('dry-run prints plan including commands for linux via mac template', async () => {
     const repoRoot = join(process.cwd(), '..', '..');
@@ -48,7 +48,7 @@ describe('real cursor manifest', () => {
     expect(out).toMatch(/Plan \(dry-run\)/);
     expect(out).toContain('[templateDir] commands: templates/agents/cursor/commands -> .cursor/commands/spec');
     expect(out).toContain('[templateFile] doc_main: templates/agents/cursor/docs/AGENTS.md -> ./AGENTS.md');
-    expect(out).toContain('[templateDir] settings_common: templates/shared/settings -> .spec/settings');
+    expect(out).toContain('[templateDir] settings_common: templates/shared/settings -> .spectra/settings');
   });
   
   it('shows cursor recommendation message after applying plan', async () => {
@@ -74,10 +74,10 @@ describe('real cursor manifest', () => {
     expect(out).toContain('Recommended models');
 
     // Check that the unified next steps are present
-    expect(out).toContain("Launch Cursor IDE and run `/spec/spec-init <what-to-build>` to create a new specification.");
+    expect(out).toContain("Launch Cursor IDE and run `/spec/spectra-init <what-to-build>` to create a new specification.");
     expect(out).toContain('Tip: Steering holds persistent project knowledge');
     expect(out).toContain(
-      'Tip: Update `{{SPEC_DIR}}/settings/templates/` like `requirements.md`, `design.md`, and `tasks.md` so the generated steering and specs follow your team\'s and project\'s development process.',
+      'Tip: Update `{{SPECTRA_DIR}}/settings/templates/` like `requirements.md`, `design.md`, and `tasks.md` so the generated steering and specs follow your team\'s and project\'s development process.',
     );
   });
 });

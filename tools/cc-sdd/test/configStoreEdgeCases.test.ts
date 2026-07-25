@@ -68,7 +68,7 @@ describe('config store edge cases', () => {
       agent: 'gemini-cli',
       lang: 'zh-TW',
       os: 'linux',
-      specDir: 'docs/spec',
+      spectraDir: 'docs/spectra',
       overwrite: 'force',
       backupDir: 'backups',
       agentLayouts: {

@@ -44,7 +44,7 @@ import yaml
 # 定数
 TRACE_MAPPING_PATH = Path(".trace-mapping.yaml")
 SNAPSHOT_PATH = Path(".trace-snapshot.json")
-LEDGER_PATH = Path(".spec/reconciliation_ledger.yaml")
+LEDGER_PATH = Path(".spectra/reconciliation_ledger.yaml")
 
 # このスクリプト自身のディレクトリ（.agents/scripts/）は extract_tags.py と同じ
 _SCRIPT_DIR = Path(__file__).parent.resolve()
@@ -292,7 +292,7 @@ def main():
             for f in findings:
                 print(f"  [{f['type']}] {f['detail']}")
         else:
-            print("✅ No spec-impacting changes detected.")
+            print("✅ No spectra-impacting changes detected.")
         sys.exit(0)
 
     if args.ledger:

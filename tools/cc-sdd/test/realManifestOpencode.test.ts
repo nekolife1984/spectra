@@ -40,7 +40,7 @@ describe('real opencode manifest', () => {
     expect(out).toMatch(/Plan \(dry-run\)/);
     expect(out).toContain('[templateDir] commands: templates/agents/opencode/commands -> .opencode/commands');
     expect(out).toContain('[templateFile] doc_main: templates/agents/opencode/docs/AGENTS.md -> ./AGENTS.md');
-    expect(out).toContain('[templateDir] settings_common: templates/shared/settings -> .spec/settings');
+    expect(out).toContain('[templateDir] settings_common: templates/shared/settings -> .spectra/settings');
   });
 
   it('apply writes AGENTS.md and command files to cwd', async () => {
@@ -53,12 +53,12 @@ describe('real opencode manifest', () => {
     expect(await exists(doc)).toBe(true);
     const text = await readFile(doc, 'utf8');
     expect(text).toMatch(/# Agentic SDLC and Spec-Driven Development/);
-    expect(text).toContain('Steering: `.spec/steering/`');
+    expect(text).toContain('Steering: `.spectra/steering/`');
 
-    const cmd = join(cwd, '.opencode/commands/spec-init.md');
+    const cmd = join(cwd, '.opencode/commands/spectra-init.md');
     expect(await exists(cmd)).toBe(true);
 
-    const settingsRule = join(cwd, '.spec/settings/rules/design-principles.md');
+    const settingsRule = join(cwd, '.spectra/settings/rules/design-principles.md');
     expect(await exists(settingsRule)).toBe(true);
 
     expect(ctx.logs.join('\n')).toMatch(/\d+\/\d+ files written/);
@@ -76,7 +76,7 @@ describe('real opencode manifest (linux)', () => {
     expect(out).toMatch(/Plan \(dry-run\)/);
     expect(out).toContain('[templateDir] commands: templates/agents/opencode/commands -> .opencode/commands');
     expect(out).toContain('[templateFile] doc_main: templates/agents/opencode/docs/AGENTS.md -> ./AGENTS.md');
-    expect(out).toContain('[templateDir] settings_common: templates/shared/settings -> .spec/settings');
+    expect(out).toContain('[templateDir] settings_common: templates/shared/settings -> .spectra/settings');
   });
 
   it('apply writes AGENTS.md and command files to cwd on linux', async () => {
@@ -89,12 +89,12 @@ describe('real opencode manifest (linux)', () => {
     expect(await exists(doc)).toBe(true);
     const text = await readFile(doc, 'utf8');
     expect(text).toMatch(/# Agentic SDLC and Spec-Driven Development/);
-    expect(text).toContain('Steering: `.spec/steering/`');
+    expect(text).toContain('Steering: `.spectra/steering/`');
 
-    const cmd = join(cwd, '.opencode/commands/spec-init.md');
+    const cmd = join(cwd, '.opencode/commands/spectra-init.md');
     expect(await exists(cmd)).toBe(true);
 
-    const settingsTemplate = join(cwd, '.spec/settings/templates/specs/init.json');
+    const settingsTemplate = join(cwd, '.spectra/settings/templates/specs/init.json');
     expect(await exists(settingsTemplate)).toBe(true);
 
     expect(ctx.logs.join('\n')).toMatch(/\d+\/\d+ files written/);

@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file.
 - Remove the README Amazon book reference after the linked title shifted to promote `ai-sdd`, a closed-source clone of cc-sdd without attribution ([#157](https://github.com/gotalab/cc-sdd/pull/157))
 
 ### Fixed
-- Add the missing `description` field to the Codex `spec-reviewer` custom agent template so Codex keeps the role available for cross-spec review instead of dropping it as malformed ([#160](https://github.com/gotalab/cc-sdd/pull/160))
+- Add the missing `description` field to the Codex `spectra-reviewer` custom agent template so Codex keeps the role available for cross-spec review instead of dropping it as malformed ([#160](https://github.com/gotalab/cc-sdd/pull/160))
 
 ## [3.0.1] - 2026-04-11
 
@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file.
 - Refine English release messaging by replacing the awkward phrase `team-scale AI-driven development` with `AI-driven development at team scale` across the main README and philosophy guide ([#155](https://github.com/gotalab/cc-sdd/pull/155))
 
 ### Fixed
-- Correct the mojibake in the Claude Code Skills `spec-impl` template so the feature-flag test protocol renders the `→` arrow correctly ([#154](https://github.com/gotalab/cc-sdd/pull/154))
+- Correct the mojibake in the Claude Code Skills `spectra-impl` template so the feature-flag test protocol renders the `→` arrow correctly ([#154](https://github.com/gotalab/cc-sdd/pull/154))
 
 ### Security
 - Harden manifest-, template-, and shared-rule-derived path handling so generated file operations stay within the expected roots and fail closed on unsafe traversal inputs or symlinked destinations ([#155](https://github.com/gotalab/cc-sdd/pull/155))
@@ -31,8 +31,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Introduce Agent Skills mode as the primary installation target across 8 platforms: Claude Code, Codex, Cursor, GitHub Copilot, Windsurf, OpenCode, Gemini CLI, and Antigravity ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- Add new workflow entry points for skills mode, including `/spec-discovery`, `/spec-batch`, and long-running autonomous `/spec-impl` with reviewer/debugger support ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- Add `.spec/settings/` rules and templates for boundary-first planning, design synthesis, review gates, task decomposition, and steering customization ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- Add new workflow entry points for skills mode, including `/spectra-discovery`, `/spectra-batch`, and long-running autonomous `/spectra-impl` with reviewer/debugger support ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- Add `.spectra/settings/` rules and templates for boundary-first planning, design synthesis, review gates, task decomposition, and steering customization ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 - Add `cc-sdd-new-agent`, a plan-first SOP for adding new supported agents or migrating existing agents to skills mode ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 
 ### Changed
@@ -46,7 +46,7 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 - Remove Codex prompts mode as a supported install path; `--codex` now blocks and directs users to `--codex-skills` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- Remove the external Ralph Loop dependency in favor of native subagent-driven autonomous implementation inside `spec-impl` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- Remove the external Ralph Loop dependency in favor of native subagent-driven autonomous implementation inside `spectra-impl` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 
 ### Fixed
 - Honor configured agent selection during non-interactive installs instead of forcing the default agent ([#141](https://github.com/gotalab/cc-sdd/pull/141))
@@ -130,7 +130,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 #### Core Features
-- **Parallel task analysis** by default in spec-tasks command ([#89](https://github.com/gotalab/cc-sdd/pull/89))
+- **Parallel task analysis** by default in spectra-tasks command ([#89](https://github.com/gotalab/cc-sdd/pull/89))
   - Automatic `(P)` marker for parallel-executable tasks
   - New `--sequential` flag to opt-out of parallel analysis
   - New rule file: `tasks-parallel-analysis.md` for identifying parallel tasks
@@ -176,13 +176,13 @@ All notable changes to this project will be documented in this file.
 - **All templates now use actual extensions** (`.md`, `.prompt.md`, `.toml`)
 - **Steering now functions as project-wide rules/patterns/guidelines** (Project Memory)
   - Enhanced steering system loading all documents under `steering/` directory
-- **Shared settings bundle** in `{{SPEC_DIR}}/settings` for cross-platform customization
+- **Shared settings bundle** in `{{SPECTRA_DIR}}/settings` for cross-platform customization
 
 #### Commands & Workflow
 - **Redesigned all 11 Spec-Driven commands** (`spec-*`, `validate-*`, `steering*`) with improved context
 - **Enhanced task generation guidelines** with parallel execution criteria
 - **Improved design template** with discovery process guidelines
-- **Updated spec-design workflow** to leverage new research.md template
+- **Updated spectra-design workflow** to leverage new research.md template
 - **Streamlined tasks.md template structure**
 
 #### Documentation & Formats
@@ -219,7 +219,7 @@ All notable changes to this project will be documented in this file.
 
 ⚠️ **Important**: Please review the [Migration Guide](docs/guides/migration-guide.md) when upgrading from v1.x.
 
-1. **Template Structure**: OS-specific directories removed. Use unified templates in `.spec/settings/templates/`
+1. **Template Structure**: OS-specific directories removed. Use unified templates in `.spectra/settings/templates/`
 2. **Steering**: Now loads entire `steering/` directory instead of single file
 3. **File Extensions**: Templates use actual extensions (`.md`, `.prompt.md`, `.toml`)
 4. **Command Count**: Expanded from 8 to 11 commands (3 validation commands added)
@@ -346,7 +346,7 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
   - Interactive project memory handling (overwrite/append/keep)
 - Codex CLI official support with 11 prompts in `.codex/prompts/`
 - GitHub Copilot official support with 11 prompts in `.github/prompts/`
-- Shared settings bundle in `{{SPEC_DIR}}/settings` for cross-platform customization
+- Shared settings bundle in `{{SPECTRA_DIR}}/settings` for cross-platform customization
 - Enhanced steering system loading all documents under `steering/` directory
 
 ### Changed
@@ -432,7 +432,7 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 
 ### Changed
 - Command structure expanded from 8 to 11 commands
-- Enhanced spec-design with flexible system flows and requirements traceability ([#55](https://github.com/gotalab/cc-sdd/pull/55))
+- Enhanced spectra-design with flexible system flows and requirements traceability ([#55](https://github.com/gotalab/cc-sdd/pull/55))
 - Improved EARS requirements template with better subject guidance
 - Updated documentation for brownfield vs greenfield workflows
 
@@ -463,8 +463,8 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 - Complete CLI tool with `npx cc-sdd@latest` installation
 - Template system supporting multiple platforms and OS variants
 - 8 core commands for spec-driven workflow
-  - spec-init, spec-requirements, spec-design, spec-tasks
-  - spec-impl, spec-status
+  - spectra-init, spectra-requirements, spectra-design, spectra-tasks
+  - spectra-impl, spectra-status
   - steering, steering-custom
 
 ### Changed
@@ -497,16 +497,16 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 
 ### Added
 - `-y` flag for streamlined workflow approval
-  - Skip requirement approval: `/spec:spec-design feature-name -y`
-  - Skip requirement + design approval: `/spec:spec-tasks feature-name -y`
+  - Skip requirement approval: `/spec:spectra-design feature-name -y`
+  - Skip requirement + design approval: `/spec:spectra-tasks feature-name -y`
 - Argument hints in command input (`<feature-name> [-y]`)
 - Custom Steering support in all spec commands
 
 ### Changed
 - Optimized command file sizes by 30-36%
-  - spec-init.md: 162→104 lines (36% reduction)
-  - spec-requirements.md: 177→124 lines (30% reduction)
-  - spec-tasks.md: 295→198 lines (33% reduction)
+  - spectra-init.md: 162→104 lines (36% reduction)
+  - spectra-requirements.md: 177→124 lines (30% reduction)
+  - spectra-tasks.md: 295→198 lines (33% reduction)
 - Task structure optimization
   - Section-based functional grouping
   - Task granularity limits (3-5 sub-items, 1-2 hour completion)
@@ -524,14 +524,14 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 - Applied optimization across all language versions (Japanese, English, Traditional Chinese)
 
 ### Added
-- "think" keyword to spec-requirements.md for better AI reasoning
+- "think" keyword to spectra-requirements.md for better AI reasoning
 
 ## [0.2.0] - 2025-07-26
 
 ### Added
 - Interactive approval system for workflow phases
-  - `/spec:spec-design`: Prompts for requirements review confirmation
-  - `/spec:spec-tasks`: Prompts for requirements + design review confirmation
+  - `/spec:spectra-design`: Prompts for requirements review confirmation
+  - `/spec:spectra-tasks`: Prompts for requirements + design review confirmation
   - Automatic spec.json updates on 'y' approval
 - Enhanced specification generation quality
   - Improved EARS format consistency in requirements.md
@@ -540,7 +540,7 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
   - TDD-optimized task structure in tasks.md
 
 ### Fixed
-- Directory handling when `.spec/steering/` doesn't exist
+- Directory handling when `.spectra/steering/` doesn't exist
 - Error messages improved for better clarity
 
 ### Changed

@@ -8,14 +8,14 @@ describe('parseArgs', () => {
       '--lang', 'ja',
       '--os', 'auto',
       '--overwrite', 'prompt',
-      '--spec-dir', '.spec',
+      '--spectra-dir', '.spectra',
     ]);
     const expected: ParsedArgs = {
       agent: 'claude-code',
       lang: 'ja',
       os: 'auto',
       overwrite: 'prompt',
-      specDir: '.spec',
+      spectraDir: '.spectra',
     };
     expect(args).toEqual(expected);
   });

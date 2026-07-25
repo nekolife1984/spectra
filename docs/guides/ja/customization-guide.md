@@ -11,7 +11,7 @@ cc-sdd は2つのカスタマイズポイントを提供しています：
 - **templates/** - AIが生成するドキュメントの**構造・フォーマット**を定義
 - **rules/** - AIの**判断基準・生成原則**を定義
 
-どちらも `{{SPEC_DIR}}/settings/` 配下にあり、プロジェクト全体で共有されます。
+どちらも `{{SPECTRA_DIR}}/settings/` 配下にあり、プロジェクト全体で共有されます。
 
 ---
 
@@ -19,7 +19,7 @@ cc-sdd は2つのカスタマイズポイントを提供しています：
 
 ### 📄 templates/ - 出力フォーマットをカスタマイズ
 
-**場所**: `{{SPEC_DIR}}/settings/templates/specs/`
+**場所**: `{{SPECTRA_DIR}}/settings/templates/specs/`
 
 **役割**: AIが生成する**ドキュメント構造**を定義します。テンプレートに追加したセクションやフィールドは、AI が自動的に埋めて出力します。
 
@@ -37,7 +37,7 @@ cc-sdd は2つのカスタマイズポイントを提供しています：
 
 ### 📋 rules/ - AIの判断基準をカスタマイズ
 
-**場所**: `{{SPEC_DIR}}/settings/rules/`
+**場所**: `{{SPECTRA_DIR}}/settings/rules/`
 
 **役割**: AIの**生成ルール・原則**を定義します。ルールを編集すると、AIの判断基準や生成スタイルが変わります。
 
@@ -176,7 +176,7 @@ requirements.md は非常に柔軟にカスタマイズできます：
 - ✅ **セクションの追加・削除**: チーム固有のレビュー項目を追加、不要なセクションは削除可能
 - ✅ **フォーマット変更**: 表形式、箇条書き、図表など自由に選択可能
 
-**Mermaid図について**: 基本構文ルールは `{{SPEC_DIR}}/settings/rules/design-principles.md` で定義されており、templatesの制約ではありません。ルールファイルを編集すれば図の要件も変更できます。
+**Mermaid図について**: 基本構文ルールは `{{SPECTRA_DIR}}/settings/rules/design-principles.md` で定義されており、templatesの制約ではありません。ルールファイルを編集すれば図の要件も変更できます。
 
 **必須なのはファイルの存在のみ**: コマンドは `design.md` を読み込みますが、特定の見出しやフォーマットをパースしません。
 
@@ -229,8 +229,8 @@ requirements.md は非常に柔軟にカスタマイズできます：
 
 ```bash
 # テンプレートの場所を確認
-ls -la {{SPEC_DIR}}/settings/templates/specs/
-ls -la {{SPEC_DIR}}/settings/rules/
+ls -la {{SPECTRA_DIR}}/settings/templates/specs/
+ls -la {{SPECTRA_DIR}}/settings/rules/
 ```
 
 ### Step 2: 構造を維持しつつ追加・編集
@@ -242,15 +242,15 @@ ls -la {{SPEC_DIR}}/settings/rules/
 
 ```bash
 # 新規specでテスト
-/spec:spec-init Test customization feature
-/spec:spec-requirements test-customization
-/spec:spec-design test-customization
-/spec:spec-tasks test-customization
+/spec:spectra-init Test customization feature
+/spec:spectra-requirements test-customization
+/spec:spectra-design test-customization
+/spec:spectra-tasks test-customization
 
 # 生成されたファイルを確認
-cat {{SPEC_DIR}}/specs/test-customization/requirements.md
-cat {{SPEC_DIR}}/specs/test-customization/design.md
-cat {{SPEC_DIR}}/specs/test-customization/tasks.md
+cat {{SPECTRA_DIR}}/specs/test-customization/requirements.md
+cat {{SPECTRA_DIR}}/specs/test-customization/design.md
+cat {{SPECTRA_DIR}}/specs/test-customization/tasks.md
 ```
 
 ---
@@ -265,8 +265,8 @@ cat {{SPEC_DIR}}/specs/test-customization/tasks.md
 
 ### 📋 カスタマイズ対象
 
-- **templates**: `{{SPEC_DIR}}/settings/templates/specs/requirements.md`
-- **rules**: `{{SPEC_DIR}}/settings/rules/ears-format.md` (オプション)
+- **templates**: `{{SPECTRA_DIR}}/settings/templates/specs/requirements.md`
+- **rules**: `{{SPECTRA_DIR}}/settings/rules/ears-format.md` (オプション)
 
 ### 🎯 適用ケース
 
@@ -278,7 +278,7 @@ cat {{SPEC_DIR}}/specs/test-customization/tasks.md
 
 #### Step 1: テンプレート編集（必須）
 
-**編集ファイル**: `{{SPEC_DIR}}/settings/templates/specs/requirements.md`
+**編集ファイル**: `{{SPECTRA_DIR}}/settings/templates/specs/requirements.md`
 
 **🔒 維持すべき構造**:
 - 番号付き見出しパターン（例: `### Requirement N:`, `### 要件 N:`, `### REQ-N:`）
@@ -410,7 +410,7 @@ cat {{SPEC_DIR}}/specs/test-customization/tasks.md
 
 #### Step 2: ルール調整（オプション - より厳密な制御が必要な場合）
 
-**編集ファイル**: `{{SPEC_DIR}}/settings/rules/ears-format.md`
+**編集ファイル**: `{{SPECTRA_DIR}}/settings/rules/ears-format.md`
 
 **追加内容**:
 
@@ -465,35 +465,35 @@ Always include NFR sections for:
 
 ### ✅ 完成後の動作
 
-`/spec:spec-requirements my-feature` を実行すると:
+`/spec:spectra-requirements my-feature` を実行すると:
 
 1. **Product Context** セクションが自動生成される
 2. 各要件に **Business Priority**、**Dependencies**、**Risk Level** が含まれる
 3. **Verification Method** と **Success Threshold** が各要件に追加される
 4. **Non-Functional Requirements** セクションが自動的に生成される
 5. **Compliance & Approvals** チェックリストが追加される
-6. 要件番号と受け入れ基準の構造は維持される（`/spec:spec-impl` および Skills モードの `/spec-impl` と互換性あり）
+6. 要件番号と受け入れ基準の構造は維持される（`/spec:spectra-impl` および Skills モードの `/spectra-impl` と互換性あり）
 
 ### 🧪 テスト方法
 
 ```bash
 # 1. テンプレートを編集
-vim {{SPEC_DIR}}/settings/templates/specs/requirements.md
+vim {{SPECTRA_DIR}}/settings/templates/specs/requirements.md
 
 # 2. (オプション) ルールを編集
-vim {{SPEC_DIR}}/settings/rules/ears-format.md
+vim {{SPECTRA_DIR}}/settings/rules/ears-format.md
 
 # 3. 新規specで確認
-/spec:spec-init Test PRD-style requirements with business context
-/spec:spec-requirements test-prd-feature
+/spec:spectra-init Test PRD-style requirements with business context
+/spec:spectra-requirements test-prd-feature
 
 # 4. 生成されたrequirements.mdを確認
-cat {{SPEC_DIR}}/specs/test-prd-feature/requirements.md
+cat {{SPECTRA_DIR}}/specs/test-prd-feature/requirements.md
 
 # 5. Product Context、Priority、NFRセクションが含まれていることを確認
-grep -A 5 "## Product Context" {{SPEC_DIR}}/specs/test-prd-feature/requirements.md
-grep "Business Priority" {{SPEC_DIR}}/specs/test-prd-feature/requirements.md
-grep -A 3 "## Non-Functional Requirements" {{SPEC_DIR}}/specs/test-prd-feature/requirements.md
+grep -A 5 "## Product Context" {{SPECTRA_DIR}}/specs/test-prd-feature/requirements.md
+grep "Business Priority" {{SPECTRA_DIR}}/specs/test-prd-feature/requirements.md
+grep -A 3 "## Non-Functional Requirements" {{SPECTRA_DIR}}/specs/test-prd-feature/requirements.md
 ```
 
 ---
@@ -502,8 +502,8 @@ grep -A 3 "## Non-Functional Requirements" {{SPEC_DIR}}/specs/test-prd-feature/r
 
 ### 📋 カスタマイズ対象
 
-- **templates**: `{{SPEC_DIR}}/settings/templates/specs/design.md`
-- **rules**: `{{SPEC_DIR}}/settings/rules/design-principles.md` (オプション)
+- **templates**: `{{SPECTRA_DIR}}/settings/templates/specs/design.md`
+- **rules**: `{{SPECTRA_DIR}}/settings/rules/design-principles.md` (オプション)
 
 ### 🎯 適用ケース
 
@@ -515,7 +515,7 @@ grep -A 3 "## Non-Functional Requirements" {{SPEC_DIR}}/specs/test-prd-feature/r
 
 #### Step 1: テンプレート編集（必須）
 
-**編集ファイル**: `{{SPEC_DIR}}/settings/templates/specs/design.md`
+**編集ファイル**: `{{SPECTRA_DIR}}/settings/templates/specs/design.md`
 
 **🔒 維持すべき構造**:
 - **ファイルの存在のみ** - 見出し名・順序・フォーマットは全て自由
@@ -1098,7 +1098,7 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains
 
 #### Step 2: ルール調整（オプション）
 
-**編集ファイル**: `{{SPEC_DIR}}/settings/rules/design-principles.md`
+**編集ファイル**: `{{SPECTRA_DIR}}/settings/rules/design-principles.md`
 
 **追加内容**:
 
@@ -1192,7 +1192,7 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains
 
 ### ✅ 完成後の動作
 
-`/spec:spec-design my-backend-feature` を実行すると:
+`/spec:spectra-design my-backend-feature` を実行すると:
 
 1. **API Specification** で全エンドポイントの詳細仕様が生成される
 2. **Database Schema** でテーブル定義、インデックス、制約が明記される
@@ -1205,20 +1205,20 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains
 
 ```bash
 # 1. テンプレートを編集
-vim {{SPEC_DIR}}/settings/templates/specs/design.md
+vim {{SPECTRA_DIR}}/settings/templates/specs/design.md
 
 # 2. 新規specで確認
-/spec:spec-init Build RESTful API for user management
-/spec:spec-requirements user-api
-/spec:spec-design user-api
+/spec:spectra-init Build RESTful API for user management
+/spec:spectra-requirements user-api
+/spec:spectra-design user-api
 
 # 3. 生成されたdesign.mdを確認
-cat {{SPEC_DIR}}/specs/user-api/design.md
+cat {{SPECTRA_DIR}}/specs/user-api/design.md
 
 # 4. バックエンド特化セクションが含まれていることを確認
-grep -A 20 "## API Specification" {{SPEC_DIR}}/specs/user-api/design.md
-grep -A 15 "## Database Schema" {{SPEC_DIR}}/specs/user-api/design.md
-grep -A 10 "## Security" {{SPEC_DIR}}/specs/user-api/design.md
+grep -A 20 "## API Specification" {{SPECTRA_DIR}}/specs/user-api/design.md
+grep -A 15 "## Database Schema" {{SPECTRA_DIR}}/specs/user-api/design.md
+grep -A 10 "## Security" {{SPECTRA_DIR}}/specs/user-api/design.md
 ```
 
 ---
@@ -1228,8 +1228,8 @@ grep -A 10 "## Security" {{SPEC_DIR}}/specs/user-api/design.md
 ### 📋 カスタマイズ対象
 
 - **作成**: `/spec:steering-custom` コマンドで新規作成
-- **保存先**: `{{SPEC_DIR}}/steering/{{domain-name}}.md`
-- **ルール調整**: `{{SPEC_DIR}}/settings/rules/steering-principles.md` (オプション)
+- **保存先**: `{{SPECTRA_DIR}}/steering/{{domain-name}}.md`
+- **ルール調整**: `{{SPECTRA_DIR}}/settings/rules/steering-principles.md` (オプション)
 
 ### 🎯 適用ケース
 
@@ -1253,7 +1253,7 @@ Create domain-specific steering for REST API standards:
 - Pagination
 ```
 
-**生成されるファイル**: `{{SPEC_DIR}}/steering/api-standards.md`
+**生成されるファイル**: `{{SPECTRA_DIR}}/steering/api-standards.md`
 
 **完全なテンプレート例**:
 
@@ -1844,7 +1844,7 @@ X-API-Replacement: /api/v2/users
 <details>
 <summary><strong>Authentication Standards</strong></summary>
 
-`{{SPEC_DIR}}/steering/authentication.md`
+`{{SPECTRA_DIR}}/steering/authentication.md`
 
 ```markdown
 # Authentication Standards
@@ -1935,7 +1935,7 @@ X-API-Replacement: /api/v2/users
 <details>
 <summary><strong>Testing Standards</strong></summary>
 
-`{{SPEC_DIR}}/steering/testing.md`
+`{{SPECTRA_DIR}}/steering/testing.md`
 
 ```markdown
 # Testing Standards
@@ -2025,7 +2025,7 @@ describe('ComponentName', () => {
 <details>
 <summary><strong>Error Handling Standards</strong></summary>
 
-`{{SPEC_DIR}}/steering/error-handling.md`
+`{{SPECTRA_DIR}}/steering/error-handling.md`
 
 ```markdown
 # Error Handling Standards
@@ -2157,9 +2157,9 @@ class ErrorBoundary extends React.Component {
 Steering文書を作成すると:
 
 1. **全てのspec生成コマンド**で自動的にルールが参照される
-2. `/spec:spec-design`でAPI設計時に標準フォーマットが自動適用される
-3. `/spec:spec-requirements`でエラーハンドリング要件が自動的に含まれる
-4. `/spec:spec-tasks`で認証・テスト関連タスクが標準に沿って生成される
+2. `/spec:spectra-design`でAPI設計時に標準フォーマットが自動適用される
+3. `/spec:spectra-requirements`でエラーハンドリング要件が自動的に含まれる
+4. `/spec:spectra-tasks`で認証・テスト関連タスクが標準に沿って生成される
 
 ### 🧪 テスト方法
 
@@ -2169,22 +2169,22 @@ Steering文書を作成すると:
 # プロンプト: Create API standards steering document for REST conventions
 
 # 2. 生成されたファイルを確認
-cat {{SPEC_DIR}}/steering/api-standards.md
+cat {{SPECTRA_DIR}}/steering/api-standards.md
 
 # 3. 新規specでSteering適用を確認
-/spec:spec-init Build user management API
-/spec:spec-design user-management-api
+/spec:spectra-init Build user management API
+/spec:spectra-design user-management-api
 
 # 4. 生成されたdesign.mdにAPI標準が反映されているか確認
-grep -A 10 "## API Specification" {{SPEC_DIR}}/specs/user-management-api/design.md
+grep -A 10 "## API Specification" {{SPECTRA_DIR}}/specs/user-management-api/design.md
 # エンドポイント構造、エラーレスポンス形式がsteering通りか確認
 
 # 5. 別の機能でも同じ標準が適用されることを確認
-/spec:spec-init Build order processing API
-/spec:spec-design order-processing-api
+/spec:spectra-init Build order processing API
+/spec:spectra-design order-processing-api
 diff \
-  <(grep "Error Response" {{SPEC_DIR}}/specs/user-management-api/design.md) \
-  <(grep "Error Response" {{SPEC_DIR}}/specs/order-processing-api/design.md)
+  <(grep "Error Response" {{SPECTRA_DIR}}/specs/user-management-api/design.md) \
+  <(grep "Error Response" {{SPECTRA_DIR}}/specs/order-processing-api/design.md)
 # 両方のspecで同じエラーフォーマットが使われていることを確認
 ```
 
@@ -2195,7 +2195,7 @@ diff \
 ### カスタムテンプレートが反映されない
 
 **確認項目**:
-- ファイルパス: `{{SPEC_DIR}}/settings/templates/specs/` に配置されているか
+- ファイルパス: `{{SPECTRA_DIR}}/settings/templates/specs/` に配置されているか
 - 必須構造: 番号付けパターン（`### ... N:`, `1.`, `- [ ] N.`）を維持しているか
 - Markdown構文: 見出しレベル、コードブロックが正しいか
 
@@ -2220,9 +2220,9 @@ npx cc-sdd@latest --overwrite=force
 
 ### チーム間でテンプレートが異なる
 
-**解決方法**: `{{SPEC_DIR}}/settings/` を git 管理
+**解決方法**: `{{SPECTRA_DIR}}/settings/` を git 管理
 ```bash
-git add {{SPEC_DIR}}/settings/
+git add {{SPECTRA_DIR}}/settings/
 git commit -m "Add team-wide templates"
 ```
 
@@ -2234,7 +2234,7 @@ git commit -m "Add team-wide templates"
 
 - **段階的カスタマイズ**: 1ファイルずつ変更しテスト
 - **必須構造の維持**: 番号付けパターン、階層構造を保持
-- **バージョン管理**: `{{SPEC_DIR}}/settings/` を git 管理
+- **バージョン管理**: `{{SPECTRA_DIR}}/settings/` を git 管理
 - **強いルール**: "MUST" + 具体例3つ以上
 
 ### ❌ 非推奨
@@ -2260,10 +2260,10 @@ git commit -m "Add team-wide templates"
 
 ```bash
 # 1. 小規模な機能で試す
-/spec:spec-init Small feature for testing custom templates
-/spec:spec-requirements test-feature
-/spec:spec-design test-feature
-/spec:spec-tasks test-feature
+/spec:spectra-init Small feature for testing custom templates
+/spec:spectra-requirements test-feature
+/spec:spectra-design test-feature
+/spec:spectra-tasks test-feature
 
 # 2. チームでレビュー
 # - 出力品質を確認

@@ -31,7 +31,7 @@ export const agentDefinitions = {
   'claude-code-skills': {
     label: 'Claude Code Skills',
     description:
-      'Installs spec skills in `.claude/skills/spec-*/`, shared settings in `{{SPEC_DIR}}/settings/`, and a CLAUDE.md quickstart.',
+      'Installs spec skills in `.claude/skills/spectra-*/`, shared settings in `{{SPECTRA_DIR}}/settings/`, and a CLAUDE.md quickstart.',
     aliasFlags: ['--claude-code-skills', '--claude-skills'],
     recommendedModels: ['Planning / review: Claude Opus 4.6 or newer', 'Implementation: Claude Sonnet 4.6 or newer'],
     layout: {
@@ -40,16 +40,16 @@ export const agentDefinitions = {
       docFile: 'CLAUDE.md',
     },
     commands: {
-      spec: '`/spec-init <what-to-build>`',
-      steering: '`/spec-steering`',
-      steeringCustom: '`/spec-steering-custom <what-to-create-custom-steering-document>`',
+      spec: '`/spectra-init <what-to-build>`',
+      steering: '`/spectra-steering`',
+      steeringCustom: '`/spectra-steering-custom <what-to-create-custom-steering-document>`',
     },
     completionGuide: {
       prependSteps: [
-        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spec-discovery <idea>`.',
+        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spectra-discovery <idea>`.',
       ],
       appendSteps: [
-        'Use `/spec-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
+        'Use `/spectra-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
       ],
     },
     templateFallbacks: {
@@ -60,7 +60,7 @@ export const agentDefinitions = {
   'codex-skills': {
     label: 'Codex Skills',
     description:
-      'Installs spec skills in `.agents/skills/spec-*/`, shared settings in `{{SPEC_DIR}}/settings/`, and an AGENTS.md quickstart.',
+      'Installs spec skills in `.agents/skills/spectra-*/`, shared settings in `{{SPECTRA_DIR}}/settings/`, and an AGENTS.md quickstart.',
     aliasFlags: ['--codex-skills'],
     recommendedModels: ['Planning / review: gpt-5.4 high or xhigh', 'Implementation: gpt-5.4'],
     layout: {
@@ -69,16 +69,16 @@ export const agentDefinitions = {
       docFile: 'AGENTS.md',
     },
     commands: {
-      spec: '`$spec-init <what-to-build>`',
-      steering: '`$spec-steering`',
-      steeringCustom: '`$spec-steering-custom <what-to-create-custom-steering-document>`',
+      spec: '`$spectra-init <what-to-build>`',
+      steering: '`$spectra-steering`',
+      steeringCustom: '`$spectra-steering-custom <what-to-create-custom-steering-document>`',
     },
     completionGuide: {
       prependSteps: [
-        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `$spec-discovery <idea>`.',
+        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `$spectra-discovery <idea>`.',
       ],
       appendSteps: [
-        'Use `$spec-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
+        'Use `$spectra-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
       ],
     },
     manifestId: 'codex-skills',
@@ -86,7 +86,7 @@ export const agentDefinitions = {
   'cursor-skills': {
     label: 'Cursor Skills',
     description:
-      'Installs spec skills in `.cursor/skills/spec-*/`, shared settings in `{{SPEC_DIR}}/settings/`, and an AGENTS.md quickstart.',
+      'Installs spec skills in `.cursor/skills/spectra-*/`, shared settings in `{{SPECTRA_DIR}}/settings/`, and an AGENTS.md quickstart.',
     aliasFlags: ['--cursor-skills'],
     recommendedModels: ['Planning / review: Claude Opus 4.6 or newer / gpt-5.4 high', 'Implementation: Claude Sonnet 4.6 or newer / gpt-5.4 / Composer 2'],
     layout: {
@@ -95,16 +95,16 @@ export const agentDefinitions = {
       docFile: 'AGENTS.md',
     },
     commands: {
-      spec: '`/spec-init <what-to-build>`',
-      steering: '`/spec-steering`',
-      steeringCustom: '`/spec-steering-custom <what-to-create-custom-steering-document>`',
+      spec: '`/spectra-init <what-to-build>`',
+      steering: '`/spectra-steering`',
+      steeringCustom: '`/spectra-steering-custom <what-to-create-custom-steering-document>`',
     },
     completionGuide: {
       prependSteps: [
-        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spec-discovery <idea>`.',
+        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spectra-discovery <idea>`.',
       ],
       appendSteps: [
-        'Use `/spec-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
+        'Use `/spectra-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
       ],
     },
     manifestId: 'cursor-skills',
@@ -112,7 +112,7 @@ export const agentDefinitions = {
   'github-copilot-skills': {
     label: 'GitHub Copilot Skills',
     description:
-      'Installs spec skills in `.github/skills/spec-*/`, shared settings in `{{SPEC_DIR}}/settings/`, and an AGENTS.md quickstart.',
+      'Installs spec skills in `.github/skills/spectra-*/`, shared settings in `{{SPECTRA_DIR}}/settings/`, and an AGENTS.md quickstart.',
     aliasFlags: ['--copilot-skills', '--github-copilot-skills'],
     recommendedModels: ['Planning / review: Claude Opus 4.6 or newer / gpt-5.4 high', 'Implementation: Claude Sonnet 4.6 or newer / gpt-5.4'],
     layout: {
@@ -121,16 +121,16 @@ export const agentDefinitions = {
       docFile: 'AGENTS.md',
     },
     commands: {
-      spec: '`/spec-init <what-to-build>`',
-      steering: '`/spec-steering`',
-      steeringCustom: '`/spec-steering-custom <what-to-create-custom-steering-document>`',
+      spec: '`/spectra-init <what-to-build>`',
+      steering: '`/spectra-steering`',
+      steeringCustom: '`/spectra-steering-custom <what-to-create-custom-steering-document>`',
     },
     completionGuide: {
       prependSteps: [
-        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spec-discovery <idea>`.',
+        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spectra-discovery <idea>`.',
       ],
       appendSteps: [
-        'Use `/spec-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
+        'Use `/spectra-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
       ],
     },
     manifestId: 'github-copilot-skills',
@@ -138,7 +138,7 @@ export const agentDefinitions = {
   'gemini-cli-skills': {
     label: 'Gemini CLI Skills',
     description:
-      'Installs spec skills in `.gemini/skills/spec-*/`, shared settings in `{{SPEC_DIR}}/settings/`, and a GEMINI.md quickstart.',
+      'Installs spec skills in `.gemini/skills/spectra-*/`, shared settings in `{{SPECTRA_DIR}}/settings/`, and a GEMINI.md quickstart.',
     aliasFlags: ['--gemini-cli-skills', '--gemini-skills'],
     recommendedModels: ['Planning / review: Gemini 3.1 Pro or newer', 'Implementation: Gemini 3 Flash or newer'],
     layout: {
@@ -147,16 +147,16 @@ export const agentDefinitions = {
       docFile: 'GEMINI.md',
     },
     commands: {
-      spec: '`/spec-init <what-to-build>`',
-      steering: '`/spec-steering`',
-      steeringCustom: '`/spec-steering-custom <what-to-create-custom-steering-document>`',
+      spec: '`/spectra-init <what-to-build>`',
+      steering: '`/spectra-steering`',
+      steeringCustom: '`/spectra-steering-custom <what-to-create-custom-steering-document>`',
     },
     completionGuide: {
       prependSteps: [
-        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spec-discovery <idea>`.',
+        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spectra-discovery <idea>`.',
       ],
       appendSteps: [
-        'Use `/spec-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
+        'Use `/spectra-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
       ],
     },
     manifestId: 'gemini-cli-skills',
@@ -164,7 +164,7 @@ export const agentDefinitions = {
   'windsurf-skills': {
     label: 'Windsurf Skills',
     description:
-      'Installs spec skills in `.windsurf/skills/spec-*/`, shared settings in `{{SPEC_DIR}}/settings/`, and an AGENTS.md quickstart.',
+      'Installs spec skills in `.windsurf/skills/spectra-*/`, shared settings in `{{SPECTRA_DIR}}/settings/`, and an AGENTS.md quickstart.',
     aliasFlags: ['--windsurf-skills'],
     recommendedModels: ['Planning / review: Claude Opus 4.6 or newer / gpt-5.4 high', 'Implementation: Claude Sonnet 4.6 or newer / gpt-5.4'],
     layout: {
@@ -173,16 +173,16 @@ export const agentDefinitions = {
       docFile: 'AGENTS.md',
     },
     commands: {
-      spec: '`@spec-init <what-to-build>`',
-      steering: '`@spec-steering`',
-      steeringCustom: '`@spec-steering-custom <what-to-create-custom-steering-document>`',
+      spec: '`@spectra-init <what-to-build>`',
+      steering: '`@spectra-steering`',
+      steeringCustom: '`@spectra-steering-custom <what-to-create-custom-steering-document>`',
     },
     completionGuide: {
       prependSteps: [
-        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `@spec-discovery <idea>`.',
+        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `@spectra-discovery <idea>`.',
       ],
       appendSteps: [
-        'Use `@spec-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
+        'Use `@spectra-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
       ],
     },
     manifestId: 'windsurf-skills',
@@ -190,7 +190,7 @@ export const agentDefinitions = {
   'opencode-skills': {
     label: 'OpenCode Skills',
     description:
-      'Installs spec skills in `.opencode/skills/spec-*/`, shared settings in `{{SPEC_DIR}}/settings/`, and an AGENTS.md quickstart.',
+      'Installs spec skills in `.opencode/skills/spectra-*/`, shared settings in `{{SPECTRA_DIR}}/settings/`, and an AGENTS.md quickstart.',
     aliasFlags: ['--opencode-skills'],
     recommendedModels: ['Planning / review: gpt-5.4 high or xhigh', 'Implementation: gpt-5.4'],
     layout: {
@@ -199,16 +199,16 @@ export const agentDefinitions = {
       docFile: 'AGENTS.md',
     },
     commands: {
-      spec: '`/spec-init <what-to-build>`',
-      steering: '`/spec-steering`',
-      steeringCustom: '`/spec-steering-custom <what-to-create-custom-steering-document>`',
+      spec: '`/spectra-init <what-to-build>`',
+      steering: '`/spectra-steering`',
+      steeringCustom: '`/spectra-steering-custom <what-to-create-custom-steering-document>`',
     },
     completionGuide: {
       prependSteps: [
-        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spec-discovery <idea>`.',
+        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spectra-discovery <idea>`.',
       ],
       appendSteps: [
-        'Use `/spec-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
+        'Use `/spectra-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
       ],
     },
     manifestId: 'opencode-skills',
@@ -216,7 +216,7 @@ export const agentDefinitions = {
   'antigravity-skills': {
     label: 'Antigravity Skills',
     description:
-      'Installs spec skills in `.agent/skills/spec-*/`, shared settings in `{{SPEC_DIR}}/settings/`, and an AGENTS.md quickstart.',
+      'Installs spec skills in `.agent/skills/spectra-*/`, shared settings in `{{SPECTRA_DIR}}/settings/`, and an AGENTS.md quickstart.',
     aliasFlags: ['--antigravity-skills', '--antigravity'],
     layout: {
       commandsDir: '.agent/skills',
@@ -224,16 +224,16 @@ export const agentDefinitions = {
       docFile: 'AGENTS.md',
     },
     commands: {
-      spec: '`/spec-init <what-to-build>`',
-      steering: '`/spec-steering`',
-      steeringCustom: '`/spec-steering-custom <what-to-create-custom-steering-document>`',
+      spec: '`/spectra-init <what-to-build>`',
+      steering: '`/spectra-steering`',
+      steeringCustom: '`/spectra-steering-custom <what-to-create-custom-steering-document>`',
     },
     completionGuide: {
       prependSteps: [
-        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spec-discovery <idea>`.',
+        'If you are not sure whether the work should become one spec, many specs, or no spec at all, start with `/spectra-discovery <idea>`.',
       ],
       appendSteps: [
-        'Use `/spec-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
+        'Use `/spectra-quick <what-to-build> [--auto]` only when you intentionally want the fast path for a single spec.',
       ],
     },
     manifestId: 'antigravity-skills',

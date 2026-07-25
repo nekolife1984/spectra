@@ -14,7 +14,7 @@ describe('mergeConfigAndArgs', () => {
       os: 'auto',
       resolvedOs: 'mac',
       lang: 'en',
-      specDir: '.spec',
+      spectraDir: '.spectra',
       overwrite: 'prompt',
       effectiveOverwrite: 'prompt',
       backupEnabled: false,
@@ -30,7 +30,7 @@ describe('mergeConfigAndArgs', () => {
       '--agent', 'qwen-code',
       '--lang', 'zh-TW',
       '--os', 'mac',
-      '--spec-dir', '.work/spec',
+      '--spectra-dir', '.work/spectra',
       '--overwrite', 'force',
       '--backup', 'bk',
       '--dry-run',
@@ -41,7 +41,7 @@ describe('mergeConfigAndArgs', () => {
       agent: 'gemini-cli',
       os: 'linux',
       lang: 'en',
-      specDir: 'docs/spec',
+      spectraDir: 'docs/spectra',
       overwrite: 'skip',
       backupDir: '.bk',
     };
@@ -51,7 +51,7 @@ describe('mergeConfigAndArgs', () => {
     expect(out.lang).toBe('zh-TW');
     expect(out.os).toBe('mac');
     expect(out.resolvedOs).toBe('mac');
-    expect(out.specDir).toBe('.work/spec');
+    expect(out.spectraDir).toBe('.work/spectra');
     expect(out.overwrite).toBe('force');
     expect(out.effectiveOverwrite).toBe('force');
     expect(out.backupEnabled).toBe(true);
@@ -67,10 +67,10 @@ describe('mergeConfigAndArgs', () => {
     expect(out.effectiveOverwrite).toBe('force');
   });
 
-  it('validates specDir via precedence and throws on invalid path', () => {
+  it('validates spectraDir via precedence and throws on invalid path', () => {
     const args = parseArgs([]);
-    const cfg: UserConfig = { specDir: '/abs' };
-    expect(() => mergeConfigAndArgs(args, cfg, runtimeDarwin)).toThrowError(/specDir/i);
+    const cfg: UserConfig = { spectraDir: '/abs' };
+    expect(() => mergeConfigAndArgs(args, cfg, runtimeDarwin)).toThrowError(/spectraDir/i);
   });
 
   it('applies agentLayouts override into layout resolution', () => {

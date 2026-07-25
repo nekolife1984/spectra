@@ -51,7 +51,7 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
    /spec:steering
    
    # 最初の機能仕様を作成
-   /spec:spec-init "あなたのプロジェクトの詳細な説明"
+   /spec:spectra-init "あなたのプロジェクトの詳細な説明"
    ```
 
 ### マルチプラットフォーム対応ディレクトリ構造
@@ -68,7 +68,7 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 │   ├── .github/prompts/      # GitHub Copilot用プロンプト定義
 │   ├── .qwen/commands/spec/  # Qwen Code用コマンド定義
 │   └── .windsurf/workflows/  # Windsurf用ワークフロー定義
-├── .spec/
+├── .spectra/
 │   ├── steering/              # 自動生成されるステアリング文書
 │   └── specs/                 # 自動生成される機能仕様
 ├── プラットフォーム別設定ファイル
@@ -91,21 +91,21 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 /spec:steering
 
 # ステップ1: 新機能の仕様作成開始（詳細な説明を含める）
-/spec:spec-init "ユーザーがPDFをアップロードして、その中の図表を抽出し、AIが内容を説明する機能を作りたい。技術スタックはNext.js、TypeScript、Tailwind CSSを使用。"
+/spec:spectra-init "ユーザーがPDFをアップロードして、その中の図表を抽出し、AIが内容を説明する機能を作りたい。技術スタックはNext.js、TypeScript、Tailwind CSSを使用。"
 
 # ステップ2: 要件定義（自動生成されたfeature-nameを使用）
-/spec:spec-requirements pdf-diagram-extractor
-# → .spec/specs/pdf-diagram-extractor/requirements.md をレビュー・編集
+/spec:spectra-requirements pdf-diagram-extractor
+# → .spectra/specs/pdf-diagram-extractor/requirements.md をレビュー・編集
 
 # ステップ3: 技術設計（インタラクティブ承認）
-/spec:spec-design pdf-diagram-extractor
+/spec:spectra-design pdf-diagram-extractor
 # → "requirements.mdをレビューしましたか？ [y/N]" に応答
-# → .spec/specs/pdf-diagram-extractor/design.md をレビュー・編集
+# → .spectra/specs/pdf-diagram-extractor/design.md をレビュー・編集
 
 # ステップ4: タスク生成（インタラクティブ承認）
-/spec:spec-tasks pdf-diagram-extractor
+/spec:spectra-tasks pdf-diagram-extractor
 # → requirements と design のレビュー確認に応答
-# → .spec/specs/pdf-diagram-extractor/tasks.md をレビュー・編集
+# → .spectra/specs/pdf-diagram-extractor/tasks.md をレビュー・編集
 
 # ステップ5: 実装開始
 ```
@@ -118,7 +118,7 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 /spec:steering
 
 # ステップ1: 新機能の仕様作成開始
-/spec:spec-init "新しい機能の詳細な説明をここに記述"
+/spec:spectra-init "新しい機能の詳細な説明をここに記述"
 # 以降は新規プロジェクトと同じ
 ```
 
@@ -126,7 +126,7 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 
 ```bash
 # 特定機能の進捗確認
-/spec:spec-status my-feature
+/spec:spectra-status my-feature
 
 # 現在のフェーズ、承認状況、タスク進捗が表示される
 ```
@@ -143,24 +143,24 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 graph TD
     A["プロジェクト開始"] --> B{"ステアリング<br/>文書化？"}
     B -->|はい| C["/spec:steering"]
-    B -->|いいえ| D["/spec:spec-init"]
+    B -->|いいえ| D["/spec:spectra-init"]
     C --> D
     
-    D --> E["/spec:spec-requirements"]
+    D --> E["/spec:spectra-requirements"]
     E --> F["requirements.md"]
     F --> G{"満足？"}
     G -->|いいえ| G1["編集・修正"]
     G1 --> F
     G -->|はい| H["次フェーズへ"]
     
-    H --> I["/spec:spec-design"]
+    H --> I["/spec:spectra-design"]
     I --> J["design.md"]
     J --> K{"満足？"}
     K -->|いいえ| K1["編集・修正"]
     K1 --> J
     K -->|はい| L["次フェーズへ"]
     
-    L --> M["/spec:spec-tasks"]
+    L --> M["/spec:spectra-tasks"]
     M --> N["tasks.md"]
     N --> O{"満足？"}
     O -->|いいえ| O1["編集・修正"]
@@ -168,7 +168,7 @@ graph TD
     O -->|はい| P["実装準備完了"]
     
     P --> Q["実装開始"]
-    Q --> R["/spec:spec-status"]
+    Q --> R["/spec:spectra-status"]
     R --> S{"完了？"}
     S -->|いいえ| Q
     S -->|はい| T["機能完成"]
@@ -219,16 +219,16 @@ graph TD
 
 | コマンド | 用途 | 使用タイミング |
 |---------|------|---------------|
-| `/spec:spec-init [詳細なプロジェクト説明]` | プロジェクト説明から仕様構造を初期化 | 新機能開発開始時 |
-| `/spec:spec-requirements [feature-name]` | 要件定義書の生成 | 仕様初期化後すぐ |
-| `/spec:spec-design [feature-name]` | 技術設計書の生成 | 要件承認後 |
-| `/spec:spec-tasks [feature-name]` | 実装タスクの生成 | 設計承認後 |
+| `/spec:spectra-init [詳細なプロジェクト説明]` | プロジェクト説明から仕様構造を初期化 | 新機能開発開始時 |
+| `/spec:spectra-requirements [feature-name]` | 要件定義書の生成 | 仕様初期化後すぐ |
+| `/spec:spectra-design [feature-name]` | 技術設計書の生成 | 要件承認後 |
+| `/spec:spectra-tasks [feature-name]` | 実装タスクの生成 | 設計承認後 |
 
 ### 📊 Phase 2: 進捗管理
 
 | コマンド | 用途 | 使用タイミング |
 |---------|------|---------------|
-| `/spec:spec-status [feature-name]` | 現在の進捗とフェーズ確認 | 開発中随時 |
+| `/spec:spectra-status [feature-name]` | 現在の進捗とフェーズ確認 | 開発中随時 |
 
 ## 3フェーズ承認ワークフロー
 
@@ -240,13 +240,13 @@ sequenceDiagram
     participant C as Claude Code
     participant H as Human Reviewer
     
-    D->>C: "/spec:spec-requirements feature"
+    D->>C: "/spec:spectra-requirements feature"
     C->>C: "要件生成"
     C->>D: "requirements.md"
     D->>H: "レビュー依頼"
     H->>H: "レビュー・編集"
     
-    D->>C: "/spec:spec-design feature"
+    D->>C: "/spec:spectra-design feature"
     C->>D: "レビュー確認: requirements.mdをレビューしましたか？"
     D->>C: "y"
     C->>C: "設計生成（要件ベース）"
@@ -254,7 +254,7 @@ sequenceDiagram
     D->>H: "レビュー依頼"
     H->>H: "レビュー・編集"
     
-    D->>C: "/spec:spec-tasks feature"
+    D->>C: "/spec:spectra-tasks feature"
     C->>D: "レビュー確認: requirements/design確認"
     D->>C: "y"
     C->>C: "タスク生成（設計ベース）"
@@ -278,7 +278,7 @@ sequenceDiagram
    - 各フェーズで必ず人間によるレビューを実施
 
 3. **定期的な進捗確認**
-   - `/spec:spec-status` で現在の状況を把握
+   - `/spec:spectra-status` で現在の状況を把握
    - タスクの完了状況を適切に更新
 
 4. **ステアリングの保守**
@@ -302,35 +302,35 @@ sequenceDiagram
 .
 ├── マルチプラットフォーム対応ディレクトリ
 │   ├── .claude/commands/spec/     # Claude Code用コマンド
-│   │   ├── spec-init.md
-│   │   ├── spec-requirements.md
-│   │   ├── spec-design.md
-│   │   ├── spec-tasks.md
-│   │   ├── spec-status.md
-│   │   ├── spec-impl.md
+│   │   ├── spectra-init.md
+│   │   ├── spectra-requirements.md
+│   │   ├── spectra-design.md
+│   │   ├── spectra-tasks.md
+│   │   ├── spectra-status.md
+│   │   ├── spectra-impl.md
 │   │   ├── steering.md
 │   │   └── steering-custom.md
 │   ├── .cursor/commands/spec/     # Cursor用コマンド
-│   │   ├── spec-init.md
-│   │   ├── spec-requirements.md
-│   │   ├── spec-design.md
-│   │   ├── spec-tasks.md
-│   │   ├── spec-status.md
-│   │   └── spec-impl.md
+│   │   ├── spectra-init.md
+│   │   ├── spectra-requirements.md
+│   │   ├── spectra-design.md
+│   │   ├── spectra-tasks.md
+│   │   ├── spectra-status.md
+│   │   └── spectra-impl.md
 │   ├── .gemini/commands/spec/     # Gemini CLI用TOML
-│   │   ├── spec-init.toml
-│   │   ├── spec-requirements.toml
-│   │   ├── spec-design.toml
-│   │   ├── spec-tasks.toml
-│   │   ├── spec-status.toml
-│   │   └── spec-impl.toml
+│   │   ├── spectra-init.toml
+│   │   ├── spectra-requirements.toml
+│   │   ├── spectra-design.toml
+│   │   ├── spectra-tasks.toml
+│   │   ├── spectra-status.toml
+│   │   └── spectra-impl.toml
 │   └── .codex/commands/           # Codex CLI用プロンプト
-│       ├── spec-init.md
-│       ├── spec-requirements.md
-│       ├── spec-design.md
-│       ├── spec-tasks.md
-│       └── spec-impl.md
-├── .spec/                         # 共通仕様管理ディレクトリ
+│       ├── spectra-init.md
+│       ├── spectra-requirements.md
+│       ├── spectra-design.md
+│       ├── spectra-tasks.md
+│       └── spectra-impl.md
+├── .spectra/                         # 共通仕様管理ディレクトリ
 │   ├── steering/                  # ステアリング文書
 │   │   ├── product.md
 │   │   ├── tech.md
@@ -388,7 +388,7 @@ sequenceDiagram
 ### 承認フローで詰まった場合
 1. レビュー確認プロンプトに正しく応答しているか確認
 2. 前フェーズの承認が完了しているか確認
-3. `/spec:spec-status` で現在の状態を診断
+3. `/spec:spectra-status` で現在の状態を診断
 4. 必要に応じて `spec.json` を手動で確認・編集
 
 ## まとめ

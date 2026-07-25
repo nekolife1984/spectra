@@ -17,11 +17,11 @@ Skills モードを使っている場合は、先に [スキルリファレン�
 - [`/spec:steering-custom`](#specsteering-custom)
 
 ### Spec Workflow
-- [`/spec:spec-init`](#specspec-init)
-- [`/spec:spec-requirements`](#specspec-requirements)
-- [`/spec:spec-design`](#specspec-design)
-- [`/spec:spec-tasks`](#specspec-tasks)
-- [`/spec:spec-impl`](#specspec-impl)
+- [`/spec:spectra-init`](#specspectra-init)
+- [`/spec:spectra-requirements`](#specspectra-requirements)
+- [`/spec:spectra-design`](#specspectra-design)
+- [`/spec:spectra-tasks`](#specspectra-tasks)
+- [`/spec:spectra-impl`](#specspectra-impl)
 
 ### Validation
 - [`/spec:validate-gap`](#specvalidate-gap)
@@ -29,7 +29,7 @@ Skills モードを使っている場合は、先に [スキルリファレン�
 - [`/spec:validate-impl`](#specvalidate-impl)
 
 ### Status
-- [`/spec:spec-status`](#specspec-status)
+- [`/spec:spectra-status`](#specspectra-status)
 
 ---
 
@@ -37,24 +37,24 @@ Skills モードを使っている場合は、先に [スキルリファレン�
 
 | コマンド | 主な引数 | 目的 | 次に実行するコマンド |
 | --- | --- | --- | --- |
-| `/spec:steering` | – | プロジェクトメモリの作成/更新 | `/spec:spec-init` |
-| `/spec:steering-custom` | 対話形式 | ドメイン固有のステアリング情報を追加 | `/spec:spec-init` (必要に応じて再実行) |
-| `/spec:spec-init <feature>` | 機能説明 | `.spec/specs/<feature>/` を作成 | `/spec:spec-requirements <feature>` |
-| `/spec:spec-requirements <feature>` | 機能名 | `requirements.md` を生成 | `/spec:spec-design <feature>` |
-| `/spec:validate-gap <feature>` | 任意 | 既存コードと要件差分を検証 | `/spec:spec-design <feature>` |
-| `/spec:spec-design <feature> [-y]` | 機能名 | `research.md`（必要に応じて）と `design.md` を生成 | `/spec:spec-tasks <feature>` |
-| `/spec:validate-design <feature>` | 任意 | 設計の品質評価 | `/spec:spec-tasks <feature>` |
-| `/spec:spec-tasks <feature> [-y]` | 機能名 | 並列実行を考慮したタスクリスト `tasks.md`（実行順序ラベル付き）を作成 | `/spec:spec-impl <feature> [task-ids]` |
-| `/spec:spec-impl <feature> [task-ids]` | タスク番号 | 実装とテスト駆動開発（TDD）の実行 | `/spec:validate-impl [feature] [task-ids]` |
-| `/spec:validate-impl [feature] [task-ids]` | 任意 | 実装のレビュー/テスト結果を確認 | `/spec:spec-status <feature>` |
-| `/spec:spec-status <feature>` | 機能名 | 各フェーズの進捗・承認状況を要約 | レコメンドに従って次フェーズへ |
+| `/spec:steering` | – | プロジェクトメモリの作成/更新 | `/spec:spectra-init` |
+| `/spec:steering-custom` | 対話形式 | ドメイン固有のステアリング情報を追加 | `/spec:spectra-init` (必要に応じて再実行) |
+| `/spec:spectra-init <feature>` | 機能説明 | `.spectra/specs/<feature>/` を作成 | `/spec:spectra-requirements <feature>` |
+| `/spec:spectra-requirements <feature>` | 機能名 | `requirements.md` を生成 | `/spec:spectra-design <feature>` |
+| `/spec:validate-gap <feature>` | 任意 | 既存コードと要件差分を検証 | `/spec:spectra-design <feature>` |
+| `/spec:spectra-design <feature> [-y]` | 機能名 | `research.md`（必要に応じて）と `design.md` を生成 | `/spec:spectra-tasks <feature>` |
+| `/spec:validate-design <feature>` | 任意 | 設計の品質評価 | `/spec:spectra-tasks <feature>` |
+| `/spec:spectra-tasks <feature> [-y]` | 機能名 | 並列実行を考慮したタスクリスト `tasks.md`（実行順序ラベル付き）を作成 | `/spec:spectra-impl <feature> [task-ids]` |
+| `/spec:spectra-impl <feature> [task-ids]` | タスク番号 | 実装とテスト駆動開発（TDD）の実行 | `/spec:validate-impl [feature] [task-ids]` |
+| `/spec:validate-impl [feature] [task-ids]` | 任意 | 実装のレビュー/テスト結果を確認 | `/spec:spectra-status <feature>` |
+| `/spec:spectra-status <feature>` | 機能名 | 各フェーズの進捗・承認状況を要約 | レコメンドに従って次フェーズへ |
 
 ---
 
 ## Steering コマンド
 
 ### `/spec:steering`
-- **目的**: プロジェクト全体のルールやガイドラインを `.spec/steering/` ディレクトリに集約し、すべてのコマンドが共通のプロジェクトメモリ（Project Memory）を参照できるようにする。特定の機能に関する実装の詳細を記述する場所ではない。
+- **目的**: プロジェクト全体のルールやガイドラインを `.spectra/steering/` ディレクトリに集約し、すべてのコマンドが共通のプロジェクトメモリ（Project Memory）を参照できるようにする。特定の機能に関する実装の詳細を記述する場所ではない。
 - **引数**: なし。
 - **出力**: `structure.md`、`tech.md`、`product.md` が生成される（既存の場合は差分を更新）。ここには長期的に使用する原則や標準のみを記載し、個別の機能に関するメモは `spec/research/design` に残すこと。
 - **典型的なフロー**: リポジトリの初回セットアップ時や大規模な変更時に実行し、生成された内容を開発者がレビュー・調整する。その後、各specコマンドがこの情報を自動的に参照する。
@@ -76,31 +76,31 @@ Skills モードを使っている場合は、先に [スキルリファレン�
 
 ## Spec Workflow コマンド
 
-### `/spec:spec-init`
-- **目的**: `.spec/specs/<feature>/` ディレクトリを作成し、`overview.md` や `context.json` などのメタデータを初期化する。
+### `/spec:spectra-init`
+- **目的**: `.spectra/specs/<feature>/` ディレクトリを作成し、`overview.md` や `context.json` などのメタデータを初期化する。
 - **必須引数**: `<feature>`（機能名やイシュー ID）。
 - **実行タイミング**: Steering情報の設定直後、または新しい機能を追加する際に実行する。
-- **次のステップ**: `/spec:spec-requirements <feature>`。
+- **次のステップ**: `/spec:spectra-requirements <feature>`。
 
-### `/spec:spec-requirements`
+### `/spec:spectra-requirements`
 - **目的**: ユーザーの要求や制約条件を洗い出し、EARS (Easy Approach to Requirements Syntax) 形式で `requirements.md` を作成する。
 - **フロー**: コマンドを実行し、AIからの補足質問に回答する。生成されたドラフトを開発者がレビューし、必要に応じて追記・修正する。
 - **ヒント**: 既存のプロジェクト（Brownfield）では、`/spec:validate-gap` を併用することで、既存コードとの差分を明確にできる。
 
-### `/spec:spec-design`
+### `/spec:spectra-design`
 - **目的**: 調査ログ `research.md`（必要な場合のみ自動生成）と、詳細設計書 `design.md` をセットで作成する。要件カバレッジ、コンポーネントとインターフェース、参考文献など、v2.0.0のテンプレートに準拠した内容が出力される。
 - **オプション**: `-y` オプションを付けると、確認プロンプトをスキップできる（本番運用での使用は推奨されない）。
 - **レビューの観点**: アーキテクチャの境界、トレーサビリティ、コンポーネントの結合度に関するルールが守られているか、また、長文の資料や外部リンクが参考文献（Supporting References）として適切に分離されているかを確認する。
 
-### `/spec:spec-tasks`
+### `/spec:spectra-tasks`
 - **目的**: `design.md` を基に実装タスクリスト (`tasks.md`) を作成する。その際、`P0`（逐次実行が必須）や `P1`（並列実行が可能）といった実行順序のラベルを付け、並行開発を容易にする。
 - **ポイント**: v2.0.0では、ドメインやレイヤーごとのブロックが標準化され、機能追加やリファクタリングの案件にも再利用しやすくなった。要件IDとの紐付け、チェックボックス、実行順序ラベルがセットで生成される。
 
-### `/spec:spec-impl`
+### `/spec:spectra-impl`
 - **目的**: 指定タスクを AI で実装。テストコマンドや検証内容も併せて提案。
-- **使い方**: `/spec:spec-impl user-auth 3 4` のようにタスクIDを渡すことで、指定されたタスクのみを対象とした実装プロンプトが生成される。
+- **使い方**: `/spec:spectra-impl user-auth 3 4` のようにタスクIDを渡すことで、指定されたタスクのみを対象とした実装プロンプトが生成される。
 - **注意**: 実行する前に、`tasks.md` のタスクリストが承認済みであることを確認すること。
-- **Skills モードでの相当コマンド**: `/spec-impl`（後述の「Skills モード」セクションを参照）。
+- **Skills モードでの相当コマンド**: `/spectra-impl`（後述の「Skills モード」セクションを参照）。
 
 ---
 
@@ -118,13 +118,13 @@ Skills モードを使っている場合は、先に [スキルリファレン�
 ### `/spec:validate-impl`
 - **役割**: 実装済みのタスクが `tasks.md` に記載された受け入れ条件を満たしているかを確認する。テストコマンドやログの不足、差分（Diff）の概要などをまとめて報告する。
 - **入力**: `[feature-name] [task-ids]`（引数を省略した場合は、直近のタスクを自動的に検出する）。
-- **v3.0.0での変更**: Skills モード（`/spec-validate-impl`）では、**インテグレーション検証**（タスク横断の整合性チェック）に焦点が移った。個別タスクの検証はレビューア Subagent が自律的に実施する。
+- **v3.0.0での変更**: Skills モード（`/spectra-validate-impl`）では、**インテグレーション検証**（タスク横断の整合性チェック）に焦点が移った。個別タスクの検証はレビューア Subagent が自律的に実施する。
 
 ---
 
 ## Status コマンド
 
-### `/spec:spec-status`
+### `/spec:spectra-status`
 - **目的**: 特定の機能開発プロジェクトについて、要件定義、設計、タスク分割、実装、検証の各フェーズの進捗と承認状況を一覧で表示する。
 - **出力**: チェックリスト形式のサマリーがCLIに表示され、次に実行すべきコマンドが提案される。
 - **利用シーン**: 担当レビューアの交代時や、複数の開発者・AIエージェントが並行して作業を進めている状況で、全体の進捗を把握するのに便利である。
@@ -135,18 +135,18 @@ Skills モードを使っている場合は、先に [スキルリファレン�
 
 `--claude-skills`、`--codex-skills`、`--cursor-skills`、`--copilot-skills`、`--windsurf-skills`、`--opencode-skills`、`--gemini-skills`、`--antigravity` でインストールした場合、一部のコマンドが Skills（`/spec-*`）として提供される。Skills モードでは外部プラグインに依存せず、各プラットフォーム標準の subagent primitive のみで動作する。
 
-### `/spec-discovery`
-- **目的**: 曖昧なアイデアや漠然とした要望を、`/spec:spec-init` に渡せる具体的な機能提案に整理する。
-- **利用タイミング**: Skills モードで `spec-init` の前に使う任意のエントリポイント。レガシーのコマンドモードには相当コマンドはなく、そこでは `/spec:spec-init` から直接始める。
+### `/spectra-discovery`
+- **目的**: 曖昧なアイデアや漠然とした要望を、`/spec:spectra-init` に渡せる具体的な機能提案に整理する。
+- **利用タイミング**: Skills モードで `spectra-init` の前に使う任意のエントリポイント。レガシーのコマンドモードには相当コマンドはなく、そこでは `/spec:spectra-init` から直接始める。
 
-### `/spec-impl`
-- **目的**: コマンドモードの `/spec:spec-impl` に相当する実装 Skill。2つのモードを持つ。
+### `/spectra-impl`
+- **目的**: コマンドモードの `/spec:spectra-impl` に相当する実装 Skill。2つのモードを持つ。
 - **自律モード（タスク引数なし）**: タスクごとに実装者・レビューア・デバッガーの3種類の Subagent を spawn。実装者が BLOCKED またはレビューアが2回 REJECTED した場合、デバッグ Subagent が新しいコンテキストで根本原因を調査（Web検索付き、最大2ラウンド）。タスク間の知見は Implementation Notes として次の実装者に引き継がれる。
-- **マニュアルモード（タスク引数あり）**: メインコンテキスト内で TDD ベースの実装を行う。コマンドモードの `/spec:spec-impl` と同等の動作。
+- **マニュアルモード（タスク引数あり）**: メインコンテキスト内で TDD ベースの実装を行う。コマンドモードの `/spec:spectra-impl` と同等の動作。
 - **セッション再開**: 中断後に再実行すると、`tasks.md` の進捗状態に基づいて未完了タスクから処理を再開する。
 
-### `/spec-validate-impl`
-- **目的**: コマンドモードの `/spec:validate-impl` に相当する検証 Skill。**インテグレーション検証**（タスク横断の整合性チェック）に特化している。個別タスクの品質チェックは `/spec-impl` の自律モードでレビューア Subagent が担当するため、この Skill ではタスク間の境界整合性を検証する。
+### `/spectra-validate-impl`
+- **目的**: コマンドモードの `/spec:validate-impl` に相当する検証 Skill。**インテグレーション検証**（タスク横断の整合性チェック）に特化している。個別タスクの品質チェックは `/spectra-impl` の自律モードでレビューア Subagent が担当するため、この Skill ではタスク間の境界整合性を検証する。
 
 ---
 
@@ -155,8 +155,8 @@ Skills モードを使っている場合は、先に [スキルリファレン�
 | 質問 | 回答 |
 | --- | --- |
 | Claude以外のエージェントでも同じ結果になるか？ | コマンド体系は共通だが、各エージェントのUIや制約によって、応答の内容は多少異なる場合がある。READMEに記載されているインストールフラグを使い、対象のエージェントを選択すること。 |
-| コマンドを連続で自動実行したい場合はどうすればよいか？ | `/spec:spec-quick <feature>` を使用すると、要件定義からタスク分割までを一度に実行できる。ただし、各フェーズの間に確認が入るため、開発者によるレビューを挟むことが可能である。 |
-| テンプレートをカスタマイズするにはどうすればよいか？ | `.spec/settings/templates/` および `.spec/settings/rules/` 内のファイルを修正すること。変更は即座にすべてのコマンドに反映される。 |
+| コマンドを連続で自動実行したい場合はどうすればよいか？ | `/spec:spectra-quick <feature>` を使用すると、要件定義からタスク分割までを一度に実行できる。ただし、各フェーズの間に確認が入るため、開発者によるレビューを挟むことが可能である。 |
+| テンプレートをカスタマイズするにはどうすればよいか？ | `.spectra/settings/templates/` および `.spectra/settings/rules/` 内のファイルを修正すること。変更は即座にすべてのコマンドに反映される。 |
 
 ---
 

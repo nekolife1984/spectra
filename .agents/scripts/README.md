@@ -80,7 +80,7 @@ jobs:
 hermes cron create \
   --schedule "0 6 * * *" \
   --prompt "$(cat cron-prompt.md)" \
-  --skills "spec-traceability" \
+  --skills "spectra-traceability" \
   --name "traceability-daily-check"
 ```
 

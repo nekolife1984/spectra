@@ -48,7 +48,7 @@ Copy the appropriate directory based on your AI development platform:
    /spec:steering
    
    # Create your first feature specification
-   /spec:spec-init "Detailed description of your project"
+   /spec:spectra-init "Detailed description of your project"
    ```
 
 ### Required Directory Structure
@@ -64,7 +64,7 @@ your-project/
 ├── .github/prompts/           # GitHub Copilot prompt collections
 ├── .qwen/commands/spec/       # Qwen Code slash command definitions
 ├── .windsurf/workflows/       # Windsurf workflow files
-├── .spec/
+├── .spectra/
 │   ├── steering/              # Auto-generated steering documents
 │   └── specs/                 # Auto-generated feature specifications  
 ├── CLAUDE.md                  # Copied and renamed from language-specific quickstart
@@ -80,21 +80,21 @@ your-project/
 /spec:steering
 
 # Step 1: Start creating new feature specification (include detailed description)
-/spec:spec-init "I want to create a feature where users can upload PDFs, extract diagrams and charts from them, and have AI explain the content. Tech stack: Next.js, TypeScript, Tailwind CSS."
+/spec:spectra-init "I want to create a feature where users can upload PDFs, extract diagrams and charts from them, and have AI explain the content. Tech stack: Next.js, TypeScript, Tailwind CSS."
 
 # Step 2: Requirements definition (use auto-generated feature-name)
-/spec:spec-requirements pdf-diagram-extractor
-# → Review and edit .spec/specs/pdf-diagram-extractor/requirements.md
+/spec:spectra-requirements pdf-diagram-extractor
+# → Review and edit .spectra/specs/pdf-diagram-extractor/requirements.md
 
 # Step 3: Technical design (interactive approval)
-/spec:spec-design pdf-diagram-extractor
+/spec:spectra-design pdf-diagram-extractor
 # → Respond to "Have you reviewed requirements.md? [y/N]"
-# → Review and edit .spec/specs/pdf-diagram-extractor/design.md
+# → Review and edit .spectra/specs/pdf-diagram-extractor/design.md
 
 # Step 4: Task generation (interactive approval)
-/spec:spec-tasks pdf-diagram-extractor
+/spec:spectra-tasks pdf-diagram-extractor
 # → Respond to review confirmation for requirements and design
-# → Review and edit .spec/specs/pdf-diagram-extractor/tasks.md
+# → Review and edit .spectra/specs/pdf-diagram-extractor/tasks.md
 
 # Step 5: Start implementation
 ```
@@ -107,7 +107,7 @@ your-project/
 /spec:steering
 
 # Step 1: Start creating new feature specification
-/spec:spec-init "Detailed description of the new feature here"
+/spec:spectra-init "Detailed description of the new feature here"
 # Following steps are the same as for new projects
 ```
 
@@ -115,7 +115,7 @@ your-project/
 
 ```bash
 # Check progress of a specific feature
-/spec:spec-status my-feature
+/spec:spectra-status my-feature
 
 # Displays current phase, approval status, and task progress
 ```
@@ -132,24 +132,24 @@ In this flow, each phase requires "Review & Approval".
 graph TD
     A["Project Start"] --> B{"Document<br/>Steering?"}
     B -->|Yes| C["/spec:steering"]
-    B -->|No| D["/spec:spec-init"]
+    B -->|No| D["/spec:spectra-init"]
     C --> D
     
-    D --> E["/spec:spec-requirements"]
+    D --> E["/spec:spectra-requirements"]
     E --> F["requirements.md"]
     F --> G{"Satisfied?"}
     G -->|No| G1["Edit & Revise"]
     G1 --> F
     G -->|Yes| H["To Next Phase"]
     
-    H --> I["/spec:spec-design"]
+    H --> I["/spec:spectra-design"]
     I --> J["design.md"]
     J --> K{"Satisfied?"}
     K -->|No| K1["Edit & Revise"]
     K1 --> J
     K -->|Yes| L["To Next Phase"]
     
-    L --> M["/spec:spec-tasks"]
+    L --> M["/spec:spectra-tasks"]
     M --> N["tasks.md"]
     N --> O{"Satisfied?"}
     O -->|No| O1["Edit & Revise"]
@@ -157,7 +157,7 @@ graph TD
     O -->|Yes| P["Ready for Implementation"]
     
     P --> Q["Start Implementation"]
-    Q --> R["/spec:spec-status"]
+    Q --> R["/spec:spectra-status"]
     R --> S{"Complete?"}
     S -->|No| Q
     S -->|Yes| T["Feature Complete"]
@@ -208,16 +208,16 @@ graph TD
 
 | Command | Purpose | When to Use |
 |---------|---------|-------------|
-| `/spec:spec-init [detailed project description]` | Initialize specification structure from project description | When starting new feature development |
-| `/spec:spec-requirements [feature-name]` | Generate requirements document | Immediately after spec initialization |
-| `/spec:spec-design [feature-name]` | Generate technical design document | After requirements approval |
-| `/spec:spec-tasks [feature-name]` | Generate implementation tasks | After design approval |
+| `/spec:spectra-init [detailed project description]` | Initialize specification structure from project description | When starting new feature development |
+| `/spec:spectra-requirements [feature-name]` | Generate requirements document | Immediately after spec initialization |
+| `/spec:spectra-design [feature-name]` | Generate technical design document | After requirements approval |
+| `/spec:spectra-tasks [feature-name]` | Generate implementation tasks | After design approval |
 
 ### 📊 Phase 2: Progress Management
 
 | Command | Purpose | When to Use |
 |---------|---------|-------------|
-| `/spec:spec-status [feature-name]` | Check current progress and phase | Regularly during development |
+| `/spec:spectra-status [feature-name]` | Check current progress and phase | Regularly during development |
 
 ## 3-Phase Approval Workflow
 
@@ -229,13 +229,13 @@ sequenceDiagram
     participant C as Claude Code
     participant H as Human Reviewer
     
-    D->>C: "/spec:spec-requirements feature"
+    D->>C: "/spec:spectra-requirements feature"
     C->>C: "Generate Requirements"
     C->>D: "requirements.md"
     D->>H: "Request Review"
     H->>H: "Review & Edit"
     
-    D->>C: "/spec:spec-design feature"
+    D->>C: "/spec:spectra-design feature"
     C->>D: "Review confirmation: Have you reviewed requirements.md?"
     D->>C: "y"
     C->>C: "Generate Design (based on requirements)"
@@ -243,7 +243,7 @@ sequenceDiagram
     D->>H: "Request Review"
     H->>H: "Review & Edit"
     
-    D->>C: "/spec:spec-tasks feature"
+    D->>C: "/spec:spectra-tasks feature"
     C->>D: "Review confirmation: requirements/design check"
     D->>C: "y"
     C->>C: "Generate Tasks (based on design)"
@@ -267,7 +267,7 @@ sequenceDiagram
    - Ensure human review at each phase
 
 3. **Regular progress checks**
-   - Use `/spec:spec-status` to understand current situation
+   - Use `/spec:spectra-status` to understand current situation
    - Update task completion status appropriately
 
 4. **Maintain steering**
@@ -292,14 +292,14 @@ sequenceDiagram
 ├── .claude/
 │   └── commands/          # Slash command definitions
 │       └── spec/
-│           ├── spec-init.md
-│           ├── spec-requirements.md
-│           ├── spec-design.md
-│           ├── spec-tasks.md
-│           ├── spec-status.md
+│           ├── spectra-init.md
+│           ├── spectra-requirements.md
+│           ├── spectra-design.md
+│           ├── spectra-tasks.md
+│           ├── spectra-status.md
 │           ├── steering.md          # Unified steering command
 │           └── steering-custom.md
-├── .spec/
+├── .spectra/
 │   ├── steering/          # Steering documents
 │   │   ├── product.md
 │   │   ├── tech.md
@@ -338,7 +338,7 @@ The following are automated through Claude Code's hook functionality:
 ### When stuck in approval flow
 1. Check that you're responding correctly to review confirmation prompts
 2. Verify previous phase approval is complete
-3. Use `/spec:spec-status` to diagnose current state
+3. Use `/spec:spectra-status` to diagnose current state
 4. Manually check/edit `spec.json` if needed
 
 ## Summary

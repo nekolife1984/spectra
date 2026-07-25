@@ -83,7 +83,7 @@ except ImportError:
         "**/*Test*.cs", "**/*Tests.cs",
     ]
     EXCLUDE_DIRS = {".git", "node_modules", ".venv", "__pycache__", "dist",
-                    "build", ".artgraph", ".trace", ".spec"}
+                    "build", ".artgraph", ".trace", ".spectra"}
 
 # タグパターン（extract_tags.py と同一）
 IMPL_TAG_RE = re.compile(r'(?:#|//)\s*@impl\s+([\d.]+(?:\s*,\s*[\d.]+)*)', re.MULTILINE)
@@ -1550,7 +1550,7 @@ def main():
     parser.add_argument("--serve", action="store_true",
                         help="対話的グラフをHTTPサーバで起動しブラウザで開く")
     parser.add_argument("--dag", action="store_true",
-                        help="DAGファイル（.spec/graph/dag.json）を読み込み推移的影響分析を行う。"
+                        help="DAGファイル（.spectra/graph/dag.json）を読み込み推移的影響分析を行う。"
                              "build-dag.py で事前にDAGを構築しておく必要あり。"
                              "CRG(code-review-graph)がなくても推移的依存を追跡可能。")
     parser.add_argument("--verbose", "-v", action="store_true",
@@ -1600,7 +1600,7 @@ def main():
 
     # --dag が指定された場合、DAGから推移的影響情報を追加
     if args.dag:
-        dag_path = project_dir / ".spec" / "graph" / "dag.json"
+        dag_path = project_dir / ".spectra" / "graph" / "dag.json"
         if dag_path.exists():
             try:
                 dag_data = json.loads(dag_path.read_text(encoding="utf-8"))

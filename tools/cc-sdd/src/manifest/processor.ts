@@ -57,7 +57,7 @@ const applyPlaceholders = (input: string, agent: AgentType, ctx: TemplateContext
     AGENT: agent,
     LANG_CODE: ctx.LANG_CODE,
     DEV_GUIDELINES: ctx.DEV_GUIDELINES,
-    SPEC_DIR: ctx.SPEC_DIR,
+    SPECTRA_DIR: ctx.SPECTRA_DIR,
     AGENT_DIR: ctx.AGENT_DIR,
     AGENT_DOC: ctx.AGENT_DOC,
     AGENT_COMMANDS_DIR: ctx.AGENT_COMMANDS_DIR,

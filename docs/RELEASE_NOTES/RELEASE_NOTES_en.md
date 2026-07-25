@@ -13,10 +13,10 @@ No unreleased features at this time. The latest stable release is v3.0.2.
 ## 🔧 Ver 3.0.2 (2026-04-14) – Patch Fixes & Docs Cleanup
 
 ### Summary
-Patch release that keeps the Codex `spec-reviewer` role valid for cross-spec review and removes a README reference that no longer aligns with cc-sdd.
+Patch release that keeps the Codex `spectra-reviewer` role valid for cross-spec review and removes a README reference that no longer aligns with cc-sdd.
 
 ### Fixed
-- Added the missing `description` field to the Codex `spec-reviewer` template so Codex keeps the custom role available instead of ignoring it as malformed ([#160](https://github.com/gotalab/cc-sdd/pull/160))
+- Added the missing `description` field to the Codex `spectra-reviewer` template so Codex keeps the custom role available instead of ignoring it as malformed ([#160](https://github.com/gotalab/cc-sdd/pull/160))
 
 ### Documentation
 - Removed the README Amazon book reference after the linked title shifted to promote `ai-sdd`, a closed-source clone of cc-sdd without attribution ([#157](https://github.com/gotalab/cc-sdd/pull/157))
@@ -39,7 +39,7 @@ npx cc-sdd@latest
 Patch release focused on safer filesystem handling in `cc-sdd`, plus a small follow-up fix for mojibake and English wording.
 
 ### Fixed
-- Fixed the mojibake in the Claude Code Skills `spec-impl` template so the feature-flag protocol renders the `→` arrow correctly ([#154](https://github.com/gotalab/cc-sdd/pull/154))
+- Fixed the mojibake in the Claude Code Skills `spectra-impl` template so the feature-flag protocol renders the `→` arrow correctly ([#154](https://github.com/gotalab/cc-sdd/pull/154))
 
 ### Security
 - Hardened manifest, template, and shared-rule path handling so generated file operations stay within their expected roots
@@ -64,16 +64,16 @@ npx cc-sdd@latest
 
 ### 🎯 Highlights
 - **Agent Skills as the primary workflow**: cc-sdd now centers on `--*-skills` installs and a unified 17-skill workflow across 8 platforms.
-- **Specs you can run**: `/spec-discovery`, `/spec-batch`, and long-running autonomous `/spec-impl` turn approved specs into an execution control plane, not just project documents.
+- **Specs you can run**: `/spectra-discovery`, `/spectra-batch`, and long-running autonomous `/spectra-impl` turn approved specs into an execution control plane, not just project documents.
 - **Native subagent dispatch**: autonomous implementation, review, and debug loops now live inside cc-sdd without relying on the external Ralph Loop project.
 
 ### ✨ Added
 - Skills-based agents for Cursor, GitHub Copilot, OpenCode, Gemini CLI, Windsurf, and Antigravity, alongside upgraded Claude Code Skills and Codex Skills support ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 - New workflow entry points:
-  - `/spec-discovery` for idea triage and roadmap routing
-  - `/spec-batch` for parallel multi-spec creation
-  - `/spec-impl` for autonomous implementation with reviewer/debugger loops ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- New rules/templates for boundary-first planning, design synthesis, review gates, task decomposition, and steering customization under `.spec/settings/` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+  - `/spectra-discovery` for idea triage and roadmap routing
+  - `/spectra-batch` for parallel multi-spec creation
+  - `/spectra-impl` for autonomous implementation with reviewer/debugger loops ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- New rules/templates for boundary-first planning, design synthesis, review gates, task decomposition, and steering customization under `.spectra/settings/` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 - `cc-sdd-new-agent`, a SOP-style skill for adding or migrating supported agents ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 
 ### 🔧 Changed
@@ -84,7 +84,7 @@ npx cc-sdd@latest
 ### ⚠️ Breaking / Migration Notes
 - Skills mode is now the primary path. Command-based installs remain deprecated and should be migrated to `--*-skills`.
 - `--codex` prompts mode is no longer supported; use `--codex-skills` instead.
-- If you previously relied on external Ralph Loop orchestration, move to the built-in `/spec-impl` autonomous flow.
+- If you previously relied on external Ralph Loop orchestration, move to the built-in `/spectra-impl` autonomous flow.
 
 ### 📖 Migration Guide
 - See [docs/guides/migration-guide.md](../guides/migration-guide.md) for upgrade guidance.
@@ -217,7 +217,7 @@ Documentation-only release improving README clarity and visual consistency.
 - **Global parity**: 7 AI agents × 13 languages share the same templates, prompts, and installation flow.
 
 ### Upgrade Essentials
-1. Follow the [Migration Guide](../guides/migration-guide.md) for template layout changes (`.spec/settings/templates/*`) and new steering behavior (directory-wide load).
+1. Follow the [Migration Guide](../guides/migration-guide.md) for template layout changes (`.spectra/settings/templates/*`) and new steering behavior (directory-wide load).
 2. Update automation/scripts to call `npx cc-sdd@latest` (the `@next` tag is reserved for future previews).
 3. Regenerate steering + spec templates once to pick up Research.md, the new design rules, and tasks parallel markers.
 
@@ -295,7 +295,7 @@ Once your project templates are regenerated on v2.0.0, all spec/todo automation 
 ## 🚀 Ver 2.0.0-alpha.3 (2025-10-22)
 
 ### 🎯 Highlights
-- **Windsurf IDE support**: Added a dedicated manifest, workflow templates under `.windsurf/workflows/`, and an AGENTS.md quickstart so Windsurf users can run the full spec Spec-Driven Development workflow with `npx cc-sdd@next --windsurf`.
+- **Windsurf IDE support**: Added a dedicated manifest, workflow templates under `.windsurf/workflows/`, and an AGENTS.md quickstart so Windsurf users can run the full spectra Spec-Driven Development workflow with `npx cc-sdd@next --windsurf`.
 - **CLI experience refresh**: Updated completion guides and recommended models so the setup summary now points Windsurf users to the correct follow-up commands and manual QA flow.
 
 ### 🧪 Quality & Tooling
@@ -335,10 +335,10 @@ Enhanced spec-driven development for existing projects
 
 **New Quality Validation Commands**
 - 🔍 **`/spec:validate-gap`** - Gap analysis between existing functionality and requirements
-  - Execute before spec-design to clarify differences between current implementation and new requirements
+  - Execute before spectra-design to clarify differences between current implementation and new requirements
   - Identify existing system understanding and integration points for new features
 - ✅ **`/spec:validate-design`** - Design compatibility verification with existing architecture
-  - Execute after spec-design to confirm design integration feasibility
+  - Execute after spectra-design to confirm design integration feasibility
   - Pre-detect conflicts and incompatibilities with existing systems
 
 ### 🚀 Full Cursor IDE Support
@@ -406,15 +406,15 @@ Fundamental review of entire spec-driven development workflow
 ### Major Spec Spec-Driven Development Command Improvements
 
 **Workflow Efficiency**
-- Added `-y` flag: `/spec:spec-design feature-name -y` skips requirements approval and generates design
-- `/spec:spec-tasks feature-name -y` skips requirements+design approval and generates tasks  
+- Added `-y` flag: `/spec:spectra-design feature-name -y` skips requirements approval and generates design
+- `/spec:spectra-tasks feature-name -y` skips requirements+design approval and generates tasks  
 - Added argument-hint: Commands now auto-display `<feature-name> [-y]` during input
 - Traditional step-by-step approval still available (spec.json editing or interactive approval)
 
 **Command Optimization**
-- spec-init.md: 162→104 lines (36% reduction, removed project_description and simplified templates)
-- spec-requirements.md: 177→124 lines (30% reduction, simplified verbose explanations)
-- spec-tasks.md: 295→198 lines (33% reduction, eliminated "Phase X:", functional naming, granularity optimization)
+- spectra-init.md: 162→104 lines (36% reduction, removed project_description and simplified templates)
+- spectra-requirements.md: 177→124 lines (30% reduction, simplified verbose explanations)
+- spectra-tasks.md: 295→198 lines (33% reduction, eliminated "Phase X:", functional naming, granularity optimization)
 
 **Task Structure Optimization**
 - Section headers for functional area organization
@@ -442,7 +442,7 @@ Fundamental review of entire spec-driven development workflow
 - No impact on interactive approval functionality
 
 **Minor Updates**
-- Added "think" keyword to spec-requirements.md
+- Added "think" keyword to spectra-requirements.md
 
 ---
 
@@ -451,8 +451,8 @@ Fundamental review of entire spec-driven development workflow
 ### Interactive Approval System
 
 **Approval Flow Improvements**
-- `/spec-design [feature-name]` now displays "Have you reviewed requirements.md? [y/N]" confirmation prompt
-- `/spec-tasks [feature-name]` now displays review confirmation for both requirements and design
+- `/spectra-design [feature-name]` now displays "Have you reviewed requirements.md? [y/N]" confirmation prompt
+- `/spectra-tasks [feature-name]` now displays review confirmation for both requirements and design
 - 'y' approval automatically updates spec.json and proceeds to next phase
 - 'N' selection stops execution and prompts for review
 
@@ -483,7 +483,7 @@ Fundamental review of entire spec-driven development workflow
 ### Fixed Issues
 
 **Improved Directory Handling**
-- Now works properly even when `.spec/steering/` directory doesn't exist
+- Now works properly even when `.spectra/steering/` directory doesn't exist
 - More user-friendly error messages
 
 **Improved Internal File Management**
@@ -553,7 +553,7 @@ Fundamental review of entire spec-driven development workflow
 ## Development History
 
 **July 17-18, 2025: Foundation Building Period**
-Project initialization and implementation of core framework for spec-style specification-driven development
+Project initialization and implementation of core framework for spectra-style specification-driven development
 
 **July 18-24, 2025: Multilingual & Feature Expansion Period**
 Added English and Traditional Chinese support, GitHub Actions integration, enhanced documentation
@@ -570,7 +570,7 @@ Significantly improved generation quality of requirements, design, and tasks doc
 
 1. Copy **`.claude/commands/` directory** and **`CLAUDE.md` file** to your project
 2. Run `/spec:steering` in Claude Code to configure project information
-3. Create new specifications with `/spec:spec-init [feature-name]`
+3. Create new specifications with `/spec:spectra-init [feature-name]`
 4. Progress through development step by step: requirements → design → tasks
 
 For detailed usage instructions, see [README_en.md](README_en.md).

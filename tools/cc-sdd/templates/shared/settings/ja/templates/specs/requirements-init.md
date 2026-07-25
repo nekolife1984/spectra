@@ -4,5 +4,5 @@
 {{PROJECT_DESCRIPTION}}
 
 ## 要件
-<!-- /spec-requirements フェーズで生成されます -->
+<!-- /spectra-requirements フェーズで生成されます -->
 
