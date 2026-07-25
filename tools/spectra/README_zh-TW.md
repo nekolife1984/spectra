@@ -79,6 +79,7 @@ npx github:nekolife1984/spectra --cursor-skills --lang zh-TW  # Cursor IDE, 繁�
 ```bash
 /spectra-discovery Photo albums with upload, tagging, and sharing
 # discovery 會寫入 brief.md（多 spec 時還會寫 roadmap.md）並提示下一個指令
+# 注意：首次使用請先跑 /spectra-steering，它會在 .spectra/steering/{product,tech,structure}.md 缺失時自動從程式碼產生，後續 discovery 的提問才能由上下文自動回答
 /spectra-init photo-albums
 /spectra-requirements photo-albums
 /spectra-design photo-albums

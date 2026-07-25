@@ -70,6 +70,8 @@ See [Setup Guide](./.agents/scripts/README.md) for more options including `--yes
 
 Then, in your agent:
 
+> **First run only**: run `/spectra-steering` *before* `/spectra-discovery`. It auto-detects when `.spectra/steering/{product,tech,structure}.md` are missing and bootstraps them from your codebase, so discovery's questions are answered from context rather than from you. Skip on subsequent runs.
+
 ```bash
 /spectra-discovery <idea>
 ```

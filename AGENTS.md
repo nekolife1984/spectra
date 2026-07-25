@@ -24,7 +24,8 @@ Powered by [**spectra**](https://github.com/nekolife1984/spectra) — Spec → C
 - Think in English, generate responses in English. All Markdown content written to project files (e.g., requirements.md, design.md, tasks.md, research.md, validation reports) MUST be written in the target language configured for this specification (see spec.json.language).
 
 ## Minimal Workflow
-- Phase 0 (optional): `/spectra-steering`, `/spectra-steering-custom`
+- Phase 0 (recommended for first run; required if you want steering context to inform later skills): `/spectra-steering`, `/spectra-steering-custom`
+  - `spectra-steering` auto-detects Bootstrap Mode when `.spectra/steering/{product,tech,structure}.md` are missing and generates them from your codebase. Run it **before** `/spectra-discovery` on a new project so discovery's questions are answered from context, not from you.
 - Discovery: `/spectra-discovery "idea"` — determines action path, writes brief.md + roadmap.md for multi-spec projects
 - Phase 1 (Specification):
   - Single spec: `/spectra-quick {feature} [--auto]` or step by step:

@@ -74,6 +74,8 @@ bash .agents/scripts/setup-crg.sh
 /spectra-discovery <やりたいこと>
 ```
 
+> **初回のみ**: `/spectra-discovery` の *前* に `/spectra-steering` を実行すること。`.spectra/steering/{product,tech,structure}.md` が無いことを自動検出し、コードベースから雛形を生成する。discovery の質問が「あなた」ではなく「コンテキスト」から答えられるようになる。2回目以降は不要。
+
 どこから始めれば良いか分からない場合は、まず `spectra-discovery` を実行する。依頼を整理して、次に叩くコマンドを教えてくれる。
 
 ### よくあるワークフロー
