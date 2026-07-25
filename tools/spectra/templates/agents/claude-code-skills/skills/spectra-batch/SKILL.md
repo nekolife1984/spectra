@@ -134,7 +134,7 @@ Output: CONSISTENT areas + ISSUES with (which specs, what's inconsistent, sugges
    - This ensures every spec's `.spectra/trace-mapping.yaml` entries have matching spec-side annotations
 
 7. **Update Trace Snapshot** (after gate passes):
-   - Update the trace snapshot to establish a baseline:
+   - Update the trace snapshot to establish a baseline for all completed specs:
      ```bash
      python3 .spectra/scripts/check_drift.py --snapshot --reason "spectra-batch: completed specs"
      ```

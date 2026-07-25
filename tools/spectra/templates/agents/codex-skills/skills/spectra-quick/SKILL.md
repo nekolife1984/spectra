@@ -152,7 +152,7 @@ After Phase 4, run the spec trace completeness gate, then a lightweight sanity r
 - If the gate fails, fix the gaps and re-run until it passes.
 
 **Update Snapshot** (after gate passes):
-- If `.spectra/trace-mapping.yaml` exists, update the trace snapshot:
+- Update the trace snapshot to establish a baseline:
   ```bash
   python3 .spectra/scripts/check_drift.py --snapshot --reason "spectra-quick: {feature-name}"
   ```
