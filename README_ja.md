@@ -1,6 +1,14 @@
 # spectra
 
-[cc-sdd](https://github.com/gotalab/cc-sdd) をフォークし、**code-review-graph (CRG)** による双方向の仕様↔コードトレーサビリティを統合したバージョンです。`@impl` タグによる要件とコードの自動追跡、影響範囲分析、仕様ドリフト検出を提供します。
+**Spec** → **Trace** → **Spectra**。\
+近代的な spec-driven SDLC ツールチェイン。双方向トレーサビリティを備えています。
+
+[cc-sdd](https://github.com/gotalab/cc-sdd) — _spec-as-contract_（仕様＝契約）という哲学を基盤に、**code-review-graph (CRG)** 統合でパワーアップ。`@impl` / `@verifies` / `@spec` タグを通じて要件→設計→実装→テストをトレースし、影響範囲分析、仕様ドリフト検出、境界検証を実現します。17言語・8つのAIコーディングエージェントに対応。
+
+### 🏷️ 名前の由来
+
+**Spectra** = **Spec** + **Trace**。\
+プリズムが光をスペクトルに分けるように、spectra は開発を要件・設計・コード・テストというトレーサブルな層に分解し、それらの繋がりを照らし出します。この名前にはプロジェクトの出自 — **cc**（Contract Code）、**sdd**（Spec-Driven Development）、**graph**（code-review-graph） — を一つのアイデンティティに昇華する意味も込められています。
 
 ## クイックスタート
 
