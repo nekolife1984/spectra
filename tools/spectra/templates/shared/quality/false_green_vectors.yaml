@@ -167,7 +167,7 @@ vectors:
     class: procedural
     priority: P1
     summary: |
-      コード変更後、.trace-snapshot.json が更新されずに
+      コード変更後、.spectra/trace-snapshot.json が更新されずに
       コミットされている。
     invariant: |
       コード変更を含む全コミットに check_drift.py --snapshot の
@@ -182,7 +182,7 @@ vectors:
     detection: missed_green
     check_framework: git
     check: |
-      git diff HEAD~1 --name-only | grep -q "\.trace-snapshot\.json"
+      git diff HEAD~1 --name-only | grep -q "\.spectra/trace-snapshot\.json"
     cli: pre-commit.sh（skip 検知）
 
   # ── P1-3: cross-language tag mismatch ──────────────────────

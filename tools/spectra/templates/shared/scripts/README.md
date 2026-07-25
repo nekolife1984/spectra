@@ -401,5 +401,5 @@ GitHub Actions / cron       ← 定期監視（オプション）
 ## 注意事項
 
 - `.trace-mapping.yaml` は手動でメンテナンスする。`extract_tags.py --trace-mapping` が追記用の出力を生成する。
-- スナップショット `.trace-snapshot.json` は gitignore 対象。CI では毎回 `--snapshot` してから `--check` するか、`--diff --gate` を使う。
+- スナップショット `.spectra/trace-snapshot.json` は gitignore 対象。CI では毎回 `--snapshot` してから `--check` するか、`--diff --gate` を使う。
 - CRG MCP が利用できない環境では `--crg` オプションはスタブとして動作し、影響分析は `.trace-mapping.yaml` の直接マッピングのみに基づく。

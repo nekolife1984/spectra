@@ -1052,18 +1052,18 @@ def check_cross_language_tags(project_dir: Path, mappings: list[dict]) -> list[s
 def check_snapshot_freshness(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
     P1-2: コード変更後にスナップショットが更新されているか
-    - .trace-snapshot.json が存在するか
+    - .spectra/trace-snapshot.json が存在するか
     - 直近のコード変更コミットでスナップショットも更新されているか
     - pre-commit hook が設置されているか（任意）
     """
     issues = []
 
-    snapshot_path = project_dir / ".trace-snapshot.json"
+    snapshot_path = project_dir / ".spectra/trace-snapshot.json"
 
     # 1) スナップショットの存在確認
     if not snapshot_path.exists():
         issues.append(
-            "[snapshot] .trace-snapshot.json が見つかりません — "
+            "[snapshot] .spectra/trace-snapshot.json が見つかりません — "
             "初回実行: python3 .spectra/scripts/check_drift.py --snapshot"
         )
         return issues
@@ -1087,7 +1087,7 @@ def check_snapshot_freshness(project_dir: Path, mappings: list[dict]) -> list[st
             snap_age_days = (time.time() - snap_ts) / 86400
             if snap_age_days > 30:
                 issues.append(
-                    f"[snapshot] .trace-snapshot.json の最終更新から "
+                    f"[snapshot] .spectra/trace-snapshot.json の最終更新から "
                     f"{int(snap_age_days)} 日経過しています"
                 )
     except (subprocess.CalledProcessError, ValueError):
@@ -1124,10 +1124,10 @@ def check_snapshot_freshness(project_dir: Path, mappings: list[dict]) -> list[st
                              "-r", "--name-only", commit_hash],
                             capture_output=True, text=True, cwd=project_dir,
                         ).stdout.strip()
-                        if ".trace-snapshot.json" not in has_snap:
+                        if ".spectra/trace-snapshot.json" not in has_snap:
                             issues.append(
                                 f"[snapshot] コード変更コミット {commit_hash} に "
-                                f".trace-snapshot.json の更新が含まれていません"
+                                f".spectra/trace-snapshot.json の更新が含まれていません"
                             )
                             break
     except (subprocess.CalledProcessError, FileNotFoundError):

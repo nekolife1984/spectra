@@ -43,7 +43,7 @@ import yaml
 
 # 定数
 TRACE_MAPPING_PATH = Path(".trace-mapping.yaml")
-SNAPSHOT_PATH = Path(".trace-snapshot.json")
+SNAPSHOT_PATH = Path(".spectra/trace-snapshot.json")
 LEDGER_PATH = Path(".spectra/reconciliation_ledger.yaml")
 
 # このスクリプト自身のディレクトリ（.spectra/scripts/）は extract_tags.py と同じ
