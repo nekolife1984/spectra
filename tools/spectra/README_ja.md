@@ -168,7 +168,7 @@ npx github:nekolife1984/spectra --spectra-dir docs
 
 ## カスタマイズ
 
-`{{SPECTRA_DIR}}/settings/` 以下のテンプレートとルールを編集して、チームのワークフローに合わせる。
+`{{SPECTRA_DIR}}/templates/` 以下のテンプレートを編集して、チームのワークフローに合わせる。
 
 - `templates/`: requirements, design, tasks のドキュメント構造。
 - `rules/`: AI の生成原則と判断基準。
@@ -197,8 +197,8 @@ project/
 ├── .github/prompts/          # 11 プロンプトコマンド（--copilot）
 ├── .windsurf/workflows/      # 11 ワークフローファイル（--windsurf）
 # プロジェクトメモリと spec 状態（共通）
-├── .spectra/settings/templates/ # 共通テンプレート（{{SPECTRA_DIR}} を展開）
-├── .spectra/settings/rules/     # 共通ルール（非 skills エージェントが使用）
+├── .spectra/templates/ # 共通テンプレート（{{SPECTRA_DIR}} を展開）
+├── .spectra/rules/     # 共通ルール（非 skills エージェントが使用）
 ├── .spectra/specs/              # 機能仕様書
 ├── .spectra/steering/           # AI 指導ドキュメント
 └── CLAUDE.md / AGENTS.md     # プロジェクト設定（エージェントごと）

@@ -150,7 +150,7 @@ npx github:nekolife1984/spectra --spectra-dir docs
 
 ## 自訂
 
-編輯 `{{SPECTRA_DIR}}/settings/` 下的模板與規則以符合團隊工作流。
+編輯 `{{SPECTRA_DIR}}/templates/` 下的模板以符合團隊工作流。
 
 - `templates/`: requirements, design, tasks 的文件結構。
 - `rules/`: AI 生成原則與判斷基準。
@@ -179,8 +179,8 @@ project/
 ├── .github/prompts/          # 11 提示指令（--copilot）
 ├── .windsurf/workflows/      # 11 工作流程檔案（--windsurf）
 # 共用的專案記憶與 spec 狀態
-├── .spectra/settings/templates/ # 共用模板（以 {{SPECTRA_DIR}} 展開）
-├── .spectra/settings/rules/     # 共用規則（非 skills 代理使用）
+├── .spectra/templates/ # 共用模板（以 {{SPECTRA_DIR}} 展開）
+├── .spectra/rules/     # 共用規則（非 skills 代理使用）
 ├── .spectra/specs/              # 功能規格文件
 ├── .spectra/steering/           # AI 指導文件
 └── CLAUDE.md / AGENTS.md     # 專案設定（依代理而異）

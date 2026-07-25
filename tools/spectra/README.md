@@ -168,7 +168,7 @@ npx github:nekolife1984/spectra --spectra-dir docs
 
 ## Customization
 
-Edit templates and rules in `{{SPECTRA_DIR}}/settings/` to match your team's workflow.
+Edit templates in `{{SPECTRA_DIR}}/templates/` to match your team's workflow.
 
 - `templates/`: document structure for requirements, design, tasks.
 - `rules/`: AI generation principles and judgment criteria.
@@ -197,8 +197,8 @@ project/
 ├── .github/prompts/          # 11 prompt commands (--copilot)
 ├── .windsurf/workflows/      # 11 workflow files (--windsurf)
 # Shared project memory and spec state
-├── .spectra/settings/templates/ # Shared templates (variables resolved with {{SPECTRA_DIR}})
-├── .spectra/settings/rules/     # Shared rules (used by non-skills agents)
+├── .spectra/templates/ # Shared templates (variables resolved with {{SPECTRA_DIR}})
+├── .spectra/rules/     # Shared rules (used by non-skills agents)
 ├── .spectra/specs/              # Feature specifications
 ├── .spectra/steering/           # AI guidance documents
 └── CLAUDE.md / AGENTS.md     # Project configuration (per agent)
