@@ -49,7 +49,7 @@ IMPL_TAG_RE = re.compile(
 )
 
 # スキップするディレクトリ
-SKIP_DIRS = {"__pycache__", ".venv", "node_modules", ".git", "dist", "build", ".next", "coverage", ".pytest_cache", "__init__.py"}
+SKIP_DIRS = {"__pycache__", ".venv", "node_modules", ".git", "dist", "build", ".next", "coverage", ".pytest_cache", ".spectra"}
 
 
 def load_trace_mapping(path: Path) -> list[dict]:

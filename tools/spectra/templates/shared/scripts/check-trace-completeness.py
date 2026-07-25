@@ -64,7 +64,6 @@ except ImportError:
 
 # ── 定数 ──
 TRACE_MAPPING_PATH = Path(".spectra/trace-mapping.yaml")
-TASKS_MD_PATH = Path(".spectra/specs")
 
 # 言語プロファイルを読み込み
 try:
@@ -137,21 +136,23 @@ def load_mapping(project_dir: Path) -> list[dict]:
 
 
 def find_tasks_mds(project_dir: Path) -> list[Path]:
-    """プロジェクト内の全 tasks.md をスキャンする。"""
-    spec_dir = project_dir / TASKS_MD_PATH
-    if not spec_dir.exists():
-        return []
-    return list(spec_dir.rglob("tasks.md"))
+    """プロジェクト内の全 tasks.md をスキャンする（.spectra 等の除外対象は除く）。"""
+    results = []
+    for fpath in sorted(project_dir.rglob("tasks.md")):
+        if any(part.startswith("__") or part in EXCLUDE_DIRS for part in fpath.parts):
+            continue
+        results.append(fpath)
+    return results
 
 
 def find_spec_mds(project_dir: Path) -> list[Path]:
     """プロジェクト内の全 requirements.md / design.md をスキャンする。"""
-    spec_dir = project_dir / TASKS_MD_PATH
-    if not spec_dir.exists():
-        return []
     results = []
-    results.extend(spec_dir.rglob("requirements.md"))
-    results.extend(spec_dir.rglob("design.md"))
+    for pattern in ("requirements.md", "design.md"):
+        for fpath in sorted(project_dir.rglob(pattern)):
+            if any(part.startswith("__") or part in EXCLUDE_DIRS for part in fpath.parts):
+                continue
+            results.append(fpath)
     return results
 
 
@@ -225,7 +226,7 @@ def check_impl_completeness(project_dir: Path, mappings: list[dict]) -> list[str
     code_impls: dict[str, list[Path]] = {}  # impl_id → [filepaths]
     for ext in EXTENSIONS:
         for fpath in sorted(project_dir.rglob(f"*{ext}")):
-            if any(part.startswith("__") or part in (".venv", "node_modules", ".git", "dist", "build") for part in fpath.parts):
+            if any(part.startswith("__") or part in EXCLUDE_DIRS for part in fpath.parts):
                 continue
             impls, _, _ = scan_file_for_tags(fpath)
             for impl_id in impls:
@@ -391,7 +392,7 @@ def check_module_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
     # @impl タグがあるのに @module タグがないファイルを警告
     for ext in EXTENSIONS:
         for fpath in sorted(project_dir.rglob(f"*{ext}")):
-            if any(part.startswith("__") or part in (".venv", "node_modules", ".git", "dist", "build") for part in fpath.parts):
+            if any(part.startswith("__") or part in EXCLUDE_DIRS for part in fpath.parts):
                 continue
             impls, modules, _ = scan_file_for_tags(fpath)
             if impls and not modules:
@@ -669,7 +670,7 @@ def check_assertions_in_verifies(project_dir: Path, mappings: list[dict]) -> lis
         r'So\s*\(|'                      # Go So
         r'Ω\s*\(|'                       # Gomega
         r'\.assert\b'                     # Python attr
-        r')\s*[\[\(]',
+        r')(?:\s*[\[\(])?',
         re.MULTILINE,
     )
 
@@ -783,7 +784,7 @@ def check_coverage_impl(project_dir: Path, mappings: list[dict]) -> list[str]:
 
     for ext in EXTENSIONS:
         for fpath in sorted(project_dir.rglob(f"*{ext}")):
-            if any(part in (".venv", "node_modules", ".git", "dist", "build", "__pycache__")
+            if any(part in EXCLUDE_DIRS
                    for part in fpath.parts):
                 continue
             try:
@@ -1010,7 +1011,7 @@ def check_cross_language_tags(project_dir: Path, mappings: list[dict]) -> list[s
 
     for ext, lang in LANG_EXT.items():
         for fpath in sorted(project_dir.rglob(f"*{ext}")):
-            if any(part in (".venv", "node_modules", ".git", "dist", "build", "__pycache__")
+            if any(part in EXCLUDE_DIRS
                    for part in fpath.parts):
                 continue
             try:

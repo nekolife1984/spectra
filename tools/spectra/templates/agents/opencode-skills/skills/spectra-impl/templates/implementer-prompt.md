@@ -51,7 +51,7 @@ If any of these cannot be determined from the spec — the requirements are too 
 ### Step 4.5: Add Traceability Tags
 Before self-review, tag each changed file and update spec documents with traceability markers:
 
-**Code files**: Add `# @impl X.Y` comments to each changed file, using the exact section numbers from `requirements.md` (e.g., `# @impl 1.1, 1.2`)
+**Code files**: Add `# @impl X.Y` comments to each changed file, using the exact section numbers from `requirements.md` (e.g., `# @impl 1.1, 1.2`).
 - Place the tag near the function/class that implements the requirement
 - If the file belongs to a module, add `# @module <module-name>` (e.g., `# @module auth`)
 
@@ -65,11 +65,28 @@ Before self-review, tag each changed file and update spec documents with traceab
 - Add `<!-- @design ComponentName -->` before each component section in `design.md`
 - Add `<!-- @satisfies X.Y -->` before each component section in `design.md` to declare which requirements it satisfies
 
+**`.spectra/trace-mapping.yaml` rules** (when creating or updating the mapping):
+
+1. **Management entries**: Root/task-scope entries (e.g., `trace-root`, `tasks-root`, `placeholder`) MUST NOT have `@impl` in their `tags`. These are organizational markers, not implementation references.
+   - ✅ Correct: `tags: ["@spec"]`
+   - ❌ Wrong: `tags: ["@impl"]`
+
+2. **code.files completeness**: When an entry has `@impl` tag, `code.files` MUST list ALL files that contain the matching `# @impl <id>` tag. Omission causes false positives in traceability checks.
+   - After adding `# @impl X.Y` to a file, ensure that file path is also listed in the corresponding mapping entry's `code.files`.
+
+3. **Spec-only vs impl entries**: If an entry in `requirements.md` is tagged `<!-- @spec X -->` but no code directly implements it (e.g., non-functional requirements), keep it as `@spec` only. If code DOES implement it, add `@impl` and `code.files`.
+
+4. **Auto-repair**: Always run `fix-trace-mapping.py` after any manual edits to `trace-mapping.yaml`:
+   ```bash
+   python3 .spectra/scripts/fix-trace-mapping.py
+   ```
+   This reconciles management entry tags, fills missing `code.files`, and promotes spec entries where code has `@impl` tags.
+
 **Gate**: If `.spectra/trace-mapping.yaml` exists, run the trace completeness gate:
   ```bash
   python3 .spectra/scripts/check-trace-completeness.py
   ```
-  If it fails, fix the gaps and re-run until it passes.
+  If it fails, run `fix-trace-mapping.py` first, then re-check. Only manual exceptions (spec-only entries that truly have no code) should remain after auto-fix.
 
 ### Step 5: Self-Review
 - Review your own changes before reporting back
