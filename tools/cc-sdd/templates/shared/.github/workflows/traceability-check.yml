@@ -1,4 +1,4 @@
-# cc-sdd-graph Traceability CI
+# spectra Traceability CI
 # =============================
 # プロジェクトにコピーして使います（.github/workflows/traceability-check.yml）。
 # pip install pyyaml が必要です。

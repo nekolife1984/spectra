@@ -1,8 +1,8 @@
 <#
 .SYNOPSIS
-    One-command cc-sdd-graph + CRG setup (Windows PowerShell)
+    One-command spectra + CRG setup (Windows PowerShell)
 .DESCRIPTION
-Installs cc-sdd-graph skills/templates, code-review-graph,
+Installs spectra skills/templates, code-review-graph,
 and optionally copies CI/CD templates.
 .PARAMETER Yes
     Auto mode (skip prompts)
@@ -15,7 +15,7 @@ param(
     [switch]$Yes = $false
 )
 
-$GITHUB_REPO = "nekolife1984/cc-sdd-graph"
+$GITHUB_REPO = "nekolife1984/spectra"
 $RAW_BASE = "https://raw.githubusercontent.com/$GITHUB_REPO/main"
 
 function Write-Info  { Write-Host "ℹ️  $args" -ForegroundColor Cyan }
@@ -31,7 +31,7 @@ function Test-Command($cmd) {
 # ── Step 0: Prerequisites ──
 Write-Host ""
 Write-Host "═══════════════════════════════════════" -ForegroundColor Cyan
-Write-Host "  cc-sdd-graph + CRG Setup" -ForegroundColor Cyan
+Write-Host "  spectra + CRG Setup" -ForegroundColor Cyan
 Write-Host "═══════════════════════════════════════" -ForegroundColor Cyan
 Write-Host ""
 
@@ -49,7 +49,7 @@ if (-not $hasPython) { Write-Err "Python not found. Install from https://python.
 Write-Ok "Node.js, npx, Python available"
 
 # ── Step 1: Agent selection ──
-Write-Info "Step 1/4: Installing cc-sdd-graph..."
+Write-Info "Step 1/4: Installing spectra..."
 
 $agentMap = @{
     "1" = ""; "2" = "--codex-skills"; "3" = "--cursor-skills"
@@ -99,7 +99,7 @@ try {
     npx "github:$GITHUB_REPO" $agentFlag $langFlag $kiroFlag
 } catch {
     Write-Warn "npx github: failed. Falling back to git clone..."
-    $tmpDir = "$env:TEMP\cc-sdd-graph-$(Get-Random)"
+    $tmpDir = "$env:TEMP\spectra-$(Get-Random)"
     git clone --depth 1 "https://github.com/$GITHUB_REPO.git" $tmpDir
     Push-Location "$tmpDir\tools\cc-sdd"
     npm install; npm run build
@@ -107,7 +107,7 @@ try {
     Pop-Location
     Remove-Item -Recurse -Force $tmpDir -ErrorAction SilentlyContinue
 }
-Write-Ok "cc-sdd-graph installation complete"
+Write-Ok "spectra installation complete"
 
 # ── Step 2: CRG setup ──
 Write-Info "Step 2/4: Setting up code-review-graph..."
@@ -155,7 +155,7 @@ if (Test-Path ".agents/scripts/check_drift.py") {
 Write-Host ""
 Write-Info "Step 5/5: CI/CD Templates (optional)..."
 Write-Host ""
-Write-Host "  cc-sdd-graph includes CI/CD templates for GitHub Actions:"
+Write-Host "  spectra includes CI/CD templates for GitHub Actions:"
 Write-Host "    * traceability-check.yml — 3-stage gate (PR blocking)"
 Write-Host "    * ci-check.sh — local equivalent for pre-push"
 Write-Host ""
@@ -186,7 +186,7 @@ if ($ciChoice -eq "y" -or $ciChoice -eq "Y") {
         }
     } else {
         Write-Warn "Template files not found locally."
-        Write-Host "  Install manually from the cc-sdd-graph repo:"
+        Write-Host "  Install manually from the spectra repo:"
         Write-Host "    Copy-Item tools/cc-sdd/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
         Write-Host "    Copy-Item tools/cc-sdd/templates/shared/scripts/ci-check.sh .agents/scripts/"
     }

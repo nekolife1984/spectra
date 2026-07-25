@@ -3,7 +3,7 @@
 brownfield-init.py — 既存コードからトレーサビリティを初期化する
 
 既存のコードベース（Brownfieldプロジェクト）をスキャンし、
-cc-sdd-graph のトレーサビリティ設定を自動生成する。
+spectra のトレーサビリティ設定を自動生成する。
 
 Usage:
   # コードをスキャンして .kiro/ + .trace-mapping.yaml を生成

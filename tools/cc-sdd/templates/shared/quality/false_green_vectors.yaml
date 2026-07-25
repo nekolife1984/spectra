@@ -1,4 +1,4 @@
-# cc-sdd-graph False-Green Vector Catalog
+# spectra False-Green Vector Catalog
 # =========================================
 # Machine-readable corpus for the verifier-hardening loop.
 # Each vector describes a way the verifier could pass green when it should not.
@@ -23,8 +23,8 @@
 meta:
   version: 1
   created: "2026-07-25"
-  tool: "cc-sdd-graph"
-  project_url: "https://github.com/nekolife1984/cc-sdd-graph"
+  tool: "spectra"
+  project_url: "https://github.com/nekolife1984/spectra"
 
 # ================================================================
 # VECTORS

@@ -1,4 +1,4 @@
-# cc-sdd-graph
+# spectra
 
 [cc-sdd](https://github.com/gotalab/cc-sdd) をフォークし、**code-review-graph (CRG)** による双方向の仕様↔コードトレーサビリティを統合したバージョンです。`@impl` タグによる要件とコードの自動追跡、影響範囲分析、仕様ドリフト検出を提供します。
 
@@ -6,17 +6,17 @@
 
 ### macOS / Linux
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/nekolife1984/cc-sdd-graph/main/scripts/quickstart.sh)
+bash <(curl -s https://raw.githubusercontent.com/nekolife1984/spectra/main/scripts/quickstart.sh)
 ```
 
 ### Windows (PowerShell)
 ```powershell
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/nekolife1984/cc-sdd-graph/main/scripts/quickstart.ps1 -OutFile quickstart.ps1
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/nekolife1984/spectra/main/scripts/quickstart.ps1 -OutFile quickstart.ps1
 .\quickstart.ps1
 ```
 
 このスクリプトが以下を自動で行います:
-1. cc-sdd-graph スキルのインストール（エージェント・言語を選択）
+1. spectra スキルのインストール（エージェント・言語を選択）
 2. code-review-graph のインストールと MCP 設定
 3. コードグラフの初回ビルド
 4. `.trace-mapping.yaml` の初期化
@@ -27,7 +27,7 @@ Invoke-WebRequest -Uri https://raw.githubusercontent.com/nekolife1984/cc-sdd-gra
 
 ```bash
 # スキルのみ
-npx github:nekolife1984/cc-sdd-graph
+npx github:nekolife1984/spectra
 
 # CRG のみ（スキルインストール後）
 bash .agents/scripts/setup-crg.sh --yes

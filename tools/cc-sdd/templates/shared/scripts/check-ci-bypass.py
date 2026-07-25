@@ -55,7 +55,7 @@ def check_prepush_hook(project_dir: Path) -> list[str]:
         content = hook_path.read_text(encoding="utf-8")
         if "pre-push.sh" not in content and "ci-check.sh" not in content:
             issues.append(
-                "[hook] pre-push hook が存在するが、cc-sdd-graph のスクリプトを"
+                "[hook] pre-push hook が存在するが、spectra のスクリプトを"
                 "参照していない（別の hook で上書きされている可能性）"
             )
     except (UnicodeDecodeError, OSError):

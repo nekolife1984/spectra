@@ -1,9 +1,9 @@
 {
-  "name": "cc-sdd-graph",
+  "name": "spectra",
   "version": "3.0.2",
-  "description": "Spec-driven SDLC with code-review-graph traceability",
+  "description": "Spec → Code bidirectional traceability. Spec-driven SDLC with @impl/@verifies tags, CRG integration, impact analysis, and 20 kiro skills.",
   "bin": {
-    "cc-sdd-graph": "./bin/cc-sdd-graph.js"
+    "spectra": "./bin/spectra.js"
   },
   "scripts": {
     "postinstall": "cd tools/cc-sdd && npm install && npm run build"

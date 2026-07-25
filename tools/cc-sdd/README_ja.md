@@ -40,14 +40,14 @@ cc-sdd は spec を、システムの各部分の間の契約として扱う。�
 
 ```bash
 cd your-project
-npx github:nekolife1984/cc-sdd-graph
+npx github:nekolife1984/spectra
 ```
 
 デフォルトでは **Claude Code Skills** と英語ドキュメントがインストールされる。他のエージェントや言語を指定する場合:
 
 ```bash
-npx github:nekolife1984/cc-sdd-graph --codex-skills --lang ja      # Codex、日本語
-npx github:nekolife1984/cc-sdd-graph --cursor-skills --lang zh-TW  # Cursor IDE、繁体字中国語
+npx github:nekolife1984/spectra --codex-skills --lang ja      # Codex、日本語
+npx github:nekolife1984/spectra --cursor-skills --lang zh-TW  # Cursor IDE、繁体字中国語
 ```
 
 8種類のAIコーディングエージェントに対応（Claude CodeとCodexが安定版、Cursor、Copilot、Windsurf、OpenCode、Gemini CLI、Antigravityがベータ版）、13言語対応。[対応エージェント一覧](#対応エージェント)を参照。
@@ -136,33 +136,33 @@ spec フェーズの典型的な出力（10 分以内）:
 ### 言語
 
 ```bash
-npx github:nekolife1984/cc-sdd-graph --lang ja    # 日本語
-npx github:nekolife1984/cc-sdd-graph --lang zh-TW # 繁体字中国語
-npx github:nekolife1984/cc-sdd-graph --lang es    # スペイン語
+npx github:nekolife1984/spectra --lang ja    # 日本語
+npx github:nekolife1984/spectra --lang zh-TW # 繁体字中国語
+npx github:nekolife1984/spectra --lang es    # スペイン語
 # 対応言語: en, ja, zh-TW, zh, es, pt, de, fr, ru, it, ko, ar, el
 ```
 
 ### レガシーモード（非推奨）
 
 ```bash
-npx github:nekolife1984/cc-sdd-graph --claude        # Claude Code コマンド（--claude-skills を使用）
-npx github:nekolife1984/cc-sdd-graph --claude-agent  # Claude Code subagent（--claude-skills を使用）
-npx github:nekolife1984/cc-sdd-graph --cursor        # Cursor IDE コマンド（--cursor-skills を使用）
-npx github:nekolife1984/cc-sdd-graph --copilot       # GitHub Copilot プロンプト（--copilot-skills を使用）
-npx github:nekolife1984/cc-sdd-graph --windsurf      # Windsurf IDE ワークフロー（--windsurf-skills を使用）
-npx github:nekolife1984/cc-sdd-graph --opencode      # OpenCode コマンド（--opencode-skills を使用）
-npx github:nekolife1984/cc-sdd-graph --gemini        # Gemini CLI コマンド（--gemini-skills を使用）
-npx github:nekolife1984/cc-sdd-graph --qwen          # Qwen Code
+npx github:nekolife1984/spectra --claude        # Claude Code コマンド（--claude-skills を使用）
+npx github:nekolife1984/spectra --claude-agent  # Claude Code subagent（--claude-skills を使用）
+npx github:nekolife1984/spectra --cursor        # Cursor IDE コマンド（--cursor-skills を使用）
+npx github:nekolife1984/spectra --copilot       # GitHub Copilot プロンプト（--copilot-skills を使用）
+npx github:nekolife1984/spectra --windsurf      # Windsurf IDE ワークフロー（--windsurf-skills を使用）
+npx github:nekolife1984/spectra --opencode      # OpenCode コマンド（--opencode-skills を使用）
+npx github:nekolife1984/spectra --gemini        # Gemini CLI コマンド（--gemini-skills を使用）
+npx github:nekolife1984/spectra --qwen          # Qwen Code
 ```
 
 ### 高度なオプション
 
 ```bash
 # 変更内容を先にプレビュー
-npx github:nekolife1984/cc-sdd-graph --dry-run --backup
+npx github:nekolife1984/spectra --dry-run --backup
 
 # カスタム specs ディレクトリ
-npx github:nekolife1984/cc-sdd-graph --kiro-dir docs
+npx github:nekolife1984/spectra --kiro-dir docs
 ```
 
 ## カスタマイズ

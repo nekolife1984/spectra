@@ -39,7 +39,7 @@ def load_profile(name: str = "default") -> dict:
     if name != "default":
         # カスタムプロファイルは .kiro/profiles/ も探す
         for base in [Path.cwd() / ".kiro" / "profiles",
-                     Path(os.environ.get("HOME", "/tmp")) / ".config" / "cc-sdd-graph" / "profiles"]:
+                     Path(os.environ.get("HOME", "/tmp")) / ".config" / "spectra" / "profiles"]:
             search_order.insert(0, base / f"{name}.yaml")
             search_order.insert(1, base / f"{name}.yml")
 

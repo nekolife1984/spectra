@@ -1,6 +1,6 @@
 # False-Green Detection Matrix
 
-cc-sdd-graph の検証器（verifier）強靭化状況を示すマトリクス。
+spectra の検証器（verifier）強靭化状況を示すマトリクス。
 
 最終測定: 2026-07-25
 

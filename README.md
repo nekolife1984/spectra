@@ -1,4 +1,4 @@
-# cc-sdd-graph
+# spectra
 
 A fork of [cc-sdd](https://github.com/gotalab/cc-sdd) that integrates **code-review-graph (CRG)** for bidirectional spec↔code traceability. Automatically track requirements to code via `@impl` tags, analyze impact scope, and detect spec drift.
 
@@ -6,17 +6,17 @@ A fork of [cc-sdd](https://github.com/gotalab/cc-sdd) that integrates **code-rev
 
 ### macOS / Linux
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/nekolife1984/cc-sdd-graph/main/scripts/quickstart.sh)
+bash <(curl -s https://raw.githubusercontent.com/nekolife1984/spectra/main/scripts/quickstart.sh)
 ```
 
 ### Windows (PowerShell)
 ```powershell
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/nekolife1984/cc-sdd-graph/main/scripts/quickstart.ps1 -OutFile quickstart.ps1
+Invoke-WebRequest -Uri https://raw.githubusercontent.com/nekolife1984/spectra/main/scripts/quickstart.ps1 -OutFile quickstart.ps1
 .\quickstart.ps1
 ```
 
 The script automates:
-1. Install cc-sdd-graph skills (choose agent & language)
+1. Install spectra skills (choose agent & language)
 2. Install and configure code-review-graph
 3. Build the initial code graph
 4. Initialize `.trace-mapping.yaml`
@@ -27,7 +27,7 @@ The script automates:
 
 ```bash
 # Skills only
-npx github:nekolife1984/cc-sdd-graph
+npx github:nekolife1984/spectra
 
 # CRG only (after skills install)
 bash .agents/scripts/setup-crg.sh --yes

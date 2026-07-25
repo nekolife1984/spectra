@@ -40,14 +40,14 @@ Full rationale, trade-offs, and when-to-use / when-not-to-use: [Why cc-sdd? A ph
 
 ```bash
 cd your-project
-npx github:nekolife1984/cc-sdd-graph
+npx github:nekolife1984/spectra
 ```
 
 The default installs **Claude Code Skills** with English docs. To pick another agent or language:
 
 ```bash
-npx github:nekolife1984/cc-sdd-graph --codex-skills --lang ja      # Codex, Japanese
-npx github:nekolife1984/cc-sdd-graph --cursor-skills --lang zh-TW  # Cursor IDE, Traditional Chinese
+npx github:nekolife1984/spectra --codex-skills --lang ja      # Codex, Japanese
+npx github:nekolife1984/spectra --cursor-skills --lang zh-TW  # Cursor IDE, Traditional Chinese
 ```
 
 Supports 8 AI coding agents (Claude Code and Codex stable; Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, and Antigravity in beta) and 13 languages. See [Supported Agents](#supported-agents) for the full list.
@@ -136,33 +136,33 @@ All 8 skills variants ship the same 17-skill set. The difference is how much rea
 ### Language
 
 ```bash
-npx github:nekolife1984/cc-sdd-graph --lang ja    # Japanese
-npx github:nekolife1984/cc-sdd-graph --lang zh-TW # Traditional Chinese
-npx github:nekolife1984/cc-sdd-graph --lang es    # Spanish
+npx github:nekolife1984/spectra --lang ja    # Japanese
+npx github:nekolife1984/spectra --lang zh-TW # Traditional Chinese
+npx github:nekolife1984/spectra --lang es    # Spanish
 # Supports: en, ja, zh-TW, zh, es, pt, de, fr, ru, it, ko, ar, el
 ```
 
 ### Legacy modes (deprecated)
 
 ```bash
-npx github:nekolife1984/cc-sdd-graph --claude        # Claude Code commands (use --claude-skills)
-npx github:nekolife1984/cc-sdd-graph --claude-agent  # Claude Code subagents (use --claude-skills)
-npx github:nekolife1984/cc-sdd-graph --cursor        # Cursor IDE commands (use --cursor-skills)
-npx github:nekolife1984/cc-sdd-graph --copilot       # GitHub Copilot prompts (use --copilot-skills)
-npx github:nekolife1984/cc-sdd-graph --windsurf      # Windsurf IDE workflows (use --windsurf-skills)
-npx github:nekolife1984/cc-sdd-graph --opencode      # OpenCode commands (use --opencode-skills)
-npx github:nekolife1984/cc-sdd-graph --gemini        # Gemini CLI commands (use --gemini-skills)
-npx github:nekolife1984/cc-sdd-graph --qwen          # Qwen Code
+npx github:nekolife1984/spectra --claude        # Claude Code commands (use --claude-skills)
+npx github:nekolife1984/spectra --claude-agent  # Claude Code subagents (use --claude-skills)
+npx github:nekolife1984/spectra --cursor        # Cursor IDE commands (use --cursor-skills)
+npx github:nekolife1984/spectra --copilot       # GitHub Copilot prompts (use --copilot-skills)
+npx github:nekolife1984/spectra --windsurf      # Windsurf IDE workflows (use --windsurf-skills)
+npx github:nekolife1984/spectra --opencode      # OpenCode commands (use --opencode-skills)
+npx github:nekolife1984/spectra --gemini        # Gemini CLI commands (use --gemini-skills)
+npx github:nekolife1984/spectra --qwen          # Qwen Code
 ```
 
 ### Advanced options
 
 ```bash
 # Preview changes before applying
-npx github:nekolife1984/cc-sdd-graph --dry-run --backup
+npx github:nekolife1984/spectra --dry-run --backup
 
 # Custom specs directory
-npx github:nekolife1984/cc-sdd-graph --kiro-dir docs
+npx github:nekolife1984/spectra --kiro-dir docs
 ```
 
 ## Customization

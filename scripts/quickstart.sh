@@ -1,16 +1,16 @@
 #!/bin/bash
-# quickstart.sh — One-command cc-sdd-graph + CRG setup
+# quickstart.sh — One-command spectra + CRG setup
 #
 # Usage:
 #   # Run directly from GitHub (recommended)
-#   bash <(curl -s https://raw.githubusercontent.com/nekolife1984/cc-sdd-graph/main/scripts/quickstart.sh)
+#   bash <(curl -s https://raw.githubusercontent.com/nekolife1984/spectra/main/scripts/quickstart.sh)
 #
 #   # Or clone first
-#   git clone https://github.com/nekolife1984/cc-sdd-graph.git
-#   bash cc-sdd-graph/scripts/quickstart.sh
+#   git clone https://github.com/nekolife1984/spectra.git
+#   bash spectra/scripts/quickstart.sh
 #
 # This script:
-#   1. Installs cc-sdd-graph skills and templates
+#   1. Installs spectra skills and templates
 #   2. Installs and configures code-review-graph
 #   3. Initializes .trace-mapping.yaml
 #   4. Saves initial snapshot
@@ -30,7 +30,7 @@ warn()  { echo -e "${YELLOW}⚠️  $1${NC}"; }
 err()   { echo -e "${RED}❌ $1${NC}"; }
 
 # ── Config ─────────────────────────────────────────────
-GITHUB_REPO="nekolife1984/cc-sdd-graph"
+GITHUB_REPO="nekolife1984/spectra"
 RAW_BASE="https://raw.githubusercontent.com/$GITHUB_REPO/main"
 REPO_URL="https://github.com/$GITHUB_REPO.git"
 TMP_DIR=""
@@ -42,7 +42,7 @@ trap cleanup EXIT
 
 echo ""
 echo -e "${CYAN}═══════════════════════════════════════${NC}"
-echo -e "${CYAN}  cc-sdd-graph + CRG Setup${NC}"
+echo -e "${CYAN}  spectra + CRG Setup${NC}"
 echo -e "${CYAN}═══════════════════════════════════════${NC}"
 echo ""
 
@@ -73,8 +73,8 @@ fi
 
 ok "Node.js, Python ($($PYTHON --version 2>&1 || true)), npx available"
 
-# ── Step 1: Install cc-sdd-graph ────────────────────────
-info "Step 1/4: Installing cc-sdd-graph..."
+# ── Step 1: Install spectra ────────────────────────
+info "Step 1/4: Installing spectra..."
 
 echo ""
 echo "  Select your AI coding agent:"
@@ -126,7 +126,7 @@ fi
 echo ""
 info "Running: npx github:$GITHUB_REPO $AGENT_FLAG $LANG_FLAG $KIRO_FLAG"
 npx "github:$GITHUB_REPO" $AGENT_FLAG $LANG_FLAG $KIRO_FLAG
-ok "cc-sdd-graph installation complete"
+ok "spectra installation complete"
 
 # ── Step 2: CRG Setup ──────────────────────────────────
 info "Step 2/4: Setting up code-review-graph..."
@@ -189,7 +189,7 @@ fi
 echo ""
 info "Step 5/5: CI/CD Templates (optional)..."
 echo ""
-echo "  cc-sdd-graph includes CI/CD templates for GitHub Actions:"
+echo "  spectra includes CI/CD templates for GitHub Actions:"
 echo "    • traceability-check.yml — 3-stage gate (PR blocking)"
 echo "    • ci-check.sh — local equivalent for pre-push"
 echo ""
@@ -225,7 +225,7 @@ case "${CI_CHOICE:-n}" in
       fi
     else
       warn "Template files not found locally."
-      echo "  To install manually, run from the cc-sdd-graph repo:"
+      echo "  To install manually, run from the spectra repo:"
       echo "    cp tools/cc-sdd/templates/shared/.github/workflows/traceability-check.yml .github/workflows/"
       echo "    cp tools/cc-sdd/templates/shared/scripts/ci-check.sh .agents/scripts/"
     fi
