@@ -24,8 +24,8 @@ Analyze implementation gap for feature **$1** based on approved requirements and
 ## Execution Steps
 
 1. **Load Context**:
-   - Read `{{SPECS_DIR}}/specs/$1/spec.json` for language and metadata
-   - Read `{{SPECS_DIR}}/specs/$1/requirements.md` for requirements
+   - Read `{{SPECS_DIR}}/$1/spec.json` for language and metadata
+   - Read `{{SPECS_DIR}}/$1/requirements.md` for requirements
    - Core steering context: `product.md`, `tech.md`, `structure.md`
    - Additional steering files only when directly relevant to the feature's domain rules, integrations, runtime prerequisites, compliance/security constraints, or existing product boundaries
    - Relevant local agent skills or playbooks only when they clearly match the feature's host environment or use case and provide analysis-relevant context
@@ -71,7 +71,7 @@ After all parallel research completes, synthesize findings for gap analysis.
 
    **Write the gap analysis to disk so it survives session boundaries and can be referenced during design phase.**
 
-   - Save the gap analysis to `{{SPECS_DIR}}/specs/$1/research.md`
+   - Save the gap analysis to `{{SPECS_DIR}}/$1/research.md`
    - If the file already exists, append the new analysis (separated by a horizontal rule `---`) rather than overwriting previous research
    - Verify the file was written by reading it back
 

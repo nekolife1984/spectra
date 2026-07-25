@@ -6,15 +6,15 @@ spectra-style Spec-Driven Development on an agentic SDLC
 
 ### Paths
 - Steering: `{{SPECTRA_DIR}}/steering/`
-- Specs: `{{SPECS_DIR}}/specs/`
+- Specs: `{{SPECS_DIR}}/`
 
 ### Steering vs Specification
 
 **Steering** (`{{SPECTRA_DIR}}/steering/`) - Guide AI with project-wide rules and context
-**Specs** (`{{SPECS_DIR}}/specs/`) - Formalize development process for individual features
+**Specs** (`{{SPECS_DIR}}/`) - Formalize development process for individual features
 
 ### Active Specifications
-- Check `{{SPECS_DIR}}/specs/` for active specifications
+- Check `{{SPECS_DIR}}/` for active specifications
 - Use `/spectra-status [feature-name]` to check progress
 
 ## Development Guidelines

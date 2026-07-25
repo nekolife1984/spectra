@@ -23,8 +23,8 @@ metadata:
 ### Step 1: Load Context
 
 **Read all necessary context**:
-- `{{SPECS_DIR}}/specs/$1/spec.json`, `requirements.md`, `design.md`
-- `{{SPECS_DIR}}/specs/$1/tasks.md` (if exists, for merge mode)
+- `{{SPECS_DIR}}/$1/spec.json`, `requirements.md`, `design.md`
+- `{{SPECS_DIR}}/$1/tasks.md` (if exists, for merge mode)
 - Core steering context: `product.md`, `tech.md`, `structure.md`
 - Additional steering files only when directly relevant to requirements coverage, design boundaries, runtime prerequisites, or team conventions that affect task executability
 
@@ -109,7 +109,7 @@ Before writing `tasks.md`, run one lightweight independent sanity review of the 
 ### Step 4: Finalize
 
 **Write tasks.md**:
-- Create/update `{{SPECS_DIR}}/specs/$1/tasks.md`
+- Create/update `{{SPECS_DIR}}/$1/tasks.md`
 - Update spec.json metadata:
   - Set `phase: "tasks-generated"`
   - Set `approvals.tasks.generated: true, approved: false`
@@ -157,7 +157,7 @@ Before writing `tasks.md`, run one lightweight independent sanity review of the 
 
 Provide brief summary in the language specified in spec.json:
 
-1. **Status**: Confirm tasks generated at `{{SPECS_DIR}}/specs/$1/tasks.md`
+1. **Status**: Confirm tasks generated at `{{SPECS_DIR}}/$1/tasks.md`
 2. **Task Summary**: 
    - Total: X major tasks, Y sub-tasks
    - All Z requirements covered
@@ -189,7 +189,7 @@ Provide brief summary in the language specified in spec.json:
 
 **Missing Requirements or Design**:
 - **Stop Execution**: Both documents must exist
-- **User Message**: "Missing requirements.md or design.md at `{{SPECS_DIR}}/specs/$1/`"
+- **User Message**: "Missing requirements.md or design.md at `{{SPECS_DIR}}/$1/`"
 - **Suggested Action**: "Complete requirements and design phases first"
 
 **Incomplete Requirements Coverage**:

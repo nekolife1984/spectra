@@ -19,7 +19,7 @@ description: Entry point for new work. Determines the best action path or work d
 
 Gather **only metadata** to determine the action path. Do NOT read full file contents yet.
 
-- **Specs inventory**: Scan `{{SPECS_DIR}}/specs/*/spec.json` for `name`, `phase` fields and `approvals` status. Note feature names and their current status.
+- **Specs inventory**: Scan `{{SPECS_DIR}}/*/spec.json` for `name`, `phase` fields and `approvals` status. Note feature names and their current status.
 - **Steering existence**: Check which files exist in `{{SPECTRA_DIR}}/steering/` (product.md, tech.md, structure.md, roadmap.md). Do NOT read their contents yet.
 - **Roadmap check**: If `{{SPECTRA_DIR}}/steering/roadmap.md` exists, read it. This contains project-level context (approach, scope, constraints, spec list) from a previous discovery session. Use it to restore project context.
 - **Top-level structure**: List the project root directory to note key directories and files. Do NOT recurse into subdirectories.
@@ -148,7 +148,7 @@ If the viability check reveals issues, present them to the user and revisit the 
 
 **For Path C (single spec)**:
 
-Write `{{SPECS_DIR}}/specs/<feature-name>/brief.md` to disk with this structure:
+Write `{{SPECS_DIR}}/<feature-name>/brief.md` to disk with this structure:
 
 ```
 # Brief: <feature-name>
@@ -192,7 +192,7 @@ Write `{{SPECS_DIR}}/specs/<feature-name>/brief.md` to disk with this structure:
 
 Write these to disk:
 - `{{SPECTRA_DIR}}/steering/roadmap.md`
-- `{{SPECS_DIR}}/specs/<feature>/brief.md` for every feature listed under `## Specs (dependency order)`
+- `{{SPECS_DIR}}/<feature>/brief.md` for every feature listed under `## Specs (dependency order)`
 
 Use this roadmap structure:
 
@@ -224,7 +224,7 @@ Use this roadmap structure:
 - [ ] feature-c -- [one-line description]. Dependencies: feature-a, feature-b
 ```
 
-Then write `{{SPECS_DIR}}/specs/<feature>/brief.md` for **every** feature listed under `## Specs (dependency order)` using the Path C brief format. This enables parallel spec creation via `/spectra-batch`.
+Then write `{{SPECS_DIR}}/<feature>/brief.md` for **every** feature listed under `## Specs (dependency order)` using the Path C brief format. This enables parallel spec creation via `/spectra-batch`.
 
 **For Path E (mixed decomposition)**:
 

@@ -9,15 +9,15 @@ Powered by [**spectra**](https://github.com/nekolife1984/spectra) — Spec → C
 
 ### Paths
 - Steering: `.spectra/steering/`
-- Specs: `docs/specs/`
+- Specs: `docs/`
 
 ### Steering vs Specification
 
 **Steering** (`.spectra/steering/`) - Guide AI with project-wide rules and context
-**Specs** (`docs/specs/`) - Formalize development process for individual features
+**Specs** (`docs/`) - Formalize development process for individual features
 
 ### Active Specifications
-- Check `docs/specs/` for active specifications
+- Check `docs/` for active specifications
 - Use `/spectra-status [feature-name]` to check progress
 
 ## Development Guidelines

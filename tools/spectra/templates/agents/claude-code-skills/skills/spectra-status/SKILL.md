@@ -18,10 +18,10 @@ description: Show specification status and progress
 ## Execution Steps
 
 ### Step 1: Load Spec Context
-- Read `{{SPECS_DIR}}/specs/$1/spec.json` for metadata and phase status
-- Read `{{SPECS_DIR}}/specs/$1/brief.md` if it exists
+- Read `{{SPECS_DIR}}/$1/spec.json` for metadata and phase status
+- Read `{{SPECS_DIR}}/$1/brief.md` if it exists
 - Read existing files: `requirements.md`, `design.md`, `tasks.md` (if they exist)
-- Check `{{SPECS_DIR}}/specs/$1/` directory for available files
+- Check `{{SPECS_DIR}}/$1/` directory for available files
 - Read `{{SPECTRA_DIR}}/steering/roadmap.md` if it exists and this spec appears in it
 
 ### Step 2: Analyze Status
@@ -57,7 +57,7 @@ Create report in the language specified in spec.json covering:
 ### Error Scenarios
 
 **Spec Not Found**:
-- **Message**: "No spec found for `$1`. Check available specs in `{{SPECS_DIR}}/specs/`"
+- **Message**: "No spec found for `$1`. Check available specs in `{{SPECS_DIR}}/`"
 - **Action**: List available spec directories
 
 **Incomplete Spec**:
@@ -68,4 +68,4 @@ Create report in the language specified in spec.json covering:
 
 To see all available specs:
 - Run with no argument or use wildcard
-- Shows all specs in `{{SPECS_DIR}}/specs/` with their status
+- Shows all specs in `{{SPECS_DIR}}/` with their status

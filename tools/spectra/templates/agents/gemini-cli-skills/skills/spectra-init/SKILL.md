@@ -11,10 +11,10 @@ description: Initialize a new specification with detailed project description
 Generate a unique feature name from the project description ($ARGUMENTS) and initialize the specification structure.
 
 ## Execution Steps
-1. **Check for Brief**: If `{{SPECS_DIR}}/specs/{feature-name}/brief.md` exists (created by `/spectra-discovery`), read it. The brief contains problem, approach, scope, and constraints from the discovery session. Use this to pre-fill the project description and skip clarification questions that the brief already answers.
+1. **Check for Brief**: If `{{SPECS_DIR}}/{feature-name}/brief.md` exists (created by `/spectra-discovery`), read it. The brief contains problem, approach, scope, and constraints from the discovery session. Use this to pre-fill the project description and skip clarification questions that the brief already answers.
 2. **Clarify Intent**: The Project Description in requirements.md must contain three elements: (a) who has the problem, (b) current situation, (c) what should change. If a brief.md exists and covers these, skip to step 3. Otherwise, ask the user to clarify before proceeding. Ask as many questions as needed; do not fill in gaps with your own assumptions.
-3. **Check Uniqueness**: Verify `{{SPECS_DIR}}/specs/` for naming conflicts. If the directory already exists with only `brief.md` (no `spec.json`), use that directory (discovery created it).
-4. **Create Directory**: `{{SPECS_DIR}}/specs/[feature-name]/` (skip if already exists from discovery)
+3. **Check Uniqueness**: Verify `{{SPECS_DIR}}/` for naming conflicts. If the directory already exists with only `brief.md` (no `spec.json`), use that directory (discovery created it).
+4. **Create Directory**: `{{SPECS_DIR}}/[feature-name]/` (skip if already exists from discovery)
 5. **Initialize Files Using Templates**:
    - Read `{{SPECTRA_DIR}}/settings/templates/specs/init.json`
    - Read `{{SPECTRA_DIR}}/settings/templates/specs/requirements-init.md`
@@ -32,7 +32,7 @@ Generate a unique feature name from the project description ($ARGUMENTS) and ini
      mappings:
        - id: "1.1"
          description: "First requirement from this spec"
-         spec: "{{SPECS_DIR}}/specs/{feature-name}/requirements.md"
+         spec: "{{SPECS_DIR}}/{feature-name}/requirements.md"
          design: ""
          code:
            files: []

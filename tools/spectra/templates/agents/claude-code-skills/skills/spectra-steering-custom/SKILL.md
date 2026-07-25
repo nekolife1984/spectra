@@ -141,5 +141,5 @@ Review and customize as needed.
 - All steering files loaded as project memory
 - Custom files equally important as core files
 - Avoid documenting agent-specific tooling directories (e.g. `.cursor/`, `.gemini/`, `.claude/`)
-- Light references to `{{SPECS_DIR}}/specs/` and `{{SPECTRA_DIR}}/steering/` are acceptable; avoid other `.spectra/` directories
+- Light references to `{{SPECS_DIR}}/` and `{{SPECTRA_DIR}}/steering/` are acceptable; avoid other `.spectra/` directories
 

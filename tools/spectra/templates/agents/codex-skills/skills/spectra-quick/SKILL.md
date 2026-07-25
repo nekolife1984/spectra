@@ -52,7 +52,7 @@ Execute these 4 phases in order:
 **Core Logic**:
 
 1. **Check for Brief**:
-   - If `{{SPECS_DIR}}/specs/{feature-name}/brief.md` exists (created by `/spectra-discovery`), read it for discovery context (problem, approach, scope, constraints)
+   - If `{{SPECS_DIR}}/{feature-name}/brief.md` exists (created by `/spectra-discovery`), read it for discovery context (problem, approach, scope, constraints)
    - Use brief content as the project description instead of `$ARGUMENTS`
 
 2. **Generate Feature Name**:
@@ -61,12 +61,12 @@ Execute these 4 phases in order:
    - Keep name concise (2-4 words ideally)
 
 3. **Check Uniqueness**:
-   - Use Glob to check `{{SPECS_DIR}}/specs/*/`
+   - Use Glob to check `{{SPECS_DIR}}/*/`
    - If directory exists with only `brief.md` (no `spec.json`), use that directory (discovery created it)
    - Otherwise if feature name exists, append `-2`, `-3`, etc.
 
 4. **Create Directory**:
-   - Use Bash: `mkdir -p {{SPECS_DIR}}/specs/{feature-name}` (skip if already exists from discovery)
+   - Use Bash: `mkdir -p {{SPECS_DIR}}/{feature-name}` (skip if already exists from discovery)
 
 5. **Initialize Files from Templates**:
 
@@ -86,11 +86,11 @@ Execute these 4 phases in order:
 
    c. Write files using Write tool:
    ```
-   - {{SPECS_DIR}}/specs/{feature-name}/spec.json
-   - {{SPECS_DIR}}/specs/{feature-name}/requirements.md
+   - {{SPECS_DIR}}/{feature-name}/spec.json
+   - {{SPECS_DIR}}/{feature-name}/requirements.md
    ```
 
-6. **Output Progress**: "Phase 1/4 complete: Spec initialized at {{SPECS_DIR}}/specs/{feature-name}/"
+6. **Output Progress**: "Phase 1/4 complete: Spec initialized at {{SPECS_DIR}}/{feature-name}/"
 
 **Automatic Mode**: IMMEDIATELY continue to Phase 2.
 
@@ -202,7 +202,7 @@ Final sanity review still runs.
 
 After each phase, show brief progress:
 ```
-Spec initialized at {{SPECS_DIR}}/specs/{feature}/
+Spec initialized at {{SPECS_DIR}}/{feature}/
 Requirements generated → Continuing to design...
 Design generated → Continuing to tasks...
 ```
@@ -215,10 +215,10 @@ Provide output in the language specified in `spec.json`:
 Quick Spec Generation Complete!
 
 ## Generated Files:
-- {{SPECS_DIR}}/specs/{feature}/spec.json
-- {{SPECS_DIR}}/specs/{feature}/requirements.md ({X} requirements)
-- {{SPECS_DIR}}/specs/{feature}/design.md ({Y} components, {Z} endpoints)
-- {{SPECS_DIR}}/specs/{feature}/tasks.md ({N} tasks)
+- {{SPECS_DIR}}/{feature}/spec.json
+- {{SPECS_DIR}}/{feature}/requirements.md ({X} requirements)
+- {{SPECS_DIR}}/{feature}/design.md ({Y} components, {Z} endpoints)
+- {{SPECS_DIR}}/{feature}/tasks.md ({N} tasks)
 
 Quick generation skipped:
 - `/spectra-validate-gap` - Gap analysis (integration check)

@@ -152,5 +152,5 @@ Review and approve as Source of Truth.
 - "Golden Rule": New code following patterns shouldn't require steering updates
 - Avoid documenting agent-specific tooling directories (e.g. `.cursor/`, `.gemini/`, `.claude/`)
 - `{{SPECTRA_DIR}}/settings/` content should NOT be documented in steering files (settings are metadata, not project knowledge)
-- Light references to `{{SPECS_DIR}}/specs/` and `{{SPECTRA_DIR}}/steering/` are acceptable; avoid other `.spectra/` directories
+- Light references to `{{SPECS_DIR}}/` and `{{SPECTRA_DIR}}/steering/` are acceptable; avoid other `.spectra/` directories
 
