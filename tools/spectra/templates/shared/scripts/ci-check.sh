@@ -20,6 +20,16 @@ echo "  ci-check.sh — Traceability CI (local)"
 echo "=========================================="
 echo ""
 
+# ── Stage 0: 自動修復 ──
+echo "=== Stage 0/4: Auto-repair trace-mapping.yaml ==="
+if [ -f ".spectra/scripts/fix-trace-mapping.py" ] && [ -f ".spectra/trace-mapping.yaml" ]; then
+    python3 .spectra/scripts/fix-trace-mapping.py --project-dir . 2>&1 | tail -3
+    echo "  ✅ Auto-repair complete"
+else
+    echo "  ⏭  fix-trace-mapping.py not available (skip)"
+fi
+echo ""
+
 # ── Stage 1 ──
 echo "=== Stage 1/3: Trace Completeness Gate ==="
 if python3 .spectra/scripts/check-trace-completeness.py 2>/dev/null; then
