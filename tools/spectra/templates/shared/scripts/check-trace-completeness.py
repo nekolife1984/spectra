@@ -129,7 +129,11 @@ def load_mapping(project_dir: Path) -> list[dict]:
     if not path.exists():
         return []
     with open(path) as f:
-        data = yaml.safe_load(f)
+        try:
+            data = yaml.safe_load(f)
+        except yaml.YAMLError as e:
+            print(f"WARNING: {TRACE_MAPPING_PATH} のパースに失敗しました: {e}", file=sys.stderr)
+            return []
     if not data:
         return []
     return data.get("mappings", [])
@@ -1255,6 +1259,15 @@ def main():
     if not has_mapping:
         print(f"\u2139\ufe0f  .spectra/trace-mapping.yaml が見つかりません — "
               f"impl/files/symbols/module/spec/design/test チェックはスキップされます")
+    else:
+        # 重複IDチェック
+        ids = [m.get("id", "") for m in mappings]
+        seen = set()
+        dupes = sorted({i for i in ids if i and (i in seen or seen.add(i))})
+        if dupes:
+            print(f"  ⚠️  重複IDが見つかりました: {dupes}")
+            any_failed = True
+            total_issues += len(dupes)
 
     total_issues = 0
     any_failed = False
