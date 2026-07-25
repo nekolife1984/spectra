@@ -30,7 +30,7 @@ description: Create complete specs (requirements, design, tasks) for all feature
    - `## Existing Spec Updates`
    - `## Direct Implementation Candidates`
    Do not include these in dependency-wave execution; they are awareness-only inputs for sequencing and consistency review.
-4. For each pending feature in `## Specs (dependency order)`, verify `{{SPECTRA_DIR}}/specs/<feature>/brief.md` exists
+4. For each pending feature in `## Specs (dependency order)`, verify `{{SPECS_DIR}}/specs/<feature>/brief.md` exists
 5. If any brief.md is missing, stop and report: "Missing brief.md for: [list]. Run `/spectra-discovery` to generate briefs first."
 
 ## Step 2: Build Dependency Waves
@@ -62,7 +62,7 @@ For each wave, dispatch all features in the wave as **parallel sub-agents**.
 ```
 Create a complete specification for feature "{feature-name}".
 
-1. Read the brief at {{SPECTRA_DIR}}/specs/{feature-name}/brief.md for feature context
+1. Read the brief at {{SPECS_DIR}}/specs/{feature-name}/brief.md for feature context
 2. Read the roadmap at {{SPECTRA_DIR}}/steering/roadmap.md for project context
 3. Execute the full spec pipeline. For each phase, read the corresponding skill's SKILL.md for complete instructions (templates, rules, review gates):
    a. Initialize: Read .agents/skills/spectra-init/SKILL.md, then create spec.json and requirements.md
@@ -88,9 +88,9 @@ After all waves complete, spawn a **single sub-agent** for cross-spec consistenc
 **Sub-agent task**:
 
 Read ALL generated specs and check for consistency across the entire project:
-- `{{SPECTRA_DIR}}/specs/*/design.md` (primary: contains interfaces, data models, architecture)
-- `{{SPECTRA_DIR}}/specs/*/requirements.md` (for scope and acceptance criteria)
-- `{{SPECTRA_DIR}}/specs/*/tasks.md` (for boundary annotations only -- read _Boundary:_ lines, skip task descriptions)
+- `{{SPECS_DIR}}/specs/*/design.md` (primary: contains interfaces, data models, architecture)
+- `{{SPECS_DIR}}/specs/*/requirements.md` (for scope and acceptance criteria)
+- `{{SPECS_DIR}}/specs/*/tasks.md` (for boundary annotations only -- read _Boundary:_ lines, skip task descriptions)
 - `{{SPECTRA_DIR}}/steering/roadmap.md`
 
 Reading priority: Focus on design.md files (they contain interfaces, data models, architecture). For requirements.md, focus on section headings and acceptance criteria. For tasks.md, focus on _Boundary:_ annotations.
@@ -116,7 +116,7 @@ Output: CONSISTENT areas + ISSUES with (which specs, what's inconsistent, sugges
 
 ## Step 5: Finalize
 
-1. Scan `{{SPECTRA_DIR}}/specs/*/tasks.md` to verify all specs exist
+1. Scan `{{SPECS_DIR}}/specs/*/tasks.md` to verify all specs exist
 2. For each completed spec, read spec.json to confirm phase and approvals
 3. Update roadmap.md: mark completed specs as `[x]`
 4. If roadmap.md includes `Existing Spec Updates` or `Direct Implementation Candidates`, leave them untouched and mention them as remaining follow-up items unless already explicitly completed elsewhere

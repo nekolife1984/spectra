@@ -21,9 +21,9 @@ metadata:
 ## Execution Steps
 
 1. **Load Context**:
-   - Read `{{SPECTRA_DIR}}/specs/$1/spec.json` for language and metadata
-   - Read `{{SPECTRA_DIR}}/specs/$1/brief.md` if it exists (discovery context: problem, approach, scope decisions, boundary candidates)
-   - Read `{{SPECTRA_DIR}}/specs/$1/requirements.md` for project description
+   - Read `{{SPECS_DIR}}/specs/$1/spec.json` for language and metadata
+   - Read `{{SPECS_DIR}}/specs/$1/brief.md` if it exists (discovery context: problem, approach, scope decisions, boundary candidates)
+   - Read `{{SPECS_DIR}}/specs/$1/requirements.md` for project description
    - Core steering context: `product.md`, `tech.md`, `structure.md`
    - Additional steering files only when directly relevant to feature scope, user personas, business/domain rules, compliance/security constraints, operational constraints, or existing product boundaries
    - Relevant local agent skills or playbooks only when they clearly match the feature's host environment or use case and contain domain terminology or workflow rules that shape user-observable requirements
@@ -72,7 +72,7 @@ Step 4: Review Requirements Draft:
    - If the draft exposes a real scope ambiguity or contradiction, stop and ask the user to clarify instead of writing guessed requirements
 
 5. **Finalize and Update Metadata**:
-   - Write `{{SPECTRA_DIR}}/specs/$1/requirements.md` only after the requirements review gate passes
+   - Write `{{SPECS_DIR}}/specs/$1/requirements.md` only after the requirements review gate passes
    - Set `phase: "requirements-generated"`
    - Set `approvals.requirements.generated: true`
    - Update `updated_at` timestamp
@@ -140,7 +140,7 @@ Provide output in the language specified in spec.json with:
 ### Next Phase: Design Generation
 
 **If Requirements Approved**:
-- Review generated requirements at `{{SPECTRA_DIR}}/specs/$1/requirements.md`
+- Review generated requirements at `{{SPECS_DIR}}/specs/$1/requirements.md`
 - **Optional Gap Analysis** (for existing codebases):
   - Run `/spectra-validate-gap $1` to analyze implementation gap with current code
   - Identifies existing components, integration points, and implementation strategy

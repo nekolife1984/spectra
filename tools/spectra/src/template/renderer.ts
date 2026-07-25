@@ -6,6 +6,7 @@ const buildDict = (agent: AgentType, ctx: TemplateContext): Record<string, strin
   LANG_CODE: ctx.LANG_CODE,
   DEV_GUIDELINES: ctx.DEV_GUIDELINES,
   SPECTRA_DIR: ctx.SPECTRA_DIR,
+  SPECS_DIR: ctx.SPECS_DIR,
   AGENT_DIR: ctx.AGENT_DIR,
   AGENT_DOC: ctx.AGENT_DOC,
   AGENT_COMMANDS_DIR: ctx.AGENT_COMMANDS_DIR,

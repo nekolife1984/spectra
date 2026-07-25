@@ -7,21 +7,21 @@ Project memory keeps persistent guidance (steering, specs notes, component docs)
 
 - Use `{{SPECTRA_DIR}}/steering/` for project-wide policies: architecture principles, naming schemes, security constraints, tech stack decisions, api standards, etc.
 - Use local `AGENTS.md` files for feature or library context (e.g. `src/lib/payments/AGENTS.md`): describe domain assumptions, API contracts, or testing conventions specific to that folder. Windsurf auto-loads these when working in the matching path.
-- Specs notes stay with each spec (under `{{SPECTRA_DIR}}/specs/`) to guide specification-level workflows.
+- Specs notes stay with each spec (under `{{SPECS_DIR}}/specs/`) to guide specification-level workflows.
 
 ## Project Context
 
 ### Paths
 - Steering: `{{SPECTRA_DIR}}/steering/`
-- Specs: `{{SPECTRA_DIR}}/specs/`
+- Specs: `{{SPECS_DIR}}/specs/`
 
 ### Steering vs Specification
 
 **Steering** (`{{SPECTRA_DIR}}/steering/`) - Guide AI with project-wide rules and context
-**Specs** (`{{SPECTRA_DIR}}/specs/`) - Formalize development process for individual features
+**Specs** (`{{SPECS_DIR}}/specs/`) - Formalize development process for individual features
 
 ### Active Specifications
-- Check `{{SPECTRA_DIR}}/specs/` for active specifications
+- Check `{{SPECS_DIR}}/specs/` for active specifications
 - Use `@spectra-status [feature-name]` to check progress
 
 ## Development Guidelines

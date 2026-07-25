@@ -15,6 +15,7 @@ export type UserConfig = Partial<{
   resolvedOs: OSType;
   lang: SupportedLanguage;
   spectraDir: string;
+  specsDir: string;
   overwrite: OverwritePolicy;
   backupDir: string;
   agentLayouts: CCSddConfig['agentLayouts'];
@@ -33,6 +34,7 @@ export type ResolvedConfig = {
   backupEnabled: boolean;
   backupDir: string;
   layout: AgentLayout;
+  specsDir: string;
 };
 
 const defaults = {
@@ -40,6 +42,7 @@ const defaults = {
   os: 'auto' as const,
   lang: 'en' as SupportedLanguage,
   spectraDir: '.spectra',
+  specsDir: 'docs',
   overwrite: 'prompt' as OverwritePolicy,
   backupDir: '.spectra.backup',
 };
@@ -57,6 +60,7 @@ export const mergeConfigAndArgs = (
   const lang = (args.lang ?? config.lang ?? defaults.lang) as SupportedLanguage;
 
   const spectraDir = resolveSpecDir({ flag: args.spectraDir, config: config.spectraDir });
+  const specsDir = args.specsDir ?? config.specsDir ?? defaults.specsDir;
 
   const overwrite: OverwritePolicy = (args.overwrite ?? config.overwrite ?? defaults.overwrite) as OverwritePolicy;
   const yes = !!args.yes;
@@ -81,6 +85,7 @@ export const mergeConfigAndArgs = (
     resolvedOs,
     lang,
     spectraDir,
+    specsDir,
     overwrite,
     effectiveOverwrite,
     dryRun,

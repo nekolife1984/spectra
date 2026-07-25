@@ -6,6 +6,7 @@ export interface BuildTemplateContextOptions {
   agent: AgentType;
   lang: SupportedLanguage;
   spectraDir?: SpectraDirOptions;
+  specsDir?: string;
   config?: CCSddConfig;
 }
 
@@ -13,6 +14,7 @@ export type TemplateContext = {
   LANG_CODE: string;
   DEV_GUIDELINES: string;
   SPECTRA_DIR: string;
+  SPECS_DIR: string;
   AGENT_DIR: string;
   AGENT_DOC: string;
   AGENT_COMMANDS_DIR: string;
@@ -40,11 +42,13 @@ export const getDevGuidelines = (lang: SupportedLanguage): string => guidelinesM
 export const createTemplateContext = (
   lang: SupportedLanguage,
   spectraDir: string,
+  specsDir: string,
   layout: AgentLayout,
 ): TemplateContext => ({
   LANG_CODE: lang,
   DEV_GUIDELINES: getDevGuidelines(lang),
   SPECTRA_DIR: spectraDir,
+  SPECS_DIR: specsDir,
   AGENT_DIR: layout.agentDir,
   AGENT_DOC: layout.docFile,
   AGENT_COMMANDS_DIR: layout.commandsDir,
@@ -53,5 +57,5 @@ export const createTemplateContext = (
 export const buildTemplateContext = (opts: BuildTemplateContextOptions): TemplateContext => {
   const spectra = resolveSpecDir(opts.spectraDir ?? {});
   const layout = resolveAgentLayout(opts.agent, opts.config);
-  return createTemplateContext(opts.lang, spectra, layout);
+  return createTemplateContext(opts.lang, spectra, opts.specsDir ?? 'docs', layout);
 };

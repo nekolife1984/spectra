@@ -38,11 +38,11 @@ This skill's main question is: when the completed tasks are viewed together, do 
 - Extract feature names and task numbers from each execution
 - Aggregate all implemented tasks by feature
 - Report detected implementations (e.g., "user-auth: 1.1, 1.2, 1.3")
-- If no history found, scan `{{SPECTRA_DIR}}/specs/` for features with completed tasks `[x]`
+- If no history found, scan `{{SPECS_DIR}}/specs/` for features with completed tasks `[x]`
 
 **If feature provided** (`$1` present, `$2` empty):
 - Use specified feature
-- Detect all completed tasks `[x]` in `{{SPECTRA_DIR}}/specs/$1/tasks.md`
+- Detect all completed tasks `[x]` in `{{SPECS_DIR}}/specs/$1/tasks.md`
 
 **If both feature and tasks provided** (`$1` and `$2` present):
 - Validate specified feature and tasks only (e.g., `user-auth 1.1,1.2`)
@@ -66,10 +66,10 @@ If the implementation run explicitly skipped task-local review (for example `--r
 ### 2. Load Context
 
 For each detected feature:
-- Read `{{SPECTRA_DIR}}/specs/<feature>/spec.json` for metadata
-- Read `{{SPECTRA_DIR}}/specs/<feature>/requirements.md` for requirements
-- Read `{{SPECTRA_DIR}}/specs/<feature>/design.md` for design structure
-- Read `{{SPECTRA_DIR}}/specs/<feature>/tasks.md` for task list and Implementation Notes
+- Read `{{SPECS_DIR}}/specs/<feature>/spec.json` for metadata
+- Read `{{SPECS_DIR}}/specs/<feature>/requirements.md` for requirements
+- Read `{{SPECS_DIR}}/specs/<feature>/design.md` for design structure
+- Read `{{SPECS_DIR}}/specs/<feature>/tasks.md` for task list and Implementation Notes
 - Core steering context: `product.md`, `tech.md`, `structure.md`
 - Additional steering files only when directly relevant to the validated boundaries, runtime prerequisites, integrations, domain rules, security/performance constraints, or team conventions that affect the GO/NO-GO call
 

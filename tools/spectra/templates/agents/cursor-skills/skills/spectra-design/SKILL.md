@@ -23,8 +23,8 @@ metadata:
 ### Step 1: Load Context
 
 **Read all necessary context**:
-- `{{SPECTRA_DIR}}/specs/$1/spec.json`, `requirements.md`, `design.md` (if exists)
-- `{{SPECTRA_DIR}}/specs/$1/research.md` (if exists, contains gap analysis from `/spectra-validate-gap`)
+- `{{SPECS_DIR}}/specs/$1/spec.json`, `requirements.md`, `design.md` (if exists)
+- `{{SPECS_DIR}}/specs/$1/research.md` (if exists, contains gap analysis from `/spectra-validate-gap`)
 - Core steering context: `product.md`, `tech.md`, `structure.md`
 - Additional steering files only when directly relevant to requirement coverage, architecture boundaries, integrations, runtime prerequisites, security/performance constraints, or team conventions that affect implementation readiness
 - `{{SPECTRA_DIR}}/settings/templates/specs/design.md` for document structure
@@ -92,7 +92,7 @@ Once all research results return, synthesize in main context before proceeding.
    - Boundary candidates, out-of-boundary decisions, and likely revalidation triggers
 
 4. **Persist Findings to Research Log**:
-   - Create or update `{{SPECTRA_DIR}}/specs/$1/research.md` using the shared template
+   - Create or update `{{SPECS_DIR}}/specs/$1/research.md` using the shared template
    - Summarize discovery scope and key findings (Summary section)
    - Record investigations in Research Log topics with sources and implications
    - Document architecture pattern evaluation, design decisions, and risks using the template sections
@@ -134,7 +134,7 @@ Once all research results return, synthesize in main context before proceeding.
 ### Step 6: Finalize Design Document
 
 1. **Write Final Design and Research Log**:
-   - Write `{{SPECTRA_DIR}}/specs/$1/design.md` only after the design review gate passes
+   - Write `{{SPECS_DIR}}/specs/$1/design.md` only after the design review gate passes
    - Write research.md with discovery findings and synthesis outcomes (if not already written)
    - Persist any `research.md` updates that support the finalized design
 
@@ -168,7 +168,7 @@ Once all research results return, synthesize in main context before proceeding.
 
 Provide brief summary in the language specified in spec.json:
 
-1. **Status**: Confirm design document generated at `{{SPECTRA_DIR}}/specs/$1/design.md`
+1. **Status**: Confirm design document generated at `{{SPECS_DIR}}/specs/$1/design.md`
 2. **Discovery Type**: Which discovery process was executed (full/light/minimal)
 3. **Key Findings**: 2-3 critical insights from `research.md` that shaped the design
 4. **Review Gate**: Confirm the design review gate passed
@@ -191,7 +191,7 @@ Provide brief summary in the language specified in spec.json:
 
 **Missing Requirements**:
 - **Stop Execution**: Requirements document must exist
-- **User Message**: "No requirements.md found at `{{SPECTRA_DIR}}/specs/$1/requirements.md`"
+- **User Message**: "No requirements.md found at `{{SPECS_DIR}}/specs/$1/requirements.md`"
 - **Suggested Action**: "Run `/spectra-requirements $1` to generate requirements first"
 
 **Template Missing**:
@@ -214,7 +214,7 @@ Provide brief summary in the language specified in spec.json:
 ### Next Phase: Task Generation
 
 **If Design Approved**:
-- Review generated design at `{{SPECTRA_DIR}}/specs/$1/design.md`
+- Review generated design at `{{SPECS_DIR}}/specs/$1/design.md`
 - **Optional**: Run `/spectra-validate-design $1` for interactive quality review
 - Then `/spectra-tasks $1 -y` to generate implementation tasks
 

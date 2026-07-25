@@ -3,4 +3,4 @@ import type { TemplateContext } from './context.js';
 import { createTemplateContext } from './context.js';
 
 export const contextFromResolved = (resolved: ResolvedConfig): TemplateContext =>
-  createTemplateContext(resolved.lang, resolved.spectraDir, resolved.layout);
+  createTemplateContext(resolved.lang, resolved.spectraDir, resolved.specsDir, resolved.layout);
