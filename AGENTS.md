@@ -1,6 +1,9 @@
 # Agentic SDLC and Spec-Driven Development
 
-Kiro-style Spec-Driven Development on an agentic SDLC
+Kiro-style Spec-Driven Development on an agentic SDLC.
+Powered by [**spectra**](https://github.com/nekolife1984/spectra) — Spec → Code bidirectional traceability with CRG integration.
+
+> **Spectra** = **Spec** + **Trace**. The name reflects how the toolchain splits development into traceable layers (requirements → design → code → tests) like a prism splits light into a spectrum, and traces how they're connected.
 
 ## Project Context
 
