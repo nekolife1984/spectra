@@ -198,25 +198,29 @@ read -r CI_CHOICE
 
 case "${CI_CHOICE:-n}" in
   y|Y|yes|YES)
-    # Try to find template files
-    TEMPLATE_SRC=""
-    # Check if we're in a clone of the repo
-    if [ -f "tools/spectra/templates/shared/.github/workflows/traceability-check.yml" ]; then
-      TEMPLATE_SRC="tools/spectra/templates/shared"
-    # Check if it was installed via npx (look in common locations)
-    elif [ -f ".agents/skills/.gitattributes" ] && [ -d "tools" ]; then
-      TEMPLATE_SRC="tools/spectra/templates/shared"
-    fi
-
-    if [ -n "$TEMPLATE_SRC" ]; then
+    # Check if .spectra/scripts exists (CLI has run)
+    if [ -d ".spectra/scripts" ]; then
       # GitHub Actions workflow
+      mkdir -p .github/workflows
+      info "Downloading CI/CD templates..."
+      curl -sSL "$RAW_BASE/tools/spectra/templates/shared/.github/workflows/traceability-check.yml" \
+        -o .github/workflows/traceability-check.yml 2>/dev/null && \
+        ok "Copied .github/workflows/traceability-check.yml" || \
+        warn "Failed to download GitHub Actions workflow"
+
+      # ci-check.sh
+      curl -sSL "$RAW_BASE/tools/spectra/templates/shared/scripts/ci-check.sh" \
+        -o .spectra/scripts/ci-check.sh 2>/dev/null && \
+        chmod +x .spectra/scripts/ci-check.sh 2>/dev/null && \
+        ok "Copied .spectra/scripts/ci-check.sh" || \
+        warn "Failed to download ci-check.sh"
+    elif [ -f "tools/spectra/templates/shared/.github/workflows/traceability-check.yml" ]; then
+      TEMPLATE_SRC="tools/spectra/templates/shared"
       mkdir -p .github/workflows
       cp "$TEMPLATE_SRC/.github/workflows/traceability-check.yml" \
         .github/workflows/traceability-check.yml 2>/dev/null && \
         ok "Copied .github/workflows/traceability-check.yml" || \
         warn "Failed to copy GitHub Actions workflow"
-
-      # ci-check.sh
       if [ -f "$TEMPLATE_SRC/scripts/ci-check.sh" ]; then
         cp "$TEMPLATE_SRC/scripts/ci-check.sh" .spectra/scripts/ci-check.sh 2>/dev/null && \
           chmod +x .spectra/scripts/ci-check.sh 2>/dev/null && \

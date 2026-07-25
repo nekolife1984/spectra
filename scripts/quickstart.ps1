@@ -165,8 +165,25 @@ if (-not $Yes) {
     $ciChoice = "n"
 }
 if ($ciChoice -eq "y" -or $ciChoice -eq "Y") {
-    $templateSrc = ""
-    if (Test-Path "tools/spectra/templates/shared/.github/workflows/traceability-check.yml") {
+    if (Test-Path ".spectra/scripts") {
+        Write-Info "Downloading CI/CD templates..."
+        # GitHub Actions workflow
+        $workflowUrl = "$RAW_BASE/tools/spectra/templates/shared/.github/workflows/traceability-check.yml"
+        $workflowDest = ".github/workflows/traceability-check.yml"
+        New-Item -ItemType Directory -Force -Path ".github/workflows" | Out-Null
+        try {
+            Invoke-WebRequest -Uri $workflowUrl -OutFile $workflowDest -ErrorAction Stop
+            Write-Ok "Copied .github/workflows/traceability-check.yml"
+        } catch { Write-Warn "Failed to download GitHub Actions workflow" }
+
+        # ci-check.sh
+        $ciUrl = "$RAW_BASE/tools/spectra/templates/shared/scripts/ci-check.sh"
+        $ciDest = ".spectra/scripts/ci-check.sh"
+        try {
+            Invoke-WebRequest -Uri $ciUrl -OutFile $ciDest -ErrorAction Stop
+            Write-Ok "Copied .spectra/scripts/ci-check.sh"
+        } catch { Write-Warn "Failed to download ci-check.sh" }
+    } elseif (Test-Path "tools/spectra/templates/shared/.github/workflows/traceability-check.yml") {
         $templateSrc = "tools/spectra/templates/shared"
     }
     if ($templateSrc -ne "") {
