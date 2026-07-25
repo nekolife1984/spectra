@@ -300,7 +300,7 @@ proper separation of concerns and allow for focused, high-quality requirement an
 |-------|-------|----------|
 | ❌ "Ambiguous feature name" | Vague description | Provide more specific description or choose from AI's suggestions |
 | ❌ "Feature already exists" | Name conflict | AI auto-appends number (e.g., `-2`), or choose different name |
-| ❌ "Template missing" | Corrupted installation | Reinstall spectra: `npx cc-sdd@latest` |
+| ❌ "Template missing" | Corrupted installation | Reinstall spectra: `npx github:nekolife1984/spectra` |
 | ⚠️ Generated name unclear | Short description | Provide longer, more detailed feature description |
 
 **Pro Tips**:
@@ -1696,7 +1696,7 @@ Or implement all remaining tasks:
 
 ### "Template missing"
 **Cause**: Corrupted or incomplete installation  
-**Solution**: Reinstall spectra: `npx cc-sdd@latest`
+**Solution**: Reinstall spectra: `npx github:nekolife1984/spectra`
 
 ### Tasks not completing
 **Cause**: Checkbox format incorrect in tasks.md  
@@ -1720,7 +1720,7 @@ Or implement all remaining tasks:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ cc-sdd Command Quick Reference                              │
+│ spectra Command Quick Reference                              │
 ├─────────────────────────────────────────────────────────────┤
 │ STEERING                                                    │
 │  /spectra-steering              Create/update project memory   │

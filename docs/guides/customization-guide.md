@@ -2036,7 +2036,7 @@ diff \
 
 **Solution**: Return to defaults and gradually re-customize
 ```bash
-npx cc-sdd@latest --overwrite=force
+npx github:nekolife1984/spectra --overwrite=force
 ```
 
 ### Generated Content Differs from Expectations

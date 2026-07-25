@@ -2204,7 +2204,7 @@ diff \
 
 **解決方法**: デフォルトに戻してから段階的に再カスタマイズ
 ```bash
-npx cc-sdd@latest --overwrite=force
+npx github:nekolife1984/spectra --overwrite=force
 ```
 
 ### 生成内容が期待と違う

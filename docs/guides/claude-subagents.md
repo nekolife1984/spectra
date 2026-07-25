@@ -11,7 +11,7 @@ This guide explains how the **Claude Code Subagents** install target (`--claude-
 
 ## Installation Recap
 
-- Install with `npx cc-sdd@latest --claude-agent --lang <code>`.
+- Install with `npx github:nekolife1984/spectra --claude-agent --lang <code>`.
 - Files are placed under:
   - `.claude/commands/spec/` – 12 high-level commands (spec, steering, validation).
   - `.claude/agents/spec/` – 9 Subagent definitions used for deeper analysis, file expansion, and reporting.
@@ -61,7 +61,7 @@ Need to re-run just one phase? Mention `@agents-spectra-design`, `@agents-spectr
 
 ## Recommended Usage Pattern
 
-1. Run `npx cc-sdd@latest --claude-agent --lang <code>` to ensure Subagent assets exist.
+1. Run `npx github:nekolife1984/spectra --claude-agent --lang <code>` to ensure Subagent assets exist.
 2. Prepare Project Memory via `/spectra-steering` (and optionally `/spectra-steering-custom`) so Subagents inherit accurate architecture/product rules.
 3. Use `spectra-quick <feature> [--auto]` for rapid drafts, then review `requirements.md`, `design.md`, `tasks.md` just like the manual flow.
 4. Run validation commands manually if the feature touches existing systems or critical boundaries.
