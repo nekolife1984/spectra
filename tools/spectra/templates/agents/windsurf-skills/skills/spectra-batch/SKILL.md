@@ -133,6 +133,12 @@ Output: CONSISTENT areas + ISSUES with (which specs, what's inconsistent, sugges
    - If the gate fails, report which specs have missing traceability tags and suggest fixes
    - This ensures every spec's `.spectra/trace-mapping.yaml` entries have matching spec-side annotations
 
+7. **Update Trace Snapshot** (after gate passes):
+   - Update the trace snapshot to establish a baseline:
+     ```bash
+     python3 .spectra/scripts/check_drift.py --snapshot --reason "spectra-batch: completed specs"
+     ```
+
 Display final summary:
 ```
 Spec Batch Complete:

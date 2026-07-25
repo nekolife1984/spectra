@@ -151,7 +151,13 @@ After Phase 4, run the spec trace completeness gate, then a lightweight sanity r
   ```
 - If the gate fails, fix the gaps and re-run until it passes.
 
-**Sanity Review** (after gate passes):
+**Update Snapshot** (after gate passes):
+- If `.spectra/trace-mapping.yaml` exists, update the trace snapshot:
+  ```bash
+  python3 .spectra/scripts/check_drift.py --snapshot --reason "spectra-quick: {feature-name}"
+  ```
+
+**Sanity Review** (after gate and snapshot):
 
 - Review `requirements.md`, `design.md`, and `tasks.md` directly from disk. If `brief.md` exists, use it only as supporting context.
 - Prefer a fresh review sub-agent when multi-agent is available. Pass only file paths and the review objective; the reviewer should read the generated files itself.
