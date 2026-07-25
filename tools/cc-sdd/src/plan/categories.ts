@@ -8,12 +8,12 @@ const normalize = (value: string): string => value.replace(/\\/g, '/');
 export const categorizeTarget = (targetAbs: string, cwd: string, resolved: ResolvedConfig): InstallCategory => {
   const rel = path.relative(cwd, targetAbs);
   const normalized = normalize(rel.split(path.sep).join('/'));
-  const kiroSettingsPrefix = `${normalize(resolved.kiroDir)}/settings/`;
+  const specSettingsPrefix = `${normalize(resolved.specDir)}/settings/`;
   const commandsPrefix = `${normalize(resolved.layout.commandsDir)}/`;
   const docPath = normalize(resolved.layout.docFile);
 
   if (normalized.startsWith(commandsPrefix)) return 'commands';
-  if (normalized.startsWith(kiroSettingsPrefix)) return 'settings';
+  if (normalized.startsWith(specSettingsPrefix)) return 'settings';
   if (normalized === docPath) return 'project-memory';
   return 'other';
 };
@@ -41,7 +41,7 @@ export const categoryDescriptions = (category: InstallCategory, resolved: Resolv
     case 'project-memory':
       return resolved.layout.docFile;
     case 'settings':
-      return `${resolved.kiroDir}/settings/`;
+      return `${resolved.specDir}/settings/`;
     default:
       return '';
   }

@@ -12,7 +12,7 @@ export type ParsedArgs = {
   yes?: boolean;
   dryRun?: boolean;
   backup?: boolean | string;
-  kiroDir?: string;
+  specDir?: string;
   manifest?: string;
   profile?: 'full' | 'minimal';
 };
@@ -38,7 +38,7 @@ const booleanFlags = new Set([
   'backup',
   ...agentAliasMap.keys(),
 ]);
-const valueFlags = new Set(['agent', 'lang', 'os', 'overwrite', 'kiro-dir', 'backup', 'manifest', 'profile']);
+const valueFlags = new Set(['agent', 'lang', 'os', 'overwrite', 'spec-dir', 'backup', 'manifest', 'profile']);
 
 const isKnownFlag = (name: string): boolean => booleanFlags.has(name) || valueFlags.has(name);
 
@@ -117,8 +117,8 @@ export const parseArgs = (argv: string[]): ParsedArgs => {
         case 'y':
           out.yes = true;
           break;
-        case 'kiro-dir':
-          out.kiroDir = String(value);
+        case 'spec-dir':
+          out.specDir = String(value);
           break;
         case 'lang': {
           const v = String(value);

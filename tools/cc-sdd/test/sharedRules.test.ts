@@ -11,7 +11,7 @@ const mkTmp = async () => mkdtemp(join(tmpdir(), 'ccsdd-shared-rules-'));
 describe('parseSharedRules', () => {
   it('parses comma-separated shared-rules from metadata', () => {
     const content = `---
-name: kiro-spec-design
+name: spec-design
 description: Some description
 metadata:
   shared-rules: "design-principles.md, design-discovery-full.md, design-synthesis.md"
@@ -27,7 +27,7 @@ metadata:
 
   it('returns empty array when no metadata block', () => {
     const content = `---
-name: kiro-spec-init
+name: spec-init
 description: Some description
 ---
 
@@ -37,7 +37,7 @@ description: Some description
 
   it('returns empty array when metadata has no shared-rules', () => {
     const content = `---
-name: kiro-spec-init
+name: spec-init
 description: Some description
 metadata:
   other-key: "value"
@@ -49,7 +49,7 @@ metadata:
 
   it('returns empty array when shared-rules value is empty', () => {
     const content = `---
-name: kiro-spec-init
+name: spec-init
 description: Some description
 metadata:
   shared-rules: ""
@@ -116,7 +116,7 @@ describe('buildSharedRuleOperations', () => {
     await expect(
       buildSharedRuleOperations(
         ['../escape.md'],
-        join(cwd, '.agents/skills/kiro-test'),
+        join(cwd, '.agents/skills/spec-test'),
         templatesRoot,
         'skill',
         cwd,
@@ -124,7 +124,7 @@ describe('buildSharedRuleOperations', () => {
         {
           LANG_CODE: 'en',
           DEV_GUIDELINES: 'guidelines',
-          KIRO_DIR: '.kiro',
+          SPEC_DIR: '.spec',
           AGENT_DIR: '.agents',
           AGENT_DOC: 'AGENTS.md',
           AGENT_COMMANDS_DIR: '.agents/skills',

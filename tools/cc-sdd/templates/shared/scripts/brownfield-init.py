@@ -6,7 +6,7 @@ brownfield-init.py — 既存コードからトレーサビリティを初期化
 spectra のトレーサビリティ設定を自動生成する。
 
 Usage:
-  # コードをスキャンして .kiro/ + .trace-mapping.yaml を生成
+  # コードをスキャンして .spec/ + .trace-mapping.yaml を生成
   python3 .agents/scripts/brownfield-init.py
 
   # ドライラン（変更なし）
@@ -56,7 +56,7 @@ FUNC_RE = re.compile(
 )
 
 EXCLUDE_DIRS = {".git", "node_modules", ".venv", "__pycache__", "dist", "build",
-                ".artgraph", ".trace", ".kiro", "bin", "obj", ".vs", "packages",
+                ".artgraph", ".trace", ".spec", "bin", "obj", ".vs", "packages",
                 "coverage", "htmlcov", ".tox", "vendor", "third_party"}
 
 
@@ -218,7 +218,7 @@ def generate_trace_mapping(modules: dict[str, dict],
         lines.append(f'  - id: "{mid}"')
         lines.append(f'    description: "{mod_name.title()} module"')
         lines.append(f'    spec:')
-        lines.append(f'      - ".kiro/specs/{mod_name}/requirements.md"')
+        lines.append(f'      - ".spec/specs/{mod_name}/requirements.md"')
         lines.append(f'    code:')
         lines.append(f'      files:')
         for f in files[:5]:
@@ -320,15 +320,15 @@ def main():
     spec_ids = assign_spec_ids(modules)
     print(f"\n  Assigned {len(spec_ids)} spec IDs")
 
-    # .kiro/specs/ 生成
-    kiro_specs = project_dir / ".kiro" / "specs"
+    # .spec/specs/ 生成
+    spec_specs = project_dir / ".spec" / "specs"
     if not args.dry_run:
-        kiro_specs.mkdir(parents=True, exist_ok=True)
+        spec_specs.mkdir(parents=True, exist_ok=True)
 
     for mod_name in sorted(modules.keys()):
         spec_id = spec_ids[mod_name]
         mod_data = modules[mod_name]
-        spec_dir = kiro_specs / mod_name
+        spec_dir = spec_specs / mod_name
         if not args.dry_run:
             spec_dir.mkdir(parents=True, exist_ok=True)
 
@@ -341,9 +341,9 @@ def main():
             (spec_dir / "design.md").write_text(design_content, encoding="utf-8")
             (spec_dir / "tasks.md").write_text(tasks_content, encoding="utf-8")
 
-        print(f"  📄 .kiro/specs/{mod_name}/requirements.md  ({spec_id})")
-        print(f"  📄 .kiro/specs/{mod_name}/design.md")
-        print(f"  📄 .kiro/specs/{mod_name}/tasks.md")
+        print(f"  📄 .spec/specs/{mod_name}/requirements.md  ({spec_id})")
+        print(f"  📄 .spec/specs/{mod_name}/design.md")
+        print(f"  📄 .spec/specs/{mod_name}/tasks.md")
 
     # .trace-mapping.yaml 生成
     tm_content = generate_trace_mapping(modules, spec_ids)
@@ -365,7 +365,7 @@ def main():
     print(f"\n{'✅ Dry-run complete' if args.dry_run else '✅ Brownfield init complete!'}")
     if not args.dry_run:
         print(f"\nNext steps:")
-        print(f"  1. Review .kiro/specs/ and .trace-mapping.yaml")
+        print(f"  1. Review .spec/specs/ and .trace-mapping.yaml")
         print(f"  2. Run: python3 .agents/scripts/check_drift.py --snapshot")
         print(f"  3. Run: python3 .agents/scripts/check-trace-completeness.py")
 

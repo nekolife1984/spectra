@@ -43,39 +43,39 @@ bash .agents/scripts/setup-crg.sh --yes
 
 ## Features
 
-### 20 kiro Skills
+### 20 spec Skills
 | Phase | Skills |
 |-------|--------|
-| Discovery | `kiro-discovery`, `kiro-steering` |
-| Specification | `kiro-spec-init`, `kiro-spec-requirements`, `kiro-spec-design`, `kiro-spec-tasks` |
-| Batch | `kiro-spec-batch`, `kiro-spec-quick` |
-| Implementation | `kiro-impl` |
-| Review | `kiro-review`, `kiro-validate-design`, `kiro-validate-gap`, `kiro-validate-impl` |
-| Debug | `kiro-debug` |
-| Completion | `kiro-verify-completion` |
-| Status | `kiro-spec-status` |
-| **CRG Traceability** | **`kiro-trace`**, **`kiro-impact`**, **`kiro-validate-boundary`** |
+| Discovery | `spec-discovery`, `spec-steering` |
+| Specification | `spec-init`, `spec-requirements`, `spec-design`, `spec-tasks` |
+| Batch | `spec-batch`, `spec-quick` |
+| Implementation | `spec-impl` |
+| Review | `spec-review`, `spec-validate-design`, `spec-validate-gap`, `spec-validate-impl` |
+| Debug | `spec-debug` |
+| Completion | `spec-verify-completion` |
+| Status | `spec-status` |
+| **CRG Traceability** | **`spec-trace`**, **`spec-impact`**, **`spec-validate-boundary`** |
 
 ### CRG-Enhanced Skills (15 of 20)
 Most skills integrate with code-review-graph for graph-aware code analysis:
 
 | Skill | CRG Integration |
 |-------|----------------|
-| `kiro-discovery` | Auto-assess impact scope when extending existing specs |
-| `kiro-spec-design` | Code graph analysis to inform architecture design |
-| `kiro-spec-tasks` | Machine-verify `_Boundary:_` against actual code graph |
-| `kiro-spec-init` | Auto-generate `.trace-mapping.yaml` skeleton |
-| `kiro-spec-batch` | Auto-generate `.trace-mapping.yaml` for all specs |
-| `kiro-review` | CRG-enhanced boundary respect check |
-| `kiro-impl` | Auto-scan `@impl` tags and update `.trace-mapping.yaml` |
-| `kiro-validate-impl` | CRG flow validation |
-| `kiro-debug` | CRG graph investigation |
-| `kiro-verify-completion` | CRG architecture alignment check |
-| `kiro-validate-design` | Verify design components exist in code |
-| `kiro-validate-gap` | Detect code without spec / spec without code |
-| `kiro-trace` | Spec ID → code impact trace |
-| `kiro-impact` | Code change → spec impact trace |
-| `kiro-validate-boundary` | Machine-verify `_Boundary:_` vs CRG graph |
+| `spec-discovery` | Auto-assess impact scope when extending existing specs |
+| `spec-design` | Code graph analysis to inform architecture design |
+| `spec-tasks` | Machine-verify `_Boundary:_` against actual code graph |
+| `spec-init` | Auto-generate `.trace-mapping.yaml` skeleton |
+| `spec-batch` | Auto-generate `.trace-mapping.yaml` for all specs |
+| `spec-review` | CRG-enhanced boundary respect check |
+| `spec-impl` | Auto-scan `@impl` tags and update `.trace-mapping.yaml` |
+| `spec-validate-impl` | CRG flow validation |
+| `spec-debug` | CRG graph investigation |
+| `spec-verify-completion` | CRG architecture alignment check |
+| `spec-validate-design` | Verify design components exist in code |
+| `spec-validate-gap` | Detect code without spec / spec without code |
+| `spec-trace` | Spec ID → code impact trace |
+| `spec-impact` | Code change → spec impact trace |
+| `spec-validate-boundary` | Machine-verify `_Boundary:_` vs CRG graph |
 
 ### Other
 - **8 agents**: Claude Code, Codex, Cursor, Copilot, Gemini CLI, Windsurf, OpenCode, Antigravity

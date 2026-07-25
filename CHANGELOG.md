@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file.
 - Refine English release messaging by replacing the awkward phrase `team-scale AI-driven development` with `AI-driven development at team scale` across the main README and philosophy guide ([#155](https://github.com/gotalab/cc-sdd/pull/155))
 
 ### Fixed
-- Correct the mojibake in the Claude Code Skills `kiro-impl` template so the feature-flag test protocol renders the `→` arrow correctly ([#154](https://github.com/gotalab/cc-sdd/pull/154))
+- Correct the mojibake in the Claude Code Skills `spec-impl` template so the feature-flag test protocol renders the `→` arrow correctly ([#154](https://github.com/gotalab/cc-sdd/pull/154))
 
 ### Security
 - Harden manifest-, template-, and shared-rule-derived path handling so generated file operations stay within the expected roots and fail closed on unsafe traversal inputs or symlinked destinations ([#155](https://github.com/gotalab/cc-sdd/pull/155))
@@ -31,8 +31,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Introduce Agent Skills mode as the primary installation target across 8 platforms: Claude Code, Codex, Cursor, GitHub Copilot, Windsurf, OpenCode, Gemini CLI, and Antigravity ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- Add new workflow entry points for skills mode, including `/kiro-discovery`, `/kiro-spec-batch`, and long-running autonomous `/kiro-impl` with reviewer/debugger support ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- Add `.kiro/settings/` rules and templates for boundary-first planning, design synthesis, review gates, task decomposition, and steering customization ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- Add new workflow entry points for skills mode, including `/spec-discovery`, `/spec-batch`, and long-running autonomous `/spec-impl` with reviewer/debugger support ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- Add `.spec/settings/` rules and templates for boundary-first planning, design synthesis, review gates, task decomposition, and steering customization ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 - Add `cc-sdd-new-agent`, a plan-first SOP for adding new supported agents or migrating existing agents to skills mode ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 
 ### Changed
@@ -46,7 +46,7 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 - Remove Codex prompts mode as a supported install path; `--codex` now blocks and directs users to `--codex-skills` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- Remove the external Ralph Loop dependency in favor of native subagent-driven autonomous implementation inside `kiro-impl` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- Remove the external Ralph Loop dependency in favor of native subagent-driven autonomous implementation inside `spec-impl` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 
 ### Fixed
 - Honor configured agent selection during non-interactive installs instead of forcing the default agent ([#141](https://github.com/gotalab/cc-sdd/pull/141))
@@ -67,7 +67,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - **OpenCode support** - 8th supported agent with full SDD workflow integration ([#117](https://github.com/gotalab/cc-sdd/pull/117), [#127](https://github.com/gotalab/cc-sdd/pull/127))
-  - `.opencode/commands/` with 11 kiro commands
+  - `.opencode/commands/` with 11 spec commands
   - OpenCode Agents (subagent version) in `.opencode/agents/`
   - OPENCODE.md project memory template
   - Installation via `npx cc-sdd@latest --opencode` or `--opencode-agent`
@@ -155,16 +155,16 @@ All notable changes to this project will be documented in this file.
 - **GitHub Copilot official support** with 11 prompts in `.github/prompts/`
 
 #### Validation Commands (Brownfield Development)
-- **`/kiro:validate-gap`** - Analyze implementation gap between requirements and existing codebase
-- **`/kiro:validate-design`** - Validate design compatibility with existing architecture
-- **`/kiro:validate-impl`** - Validate implementation against requirements, design, and tasks
+- **`/spec:validate-gap`** - Analyze implementation gap between requirements and existing codebase
+- **`/spec:validate-design`** - Validate design compatibility with existing architecture
+- **`/spec:validate-impl`** - Validate implementation against requirements, design, and tasks
 
 #### Developer Experience
 - **Interactive CLI installer** with guided setup ([#70](https://github.com/gotalab/cc-sdd/pull/70))
   - Organized file display by Commands / Project Memory / Settings categories
   - Interactive project memory handling (overwrite/append/keep)
 - **Comprehensive documentation**
-  - Complete command reference with 11 `/kiro:*` commands ([#83](https://github.com/gotalab/cc-sdd/pull/83))
+  - Complete command reference with 11 `/spec:*` commands ([#83](https://github.com/gotalab/cc-sdd/pull/83))
   - Customization guide with 7 practical examples ([#83](https://github.com/gotalab/cc-sdd/pull/83))
   - Migration guide for v1.x users
 - **npm badges** for version tracking ([#86](https://github.com/gotalab/cc-sdd/pull/86))
@@ -176,7 +176,7 @@ All notable changes to this project will be documented in this file.
 - **All templates now use actual extensions** (`.md`, `.prompt.md`, `.toml`)
 - **Steering now functions as project-wide rules/patterns/guidelines** (Project Memory)
   - Enhanced steering system loading all documents under `steering/` directory
-- **Shared settings bundle** in `{{KIRO_DIR}}/settings` for cross-platform customization
+- **Shared settings bundle** in `{{SPEC_DIR}}/settings` for cross-platform customization
 
 #### Commands & Workflow
 - **Redesigned all 11 Spec-Driven commands** (`spec-*`, `validate-*`, `steering*`) with improved context
@@ -219,7 +219,7 @@ All notable changes to this project will be documented in this file.
 
 ⚠️ **Important**: Please review the [Migration Guide](docs/guides/migration-guide.md) when upgrading from v1.x.
 
-1. **Template Structure**: OS-specific directories removed. Use unified templates in `.kiro/settings/templates/`
+1. **Template Structure**: OS-specific directories removed. Use unified templates in `.spec/settings/templates/`
 2. **Steering**: Now loads entire `steering/` directory instead of single file
 3. **File Extensions**: Templates use actual extensions (`.md`, `.prompt.md`, `.toml`)
 4. **Command Count**: Expanded from 8 to 11 commands (3 validation commands added)
@@ -268,7 +268,7 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
   - Agent-specific workflow examples
   - Project-specific rule examples
 - Complete command reference documentation ([#83](https://github.com/gotalab/cc-sdd/pull/83))
-  - Detailed usage for all 11 `/kiro:*` commands
+  - Detailed usage for all 11 `/spec:*` commands
   - Parameter descriptions and examples
 
 ### Changed
@@ -346,7 +346,7 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
   - Interactive project memory handling (overwrite/append/keep)
 - Codex CLI official support with 11 prompts in `.codex/prompts/`
 - GitHub Copilot official support with 11 prompts in `.github/prompts/`
-- Shared settings bundle in `{{KIRO_DIR}}/settings` for cross-platform customization
+- Shared settings bundle in `{{SPEC_DIR}}/settings` for cross-platform customization
 - Enhanced steering system loading all documents under `steering/` directory
 
 ### Changed
@@ -376,7 +376,7 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 ### Added
 - Qwen Code AI assistant support ([#64](https://github.com/gotalab/cc-sdd/pull/64))
   - Reuse gemini-cli templates to minimize code duplication
-  - Command directory: `.qwen/commands/kiro`
+  - Command directory: `.qwen/commands/spec`
   - QWEN.md template for project memory
 
 ## [1.1.4] - 2025-09-17
@@ -394,8 +394,8 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
   - Added `AGENTS.md` to project analysis section
 
 ### Fixed
-- Kiro IDE integration descriptions in READMEs ([#61](https://github.com/gotalab/cc-sdd/pull/61))
-  - Clarified spec portability to Kiro IDE
+- Spec IDE integration descriptions in READMEs ([#61](https://github.com/gotalab/cc-sdd/pull/61))
+  - Clarified spec portability to Spec IDE
   - Removed confusing command references
 
 ## [1.1.2] - 2025-09-14
@@ -423,9 +423,9 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 
 ### Added
 - Validation commands for brownfield development ([#56](https://github.com/gotalab/cc-sdd/pull/56))
-  - `/kiro:validate-gap` - Analyze implementation gap between requirements and existing codebase
-  - `/kiro:validate-design` - Validate design compatibility with existing architecture
-  - `/kiro:validate-impl` - Validate implementation against requirements, design, and tasks
+  - `/spec:validate-gap` - Analyze implementation gap between requirements and existing codebase
+  - `/spec:validate-design` - Validate design compatibility with existing architecture
+  - `/spec:validate-impl` - Validate implementation against requirements, design, and tasks
 - Cursor IDE official support with 11 commands
 - AGENTS.md configuration file for Cursor IDE optimization
 - Windows template support for Gemini CLI with proper bash -c wrapping ([#56](https://github.com/gotalab/cc-sdd/pull/56))
@@ -485,7 +485,7 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 **Related PRs:**
 - [#54](https://github.com/gotalab/cc-sdd/pull/54) - Improve slash commands with individual arguments
 - [#52](https://github.com/gotalab/cc-sdd/pull/52) - Add Cursor agent support
-- [#51](https://github.com/gotalab/cc-sdd/pull/51) - Major enhancement of kiro commands
+- [#51](https://github.com/gotalab/cc-sdd/pull/51) - Major enhancement of spec commands
 - [#45](https://github.com/gotalab/cc-sdd/pull/45) - Optimize context creation performance
 - [#43](https://github.com/gotalab/cc-sdd/pull/43) - Add CI/CD workflow
 - [#42](https://github.com/gotalab/cc-sdd/pull/42) - Refactor README structure
@@ -497,8 +497,8 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 
 ### Added
 - `-y` flag for streamlined workflow approval
-  - Skip requirement approval: `/kiro:spec-design feature-name -y`
-  - Skip requirement + design approval: `/kiro:spec-tasks feature-name -y`
+  - Skip requirement approval: `/spec:spec-design feature-name -y`
+  - Skip requirement + design approval: `/spec:spec-tasks feature-name -y`
 - Argument hints in command input (`<feature-name> [-y]`)
 - Custom Steering support in all spec commands
 
@@ -530,8 +530,8 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 
 ### Added
 - Interactive approval system for workflow phases
-  - `/kiro:spec-design`: Prompts for requirements review confirmation
-  - `/kiro:spec-tasks`: Prompts for requirements + design review confirmation
+  - `/spec:spec-design`: Prompts for requirements review confirmation
+  - `/spec:spec-tasks`: Prompts for requirements + design review confirmation
   - Automatic spec.json updates on 'y' approval
 - Enhanced specification generation quality
   - Improved EARS format consistency in requirements.md
@@ -540,12 +540,12 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
   - TDD-optimized task structure in tasks.md
 
 ### Fixed
-- Directory handling when `.kiro/steering/` doesn't exist
+- Directory handling when `.spec/steering/` doesn't exist
 - Error messages improved for better clarity
 
 ### Changed
 - Simplified system design by removing redundant `progress` field
-- Reverted to original Kiro design philosophy for requirements generation
+- Reverted to original Spec design philosophy for requirements generation
 - Removed excessive "CRITICAL" and "MUST" language
 - Focus on core functionality with iterative improvement
 
@@ -557,7 +557,7 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 - Detailed usage recommendations and guidance
 
 ### Changed
-- Enhanced `/kiro:steering` command to properly handle existing files
+- Enhanced `/spec:steering` command to properly handle existing files
 - Improved steering document management
 
 ### Fixed
@@ -567,7 +567,7 @@ See the comprehensive [Migration Guide](docs/guides/migration-guide.md) for deta
 ## [0.1.0] - 2025-07-18
 
 ### Added
-- Kiro IDE-style Spec-Driven Development system
+- Spec IDE-style Spec-Driven Development system
 - 3-phase approval workflow (Requirements → Design → Tasks → Implementation)
 - EARS format requirement definition support
 - Hierarchical requirement structure

@@ -85,18 +85,18 @@ $langFlag = if ($langChoice -eq "2") { "--lang ja" } else { "" }
 $crgPlatform = $crgPlatformMap[$agentChoice]
 $prefix = $prefixMap[$agentChoice]
 
-# Kiro directory prompt
-$kiroFlag = ""
+# Spec directory prompt
+$specFlag = ""
 Write-Host ""
-Write-Host "  Kiro directory (where specs and settings are stored):"
-$kiroInput = Read-Host "  Path (Enter=.kiro)"
-if (-not [string]::IsNullOrEmpty($kiroInput)) {
-    $kiroFlag = "--kiro-dir $kiroInput"
+Write-Host "  Spec directory (where specs and settings are stored):"
+$specInput = Read-Host "  Path (Enter=.spec)"
+if (-not [string]::IsNullOrEmpty($specInput)) {
+    $specFlag = "--spec-dir $specInput"
 }
 
 try {
-    Write-Info "Running: npx github:$GITHUB_REPO $agentFlag $langFlag $kiroFlag"
-    npx "github:$GITHUB_REPO" $agentFlag $langFlag $kiroFlag
+    Write-Info "Running: npx github:$GITHUB_REPO $agentFlag $langFlag $specFlag"
+    npx "github:$GITHUB_REPO" $agentFlag $langFlag $specFlag
 } catch {
     Write-Warn "npx github: failed. Falling back to git clone..."
     $tmpDir = "$env:TEMP\spectra-$(Get-Random)"
@@ -203,17 +203,17 @@ Write-Host "  Setup Complete!" -ForegroundColor Green
 Write-Host "═══════════════════════════════════════" -ForegroundColor Green
 Write-Host ""
 Write-Host "  Get started with:"
-Write-Host "    ${prefix}kiro-discovery ""your idea"""
-Write-Host "    ${prefix}kiro-spec-init my-feature"
-Write-Host "    ${prefix}kiro-spec-requirements my-feature"
-Write-Host "    ${prefix}kiro-spec-design my-feature"
-Write-Host "    ${prefix}kiro-spec-tasks my-feature"
-Write-Host "    ${prefix}kiro-impl my-feature"
+Write-Host "    ${prefix}spec-discovery ""your idea"""
+Write-Host "    ${prefix}spec-init my-feature"
+Write-Host "    ${prefix}spec-requirements my-feature"
+Write-Host "    ${prefix}spec-design my-feature"
+Write-Host "    ${prefix}spec-tasks my-feature"
+Write-Host "    ${prefix}spec-impl my-feature"
 Write-Host ""
 Write-Host "  CRG Traceability:"
-Write-Host "    ${prefix}kiro-trace 1.1"
-Write-Host "    ${prefix}kiro-impact src/my-file.py"
-Write-Host "    ${prefix}kiro-validate-boundary"
+Write-Host "    ${prefix}spec-trace 1.1"
+Write-Host "    ${prefix}spec-impact src/my-file.py"
+Write-Host "    ${prefix}spec-validate-boundary"
 Write-Host ""
 Write-Host "  Rebuild code graph:"
 Write-Host "    code-review-graph build"

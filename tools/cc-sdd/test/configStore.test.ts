@@ -25,7 +25,7 @@ describe('config store', () => {
       agent: 'gemini-cli',
       lang: 'en',
       os: 'linux',
-      kiroDir: '.work/kiro',
+      specDir: '.work/spec',
       overwrite: 'skip',
       backupDir: 'bk',
       agentLayouts: {

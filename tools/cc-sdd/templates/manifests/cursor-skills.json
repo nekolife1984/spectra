@@ -25,7 +25,7 @@
       "source": {
         "type": "templateDir",
         "fromDir": "templates/shared/settings/{{LANG_CODE}}/templates",
-        "toDir": "{{KIRO_DIR}}/settings/templates"
+        "toDir": "{{SPEC_DIR}}/settings/templates"
       },
       "when": { "agent": "cursor-skills" }
     },

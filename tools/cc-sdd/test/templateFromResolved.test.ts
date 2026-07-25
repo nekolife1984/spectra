@@ -12,7 +12,7 @@ describe('contextFromResolved', () => {
     const ctx = contextFromResolved(resolved);
 
     expect(ctx.LANG_CODE).toBe('en');
-    expect(ctx.KIRO_DIR).toBe('.kiro');
+    expect(ctx.SPEC_DIR).toBe('.spec');
     expect(ctx.AGENT_DIR).toBe('.claude');
     expect(ctx.AGENT_DOC).toBe('CLAUDE.md');
     expect(ctx.AGENT_COMMANDS_DIR).toBe('.claude/skills');
@@ -22,7 +22,7 @@ describe('contextFromResolved', () => {
   });
 
   it('creates template context with custom configuration', () => {
-    const args = parseArgs(['--lang', 'ja', '--kiro-dir', 'docs/kiro', '--agent', 'gemini-cli']);
+    const args = parseArgs(['--lang', 'ja', '--spec-dir', 'docs/spec', '--agent', 'gemini-cli']);
     const config = {
       agentLayouts: {
         'gemini-cli': { commandsDir: '.custom/commands' }
@@ -32,7 +32,7 @@ describe('contextFromResolved', () => {
     const ctx = contextFromResolved(resolved);
 
     expect(ctx.LANG_CODE).toBe('ja');
-    expect(ctx.KIRO_DIR).toBe('docs/kiro');
+    expect(ctx.SPEC_DIR).toBe('docs/spec');
     expect(ctx.AGENT_DIR).toBe('.gemini');
     expect(ctx.AGENT_DOC).toBe('GEMINI.md');
     expect(ctx.AGENT_COMMANDS_DIR).toBe('.custom/commands');
@@ -47,17 +47,17 @@ describe('contextFromResolved', () => {
     const ctx = contextFromResolved(resolved);
 
     expect(ctx.LANG_CODE).toBe('zh-TW');
-    expect(ctx.KIRO_DIR).toBe('.kiro');
+    expect(ctx.SPEC_DIR).toBe('.spec');
     expect(ctx.AGENT_DIR).toBe('.qwen');
     expect(ctx.AGENT_DOC).toBe('QWEN.md');
-    expect(ctx.AGENT_COMMANDS_DIR).toBe('.qwen/commands/kiro');
+    expect(ctx.AGENT_COMMANDS_DIR).toBe('.qwen/commands/spec');
     expect(ctx.DEV_GUIDELINES).toBe(
       '- Think in English, generate responses in Traditional Chinese. All Markdown content written to project files (e.g., requirements.md, design.md, tasks.md, research.md, validation reports) MUST be written in the target language configured for this specification (see spec.json.language).',
     );
   });
 
   it('preserves all layout properties correctly', () => {
-    const args = parseArgs(['--kiro-dir', 'custom-kiro']);
+    const args = parseArgs(['--spec-dir', 'custom-spec']);
     const config = {
       agentLayouts: {
         'claude-code-skills': {
@@ -71,7 +71,7 @@ describe('contextFromResolved', () => {
     const ctx = contextFromResolved(resolved);
 
     expect(ctx.LANG_CODE).toBe('en');
-    expect(ctx.KIRO_DIR).toBe('custom-kiro');
+    expect(ctx.SPEC_DIR).toBe('custom-spec');
     expect(ctx.AGENT_DIR).toBe('.custom-agent');
     expect(ctx.AGENT_DOC).toBe('CUSTOM-DOC.md');
     expect(ctx.AGENT_COMMANDS_DIR).toBe('.custom/commands/path');

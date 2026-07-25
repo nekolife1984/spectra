@@ -12,11 +12,11 @@
 > 初期バージョンのため、使いながら適宜改善していく予定
 
 📝 **関連記事**  
-**[Kiroの仕様書駆動開発プロセスをClaude Codeで徹底的に再現した](https://zenn.dev/gotalab/articles/3db0621ce3d6d2)** - Zenn記事
+**[Specの仕様書駆動開発プロセスをClaude Codeで徹底的に再現した](https://zenn.dev/gotalab/articles/3db0621ce3d6d2)** - Zenn記事
 
-Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォームに対応したSpec-Driven Developmentツールセット。Kiro IDEに組み込まれているSpec-Driven Developmentを各プラットフォームで実践するためのプロジェクト。
+Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォームに対応したSpec-Driven Developmentツールセット。Spec IDEに組み込まれているSpec-Driven Developmentを各プラットフォームで実践するためのプロジェクト。
 
-**Kiro IDEと高い互換性** — 既存のKiro流SDDの仕様・ワークフロー・ディレクトリ構成をそのまま活用できます。
+**Spec IDEと高い互換性** — 既存のSpec流SDDの仕様・ワークフロー・ディレクトリ構成をそのまま活用できます。
 
 ## 概要
 
@@ -34,7 +34,7 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 - **🔮 Cursor**: `.cursor/commands/` - Cursor用のコマンド定義  
 - **⚡ Gemini CLI**: `.gemini/commands/` - Gemini CLI用のTOMLファイル
 - **🐙 GitHub Copilot**: `.github/prompts/` - Copilot向けプロンプト定義
-- **🔧 Qwen Code**: `.qwen/commands/kiro/` - Qwen Code用コマンド定義
+- **🔧 Qwen Code**: `.qwen/commands/spec/` - Qwen Code用コマンド定義
 - **🌊 Windsurf IDE**: `.windsurf/workflows/` - Windsurf用ワークフロー定義
 
 #### 共通設定ファイル
@@ -48,10 +48,10 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 3. **最初のコマンドを実行** (プラットフォーム共通):
    ```bash
    # オプション: ステアリング文書を作成
-   /kiro:steering
+   /spec:steering
    
    # 最初の機能仕様を作成
-   /kiro:spec-init "あなたのプロジェクトの詳細な説明"
+   /spec:spec-init "あなたのプロジェクトの詳細な説明"
    ```
 
 ### マルチプラットフォーム対応ディレクトリ構造
@@ -61,14 +61,14 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 ```
 あなたのプロジェクト/
 ├── プラットフォーム別ディレクトリ（使用するものをコピー）
-│   ├── .claude/commands/kiro/ # Claude Code用コマンド定義
+│   ├── .claude/commands/spec/ # Claude Code用コマンド定義
 │   ├── .codex/prompts/       # Codex CLI用プロンプト定義
-│   ├── .cursor/commands/kiro/# Cursor用コマンド定義
-│   ├── .gemini/commands/kiro/# Gemini CLI用TOML設定
+│   ├── .cursor/commands/spec/# Cursor用コマンド定義
+│   ├── .gemini/commands/spec/# Gemini CLI用TOML設定
 │   ├── .github/prompts/      # GitHub Copilot用プロンプト定義
-│   ├── .qwen/commands/kiro/  # Qwen Code用コマンド定義
+│   ├── .qwen/commands/spec/  # Qwen Code用コマンド定義
 │   └── .windsurf/workflows/  # Windsurf用ワークフロー定義
-├── .kiro/
+├── .spec/
 │   ├── steering/              # 自動生成されるステアリング文書
 │   └── specs/                 # 自動生成される機能仕様
 ├── プラットフォーム別設定ファイル
@@ -88,24 +88,24 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 
 ```bash
 # オプション: プロジェクトステアリング生成（推奨だが必須ではない）
-/kiro:steering
+/spec:steering
 
 # ステップ1: 新機能の仕様作成開始（詳細な説明を含める）
-/kiro:spec-init "ユーザーがPDFをアップロードして、その中の図表を抽出し、AIが内容を説明する機能を作りたい。技術スタックはNext.js、TypeScript、Tailwind CSSを使用。"
+/spec:spec-init "ユーザーがPDFをアップロードして、その中の図表を抽出し、AIが内容を説明する機能を作りたい。技術スタックはNext.js、TypeScript、Tailwind CSSを使用。"
 
 # ステップ2: 要件定義（自動生成されたfeature-nameを使用）
-/kiro:spec-requirements pdf-diagram-extractor
-# → .kiro/specs/pdf-diagram-extractor/requirements.md をレビュー・編集
+/spec:spec-requirements pdf-diagram-extractor
+# → .spec/specs/pdf-diagram-extractor/requirements.md をレビュー・編集
 
 # ステップ3: 技術設計（インタラクティブ承認）
-/kiro:spec-design pdf-diagram-extractor
+/spec:spec-design pdf-diagram-extractor
 # → "requirements.mdをレビューしましたか？ [y/N]" に応答
-# → .kiro/specs/pdf-diagram-extractor/design.md をレビュー・編集
+# → .spec/specs/pdf-diagram-extractor/design.md をレビュー・編集
 
 # ステップ4: タスク生成（インタラクティブ承認）
-/kiro:spec-tasks pdf-diagram-extractor
+/spec:spec-tasks pdf-diagram-extractor
 # → requirements と design のレビュー確認に応答
-# → .kiro/specs/pdf-diagram-extractor/tasks.md をレビュー・編集
+# → .spec/specs/pdf-diagram-extractor/tasks.md をレビュー・編集
 
 # ステップ5: 実装開始
 ```
@@ -115,10 +115,10 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 ```bash
 # オプション: ステアリング作成・更新
 # 新規作成の場合も、更新の場合も同じコマンドを使用
-/kiro:steering
+/spec:steering
 
 # ステップ1: 新機能の仕様作成開始
-/kiro:spec-init "新しい機能の詳細な説明をここに記述"
+/spec:spec-init "新しい機能の詳細な説明をここに記述"
 # 以降は新規プロジェクトと同じ
 ```
 
@@ -126,7 +126,7 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 
 ```bash
 # 特定機能の進捗確認
-/kiro:spec-status my-feature
+/spec:spec-status my-feature
 
 # 現在のフェーズ、承認状況、タスク進捗が表示される
 ```
@@ -142,25 +142,25 @@ Claude Code、Cursor、Gemini CLI、Codex CLIの4つのプラットフォーム�
 ```mermaid
 graph TD
     A["プロジェクト開始"] --> B{"ステアリング<br/>文書化？"}
-    B -->|はい| C["/kiro:steering"]
-    B -->|いいえ| D["/kiro:spec-init"]
+    B -->|はい| C["/spec:steering"]
+    B -->|いいえ| D["/spec:spec-init"]
     C --> D
     
-    D --> E["/kiro:spec-requirements"]
+    D --> E["/spec:spec-requirements"]
     E --> F["requirements.md"]
     F --> G{"満足？"}
     G -->|いいえ| G1["編集・修正"]
     G1 --> F
     G -->|はい| H["次フェーズへ"]
     
-    H --> I["/kiro:spec-design"]
+    H --> I["/spec:spec-design"]
     I --> J["design.md"]
     J --> K{"満足？"}
     K -->|いいえ| K1["編集・修正"]
     K1 --> J
     K -->|はい| L["次フェーズへ"]
     
-    L --> M["/kiro:spec-tasks"]
+    L --> M["/spec:spec-tasks"]
     M --> N["tasks.md"]
     N --> O{"満足？"}
     O -->|いいえ| O1["編集・修正"]
@@ -168,13 +168,13 @@ graph TD
     O -->|はい| P["実装準備完了"]
     
     P --> Q["実装開始"]
-    Q --> R["/kiro:spec-status"]
+    Q --> R["/spec:spec-status"]
     R --> S{"完了？"}
     S -->|いいえ| Q
     S -->|はい| T["機能完成"]
     
     T --> U{"ステアリング<br/>更新？"}
-    U -->|はい| V["/kiro:steering"]
+    U -->|はい| V["/spec:steering"]
     U -->|いいえ| W["完了"]
     V --> W
     
@@ -204,8 +204,8 @@ graph TD
 
 | コマンド | 用途 | 使用タイミング |
 |---------|------|---------------|
-| `/kiro:steering` | ステアリング文書のスマート作成・更新 | すべての場面（新規・更新どちらも） |
-| `/kiro:steering-custom` | カスタムステアリング文書の作成 | 特殊な規約やガイドラインが必要な時 |
+| `/spec:steering` | ステアリング文書のスマート作成・更新 | すべての場面（新規・更新どちらも） |
+| `/spec:steering-custom` | カスタムステアリング文書の作成 | 特殊な規約やガイドラインが必要な時 |
 
 **注意**: ステアリング文書は推奨されるが必須ではない。小規模な機能追加や試験的な開発では省略可能。
 
@@ -219,16 +219,16 @@ graph TD
 
 | コマンド | 用途 | 使用タイミング |
 |---------|------|---------------|
-| `/kiro:spec-init [詳細なプロジェクト説明]` | プロジェクト説明から仕様構造を初期化 | 新機能開発開始時 |
-| `/kiro:spec-requirements [feature-name]` | 要件定義書の生成 | 仕様初期化後すぐ |
-| `/kiro:spec-design [feature-name]` | 技術設計書の生成 | 要件承認後 |
-| `/kiro:spec-tasks [feature-name]` | 実装タスクの生成 | 設計承認後 |
+| `/spec:spec-init [詳細なプロジェクト説明]` | プロジェクト説明から仕様構造を初期化 | 新機能開発開始時 |
+| `/spec:spec-requirements [feature-name]` | 要件定義書の生成 | 仕様初期化後すぐ |
+| `/spec:spec-design [feature-name]` | 技術設計書の生成 | 要件承認後 |
+| `/spec:spec-tasks [feature-name]` | 実装タスクの生成 | 設計承認後 |
 
 ### 📊 Phase 2: 進捗管理
 
 | コマンド | 用途 | 使用タイミング |
 |---------|------|---------------|
-| `/kiro:spec-status [feature-name]` | 現在の進捗とフェーズ確認 | 開発中随時 |
+| `/spec:spec-status [feature-name]` | 現在の進捗とフェーズ確認 | 開発中随時 |
 
 ## 3フェーズ承認ワークフロー
 
@@ -240,13 +240,13 @@ sequenceDiagram
     participant C as Claude Code
     participant H as Human Reviewer
     
-    D->>C: "/kiro:spec-requirements feature"
+    D->>C: "/spec:spec-requirements feature"
     C->>C: "要件生成"
     C->>D: "requirements.md"
     D->>H: "レビュー依頼"
     H->>H: "レビュー・編集"
     
-    D->>C: "/kiro:spec-design feature"
+    D->>C: "/spec:spec-design feature"
     C->>D: "レビュー確認: requirements.mdをレビューしましたか？"
     D->>C: "y"
     C->>C: "設計生成（要件ベース）"
@@ -254,7 +254,7 @@ sequenceDiagram
     D->>H: "レビュー依頼"
     H->>H: "レビュー・編集"
     
-    D->>C: "/kiro:spec-tasks feature"
+    D->>C: "/spec:spec-tasks feature"
     C->>D: "レビュー確認: requirements/design確認"
     D->>C: "y"
     C->>C: "タスク生成（設計ベース）"
@@ -270,7 +270,7 @@ sequenceDiagram
 ### ✅ 推奨事項
 
 1. **常にステアリングから開始**
-   - すべての場面で `/kiro:steering` を使用（スマートに新規作成・更新を判断）
+   - すべての場面で `/spec:steering` を使用（スマートに新規作成・更新を判断）
    - 統合コマンドは既存ファイルを保護しつつ適切に処理
 
 2. **フェーズを飛ばさない**
@@ -278,11 +278,11 @@ sequenceDiagram
    - 各フェーズで必ず人間によるレビューを実施
 
 3. **定期的な進捗確認**
-   - `/kiro:spec-status` で現在の状況を把握
+   - `/spec:spec-status` で現在の状況を把握
    - タスクの完了状況を適切に更新
 
 4. **ステアリングの保守**
-   - 大きな変更後は `/kiro:steering` を実行（自動的に更新を判断）
+   - 大きな変更後は `/spec:steering` を実行（自動的に更新を判断）
    - プロジェクトの成長に合わせて更新
 
 ### ❌ 避けるべきこと
@@ -301,7 +301,7 @@ sequenceDiagram
 ```
 .
 ├── マルチプラットフォーム対応ディレクトリ
-│   ├── .claude/commands/kiro/     # Claude Code用コマンド
+│   ├── .claude/commands/spec/     # Claude Code用コマンド
 │   │   ├── spec-init.md
 │   │   ├── spec-requirements.md
 │   │   ├── spec-design.md
@@ -310,14 +310,14 @@ sequenceDiagram
 │   │   ├── spec-impl.md
 │   │   ├── steering.md
 │   │   └── steering-custom.md
-│   ├── .cursor/commands/kiro/     # Cursor用コマンド
+│   ├── .cursor/commands/spec/     # Cursor用コマンド
 │   │   ├── spec-init.md
 │   │   ├── spec-requirements.md
 │   │   ├── spec-design.md
 │   │   ├── spec-tasks.md
 │   │   ├── spec-status.md
 │   │   └── spec-impl.md
-│   ├── .gemini/commands/kiro/     # Gemini CLI用TOML
+│   ├── .gemini/commands/spec/     # Gemini CLI用TOML
 │   │   ├── spec-init.toml
 │   │   ├── spec-requirements.toml
 │   │   ├── spec-design.toml
@@ -330,7 +330,7 @@ sequenceDiagram
 │       ├── spec-design.md
 │       ├── spec-tasks.md
 │       └── spec-impl.md
-├── .kiro/                         # 共通仕様管理ディレクトリ
+├── .spec/                         # 共通仕様管理ディレクトリ
 │   ├── steering/                  # ステアリング文書
 │   │   ├── product.md
 │   │   ├── tech.md
@@ -388,7 +388,7 @@ sequenceDiagram
 ### 承認フローで詰まった場合
 1. レビュー確認プロンプトに正しく応答しているか確認
 2. 前フェーズの承認が完了しているか確認
-3. `/kiro:spec-status` で現在の状態を診断
+3. `/spec:spec-status` で現在の状態を診断
 4. 必要に応じて `spec.json` を手動で確認・編集
 
 ## まとめ

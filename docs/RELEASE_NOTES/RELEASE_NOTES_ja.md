@@ -39,7 +39,7 @@ npx cc-sdd@latest
 `cc-sdd` のファイルシステム安全性を高める patch release です。あわせて、mojibake の修正と英語ドキュメントの軽微な表現改善を含みます。
 
 ### 修正
-- Claude Code Skills の `kiro-impl` テンプレートで発生していた mojibake を修正し、Feature Flag Protocol の `→` が正しく表示されるようにしました ([#154](https://github.com/gotalab/cc-sdd/pull/154))
+- Claude Code Skills の `spec-impl` テンプレートで発生していた mojibake を修正し、Feature Flag Protocol の `→` が正しく表示されるようにしました ([#154](https://github.com/gotalab/cc-sdd/pull/154))
 
 ### セキュリティ
 - manifest、template、shared-rules 由来のパス処理を強化し、生成されるファイル操作が許可されたルート内に限定されるよう改善
@@ -64,16 +64,16 @@ npx cc-sdd@latest
 
 ### 🎯 ハイライト
 - **Agent Skills が主軸に**: cc-sdd は `--*-skills` インストールと、8プラットフォーム共通の17-skillワークフローを中心に再構成されました。
-- **実行できる spec**: `/kiro-discovery`、`/kiro-spec-batch`、長時間実行の `/kiro-impl` により、承認済み spec を単なる文書ではなく実行の control plane として扱えます。
+- **実行できる spec**: `/spec-discovery`、`/spec-batch`、長時間実行の `/spec-impl` により、承認済み spec を単なる文書ではなく実行の control plane として扱えます。
 - **ネイティブな subagent dispatch**: 自律実装・レビュー・デバッグのループが cc-sdd 内に統合され、外部の Ralph Loop 依存が不要になりました。
 
 ### ✨ 追加
 - Cursor / GitHub Copilot / OpenCode / Gemini CLI / Windsurf / Antigravity 向けの skills-based agents を追加し、Claude Code Skills / Codex Skills も強化 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 - 新しい workflow entry points:
-  - `/kiro-discovery` でアイデアを triage して roadmap に分岐
-  - `/kiro-spec-batch` で複数 spec を並列作成
-  - `/kiro-impl` で reviewer/debugger loop 付きの autonomous implementation ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- boundary-first planning、design synthesis、review gates、task decomposition、steering customization のための `.kiro/settings/` rules/templates を追加 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+  - `/spec-discovery` でアイデアを triage して roadmap に分岐
+  - `/spec-batch` で複数 spec を並列作成
+  - `/spec-impl` で reviewer/debugger loop 付きの autonomous implementation ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- boundary-first planning、design synthesis、review gates、task decomposition、steering customization のための `.spec/settings/` rules/templates を追加 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 - 新しい `cc-sdd-new-agent` skill を追加し、対応 agent の追加や skills mode への移行手順を SOP 化 ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 
 ### 🔧 変更
@@ -84,7 +84,7 @@ npx cc-sdd@latest
 ### ⚠️ Breaking / Migration Notes
 - 今後は skills mode が主ルートです。command-based installs は deprecated なので `--*-skills` へ移行してください。
 - `--codex` prompts mode は非対応になりました。`--codex-skills` を使ってください。
-- これまで外部の Ralph Loop を前提にしていた場合は、組み込みの `/kiro-impl` autonomous flow に移行してください。
+- これまで外部の Ralph Loop を前提にしていた場合は、組み込みの `/spec-impl` autonomous flow に移行してください。
 
 ### 📖 Migration Guide
 - アップグレード手順は [docs/guides/migration-guide.md](../guides/migration-guide.md) を参照してください。
@@ -124,7 +124,7 @@ npx cc-sdd@latest
 
 ### ✨ 追加
 - **OpenCode** ([#117](https://github.com/gotalab/cc-sdd/pull/117), [#127](https://github.com/gotalab/cc-sdd/pull/127))
-  - `.opencode/commands/` に全11個のkiroコマンド
+  - `.opencode/commands/` に全11個のspecコマンド
   - `.opencode/agents/` にOpenCode Agents（サブエージェント版）
   - OPENCODE.md プロジェクトメモリテンプレート
   - インストール: `npx cc-sdd@latest --opencode` または `--opencode-agent`
@@ -213,11 +213,11 @@ npx cc-sdd@latest
 ### ハイライト
 - **`npx cc-sdd@latest`で全機能開放**：alpha.1〜alpha.6で試験投入したResearch.md、検証コマンド、Subagents、Windsurf統合をすべてGA化。
 - **設計〜実装の一貫性強化**：要約表・Req Coverage・Supporting Referencesを備えた新designテンプレでSSoTを堅持。
-- **Brownfield向けガードレール**：`/kiro:validate-*`、並列タスク分析、Steeringプロジェクトメモリでデグレを未然に防止。
+- **Brownfield向けガードレール**：`/spec:validate-*`、並列タスク分析、Steeringプロジェクトメモリでデグレを未然に防止。
 - **グローバル対応**：7エージェント×12言語が同一テンプレートとコマンド体系を共有。
 
 ### アップグレード要点
-1. 必ず [移行ガイド](../guides/migration-guide.md) を参照し、`.kiro/settings/templates/*` の再配置とSteeringのディレクトリ読込変更を反映。
+1. 必ず [移行ガイド](../guides/migration-guide.md) を参照し、`.spec/settings/templates/*` の再配置とSteeringのディレクトリ読込変更を反映。
 2. 自動化やREADMEの実行例を `npx cc-sdd@latest` 基準に統一（`@next`は今後のプレビュー専用）。
 3. steering / research / design / tasks テンプレートを再生成し、Research.md・Supporting References・(P)マーカーを取り込む。
 
@@ -269,7 +269,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
   - プロジェクト固有のルール例
   - 7つの実践的なカスタマイズ例
 - **コマンドリファレンス**（[#83](https://github.com/gotalab/cc-sdd/pull/83)）
-  - 全11個の`/kiro:*`コマンドの詳細な使用方法
+  - 全11個の`/spec:*`コマンドの詳細な使用方法
   - パラメータ説明と実例
 
 ### 🔧 改善
@@ -298,7 +298,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 ## 🚀 Ver 2.0.0-alpha.3 (2025-10-22)
 
 ### 🎯 ハイライト
-- **Windsurf IDE 対応**： `.windsurf/workflows/` に 11 個のワークフローと AGENTS.md を展開するマニフェストを追加し、`npx cc-sdd@next --windsurf` で kiro 仕様駆動ワークフローを利用できるようになりました。
+- **Windsurf IDE 対応**： `.windsurf/workflows/` に 11 個のワークフローと AGENTS.md を展開するマニフェストを追加し、`npx cc-sdd@next --windsurf` で spec 仕様駆動ワークフローを利用できるようになりました。
 - **CLI 体験刷新**： セットアップ完了メッセージに Windsurf 向け推奨モデルと次のコマンドを表示し、ドキュメントでは手動 QA フローを案内するように改善しました。
 
 ### 🧪 品質 / ツール
@@ -319,14 +319,14 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - **ガイド付きCLIインストーラー**：`npx cc-sdd@latest` 実行時に、作成/更新されるファイルを Commands / Project Memory / Settings で整理表示し、プロジェクトメモリ文書は上書き・追記・維持を対話的に選べるようになりました。再インストール時の安心感とスピードが向上します。
 - **Spec-Drivenコマンドの再設計**：全エージェントの 11 コマンド（`spec-*`, `validate-*`, `steering*`）をコンテキストを再設計。仕様書・詳細設計・タスク計画などの成果物をチームやプロジェクトに合わせて柔軟に調整しやすくしました。
 - **Steeringの強化**：ステアリングをプロジェクト全体で適用すべきルールやパターン、例、ガイドラインのプロジェクトメモリとして適切に機能するように改修しました。`product/tech/structure` 中心だったステアリングの読み込みを`steering/` 配下のそれ以外のドキュメントも同じ重みで採用。
-- **設定/テンプレートのカスタマイズ性向上**：`{{KIRO_DIR}}/settings` へ共通ルール/テンプレートを展開。プロジェクトに合わせた設計・タスクのフォーマット調整が容易になりました。1回のカスタマイズで、別のコーディングエージェントでも同様の設定を引き継ぐことが可能になりました。
+- **設定/テンプレートのカスタマイズ性向上**：`{{SPEC_DIR}}/settings` へ共通ルール/テンプレートを展開。プロジェクトに合わせた設計・タスクのフォーマット調整が容易になりました。1回のカスタマイズで、別のコーディングエージェントでも同様の設定を引き継ぐことが可能になりました。
 - **Codex CLI正式対応**：`.codex/prompts/` へ 11 個のプロンプトを提供し、Spec-Driven Development ワークフローを正式サポート。
 - **GitHub Copilot正式対応**：`.github/prompts/` に 11 個のプロンプトを自動配置。Codex CLI と同じステアリング/テンプレート構造を共有し、クロスプラットフォームで共通運用可能に。
 
 ### 🛠️ 内部改善
 - **テンプレート構造刷新**：各エージェントの `os-mac / os-windows` ディレクトリを廃止し、単一の `commands/` 構成へ統一。すべてのテンプレートを `.md` / `.prompt.md` / `.toml` といった実拡張子で管理。
 - **マニフェストと CLI の更新**：全マニフェストを新構造に合わせて再定義し、Codex / GitHub Copilot 用マニフェストを追加。CLI も `--codex`, `--github-copilot` フラグとヘルプを拡張し、`resolveAgentLayout` に新ディレクトリを登録。
-- **テスト体制の強化**：既存エージェント向けリアルマニフェストテストを刷新し、`.kiro/settings` 展開を含む動作を検証。Codex / GitHub Copilot 用 E2E テストを追加。
+- **テスト体制の強化**：既存エージェント向けリアルマニフェストテストを刷新し、`.spec/settings` 展開を含む動作を検証。Codex / GitHub Copilot 用 E2E テストを追加。
 - **ドキュメント整備**：README（英語/日本語/繁体字）およびリポジトリ README を更新し、対応エージェント、コマンド数、ディレクトリ構造、CLI 例を最新状態に反映。
 
 ### 🔄 関連プルリクエスト
@@ -353,10 +353,10 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 既存プロジェクトに対する仕様駆動開発をより効果的に実現
 
 **品質検証コマンドの新規追加**
-- 🔍 **`/kiro:validate-gap`** - 既存機能と要件のギャップ分析
+- 🔍 **`/spec:validate-gap`** - 既存機能と要件のギャップ分析
   - spec-design前に実行し、現在の実装と新要件の差分を明確化
   - 既存システムの理解と新機能の統合ポイントを特定
-- ✅ **`/kiro:validate-design`** - 設計の既存アーキテクチャとの互換性検証
+- ✅ **`/spec:validate-design`** - 設計の既存アーキテクチャとの互換性検証
   - spec-design後に実行し、設計の統合可能性を確認
   - 既存システムとの衝突や非互換性を事前に検出
 
@@ -382,7 +382,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 
 **コンテンツ強化**
 - **AI-DLC "ボルト"概念** - AWS記事へのリンクで用語を明確化
-- **Kiro IDE統合説明** - ポータビリティと実装ガードレールを強調
+- **Spec IDE統合説明** - ポータビリティと実装ガードレールを強調
 - **Speaker Deckプレゼンテーション追加** - 「Claude Codeは仕様駆動の夢を見ない」
 
 ### 🔧 技術的改善
@@ -422,11 +422,11 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 
 ## Ver 0.3.0 (2025-08-12)
 
-### Kiro spec-driven developmentコマンド大幅改善
+### Spec spec-driven developmentコマンド大幅改善
 
 **ワークフロー効率化**
-- `-y`フラグ追加: `/kiro:spec-design feature-name -y`で要件承認をスキップして設計生成
-- `/kiro:spec-tasks feature-name -y`で要件+設計承認をスキップしてタスク生成
+- `-y`フラグ追加: `/spec:spec-design feature-name -y`で要件承認をスキップして設計生成
+- `/spec:spec-tasks feature-name -y`で要件+設計承認をスキップしてタスク生成
 - argument-hint追加: コマンド入力時に`<feature-name> [-y]`が自動表示
 - 従来の段階的承認も維持（spec.json編集またはインタラクティブ承認）
 
@@ -497,12 +497,12 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - 実装タスクがコード生成LLM向けに最適化されました
 - テスト駆動開発アプローチが各タスクに統合されました
 - タスク間の依存関係がより明確に管理されるようになりました
-- Kiro設計原則に適合した独立プロンプト形式に改善しました
+- Spec設計原則に適合した独立プロンプト形式に改善しました
 
 ### 修正された問題
 
 **ディレクトリハンドリングの改善**
-- `.kiro/steering/`ディレクトリが存在しない場合でも正常に動作するようになりました
+- `.spec/steering/`ディレクトリが存在しない場合でも正常に動作するようになりました
 - エラーメッセージがより分かりやすくなりました
 
 **内部ファイル管理の改善**
@@ -516,7 +516,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - spec.jsonの構造を簡素化し、保守性を向上
 
 **要件生成アプローチの見直し**
-- 過剰に包括的だった要件生成を元のKiro設計に回帰
+- 過剰に包括的だった要件生成を元のSpec設計に回帰
 - 「CRITICAL」「MUST」などの強制的表現を削除
 - コア機能に焦点を当てた段階的な要件生成に変更
 - 反復改善前提の自然な開発フローを復活
@@ -536,7 +536,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 - 詳細な使用推奨事項とガイダンスを追加しました
 
 **ステアリング管理機能の統一**
-- `/kiro:steering`コマンドが既存ファイルを適切に処理するようになりました
+- `/spec:steering`コマンドが既存ファイルを適切に処理するようになりました
 - ステアリング文書の管理がより直感的になりました
 
 **システム安定性の向上**
@@ -548,7 +548,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 ## Ver 0.1.0 (2025-07-18)
 
 ### 基本機能
-- Kiro IDEスタイルの仕様書駆動開発システムを実装
+- Spec IDEスタイルの仕様書駆動開発システムを実装
 - 要件→設計→タスク→実装の3段階承認ワークフロー
 - EARS形式による要件定義サポート
 - 階層的要件構造での整理機能
@@ -572,7 +572,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 ## 開発の歩み
 
 **2025年7月17日〜18日：基盤構築期**
-プロジェクトの初期化とKiro-style仕様書駆動開発の核となるフレームワークを実装
+プロジェクトの初期化とspec-style仕様書駆動開発の核となるフレームワークを実装
 
 **2025年7月18日〜24日：多言語化・機能拡張期**  
 英語・繁体中文対応の追加、GitHub Actions統合、ドキュメント充実
@@ -581,7 +581,7 @@ v2.0.0へ移行後にテンプレートを再生成すれば、追加フラグ�
 セキュリティ強化、inclusion modes改善、システム安定性向上
 
 **2025年7月26日：仕様書生成品質革新期 & システム簡素化**
-requirements、design、tasksの各文書生成品質を大幅改善、過剰なprogress追跡を削除してKiro元設計に回帰
+requirements、design、tasksの各文書生成品質を大幅改善、過剰なprogress追跡を削除してSpec元設計に回帰
 
 ---
 
@@ -596,15 +596,15 @@ requirements、design、tasksの各文書生成品質を大幅改善、過剰な
 
 ### 基本フロー（全プラットフォーム共通）
 1. 選択したプラットフォームのファイルをプロジェクトにコピー
-2. `/kiro:steering`でプロジェクト情報を設定
-3. `/kiro:spec-init [機能説明]`で新しい仕様書を作成
+2. `/spec:steering`でプロジェクト情報を設定
+3. `/spec:spec-init [機能説明]`で新しい仕様書を作成
 4. 要件→設計→タスク→実装の順で段階的に開発を進める
 
 詳細な使用方法は[README_ja.md](docs/README/README_ja.md)をご覧ください。
 
 ## 関連リンク
 
-- **[Zenn記事](https://zenn.dev/gotalab/articles/3db0621ce3d6d2)** - Kiroの仕様書駆動開発プロセスの詳細解説
+- **[Zenn記事](https://zenn.dev/gotalab/articles/3db0621ce3d6d2)** - Specの仕様書駆動開発プロセスの詳細解説
 - **[日本語ドキュメント](docs/README/README_ja.md)**
 - **[English Documentation](docs/README/README_en.md)**
 - **[繁體中文說明](docs/README/README_zh-TW.md)**

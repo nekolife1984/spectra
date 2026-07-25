@@ -3,32 +3,32 @@ import { buildTemplateContext } from '../src/template/context';
 import type { AgentType, CCSddConfig } from '../src/resolvers/agentLayout';
 
 describe('buildTemplateContext', () => {
-  it('includes LANG_CODE and KIRO_DIR (default)', () => {
+  it('includes LANG_CODE and SPEC_DIR (default)', () => {
     const ctx = buildTemplateContext({ agent: 'claude-code', lang: 'ja' });
     expect(ctx.LANG_CODE).toBe('ja');
-    expect(ctx.KIRO_DIR).toBe('.kiro');
+    expect(ctx.SPEC_DIR).toBe('.spec');
     expect(ctx.DEV_GUIDELINES).toBe(
       '- Think in English, generate responses in Japanese. All Markdown content written to project files (e.g., requirements.md, design.md, tasks.md, research.md, validation reports) MUST be written in the target language configured for this specification (see spec.json.language).',
     );
   });
 
-  it('uses kiro-dir flag when provided', () => {
-    const ctx = buildTemplateContext({ agent: 'claude-code', lang: 'en', kiroDir: { flag: 'docs/kiro' } });
-    expect(ctx.KIRO_DIR).toBe('docs/kiro');
+  it('uses spec-dir flag when provided', () => {
+    const ctx = buildTemplateContext({ agent: 'claude-code', lang: 'en', specDir: { flag: 'docs/spec' } });
+    expect(ctx.SPEC_DIR).toBe('docs/spec');
   });
 
   it('includes agent layout variables for claude-code', () => {
     const ctx = buildTemplateContext({ agent: 'claude-code', lang: 'en' });
     expect(ctx.AGENT_DIR).toBe('.claude');
     expect(ctx.AGENT_DOC).toBe('CLAUDE.md');
-    expect(ctx.AGENT_COMMANDS_DIR).toBe('.claude/commands/kiro');
+    expect(ctx.AGENT_COMMANDS_DIR).toBe('.claude/commands/spec');
   });
 
   it('includes agent layout variables for claude-code-agent', () => {
     const ctx = buildTemplateContext({ agent: 'claude-code-agent', lang: 'en' });
     expect(ctx.AGENT_DIR).toBe('.claude');
     expect(ctx.AGENT_DOC).toBe('CLAUDE.md');
-    expect(ctx.AGENT_COMMANDS_DIR).toBe('.claude/commands/kiro');
+    expect(ctx.AGENT_COMMANDS_DIR).toBe('.claude/commands/spec');
   });
 
   it('respects agentLayouts override', () => {

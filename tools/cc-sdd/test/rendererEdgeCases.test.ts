@@ -82,14 +82,14 @@ describe('template renderer edge cases', () => {
             file: '{{AGENT_DOC}}'
           }
         },
-        array: ['{{LANG_CODE}}', '{{KIRO_DIR}}', '{{DEV_GUIDELINES}}']
+        array: ['{{LANG_CODE}}', '{{SPEC_DIR}}', '{{DEV_GUIDELINES}}']
       });
 
       const result = renderJsonTemplate(input, agent, ctx) as any;
       expect(result.config.agent).toBe('claude-code');
       expect(result.config.nested.dir).toBe('.claude');
       expect(result.config.nested.file).toBe('CLAUDE.md');
-      expect(result.array).toEqual(['en', '.kiro', ctx.DEV_GUIDELINES]);
+      expect(result.array).toEqual(['en', '.spec', ctx.DEV_GUIDELINES]);
     });
 
     it('handles JSON with numbers and booleans', () => {
@@ -123,7 +123,7 @@ describe('template renderer edge cases', () => {
       const complexCtx = buildTemplateContext({ 
         agent: 'gemini-cli', 
         lang: 'ja',
-        kiroDir: { flag: 'custom-kiro' }
+        specDir: { flag: 'custom-spec' }
       });
       
       const input = JSON.stringify({
@@ -133,7 +133,7 @@ describe('template renderer edge cases', () => {
           config: {
             lang: '{{LANG_CODE}}',
             paths: {
-              kiro: '{{KIRO_DIR}}',
+              spec: '{{SPEC_DIR}}',
               agent: '{{AGENT_DIR}}',
               commands: '{{AGENT_COMMANDS_DIR}}'
             }
@@ -145,9 +145,9 @@ describe('template renderer edge cases', () => {
       expect(result.manifest.version).toBe(2);
       expect(result.manifest.agent).toBe('gemini-cli');
       expect(result.manifest.config.lang).toBe('ja');
-      expect(result.manifest.config.paths.kiro).toBe('custom-kiro');
+      expect(result.manifest.config.paths.spec).toBe('custom-spec');
       expect(result.manifest.config.paths.agent).toBe('.gemini');
-      expect(result.manifest.config.paths.commands).toBe('.gemini/commands/kiro');
+      expect(result.manifest.config.paths.commands).toBe('.gemini/commands/spec');
     });
   });
 });

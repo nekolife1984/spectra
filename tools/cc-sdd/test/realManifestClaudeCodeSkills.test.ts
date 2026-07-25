@@ -41,7 +41,7 @@ describe('real claude-code-skills manifest', () => {
     expect(out).toContain('[templateDir] skills: templates/agents/claude-code-skills/skills -> .claude/skills');
     expect(out).toContain('[templateFile] doc_main: templates/agents/claude-code-skills/docs/CLAUDE.md -> ./CLAUDE.md');
     expect(out).toContain('[templateDir] traceability_scripts: templates/shared/scripts -> .agents/scripts');
-    expect(out).toContain('[templateDir] settings_templates: templates/shared/settings/en/templates -> .kiro/settings/templates');
+    expect(out).toContain('[templateDir] settings_templates: templates/shared/settings/en/templates -> .spec/settings/templates');
   });
 
   it('apply writes CLAUDE.md, skill files to cwd', async () => {
@@ -54,19 +54,19 @@ describe('real claude-code-skills manifest', () => {
     expect(await exists(doc)).toBe(true);
     const text = await readFile(doc, 'utf8');
     expect(text).toMatch(/# Agentic SDLC and Spec-Driven Development/);
-    expect(text).toContain('/kiro-spec-status');
-    expect(text).not.toContain('/kiro:spec-status');
+    expect(text).toContain('/spec-status');
+    expect(text).not.toContain('/spec:spec-status');
     expect(text).toContain('autonomous mode');
     expect(text).toContain('[--review required|inline|off]');
     expect(text).toContain('`--review off` skips task-local review');
 
-    const skillSpecInit = join(cwd, '.claude/skills/kiro-spec-init/SKILL.md');
+    const skillSpecInit = join(cwd, '.claude/skills/spec-init/SKILL.md');
     expect(await exists(skillSpecInit)).toBe(true);
     const skillSpecInitText = await readFile(skillSpecInit, 'utf8');
-    expect(skillSpecInitText).toMatch(/name: kiro-spec-init/);
-    expect(skillSpecInitText).toContain('/kiro-spec-requirements');
+    expect(skillSpecInitText).toMatch(/name: spec-init/);
+    expect(skillSpecInitText).toContain('/spec-requirements');
 
-    const skillSpecDesign = join(cwd, '.claude/skills/kiro-spec-design/SKILL.md');
+    const skillSpecDesign = join(cwd, '.claude/skills/spec-design/SKILL.md');
     expect(await exists(skillSpecDesign)).toBe(true);
     const skillSpecDesignText = await readFile(skillSpecDesign, 'utf8');
     expect(skillSpecDesignText).not.toMatch(/context: fork/);
@@ -76,7 +76,7 @@ describe('real claude-code-skills manifest', () => {
     expect(skillSpecDesignText).toContain('Keep the review bounded to at most 2 repair passes');
     expect(skillSpecDesignText).toContain('Spec Gap Found During Design Review');
 
-    const skillValidateImpl = join(cwd, '.claude/skills/kiro-validate-impl/SKILL.md');
+    const skillValidateImpl = join(cwd, '.claude/skills/spec-validate-impl/SKILL.md');
     expect(await exists(skillValidateImpl)).toBe(true);
     const skillValidateImplText = await readFile(skillValidateImpl, 'utf8');
     expect(skillValidateImplText).toContain('Validate feature-level integration');
@@ -89,19 +89,19 @@ describe('real claude-code-skills manifest', () => {
     expect(skillValidateImplText).toContain('usually reviewed during implementation');
     expect(skillValidateImplText).toContain('`--review off`');
 
-    const skillValidateDesign = join(cwd, '.claude/skills/kiro-validate-design/SKILL.md');
+    const skillValidateDesign = join(cwd, '.claude/skills/spec-validate-design/SKILL.md');
     expect(await exists(skillValidateDesign)).toBe(true);
     const skillValidateDesignText = await readFile(skillValidateDesign, 'utf8');
     expect(skillValidateDesignText).toContain('Core steering context: `product.md`, `tech.md`, `structure.md`');
     expect(skillValidateDesignText).toContain('review-relevant steering or use-case-aligned local agent skills/playbooks');
 
-    const skillValidateGap = join(cwd, '.claude/skills/kiro-validate-gap/SKILL.md');
+    const skillValidateGap = join(cwd, '.claude/skills/spec-validate-gap/SKILL.md');
     expect(await exists(skillValidateGap)).toBe(true);
     const skillValidateGapText = await readFile(skillValidateGap, 'utf8');
     expect(skillValidateGapText).toContain('Core steering context: `product.md`, `tech.md`, `structure.md`');
     expect(skillValidateGapText).toContain('analysis-relevant steering or use-case-aligned local agent skills/playbooks');
 
-    const skillSpecRequirements = join(cwd, '.claude/skills/kiro-spec-requirements/SKILL.md');
+    const skillSpecRequirements = join(cwd, '.claude/skills/spec-requirements/SKILL.md');
     expect(await exists(skillSpecRequirements)).toBe(true);
     const skillSpecRequirementsText = await readFile(skillSpecRequirements, 'utf8');
     expect(skillSpecRequirementsText).toContain('Core steering context: `product.md`, `tech.md`, `structure.md`');
@@ -110,16 +110,16 @@ describe('real claude-code-skills manifest', () => {
     expect(skillSpecRequirementsText).toContain('requirements review gate passes');
     expect(skillSpecRequirementsText).toContain('Missing Project Description');
 
-    // kiro-impl skill with subagent dispatch
-    const skillImpl = join(cwd, '.claude/skills/kiro-impl/SKILL.md');
+    // spec-impl skill with subagent dispatch
+    const skillImpl = join(cwd, '.claude/skills/spec-impl/SKILL.md');
     expect(await exists(skillImpl)).toBe(true);
     const skillImplText = await readFile(skillImpl, 'utf8');
-    expect(skillImplText).toMatch(/name: kiro-impl/);
+    expect(skillImplText).toMatch(/name: spec-impl/);
     expect(skillImplText).toContain('Agent tool');
     expect(skillImplText).toContain('Autonomous mode');
     expect(skillImplText).toContain('Manual mode');
     expect(skillImplText).toContain('Feature Flag Protocol');
-    expect(skillImplText).toContain('kiro-validate-impl');
+    expect(skillImplText).toContain('spec-validate-impl');
     expect(skillImplText).toContain('BLOCKED');
     expect(skillImplText).toContain('Bounded Remediation');
     expect(skillImplText).toContain('Parse implementer status only from the exact `## Status Report` block');
@@ -133,7 +133,7 @@ describe('real claude-code-skills manifest', () => {
     expect(skillImplText).toContain('skip review');
     expect(skillImplText).toContain('If review mode is `off`');
 
-    const implPrompt = join(cwd, '.claude/skills/kiro-impl/templates/implementer-prompt.md');
+    const implPrompt = join(cwd, '.claude/skills/spec-impl/templates/implementer-prompt.md');
     expect(await exists(implPrompt)).toBe(true);
     const implPromptText = await readFile(implPrompt, 'utf8');
     expect(implPromptText).toContain('TDD');
@@ -143,10 +143,10 @@ describe('real claude-code-skills manifest', () => {
     expect(implPromptText).toContain('The parent controller parses the exact `- STATUS:` line');
     expect(skillImplText).toContain('Only after review returns `APPROVED`');
 
-    const reviewPrompt = join(cwd, '.claude/skills/kiro-impl/templates/reviewer-prompt.md');
+    const reviewPrompt = join(cwd, '.claude/skills/spec-impl/templates/reviewer-prompt.md');
     expect(await exists(reviewPrompt)).toBe(true);
     const reviewPromptText = await readFile(reviewPrompt, 'utf8');
-    expect(reviewPromptText).toContain('Apply the `kiro-review` protocol');
+    expect(reviewPromptText).toContain('Apply the `spec-review` protocol');
     expect(reviewPromptText).toContain('Reality Check');
     expect(reviewPromptText).toContain('APPROVED');
     expect(reviewPromptText).toContain('REJECTED');
@@ -154,21 +154,21 @@ describe('real claude-code-skills manifest', () => {
     expect(reviewPromptText).toContain('mechanical checks');
     expect(reviewPromptText).toContain('The parent controller parses the exact `- VERDICT:` line');
 
-    const debugPrompt = join(cwd, '.claude/skills/kiro-impl/templates/debugger-prompt.md');
+    const debugPrompt = join(cwd, '.claude/skills/spec-impl/templates/debugger-prompt.md');
     expect(await exists(debugPrompt)).toBe(true);
     const debugPromptText = await readFile(debugPrompt, 'utf8');
-    expect(debugPromptText).toContain('Apply the `kiro-debug` protocol');
+    expect(debugPromptText).toContain('Apply the `spec-debug` protocol');
     expect(debugPromptText).toContain('web or official docs research');
     expect(debugPromptText).toContain('repo-fixability judgment');
 
-    const skillReview = join(cwd, '.claude/skills/kiro-review/SKILL.md');
+    const skillReview = join(cwd, '.claude/skills/spec-review/SKILL.md');
     expect(await exists(skillReview)).toBe(true);
     const skillReviewText = await readFile(skillReview, 'utf8');
     expect(skillReviewText).toContain('task-local adversarial review');
     expect(skillReviewText).toContain('RED phase');
     expect(skillReviewText).toContain('MECHANICAL_RESULTS');
 
-    const skillDebug = join(cwd, '.claude/skills/kiro-debug/SKILL.md');
+    const skillDebug = join(cwd, '.claude/skills/spec-debug/SKILL.md');
     expect(await exists(skillDebug)).toBe(true);
     const skillDebugText = await readFile(skillDebug, 'utf8');
     expect(skillDebugText).toContain('root cause investigation');
@@ -176,7 +176,7 @@ describe('real claude-code-skills manifest', () => {
     expect(skillDebugText).toContain('NEXT_ACTION: RETRY_TASK | BLOCK_TASK | STOP_FOR_HUMAN');
     expect(skillDebugText).toContain('TASK_ORDERING_PROBLEM');
 
-    const skillVerifyCompletion = join(cwd, '.claude/skills/kiro-verify-completion/SKILL.md');
+    const skillVerifyCompletion = join(cwd, '.claude/skills/spec-verify-completion/SKILL.md');
     expect(await exists(skillVerifyCompletion)).toBe(true);
     const skillVerifyCompletionText = await readFile(skillVerifyCompletion, 'utf8');
     expect(skillVerifyCompletionText).toContain('fresh evidence');
@@ -192,54 +192,54 @@ describe('real claude-code-skills manifest', () => {
       'design-review-gate.md',
     ];
     for (const rule of designRules) {
-      expect(await exists(join(cwd, `.claude/skills/kiro-spec-design/rules/${rule}`))).toBe(true);
+      expect(await exists(join(cwd, `.claude/skills/spec-design/rules/${rule}`))).toBe(true);
     }
-    expect(await exists(join(cwd, '.claude/skills/kiro-validate-design/rules/design-review.md'))).toBe(true);
-    expect(await exists(join(cwd, '.claude/skills/kiro-spec-requirements/rules/ears-format.md'))).toBe(true);
-    expect(await exists(join(cwd, '.claude/skills/kiro-spec-requirements/rules/requirements-review-gate.md'))).toBe(true);
-    expect(await exists(join(cwd, '.claude/skills/kiro-validate-gap/rules/gap-analysis.md'))).toBe(true);
-    expect(await exists(join(cwd, '.claude/skills/kiro-steering/rules/steering-principles.md'))).toBe(true);
-    expect(await exists(join(cwd, '.claude/skills/kiro-steering-custom/rules/steering-principles.md'))).toBe(true);
-    expect(await exists(join(cwd, '.claude/skills/kiro-spec-tasks/rules/tasks-generation.md'))).toBe(true);
-    expect(await exists(join(cwd, '.claude/skills/kiro-spec-tasks/rules/tasks-parallel-analysis.md'))).toBe(true);
-    const skillSpecTasks = join(cwd, '.claude/skills/kiro-spec-tasks/SKILL.md');
+    expect(await exists(join(cwd, '.claude/skills/spec-validate-design/rules/design-review.md'))).toBe(true);
+    expect(await exists(join(cwd, '.claude/skills/spec-requirements/rules/ears-format.md'))).toBe(true);
+    expect(await exists(join(cwd, '.claude/skills/spec-requirements/rules/requirements-review-gate.md'))).toBe(true);
+    expect(await exists(join(cwd, '.claude/skills/spec-validate-gap/rules/gap-analysis.md'))).toBe(true);
+    expect(await exists(join(cwd, '.claude/skills/spec-steering/rules/steering-principles.md'))).toBe(true);
+    expect(await exists(join(cwd, '.claude/skills/spec-steering-custom/rules/steering-principles.md'))).toBe(true);
+    expect(await exists(join(cwd, '.claude/skills/spec-tasks/rules/tasks-generation.md'))).toBe(true);
+    expect(await exists(join(cwd, '.claude/skills/spec-tasks/rules/tasks-parallel-analysis.md'))).toBe(true);
+    const skillSpecTasks = join(cwd, '.claude/skills/spec-tasks/SKILL.md');
     const skillSpecTasksText = await readFile(skillSpecTasks, 'utf8');
     expect(skillSpecTasksText).toContain('Core steering context: `product.md`, `tech.md`, `structure.md`');
     expect(skillSpecTasksText).toContain('Step 3: Review Task Plan');
     expect(skillSpecTasksText).toContain('Keep the review bounded to at most 2 repair passes');
     expect(skillSpecTasksText).toContain('Spec Gap Found During Task Review');
-    const tasksGenerationRules = await readFile(join(cwd, '.claude/skills/kiro-spec-tasks/rules/tasks-generation.md'), 'utf8');
+    const tasksGenerationRules = await readFile(join(cwd, '.claude/skills/spec-tasks/rules/tasks-generation.md'), 'utf8');
     expect(tasksGenerationRules).toContain('## Task Plan Review Gate');
     expect(tasksGenerationRules).toContain('### Coverage Review');
     expect(tasksGenerationRules).toContain('### Executability Review');
     expect(tasksGenerationRules).toContain('no more than 2 review-and-repair passes');
-    const designReviewGate = await readFile(join(cwd, '.claude/skills/kiro-spec-design/rules/design-review-gate.md'), 'utf8');
+    const designReviewGate = await readFile(join(cwd, '.claude/skills/spec-design/rules/design-review-gate.md'), 'utf8');
     expect(designReviewGate).toContain('## Requirements Coverage Review');
     expect(designReviewGate).toContain('## Architecture Readiness Review');
     expect(designReviewGate).toContain('## Executability Review');
-    const requirementsReviewGate = await readFile(join(cwd, '.claude/skills/kiro-spec-requirements/rules/requirements-review-gate.md'), 'utf8');
+    const requirementsReviewGate = await readFile(join(cwd, '.claude/skills/spec-requirements/rules/requirements-review-gate.md'), 'utf8');
     expect(requirementsReviewGate).toContain('## Scope and Coverage Review');
     expect(requirementsReviewGate).toContain('## EARS and Testability Review');
     expect(requirementsReviewGate).toContain('## Structure and Quality Review');
 
     // Skills without shared-rules should NOT have rules/ directories
     const noRulesSkills = [
-      'kiro-spec-init',
-      'kiro-spec-status',
-      'kiro-spec-quick',
-      'kiro-spec-batch',
-      'kiro-impl',
-      'kiro-validate-impl',
-      'kiro-discovery',
-      'kiro-review',
-      'kiro-debug',
-      'kiro-verify-completion',
+      'spec-init',
+      'spec-status',
+      'spec-quick',
+      'spec-batch',
+      'spec-impl',
+      'spec-validate-impl',
+      'spec-discovery',
+      'spec-review',
+      'spec-debug',
+      'spec-verify-completion',
     ];
     for (const skill of noRulesSkills) {
       expect(await exists(join(cwd, `.claude/skills/${skill}/rules`))).toBe(false);
     }
 
-    const settingsRuleDir = join(cwd, '.kiro/settings/rules');
+    const settingsRuleDir = join(cwd, '.spec/settings/rules');
     expect(await exists(settingsRuleDir)).toBe(false);
 
     expect(ctx.logs.join('\n')).toMatch(/\d+\/\d+ files written/);
@@ -251,23 +251,23 @@ describe('real claude-code-skills manifest', () => {
     await runCli(['--lang', 'en', '--manifest', manifestPath, '--overwrite=force', '--claude-skills'], runtime, ctx.io, {}, { cwd, templatesRoot: process.cwd() });
 
     const expectedSkills = [
-      'kiro-debug',
-      'kiro-discovery',
-      'kiro-review',
-      'kiro-spec-batch',
-      'kiro-spec-init',
-      'kiro-spec-status',
-      'kiro-spec-quick',
-      'kiro-spec-design',
-      'kiro-spec-requirements',
-      'kiro-spec-tasks',
-      'kiro-impl',
-      'kiro-steering',
-      'kiro-steering-custom',
-      'kiro-validate-design',
-      'kiro-validate-gap',
-      'kiro-validate-impl',
-      'kiro-verify-completion',
+      'spec-debug',
+      'spec-discovery',
+      'spec-review',
+      'spec-batch',
+      'spec-init',
+      'spec-status',
+      'spec-quick',
+      'spec-design',
+      'spec-requirements',
+      'spec-tasks',
+      'spec-impl',
+      'spec-steering',
+      'spec-steering-custom',
+      'spec-validate-design',
+      'spec-validate-gap',
+      'spec-validate-impl',
+      'spec-verify-completion',
     ];
 
     for (const skill of expectedSkills) {
@@ -275,10 +275,10 @@ describe('real claude-code-skills manifest', () => {
       expect(await exists(skillPath)).toBe(true);
     }
 
-    // kiro-impl has prompt templates
-    expect(await exists(join(cwd, '.claude/skills/kiro-impl/templates/implementer-prompt.md'))).toBe(true);
-    expect(await exists(join(cwd, '.claude/skills/kiro-impl/templates/reviewer-prompt.md'))).toBe(true);
-    expect(await exists(join(cwd, '.claude/skills/kiro-impl/templates/debugger-prompt.md'))).toBe(true);
+    // spec-impl has prompt templates
+    expect(await exists(join(cwd, '.claude/skills/spec-impl/templates/implementer-prompt.md'))).toBe(true);
+    expect(await exists(join(cwd, '.claude/skills/spec-impl/templates/reviewer-prompt.md'))).toBe(true);
+    expect(await exists(join(cwd, '.claude/skills/spec-impl/templates/debugger-prompt.md'))).toBe(true);
 
     // No agents directory (tdd-task-implementer removed)
     expect(await exists(join(cwd, '.claude/agents'))).toBe(false);

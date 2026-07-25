@@ -12,7 +12,7 @@ Usage:
   python3 .agents/scripts/build-dag.py
 
   # 出力ファイルを指定
-  python3 .agents/scripts/build-dag.py --output .kiro/graph/dag.json
+  python3 .agents/scripts/build-dag.py --output .spec/graph/dag.json
 
   # プロジェクトディレクトリ指定
   python3 .agents/scripts/build-dag.py --project-dir /path/to/project
@@ -21,7 +21,7 @@ Usage:
   python3 .agents/scripts/build-dag.py --verbose
 
 Output:
-  .kiro/graph/dag.json  — デフォルト出力先
+  .spec/graph/dag.json  — デフォルト出力先
 """
 
 import argparse
@@ -122,7 +122,7 @@ IMPL_TAG_RE = re.compile(r'(?:#|//)\s*@impl\s+([\d.]+(?:,\s*[\d.]+)*)', re.MULTI
 
 # 除外ディレクトリ
 EXCLUDE_DIRS = {".git", "node_modules", ".venv", "__pycache__", "dist", "build",
-                ".artgraph", ".trace", ".kiro", "bin", "obj", ".vs", "packages"}
+                ".artgraph", ".trace", ".spec", "bin", "obj", ".vs", "packages"}
 
 # サポートする拡張子（全言語）
 SUPPORTED_EXTENSIONS = set(IMPORT_PATTERNS.keys())
@@ -219,8 +219,8 @@ def main():
     )
     parser.add_argument("--project-dir", type=str, default=".",
                         help="プロジェクトルート（デフォルト: カレント）")
-    parser.add_argument("--output", type=str, default=".kiro/graph/dag.json",
-                        help="出力JSONパス（デフォルト: .kiro/graph/dag.json）")
+    parser.add_argument("--output", type=str, default=".spec/graph/dag.json",
+                        help="出力JSONパス（デフォルト: .spec/graph/dag.json）")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="詳細出力")
     args = parser.parse_args()

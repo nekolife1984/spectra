@@ -115,17 +115,17 @@ case "${LANG_CHOICE:-1}" in
 esac
 
 echo ""
-echo "  Kiro directory (where specs and settings are stored):"
-echo -n "  Path (Enter=.kiro): "
-read -r KIRO_DIR_INPUT
-KIRO_FLAG=""
-if [ -n "$KIRO_DIR_INPUT" ]; then
-  KIRO_FLAG="--kiro-dir $KIRO_DIR_INPUT"
+echo "  Spec directory (where specs and settings are stored):"
+echo -n "  Path (Enter=.spec): "
+read -r SPEC_DIR_INPUT
+SPEC_FLAG=""
+if [ -n "$SPEC_DIR_INPUT" ]; then
+  SPEC_FLAG="--spec-dir $SPEC_DIR_INPUT"
 fi
 
 echo ""
-info "Running: npx github:$GITHUB_REPO $AGENT_FLAG $LANG_FLAG $KIRO_FLAG"
-npx "github:$GITHUB_REPO" $AGENT_FLAG $LANG_FLAG $KIRO_FLAG
+info "Running: npx github:$GITHUB_REPO $AGENT_FLAG $LANG_FLAG $SPEC_FLAG"
+npx "github:$GITHUB_REPO" $AGENT_FLAG $LANG_FLAG $SPEC_FLAG
 ok "spectra installation complete"
 
 # ── Step 2: CRG Setup ──────────────────────────────────
@@ -251,17 +251,17 @@ case "${AGENT_CHOICE:-1}" in
   *) PREFIX='/';;
 esac
 
-echo "    ${PREFIX}kiro-discovery \"your idea\""
-echo "    ${PREFIX}kiro-spec-init my-feature"
-echo "    ${PREFIX}kiro-spec-requirements my-feature"
-echo "    ${PREFIX}kiro-spec-design my-feature"
-echo "    ${PREFIX}kiro-spec-tasks my-feature"
-echo "    ${PREFIX}kiro-impl my-feature"
+echo "    ${PREFIX}spec-discovery \"your idea\""
+echo "    ${PREFIX}spec-init my-feature"
+echo "    ${PREFIX}spec-requirements my-feature"
+echo "    ${PREFIX}spec-design my-feature"
+echo "    ${PREFIX}spec-tasks my-feature"
+echo "    ${PREFIX}spec-impl my-feature"
 echo ""
 echo "  CRG Traceability:"
-echo "    ${PREFIX}kiro-trace 1.1"
-echo "    ${PREFIX}kiro-impact src/my-file.py"
-echo "    ${PREFIX}kiro-validate-boundary"
+echo "    ${PREFIX}spec-trace 1.1"
+echo "    ${PREFIX}spec-impact src/my-file.py"
+echo "    ${PREFIX}spec-validate-boundary"
 echo ""
 echo "  Rebuild code graph:"
 echo "    code-review-graph build"

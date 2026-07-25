@@ -1,7 +1,7 @@
 {
   "name": "spectra",
   "version": "3.0.2",
-  "description": "Spec → Code bidirectional traceability. Spec-driven SDLC with @impl/@verifies tags, CRG integration, impact analysis, and 20 kiro skills.",
+  "description": "Spec → Code bidirectional traceability. Spec-driven SDLC with @impl/@verifies tags, CRG integration, impact analysis, and 20 spec skills.",
   "bin": {
     "spectra": "./bin/spectra.js"
   },

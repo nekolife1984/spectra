@@ -1,6 +1,6 @@
 # Agentic SDLC and Spec-Driven Development
 
-Kiro-style Spec-Driven Development on an agentic SDLC.
+Spec-style Spec-Driven Development on an agentic SDLC.
 Powered by [**spectra**](https://github.com/nekolife1984/spectra) — Spec → Code bidirectional traceability with CRG integration.
 
 > **Spectra** = **Spec** + **Trace**. The name reflects how the toolchain splits development into traceable layers (requirements → design → code → tests) like a prism splits light into a spectrum, and traces how they're connected.
@@ -8,51 +8,51 @@ Powered by [**spectra**](https://github.com/nekolife1984/spectra) — Spec → C
 ## Project Context
 
 ### Paths
-- Steering: `.kiro/steering/`
-- Specs: `.kiro/specs/`
+- Steering: `.spec/steering/`
+- Specs: `.spec/specs/`
 
 ### Steering vs Specification
 
-**Steering** (`.kiro/steering/`) - Guide AI with project-wide rules and context
-**Specs** (`.kiro/specs/`) - Formalize development process for individual features
+**Steering** (`.spec/steering/`) - Guide AI with project-wide rules and context
+**Specs** (`.spec/specs/`) - Formalize development process for individual features
 
 ### Active Specifications
-- Check `.kiro/specs/` for active specifications
-- Use `/kiro-spec-status [feature-name]` to check progress
+- Check `.spec/specs/` for active specifications
+- Use `/spec-status [feature-name]` to check progress
 
 ## Development Guidelines
 - Think in English, generate responses in English. All Markdown content written to project files (e.g., requirements.md, design.md, tasks.md, research.md, validation reports) MUST be written in the target language configured for this specification (see spec.json.language).
 
 ## Minimal Workflow
-- Phase 0 (optional): `/kiro-steering`, `/kiro-steering-custom`
-- Discovery: `/kiro-discovery "idea"` — determines action path, writes brief.md + roadmap.md for multi-spec projects
+- Phase 0 (optional): `/spec-steering`, `/spec-steering-custom`
+- Discovery: `/spec-discovery "idea"` — determines action path, writes brief.md + roadmap.md for multi-spec projects
 - Phase 1 (Specification):
-  - Single spec: `/kiro-spec-quick {feature} [--auto]` or step by step:
-    - `/kiro-spec-init "description"`
-    - `/kiro-spec-requirements {feature}`
-    - `/kiro-validate-gap {feature}` (optional: for existing codebase)
-    - `/kiro-spec-design {feature} [-y]`
-    - `/kiro-validate-design {feature}` (optional: design review)
-    - `/kiro-spec-tasks {feature} [-y]`
-  - Multi-spec: `/kiro-spec-batch` — creates all specs from roadmap.md in parallel by dependency wave
-- Phase 2 (Implementation): `/kiro-impl {feature} [tasks]`
+  - Single spec: `/spec-quick {feature} [--auto]` or step by step:
+    - `/spec-init "description"`
+    - `/spec-requirements {feature}`
+    - `/spec-validate-gap {feature}` (optional: for existing codebase)
+    - `/spec-design {feature} [-y]`
+    - `/spec-validate-design {feature}` (optional: design review)
+    - `/spec-tasks {feature} [-y]`
+  - Multi-spec: `/spec-batch` — creates all specs from roadmap.md in parallel by dependency wave
+- Phase 2 (Implementation): `/spec-impl {feature} [tasks]`
   - Without task numbers: autonomous mode (subagent per task + independent review + final validation)
   - With task numbers: manual mode (selected tasks only in main context)
-  - `/kiro-validate-impl {feature}` (standalone re-validation)
-- Progress check: `/kiro-spec-status {feature}` (use anytime)
+  - `/spec-validate-impl {feature}` (standalone re-validation)
+- Progress check: `/spec-status {feature}` (use anytime)
 
 ## Skills Structure
-Skills are located in `.agents/skills/kiro-*/SKILL.md` (or agent-specific paths like `.claude/skills/`, `.opencode/skills/`, etc.)
+Skills are located in `.agents/skills/spec-*/SKILL.md` (or agent-specific paths like `.claude/skills/`, `.opencode/skills/`, etc.)
 - Each skill is a directory with a `SKILL.md` file
 - Skills run inline with access to conversation context
 - Skills may delegate parallel research to subagents for efficiency
 - Additional files (templates, examples) can be added to skill directories
-- `kiro-review` — task-local adversarial review protocol used by reviewer subagents
-- `kiro-debug` — root-cause-first debug protocol used by debugger subagents
-- `kiro-verify-completion` — fresh-evidence gate before success or completion claims
-- `kiro-trace` — trace spec changes to code impact (requires `.trace-mapping.yaml`)
-- `kiro-impact` — trace code changes back to affected specs
-- `kiro-validate-boundary` — mechanically verify `_Boundary:_` against CRG code graph
+- `spec-review` — task-local adversarial review protocol used by reviewer subagents
+- `spec-debug` — root-cause-first debug protocol used by debugger subagents
+- `spec-verify-completion` — fresh-evidence gate before success or completion claims
+- `spec-trace` — trace spec changes to code impact (requires `.trace-mapping.yaml`)
+- `spec-impact` — trace code changes back to affected specs
+- `spec-validate-boundary` — mechanically verify `_Boundary:_` against CRG code graph
 - **CRG MCP tools** (code-review-graph) are used by design, review, validation, and debug skills for code-graph-aware impact analysis
 - **Traceability**: Projects with `.trace-mapping.yaml` get automated impact analysis via `.agents/scripts/impact.py` and drift detection via `.agents/scripts/check_drift.py`
 - **If there is even a 1% chance a skill applies to the current task, invoke it.** Do not skip skills because the task seems simple.
@@ -60,10 +60,10 @@ Skills are located in `.agents/skills/kiro-*/SKILL.md` (or agent-specific paths 
 ## Development Rules
 - 3-phase approval workflow: Requirements → Design → Tasks → Implementation
 - Human review required each phase; use `-y` only for intentional fast-track
-- Keep steering current and verify alignment with `/kiro-spec-status`
+- Keep steering current and verify alignment with `/spec-status`
 - Follow the user's instructions precisely, and within that scope act autonomously: gather the necessary context and complete the requested work end-to-end in this run, asking questions only when essential information is missing or the instructions are critically ambiguous.
 
 ## Steering Configuration
-- Load entire `.kiro/steering/` as project memory
+- Load entire `.spec/steering/` as project memory
 - Default files: `product.md`, `tech.md`, `structure.md`
-- Custom files are supported (managed via `/kiro-steering-custom`)
+- Custom files are supported (managed via `/spec-steering-custom`)

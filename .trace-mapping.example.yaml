@@ -12,8 +12,8 @@
 #   5. python3 .agents/scripts/check_drift.py --snapshot でベースライン保存
 #
 # 自動生成:
-#   /kiro-spec-batch が spec 生成時にスケルトンを作成
-#   /kiro-impl が実装完了後に extract_tags.py を呼び出して更新
+#   /spec-batch が spec 生成時にスケルトンを作成
+#   /spec-impl が実装完了後に extract_tags.py を呼び出して更新
 #   手動追加: python3 .agents/scripts/extract_tags.py --trace-mapping
 
 mappings:
@@ -21,31 +21,31 @@ mappings:
   # id は requirements.md の要件見出し番号と一致させる
   - id: "1.1"
     description: "要件の説明（1行）"
-    spec: .kiro/specs/{feature}/requirements.md#要件-1
-    design: .kiro/specs/{feature}/design.md#ComponentName
+    spec: .spec/specs/{feature}/requirements.md#要件-1
+    design: .spec/specs/{feature}/design.md#ComponentName
     code:
       files:
         - src/feature/file.py
       symbols:
         - ClassName.method_name
     tasks:
-      - .kiro/specs/{feature}/tasks.md#X.Y
+      - .spec/specs/{feature}/tasks.md#X.Y
     docs:
-      - .kiro/specs/{feature}/design.md#ComponentName
+      - .spec/specs/{feature}/design.md#ComponentName
     tags: ["@impl"]
 
   # ── モジュールレベルのマッピング（アーキテクチャ検証用） ──
   - id: "module-{name}"
     description: "モジュールの説明"
-    spec: .kiro/specs/{feature}/requirements.md
-    design: .kiro/specs/{feature}/design.md#{module}
+    spec: .spec/specs/{feature}/requirements.md
+    design: .spec/specs/{feature}/design.md#{module}
     code:
       files:
         - src/{module}/**/*.py
       symbols:
         - ModuleClass
     docs:
-      - .kiro/specs/{feature}/design.md#{module}
+      - .spec/specs/{feature}/design.md#{module}
     tags: ["@module"]
 
 # 参考: コード内のタグ記法

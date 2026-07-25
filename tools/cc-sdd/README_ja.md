@@ -10,19 +10,19 @@
 
 **承認済みの仕様を、長時間でも壊れない自律実装ワークフローに変える。** ワンコマンドで agentic SDLC ワークフローを Agent Skills として導入する: discovery, requirements, design, tasks, そしてタスクごとの independent review 付きの自律実装。8 つの AI coding agent に対応、同じ 17-skill セットで動作する。
 
-👻 **Kiro スタイル。** Kiro IDE の spec-driven / agentic SDLC スタイル。既存の Kiro 仕様書もそのまま使える。
+👻 **Spec スタイル。** Spec IDE の spec-driven / agentic SDLC スタイル。既存の Spec 仕様書もそのまま使える。
 
 ## v3.0 の新機能
 
 cc-sdd v3.0 は Agent Skills と長時間自律実装を軸にした再構築である。
 
-- **`/kiro-discovery` が新しいエントリポイント。** discovery が新規依頼を「既存 spec を拡張 / spec 不要で直接実装 / 1 つの新規 spec / 複数 spec に分解 / mixed decomposition」に振り分ける。`brief.md` と必要に応じて `roadmap.md` を書き出すので、セッションを再開しても scope を説明し直さずに続けられる。
-- **`/kiro-impl` による長時間自律実装。** 各タスクに対し fresh implementer が feature flag 越しに TDD (RED → GREEN) で実装、独立した reviewer が機械的検証、失敗時は auto-debug pass が新しいコンテキストで根本原因を調査する。タスク間の知見は `tasks.md` の `## Implementation Notes` で次の implementer に引き継がれる。1 iteration = 1 task、中断後の再実行も安全。
+- **`/spec-discovery` が新しいエントリポイント。** discovery が新規依頼を「既存 spec を拡張 / spec 不要で直接実装 / 1 つの新規 spec / 複数 spec に分解 / mixed decomposition」に振り分ける。`brief.md` と必要に応じて `roadmap.md` を書き出すので、セッションを再開しても scope を説明し直さずに続けられる。
+- **`/spec-impl` による長時間自律実装。** 各タスクに対し fresh implementer が feature flag 越しに TDD (RED → GREEN) で実装、独立した reviewer が機械的検証、失敗時は auto-debug pass が新しいコンテキストで根本原因を調査する。タスク間の知見は `tasks.md` の `## Implementation Notes` で次の implementer に引き継がれる。1 iteration = 1 task、中断後の再実行も安全。
 - **境界中心の spec discipline。** `design.md` に File Structure Plan が入り、タスク境界の根拠になる。タスクには `_Boundary:_` / `_Depends:_` アノテーションが付く。review と validation はスタイルではなく境界違反を見る。
-- **`/kiro-spec-batch` で複数 spec の並列作成。** roadmap から複数 spec を並列生成し、cross-spec review で矛盾・責務重複・インターフェースミスマッチを検出する。
+- **`/spec-batch` で複数 spec の並列作成。** roadmap から複数 spec を並列生成し、cross-spec review で矛盾・責務重複・インターフェースミスマッチを検出する。
 - **8 つの AI coding agent で Agent Skills を展開。** 17 skills × 8 プラットフォーム、on-demand ロード (progressive disclosure)。Claude Code と Codex は stable、Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, Antigravity は beta。外部依存なし、subagent は各プラットフォーム標準の spawn で立ち上がる。
 
-Skills モードのワークフローと `/kiro-impl` 内部の詳細は [スキルリファレンス](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/skill-reference.md) を参照。
+Skills モードのワークフローと `/spec-impl` 内部の詳細は [スキルリファレンス](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/skill-reference.md) を参照。
 
 v1.x / v2.x からの移行は [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md#5-v2x--v30) を参照。
 
@@ -61,9 +61,9 @@ bash .agents/scripts/setup-crg.sh
 ```
 
 これにより以下が有効になります:
-- `/kiro-trace <spec-id>` — 仕様変更がコードに与える影響をトレース
-- `/kiro-impact <file>` — コード変更が仕様に与える影響をトレース
-- `/kiro-validate-boundary` — `_Boundary:_` とコードグラフを機械検証
+- `/spec-trace <spec-id>` — 仕様変更がコードに与える影響をトレース
+- `/spec-impact <file>` — コード変更が仕様に与える影響をトレース
+- `/spec-validate-boundary` — `_Boundary:_` とコードグラフを機械検証
 - CRG 強化された設計レビュー、ギャップ分析、完了検証など（全15スキル）
 - pre-commit hook によるコミット時の自動スナップショット更新
 
@@ -72,36 +72,36 @@ bash .agents/scripts/setup-crg.sh
 その後、エージェント上で:
 
 ```bash
-/kiro-discovery <やりたいこと>
+/spec-discovery <やりたいこと>
 ```
 
-どこから始めれば良いか分からない場合は、まず `kiro-discovery` を実行する。依頼を整理して、次に叩くコマンドを教えてくれる。
+どこから始めれば良いか分からない場合は、まず `spec-discovery` を実行する。依頼を整理して、次に叩くコマンドを教えてくれる。
 
 ### よくあるワークフロー
 
 | やりたいこと | Skills モード |
 |---|---|
-| 新しい機能やプロダクトサイズの構想を始める | `kiro-discovery` → `kiro-spec-init` → `kiro-spec-requirements` → `kiro-spec-design` → `kiro-spec-tasks` → `kiro-impl` |
-| 既存のシステムを拡張する | `kiro-steering` → `kiro-discovery` または `kiro-spec-init` → 任意で `kiro-validate-gap` → `kiro-spec-design` → `kiro-spec-tasks` → `kiro-impl` |
-| 大きい initiative を分解する | `kiro-discovery` → `kiro-spec-batch` |
-| spec 不要の小変更を入れる | `kiro-discovery` → 直接実装 |
+| 新しい機能やプロダクトサイズの構想を始める | `spec-discovery` → `spec-init` → `spec-requirements` → `spec-design` → `spec-tasks` → `spec-impl` |
+| 既存のシステムを拡張する | `spec-steering` → `spec-discovery` または `spec-init` → 任意で `spec-validate-gap` → `spec-design` → `spec-tasks` → `spec-impl` |
+| 大きい initiative を分解する | `spec-discovery` → `spec-batch` |
+| spec 不要の小変更を入れる | `spec-discovery` → 直接実装 |
 
-レガシーの `/kiro:*` コマンドモード (`--claude`, `--cursor` など) も引き続き利用可能だが、非推奨である。アップグレード手順は [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md) を参照。
+レガシーの `/spec:*` コマンドモード (`--claude`, `--cursor` など) も引き続き利用可能だが、非推奨である。アップグレード手順は [Migration Guide](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md) を参照。
 
-規模の大きい承認済み task set に対しては、`kiro-impl` を走らせるとタスクごとの subagent spawn、independent review、失敗時の auto-debug 付きで自律実装が始まる。
+規模の大きい承認済み task set に対しては、`spec-impl` を走らせるとタスクごとの subagent spawn、independent review、失敗時の auto-debug 付きで自律実装が始まる。
 
 ## 実際の動き
 
 例: 新規の Photo Albums 機能を作る。
 
 ```bash
-/kiro-discovery Photo albums with upload, tagging, and sharing
+/spec-discovery Photo albums with upload, tagging, and sharing
 # discovery が brief.md（マルチスペックなら roadmap.md も）を書いて、次のコマンドを提案する
-/kiro-spec-init photo-albums
-/kiro-spec-requirements photo-albums
-/kiro-spec-design photo-albums
-/kiro-spec-tasks photo-albums
-/kiro-impl photo-albums
+/spec-init photo-albums
+/spec-requirements photo-albums
+/spec-design photo-albums
+/spec-tasks photo-albums
+/spec-impl photo-albums
 # 自律実行: タスクごとに fresh implementer, independent reviewer, auto-debug
 ```
 
@@ -111,7 +111,7 @@ spec フェーズの典型的な出力（10 分以内）:
 - `design.md`: Mermaid 図と File Structure Plan 付きアーキテクチャ。
 - `tasks.md`: 境界と依存関係のアノテーション付き実装タスク。
 
-その後 `/kiro-impl` が feature flag 越しの TDD (RED → GREEN), 独立した reviewer pass, 失敗時の auto-debug と共にタスクを自律実行する。
+その後 `/spec-impl` が feature flag 越しの TDD (RED → GREEN), 独立した reviewer pass, 失敗時の auto-debug と共にタスクを自律実行する。
 
 ## 対応エージェント
 
@@ -162,12 +162,12 @@ npx github:nekolife1984/spectra --qwen          # Qwen Code
 npx github:nekolife1984/spectra --dry-run --backup
 
 # カスタム specs ディレクトリ
-npx github:nekolife1984/spectra --kiro-dir docs
+npx github:nekolife1984/spectra --spec-dir docs
 ```
 
 ## カスタマイズ
 
-`{{KIRO_DIR}}/settings/` 以下のテンプレートとルールを編集して、チームのワークフローに合わせる。
+`{{SPEC_DIR}}/settings/` 以下のテンプレートとルールを編集して、チームのワークフローに合わせる。
 
 - `templates/`: requirements, design, tasks のドキュメント構造。
 - `rules/`: AI の生成原則と判断基準。
@@ -192,14 +192,14 @@ project/
 ├── .gemini/skills/           # 17 skills（Gemini CLI Skills）
 ├── .agent/skills/            # 17 skills（Antigravity Skills）
 # レガシーコマンドモード（非推奨）
-├── .claude/commands/kiro/    # 11 スラッシュコマンド（--claude）
+├── .claude/commands/spec/    # 11 スラッシュコマンド（--claude）
 ├── .github/prompts/          # 11 プロンプトコマンド（--copilot）
 ├── .windsurf/workflows/      # 11 ワークフローファイル（--windsurf）
 # プロジェクトメモリと spec 状態（共通）
-├── .kiro/settings/templates/ # 共通テンプレート（{{KIRO_DIR}} を展開）
-├── .kiro/settings/rules/     # 共通ルール（非 skills エージェントが使用）
-├── .kiro/specs/              # 機能仕様書
-├── .kiro/steering/           # AI 指導ドキュメント
+├── .spec/settings/templates/ # 共通テンプレート（{{SPEC_DIR}} を展開）
+├── .spec/settings/rules/     # 共通ルール（非 skills エージェントが使用）
+├── .spec/specs/              # 機能仕様書
+├── .spec/steering/           # AI 指導ドキュメント
 └── CLAUDE.md / AGENTS.md     # プロジェクト設定（エージェントごと）
 ```
 
@@ -215,7 +215,7 @@ project/
 - Claude Subagents ガイド: [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/claude-subagents.md) | [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/claude-subagents.md)
 - マイグレーションガイド: [日本語](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/ja/migration-guide.md) | [English](https://github.com/gotalab/cc-sdd/blob/main/docs/guides/migration-guide.md)
 - [Issues & サポート](https://github.com/gotalab/cc-sdd/issues) - バグ報告と質問
-- [Kiro IDE](https://kiro.dev)
+- [Spec IDE](https://kiro.dev)
 
 ---
 

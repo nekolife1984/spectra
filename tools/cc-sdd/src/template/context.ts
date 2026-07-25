@@ -1,18 +1,18 @@
-import { resolveKiroDir, type KiroDirOptions } from '../resolvers/kiroDir.js';
+import { resolveSpecDir, type SpecDirOptions } from '../resolvers/specDir.js';
 import { resolveAgentLayout, type AgentLayout, type AgentType, type CCSddConfig } from '../resolvers/agentLayout.js';
 import type { SupportedLanguage } from '../constants/languages.js';
 
 export interface BuildTemplateContextOptions {
   agent: AgentType;
   lang: SupportedLanguage;
-  kiroDir?: KiroDirOptions;
+  specDir?: SpecDirOptions;
   config?: CCSddConfig;
 }
 
 export type TemplateContext = {
   LANG_CODE: string;
   DEV_GUIDELINES: string;
-  KIRO_DIR: string;
+  SPEC_DIR: string;
   AGENT_DIR: string;
   AGENT_DOC: string;
   AGENT_COMMANDS_DIR: string;
@@ -39,19 +39,19 @@ export const getDevGuidelines = (lang: SupportedLanguage): string => guidelinesM
 
 export const createTemplateContext = (
   lang: SupportedLanguage,
-  kiroDir: string,
+  specDir: string,
   layout: AgentLayout,
 ): TemplateContext => ({
   LANG_CODE: lang,
   DEV_GUIDELINES: getDevGuidelines(lang),
-  KIRO_DIR: kiroDir,
+  SPEC_DIR: specDir,
   AGENT_DIR: layout.agentDir,
   AGENT_DOC: layout.docFile,
   AGENT_COMMANDS_DIR: layout.commandsDir,
 });
 
 export const buildTemplateContext = (opts: BuildTemplateContextOptions): TemplateContext => {
-  const kiro = resolveKiroDir(opts.kiroDir ?? {});
+  const spec = resolveSpecDir(opts.specDir ?? {});
   const layout = resolveAgentLayout(opts.agent, opts.config);
-  return createTemplateContext(opts.lang, kiro, layout);
+  return createTemplateContext(opts.lang, spec, layout);
 };

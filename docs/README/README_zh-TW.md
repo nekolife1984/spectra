@@ -11,9 +11,9 @@
 > [!警告]
 > 這是初始版本，將隨著使用逐步改進
 
-支援 Claude Code、Cursor、Gemini CLI 及 Codex CLI 四大平台的規格驅動開發工具組。本專案在多個 AI 開發平台上重現了 Kiro IDE 的規格驅動開發流程。
+支援 Claude Code、Cursor、Gemini CLI 及 Codex CLI 四大平台的規格驅動開發工具組。本專案在多個 AI 開發平台上重現了 Spec IDE 的規格驅動開發流程。
 
-**與 Kiro IDE 高度相容** — 無縫運用現有 Kiro SDD 規格、工作流程及目錄結構。
+**與 Spec IDE 高度相容** — 無縫運用現有 Spec SDD 規格、工作流程及目錄結構。
 
 ## 專案簡介
 
@@ -31,7 +31,7 @@
 - **🔮 Cursor**：`.cursor/commands/` - Cursor 指令定義  
 - **⚡ Gemini CLI**：`.gemini/commands/` - TOML 配置檔案
 - **🐙 GitHub Copilot**：`.github/prompts/` - Copilot 提示集合
-- **🔧 Qwen Code**：`.qwen/commands/kiro/` - Qwen Code 指令定義
+- **🔧 Qwen Code**：`.qwen/commands/spec/` - Qwen Code 指令定義
 - **🌊 Windsurf IDE**：`.windsurf/workflows/` - Windsurf 工作流程
 
 #### 通用配置檔案
@@ -44,10 +44,10 @@
 3. **執行初始指令**（各平台通用）：
    ```bash
    # 選用：建立 steering 文件
-   /kiro:steering
+   /spec:steering
    
    # 建立第一個功能規格
-   /kiro:spec-init "請詳細描述你的專案"
+   /spec:spec-init "請詳細描述你的專案"
    ```
 
 ### 必要目錄結構
@@ -56,14 +56,14 @@
 
 ```
 your-project/
-├── .claude/commands/kiro/   # Claude Code 指令定義
+├── .claude/commands/spec/   # Claude Code 指令定義
 ├── .codex/prompts/          # Codex CLI 提示定義
-├── .cursor/commands/kiro/   # Cursor 指令定義
-├── .gemini/commands/kiro/   # Gemini CLI 設定
+├── .cursor/commands/spec/   # Cursor 指令定義
+├── .gemini/commands/spec/   # Gemini CLI 設定
 ├── .github/prompts/         # GitHub Copilot 提示集合
-├── .qwen/commands/kiro/     # Qwen Code 指令定義
+├── .qwen/commands/spec/     # Qwen Code 指令定義
 ├── .windsurf/workflows/     # Windsurf 工作流程
-├── .kiro/
+├── .spec/
 │   ├── steering/            # 自動產生的 steering 文件
 │   └── specs/               # 自動產生的功能規格
 ├── CLAUDE.md                # 由語言別檔案複製並改名
@@ -76,24 +76,24 @@ your-project/
 
 ```bash
 # 選用：產生 steering 文件（建議但非必須）
-/kiro:steering
+/spec:steering
 
 # 步驟1：建立新功能規格（請詳細描述需求）
-/kiro:spec-init "我想建立一個讓使用者上傳 PDF，從中擷取圖表並由 AI 解釋內容的功能。技術棧：Next.js、TypeScript、Tailwind CSS。"
+/spec:spec-init "我想建立一個讓使用者上傳 PDF，從中擷取圖表並由 AI 解釋內容的功能。技術棧：Next.js、TypeScript、Tailwind CSS。"
 
 # 步驟2：需求定義（使用自動產生的功能名稱）
-/kiro:spec-requirements pdf-diagram-extractor
-# → 編輯 .kiro/specs/pdf-diagram-extractor/requirements.md
+/spec:spec-requirements pdf-diagram-extractor
+# → 編輯 .spec/specs/pdf-diagram-extractor/requirements.md
 
 # 步驟3：技術設計（互動式核准）
-/kiro:spec-design pdf-diagram-extractor
+/spec:spec-design pdf-diagram-extractor
 # → 回應「您已檢閱 requirements.md 了嗎？ [y/N]」
-# → 編輯 .kiro/specs/pdf-diagram-extractor/design.md
+# → 編輯 .spec/specs/pdf-diagram-extractor/design.md
 
 # 步驟4：產生實作任務（互動式核准）
-/kiro:spec-tasks pdf-diagram-extractor
+/spec:spec-tasks pdf-diagram-extractor
 # → 回應 requirements 與 design 的檢閱確認
-# → 編輯 .kiro/specs/pdf-diagram-extractor/tasks.md
+# → 編輯 .spec/specs/pdf-diagram-extractor/tasks.md
 
 # 步驟5：開始實作
 ```
@@ -103,10 +103,10 @@ your-project/
 ```bash
 # 選用：建立或更新 steering
 # 同一指令可處理新建與更新
-/kiro:steering
+/spec:steering
 
 # 步驟1：建立新功能規格
-/kiro:spec-init "請詳細描述新功能"
+/spec:spec-init "請詳細描述新功能"
 # 後續步驟同新專案
 ```
 
@@ -114,7 +114,7 @@ your-project/
 
 ```bash
 # 查詢特定功能進度
-/kiro:spec-status my-feature
+/spec:spec-status my-feature
 
 # 顯示目前階段、審核狀態與任務進度
 ```
@@ -130,25 +130,25 @@ your-project/
 ```mermaid
 graph TD
     A["專案開始"] --> B{"建立<br/>Steering？"}
-    B -->|是| C["/kiro:steering"]
-    B -->|否| D["/kiro:spec-init"]
+    B -->|是| C["/spec:steering"]
+    B -->|否| D["/spec:spec-init"]
     C --> D
     
-    D --> E["/kiro:spec-requirements"]
+    D --> E["/spec:spec-requirements"]
     E --> F["requirements.md"]
     F --> G{"滿意？"}
     G -->|否| G1["編輯修正"]
     G1 --> F
     G -->|是| H["進入下階段"]
     
-    H --> I["/kiro:spec-design"]
+    H --> I["/spec:spec-design"]
     I --> J["design.md"]
     J --> K{"滿意？"}
     K -->|否| K1["編輯修正"]
     K1 --> J
     K -->|是| L["進入下階段"]
     
-    L --> M["/kiro:spec-tasks"]
+    L --> M["/spec:spec-tasks"]
     M --> N["tasks.md"]
     N --> O{"滿意？"}
     O -->|否| O1["編輯修正"]
@@ -156,13 +156,13 @@ graph TD
     O -->|是| P["準備實作"]
     
     P --> Q["開始實作"]
-    Q --> R["/kiro:spec-status"]
+    Q --> R["/spec:spec-status"]
     R --> S{"完成？"}
     S -->|否| Q
     S -->|是| T["功能完成"]
     
     T --> U{"更新<br/>Steering？"}
-    U -->|是| V["/kiro:steering"]
+    U -->|是| V["/spec:steering"]
     U -->|否| W["結束"]
     V --> W
     
@@ -192,8 +192,8 @@ graph TD
 
 | 指令 | 目的 | 使用時機 |
 |------|------|----------|
-| `/kiro:steering` | 智慧建立或更新 steering 文件 | 所有情況（新建和更新） |
-| `/kiro:steering-custom` | 建立自訂 steering 文件 | 需特殊規範或指引時 |
+| `/spec:steering` | 智慧建立或更新 steering 文件 | 所有情況（新建和更新） |
+| `/spec:steering-custom` | 建立自訂 steering 文件 | 需特殊規範或指引時 |
 
 **備註**：Steering 文件建議建立，但非強制。小型功能或實驗性開發可省略。
 
@@ -207,16 +207,16 @@ graph TD
 
 | 指令 | 目的 | 使用時機 |
 |------|------|----------|
-| `/kiro:spec-init [詳細專案描述]` | 根據描述初始化規格結構 | 新功能開發啟動時 |
-| `/kiro:spec-requirements [功能名稱]` | 產生需求文件 | 規格初始化後立即執行 |
-| `/kiro:spec-design [功能名稱]` | 產生技術設計文件 | 需求審核通過後 |
-| `/kiro:spec-tasks [功能名稱]` | 產生實作任務 | 設計審核通過後 |
+| `/spec:spec-init [詳細專案描述]` | 根據描述初始化規格結構 | 新功能開發啟動時 |
+| `/spec:spec-requirements [功能名稱]` | 產生需求文件 | 規格初始化後立即執行 |
+| `/spec:spec-design [功能名稱]` | 產生技術設計文件 | 需求審核通過後 |
+| `/spec:spec-tasks [功能名稱]` | 產生實作任務 | 設計審核通過後 |
 
 ### 📊 階段2：進度管理
 
 | 指令 | 目的 | 使用時機 |
 |------|------|----------|
-| `/kiro:spec-status [功能名稱]` | 查詢目前進度與階段 | 開發過程中定期查詢 |
+| `/spec:spec-status [功能名稱]` | 查詢目前進度與階段 | 開發過程中定期查詢 |
 
 ## 三階段審核流程
 
@@ -228,13 +228,13 @@ sequenceDiagram
     participant C as Claude Code
     participant H as 人工審核者
     
-    D->>C: "/kiro:spec-requirements feature"
+    D->>C: "/spec:spec-requirements feature"
     C->>C: "產生需求文件"
     C->>D: "requirements.md"
     D->>H: "請求審核"
     H->>H: "審查與編輯"
     
-    D->>C: "/kiro:spec-design feature"
+    D->>C: "/spec:spec-design feature"
     C->>D: "檢閱確認：您已檢閱 requirements.md 了嗎？"
     D->>C: "y"
     C->>C: "根據需求產生設計"
@@ -242,7 +242,7 @@ sequenceDiagram
     D->>H: "請求審核"
     H->>H: "審查與編輯"
     
-    D->>C: "/kiro:spec-tasks feature"
+    D->>C: "/spec:spec-tasks feature"
     C->>D: "檢閱確認：requirements/design 確認"
     D->>C: "y"
     C->>C: "根據設計產生任務"
@@ -258,7 +258,7 @@ sequenceDiagram
 ### ✅ 建議事項
 
 1. **務必從 steering 開始**
-   - 所有情況都使用 `/kiro:steering`（智慧處理新建和更新）
+   - 所有情況都使用 `/spec:steering`（智慧處理新建和更新）
    - 統一指令會適當保護現有文件並妥善處理
 
 2. **不可跳過階段**
@@ -266,11 +266,11 @@ sequenceDiagram
    - 每階段都需人工審核
 
 3. **定期檢查進度**
-   - 用 `/kiro:spec-status` 掌握現況
+   - 用 `/spec:spec-status` 掌握現況
    - 任務完成狀態要及時更新
 
 4. **維護 steering 文件**
-   - 重大變更後執行 `/kiro:steering`（自動判斷更新策略）
+   - 重大變更後執行 `/spec:steering`（自動判斷更新策略）
    - 隨專案成長持續更新
 
 ### ❌ 避免事項
@@ -290,7 +290,7 @@ sequenceDiagram
 .
 ├── .claude/
 │   └── commands/          # Slash 指令定義
-│       └── kiro/
+│       └── spec/
 │           ├── spec-init.md
 │           ├── spec-requirements.md
 │           ├── spec-design.md
@@ -298,7 +298,7 @@ sequenceDiagram
 │           ├── spec-status.md
 │           ├── steering.md          # 統一 steering 指令
 │           └── steering-custom.md
-├── .kiro/
+├── .spec/
 │   ├── steering/          # Steering 文件
 │   │   ├── product.md
 │   │   ├── tech.md
@@ -337,7 +337,7 @@ sequenceDiagram
 ### 卡在審核流程時
 1. 確認是否正確回應檢閱確認提示
 2. 確認前一階段已核准
-3. 用 `/kiro:spec-status` 診斷目前狀態
+3. 用 `/spec:spec-status` 診斷目前狀態
 4. 必要時手動檢查/編輯 spec.json
 
 ## 摘要

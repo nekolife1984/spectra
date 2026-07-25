@@ -57,17 +57,17 @@ describe('manifest planner glue', () => {
       version: 1,
       artifacts: [
         {
-          id: 'kiro_meta',
+          id: 'spec_meta',
           source: {
             type: 'templateFile' as const,
             from: 'templates/meta/config.tpl.json',
-            toDir: '{{KIRO_DIR}}',
+            toDir: '{{SPEC_DIR}}',
           },
         },
       ],
     };
     await writeFile(file, JSON.stringify(m), 'utf8');
-    const args = parseArgs(['--kiro-dir', '.work/kiro']);
+    const args = parseArgs(['--spec-dir', '.work/spec']);
     const resolved = mergeConfigAndArgs(args, {}, runtimeDarwin);
 
     const loaded = await loadManifest(file);
@@ -77,7 +77,7 @@ describe('manifest planner glue', () => {
     expect(plan).toHaveLength(1);
     const item = plan[0] as any;
     expect(item.source.type).toBe('templateFile');
-    expect(item.source.toDir).toBe('.work/kiro');
+    expect(item.source.toDir).toBe('.work/spec');
     expect(item.source.outFile).toBe('config.json');
   });
 

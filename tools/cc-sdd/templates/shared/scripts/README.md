@@ -234,7 +234,7 @@ CRG(code-review-graph)がなくても、`build-dag.py` で作成した軽量impo
 # DAGを構築（全ソースファイルのimport関係をスキャン）
 python3 .agents/scripts/build-dag.py
 
-# → .kiro/graph/dag.json が生成される
+# → .spec/graph/dag.json が生成される
 # → 対応言語: Python, TS/JS, Go, Rust, Ruby, Java, Kotlin, Swift,
 #                C, C++, C#, Cヘッダ（17言語）
 ```
@@ -271,7 +271,7 @@ python3 .agents/scripts/impact.py --quick --spec-id 1.1 --dag
 
 ```bash
 # プロジェクトにコピーして使う
-cp -r tools/cc-sdd/templates/shared/quality/ .kiro/quality/
+cp -r tools/cc-sdd/templates/shared/quality/ .spec/quality/
 ```
 
 | ファイル | 内容 |

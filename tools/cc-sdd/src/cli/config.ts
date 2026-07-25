@@ -3,7 +3,7 @@ import type { AgentType, AgentLayout, CCSddConfig } from '../resolvers/agentLayo
 import { resolveAgentLayout } from '../resolvers/agentLayout.js';
 import type { OSType } from '../resolvers/os.js';
 import { resolveOs } from '../resolvers/os.js';
-import { resolveKiroDir } from '../resolvers/kiroDir.js';
+import { resolveSpecDir } from '../resolvers/specDir.js';
 import type { SupportedLanguage } from '../constants/languages.js';
 
 export type OverwritePolicy = 'prompt' | 'skip' | 'force';
@@ -14,7 +14,7 @@ export type UserConfig = Partial<{
   os: 'auto' | OSType;
   resolvedOs: OSType;
   lang: SupportedLanguage;
-  kiroDir: string;
+  specDir: string;
   overwrite: OverwritePolicy;
   backupDir: string;
   agentLayouts: CCSddConfig['agentLayouts'];
@@ -25,7 +25,7 @@ export type ResolvedConfig = {
   os: 'auto' | OSType;
   resolvedOs: OSType;
   lang: SupportedLanguage;
-  kiroDir: string;
+  specDir: string;
   overwrite: OverwritePolicy;
   effectiveOverwrite: OverwritePolicy;
   dryRun: boolean;
@@ -39,7 +39,7 @@ const defaults = {
   agent: 'claude-code-skills' as AgentType,
   os: 'auto' as const,
   lang: 'en' as SupportedLanguage,
-  kiroDir: '.kiro',
+  specDir: '.spec',
   overwrite: 'prompt' as OverwritePolicy,
   backupDir: '.cc-sdd.backup',
 };
@@ -56,7 +56,7 @@ export const mergeConfigAndArgs = (
   const resolvedOs = resolveOs(osInput, runtime);
   const lang = (args.lang ?? config.lang ?? defaults.lang) as SupportedLanguage;
 
-  const kiroDir = resolveKiroDir({ flag: args.kiroDir, config: config.kiroDir });
+  const specDir = resolveSpecDir({ flag: args.specDir, config: config.specDir });
 
   const overwrite: OverwritePolicy = (args.overwrite ?? config.overwrite ?? defaults.overwrite) as OverwritePolicy;
   const yes = !!args.yes;
@@ -80,7 +80,7 @@ export const mergeConfigAndArgs = (
     os: osInput,
     resolvedOs,
     lang,
-    kiroDir,
+    specDir,
     overwrite,
     effectiveOverwrite,
     dryRun,

@@ -4,5 +4,5 @@
 {{PROJECT_DESCRIPTION}}
 
 ## 要件
-<!-- /kiro-spec-requirements フェーズで生成されます -->
+<!-- /spec-requirements フェーズで生成されます -->
 

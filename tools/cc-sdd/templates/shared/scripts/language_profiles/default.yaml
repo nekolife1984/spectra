@@ -2,7 +2,7 @@
 # ==============================
 # 対応言語とパターンの定義。
 # カスタムプロファイルを作成するには:
-#   1. このファイルを .kiro/profiles/custom.yaml にコピー
+#   1. このファイルを .spec/profiles/custom.yaml にコピー
 #   2. 必要な言語を追加・編集
 #   3. .agents/scripts/language_profiles/ に配置すると自動読み込み
 #
@@ -71,7 +71,7 @@ builtin:
     - build
     - .artgraph
     - .trace
-    - .kiro
+    - .spec
     - bin
     - obj
     - .vs

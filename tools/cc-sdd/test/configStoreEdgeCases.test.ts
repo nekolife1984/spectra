@@ -68,7 +68,7 @@ describe('config store edge cases', () => {
       agent: 'gemini-cli',
       lang: 'zh-TW',
       os: 'linux',
-      kiroDir: 'docs/kiro',
+      specDir: 'docs/spec',
       overwrite: 'force',
       backupDir: 'backups',
       agentLayouts: {

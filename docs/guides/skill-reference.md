@@ -4,7 +4,7 @@
 
 Reference for the skills-mode workflow in cc-sdd. Use this guide when you installed a skills-mode agent such as `--claude-skills`, `--codex-skills`, `--cursor-skills`, `--copilot-skills`, `--windsurf-skills`, `--opencode-skills`, `--gemini-skills`, or `--antigravity`.
 
-If you are using legacy `/kiro:*` commands, use the [Command Reference](command-reference.md) instead.
+If you are using legacy `/spec:*` commands, use the [Command Reference](command-reference.md) instead.
 
 ## Start Here
 
@@ -12,16 +12,16 @@ Use this table when you are deciding which skill to run first.
 
 | You want to... | Start with | Typical next step |
 | --- | --- | --- |
-| Route a new request | `/kiro-discovery` | `kiro-spec-init`, `kiro-spec-batch`, or direct implementation |
-| Create one new spec | `/kiro-spec-init` | `/kiro-spec-requirements` |
-| Create many specs from one initiative | `/kiro-spec-batch` | Review generated specs, then `/kiro-impl` on the approved one(s) |
-| Implement approved tasks | `/kiro-impl` | `/kiro-validate-impl` |
-| Validate feature integration | `/kiro-validate-impl` | Fix findings or report `GO` / `NO-GO` / `MANUAL_VERIFY_REQUIRED` |
-| Capture project memory | `/kiro-steering` or `/kiro-steering-custom` | Start or resume spec work |
+| Route a new request | `/spec-discovery` | `spec-init`, `spec-batch`, or direct implementation |
+| Create one new spec | `/spec-init` | `/spec-requirements` |
+| Create many specs from one initiative | `/spec-batch` | Review generated specs, then `/spec-impl` on the approved one(s) |
+| Implement approved tasks | `/spec-impl` | `/spec-validate-impl` |
+| Validate feature integration | `/spec-validate-impl` | Fix findings or report `GO` / `NO-GO` / `MANUAL_VERIFY_REQUIRED` |
+| Capture project memory | `/spec-steering` or `/spec-steering-custom` | Start or resume spec work |
 
 ## Workflow Skills
 
-### `/kiro-discovery`
+### `/spec-discovery`
 
 Use when you have new work but do not yet know whether it should become one spec, multiple specs, or no spec at all.
 
@@ -36,7 +36,7 @@ Use when you have new work but do not yet know whether it should become one spec
   - create one new spec
   - decompose into multiple specs
 
-### `/kiro-spec-batch`
+### `/spec-batch`
 
 Use when discovery or a roadmap already tells you the work should be split into multiple specs.
 
@@ -48,7 +48,7 @@ Use when discovery or a roadmap already tells you the work should be split into 
   - review the generated specs
   - continue with the approved spec(s)
 
-### `/kiro-impl`
+### `/spec-impl`
 
 Use when `tasks.md` is approved and you want to execute implementation.
 
@@ -57,10 +57,10 @@ Use when `tasks.md` is approved and you want to execute implementation.
   - manual mode: task args provided, TDD in main context with review gate
 - Guarantees:
   - reviewer approval before completion
-  - `kiro-verify-completion` before success claims
+  - `spec-verify-completion` before success claims
   - bounded remediation and debug loops
 
-### `/kiro-validate-impl`
+### `/spec-validate-impl`
 
 Use after implementation when you need feature-level validation across tasks.
 
@@ -76,9 +76,9 @@ Use after implementation when you need feature-level validation across tasks.
 
 ## Supporting Skills
 
-These are real skills, but many users meet them indirectly through `/kiro-impl`.
+These are real skills, but many users meet them indirectly through `/spec-impl`.
 
-### `kiro-review`
+### `spec-review`
 
 Task-local adversarial review protocol.
 
@@ -91,7 +91,7 @@ Task-local adversarial review protocol.
   - mechanical verification
   - RED-phase evidence where required
 
-### `kiro-debug`
+### `spec-debug`
 
 Root-cause-first debug protocol.
 
@@ -105,7 +105,7 @@ Root-cause-first debug protocol.
   - `FIX_PLAN`
   - `NEXT_ACTION`
 
-### `kiro-verify-completion`
+### `spec-verify-completion`
 
 Fresh-evidence gate before success claims.
 
@@ -118,25 +118,25 @@ Fresh-evidence gate before success claims.
   - `NOT_VERIFIED`
   - `MANUAL_VERIFY_REQUIRED`
 
-## Inside `/kiro-impl`: Dispatch and Iteration
+## Inside `/spec-impl`: Dispatch and Iteration
 
-Most of the "what is a subagent here?" question lives inside `/kiro-impl`. Unlike the legacy `--claude-agent` install target, skills mode does not rely on pre-defined subagent files under `.claude/agents/kiro/`. Implementation dispatch is owned by the skill itself.
+Most of the "what is a subagent here?" question lives inside `/spec-impl`. Unlike the legacy `--claude-agent` install target, skills mode does not rely on pre-defined subagent files under `.claude/agents/spec/`. Implementation dispatch is owned by the skill itself.
 
 ### Dynamic dispatch, not static agent files
 
 - There is no `tdd-task-implementer.md` or similar file under `.claude/agents/`.
-- `/kiro-impl` spawns fresh execution contexts on demand through each platform's native subagent primitive (for example, Claude Code's Task tool), using prompt templates kept under the skill.
-- This is what lets the same `/kiro-impl` skill work across Claude Code, Codex, Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, and Antigravity without maintaining a separate agent file per platform.
+- `/spec-impl` spawns fresh execution contexts on demand through each platform's native subagent primitive (for example, Claude Code's Task tool), using prompt templates kept under the skill.
+- This is what lets the same `/spec-impl` skill work across Claude Code, Codex, Cursor, Copilot, Windsurf, OpenCode, Gemini CLI, and Antigravity without maintaining a separate agent file per platform.
 
 ### Per-task role trio
 
-Each task may involve up to three roles dispatched by `/kiro-impl`:
+Each task may involve up to three roles dispatched by `/spec-impl`:
 
 - **Implementer** — fresh execution context that builds a Task Brief from the spec, then implements with TDD (RED → GREEN under the Feature Flag Protocol).
 - **Reviewer** — independent pass that runs `git diff`, greps for TODOs, runs the test suite, and checks task-boundary compliance.
 - **Debugger** — triggered when the implementer is BLOCKED, or when the reviewer rejects after 2 remediation rounds. Investigates root causes in a clean context (with web search), produces a fix plan, and hands off to a new implementer. Max 2 debug rounds per task.
 
-These three roles correspond to the three supporting skills above (`kiro-review`, `kiro-debug`, `kiro-verify-completion`). The dispatch is dynamic — no file under `.claude/agents/` needs to exist.
+These three roles correspond to the three supporting skills above (`spec-review`, `spec-debug`, `spec-verify-completion`). The dispatch is dynamic — no file under `.claude/agents/` needs to exist.
 
 ### Learnings propagation
 
@@ -144,7 +144,7 @@ When a task reveals cross-cutting insights (for example "better-sqlite3 needs El
 
 ### 1 task per iteration
 
-Each iteration processes a single task. This keeps context hygiene across long autonomous runs, makes `/kiro-impl` safe to re-run after interruption, and bounds the scope of review and debug passes.
+Each iteration processes a single task. This keeps context hygiene across long autonomous runs, makes `/spec-impl` safe to re-run after interruption, and bounds the scope of review and debug passes.
 
 ## Skills mode vs `--claude-agent`
 
@@ -152,11 +152,11 @@ Skills mode and the legacy `--claude-agent` install target take fundamentally di
 
 | Concern | `--claude-agent` (legacy) | Skills mode |
 | --- | --- | --- |
-| Subagent definitions | Static `.claude/agents/kiro/*.md` files | Prompt templates inside skills, dispatched dynamically |
+| Subagent definitions | Static `.claude/agents/spec/*.md` files | Prompt templates inside skills, dispatched dynamically |
 | Cross-platform | Claude Code only | 8 platforms |
-| Spec generation (`spec-quick`) | Four-phase Subagent orchestration | Inline `kiro-spec-quick` skill that sequences the four spec skills |
-| Parallel spec batch | Not available | `/kiro-spec-batch` with cross-spec review |
-| Implementation | Manual via `/kiro:spec-impl` | Autonomous or manual via `/kiro-impl` |
+| Spec generation (`spec-quick`) | Four-phase Subagent orchestration | Inline `spec-quick` skill that sequences the four spec skills |
+| Parallel spec batch | Not available | `/spec-batch` with cross-spec review |
+| Implementation | Manual via `/spec:spec-impl` | Autonomous or manual via `/spec-impl` |
 | Review process | Manual or via `validate-impl` | Built-in independent reviewer pass |
 | Debug on failure | Not available | Auto debug pass (max 2 rounds) with web search |
 | Session resume | Start fresh | Safe to re-run after interruption |
@@ -166,20 +166,20 @@ For the `--claude-agent` details, see [Claude Code Subagents Workflow](claude-su
 
 ## Customizing skills-mode dispatch
 
-Because skills mode generates prompts dynamically, customization works differently than editing `.claude/agents/kiro/*.md` files.
+Because skills mode generates prompts dynamically, customization works differently than editing `.claude/agents/spec/*.md` files.
 
-1. **Steering documents** — the primary lever. Implementer and reviewer contexts inherit rules from steering, so update `{{KIRO_DIR}}/steering/*.md` for architecture and convention changes.
-2. **Templates and rules** — update `{{KIRO_DIR}}/settings/templates/*.md` and `{{KIRO_DIR}}/settings/rules/*.md` to influence the Task Brief and review criteria.
+1. **Steering documents** — the primary lever. Implementer and reviewer contexts inherit rules from steering, so update `{{SPEC_DIR}}/steering/*.md` for architecture and convention changes.
+2. **Templates and rules** — update `{{SPEC_DIR}}/settings/templates/*.md` and `{{SPEC_DIR}}/settings/rules/*.md` to influence the Task Brief and review criteria.
 3. **Skill files** — advanced users can edit the installed `SKILL.md` files under `.claude/skills/` (or the equivalent per platform) to adjust dispatch behaviour, review gates, or iteration strategy.
 
 ## Skills vs Commands
 
 | Area | Skills mode | Legacy commands |
 | --- | --- | --- |
-| New-work entry point | `/kiro-discovery` | none |
-| Multi-spec creation | `/kiro-spec-batch` | none |
-| Implementation | `/kiro-impl` | `/kiro:spec-impl` |
-| Integration validation | `/kiro-validate-impl` | `/kiro:validate-impl` |
+| New-work entry point | `/spec-discovery` | none |
+| Multi-spec creation | `/spec-batch` | none |
+| Implementation | `/spec-impl` | `/spec:spec-impl` |
+| Integration validation | `/spec-validate-impl` | `/spec:validate-impl` |
 | Review/debug/completion gates | explicit skills | embedded in command flow or external process |
 
 ## Recommended Reading Order

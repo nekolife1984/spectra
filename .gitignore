@@ -75,9 +75,9 @@ coverage/
 # Project specific
 BLOG.md
 docs/cc-sdd/
-docs/kiro/prompt/
-docs/kiro/
-# .kiro/
+docs/spec/prompt/
+docs/spec/
+# .spec/
 # Agent configurations
 .claude/agents/
 .claude/hooks/
@@ -90,5 +90,5 @@ docs/kiro/
 # AGENTS.md
 
 # Local dev tooling (not part of the project)
-.entire/.kiro/graph/
-.kiro/graph/
+.entire/.spec/graph/
+.spec/graph/

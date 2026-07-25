@@ -39,7 +39,7 @@ npx cc-sdd@latest
 Patch release focused on safer filesystem handling in `cc-sdd`, plus a small follow-up fix for mojibake and English wording.
 
 ### Fixed
-- Fixed the mojibake in the Claude Code Skills `kiro-impl` template so the feature-flag protocol renders the `→` arrow correctly ([#154](https://github.com/gotalab/cc-sdd/pull/154))
+- Fixed the mojibake in the Claude Code Skills `spec-impl` template so the feature-flag protocol renders the `→` arrow correctly ([#154](https://github.com/gotalab/cc-sdd/pull/154))
 
 ### Security
 - Hardened manifest, template, and shared-rule path handling so generated file operations stay within their expected roots
@@ -64,16 +64,16 @@ npx cc-sdd@latest
 
 ### 🎯 Highlights
 - **Agent Skills as the primary workflow**: cc-sdd now centers on `--*-skills` installs and a unified 17-skill workflow across 8 platforms.
-- **Specs you can run**: `/kiro-discovery`, `/kiro-spec-batch`, and long-running autonomous `/kiro-impl` turn approved specs into an execution control plane, not just project documents.
+- **Specs you can run**: `/spec-discovery`, `/spec-batch`, and long-running autonomous `/spec-impl` turn approved specs into an execution control plane, not just project documents.
 - **Native subagent dispatch**: autonomous implementation, review, and debug loops now live inside cc-sdd without relying on the external Ralph Loop project.
 
 ### ✨ Added
 - Skills-based agents for Cursor, GitHub Copilot, OpenCode, Gemini CLI, Windsurf, and Antigravity, alongside upgraded Claude Code Skills and Codex Skills support ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 - New workflow entry points:
-  - `/kiro-discovery` for idea triage and roadmap routing
-  - `/kiro-spec-batch` for parallel multi-spec creation
-  - `/kiro-impl` for autonomous implementation with reviewer/debugger loops ([#141](https://github.com/gotalab/cc-sdd/pull/141))
-- New rules/templates for boundary-first planning, design synthesis, review gates, task decomposition, and steering customization under `.kiro/settings/` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+  - `/spec-discovery` for idea triage and roadmap routing
+  - `/spec-batch` for parallel multi-spec creation
+  - `/spec-impl` for autonomous implementation with reviewer/debugger loops ([#141](https://github.com/gotalab/cc-sdd/pull/141))
+- New rules/templates for boundary-first planning, design synthesis, review gates, task decomposition, and steering customization under `.spec/settings/` ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 - `cc-sdd-new-agent`, a SOP-style skill for adding or migrating supported agents ([#141](https://github.com/gotalab/cc-sdd/pull/141))
 
 ### 🔧 Changed
@@ -84,7 +84,7 @@ npx cc-sdd@latest
 ### ⚠️ Breaking / Migration Notes
 - Skills mode is now the primary path. Command-based installs remain deprecated and should be migrated to `--*-skills`.
 - `--codex` prompts mode is no longer supported; use `--codex-skills` instead.
-- If you previously relied on external Ralph Loop orchestration, move to the built-in `/kiro-impl` autonomous flow.
+- If you previously relied on external Ralph Loop orchestration, move to the built-in `/spec-impl` autonomous flow.
 
 ### 📖 Migration Guide
 - See [docs/guides/migration-guide.md](../guides/migration-guide.md) for upgrade guidance.
@@ -124,7 +124,7 @@ npx cc-sdd@latest
 
 ### ✨ Added
 - **OpenCode** ([#117](https://github.com/gotalab/cc-sdd/pull/117), [#127](https://github.com/gotalab/cc-sdd/pull/127))
-  - `.opencode/commands/` with all 11 kiro commands
+  - `.opencode/commands/` with all 11 spec commands
   - OpenCode Agents (subagent version) in `.opencode/agents/`
   - OPENCODE.md project memory template
   - Installation: `npx cc-sdd@latest --opencode` or `--opencode-agent`
@@ -213,11 +213,11 @@ Documentation-only release improving README clarity and visual consistency.
 ### Highlights at a Glance
 - **`npx cc-sdd@latest` = full stack SDD**: all alpha capabilities (research.md, validation commands, Subagents, Windsurf) are now GA.
 - **Spec-to-impl fidelity**: Research/Design/Tasks templates now enforce requirement IDs, component density rules, and Supporting References for long-form details.
-- **Brownfield guardrails**: `/kiro:validate-*` commands, parallel-task analysis, and steering-wide project memory reduce drift before any code change.
+- **Brownfield guardrails**: `/spec:validate-*` commands, parallel-task analysis, and steering-wide project memory reduce drift before any code change.
 - **Global parity**: 7 AI agents × 13 languages share the same templates, prompts, and installation flow.
 
 ### Upgrade Essentials
-1. Follow the [Migration Guide](../guides/migration-guide.md) for template layout changes (`.kiro/settings/templates/*`) and new steering behavior (directory-wide load).
+1. Follow the [Migration Guide](../guides/migration-guide.md) for template layout changes (`.spec/settings/templates/*`) and new steering behavior (directory-wide load).
 2. Update automation/scripts to call `npx cc-sdd@latest` (the `@next` tag is reserved for future previews).
 3. Regenerate steering + spec templates once to pick up Research.md, the new design rules, and tasks parallel markers.
 
@@ -266,7 +266,7 @@ Once your project templates are regenerated on v2.0.0, all spec/todo automation 
   - Project-specific rule examples
   - 7 practical customization examples
 - **Command Reference** ([#83](https://github.com/gotalab/cc-sdd/pull/83))
-  - Detailed usage for all 11 `/kiro:*` commands
+  - Detailed usage for all 11 `/spec:*` commands
   - Parameter descriptions and practical examples
 
 ### 🔧 Improvements
@@ -295,7 +295,7 @@ Once your project templates are regenerated on v2.0.0, all spec/todo automation 
 ## 🚀 Ver 2.0.0-alpha.3 (2025-10-22)
 
 ### 🎯 Highlights
-- **Windsurf IDE support**: Added a dedicated manifest, workflow templates under `.windsurf/workflows/`, and an AGENTS.md quickstart so Windsurf users can run the full kiro Spec-Driven Development workflow with `npx cc-sdd@next --windsurf`.
+- **Windsurf IDE support**: Added a dedicated manifest, workflow templates under `.windsurf/workflows/`, and an AGENTS.md quickstart so Windsurf users can run the full spec Spec-Driven Development workflow with `npx cc-sdd@next --windsurf`.
 - **CLI experience refresh**: Updated completion guides and recommended models so the setup summary now points Windsurf users to the correct follow-up commands and manual QA flow.
 
 ### 🧪 Quality & Tooling
@@ -334,10 +334,10 @@ Once your project templates are regenerated on v2.0.0, all spec/todo automation 
 Enhanced spec-driven development for existing projects
 
 **New Quality Validation Commands**
-- 🔍 **`/kiro:validate-gap`** - Gap analysis between existing functionality and requirements
+- 🔍 **`/spec:validate-gap`** - Gap analysis between existing functionality and requirements
   - Execute before spec-design to clarify differences between current implementation and new requirements
   - Identify existing system understanding and integration points for new features
-- ✅ **`/kiro:validate-design`** - Design compatibility verification with existing architecture
+- ✅ **`/spec:validate-design`** - Design compatibility verification with existing architecture
   - Execute after spec-design to confirm design integration feasibility
   - Pre-detect conflicts and incompatibilities with existing systems
 
@@ -363,7 +363,7 @@ Refreshed for clarity and conciseness
 
 **Content Enhancements**
 - **AI-DLC "bolts" concept** - Clarified terminology with AWS article links
-- **Kiro IDE integration explanation** - Emphasized portability and implementation guardrails
+- **Spec IDE integration explanation** - Emphasized portability and implementation guardrails
 - **Added Speaker Deck presentation** - "Claude Code Doesn't Dream of Spec-Driven Development"
 
 ### 🔧 Technical Improvements
@@ -403,11 +403,11 @@ Fundamental review of entire spec-driven development workflow
 
 ## Ver 0.3.0 (August 12, 2025 Update)
 
-### Major Kiro Spec-Driven Development Command Improvements
+### Major Spec Spec-Driven Development Command Improvements
 
 **Workflow Efficiency**
-- Added `-y` flag: `/kiro:spec-design feature-name -y` skips requirements approval and generates design
-- `/kiro:spec-tasks feature-name -y` skips requirements+design approval and generates tasks  
+- Added `-y` flag: `/spec:spec-design feature-name -y` skips requirements approval and generates design
+- `/spec:spec-tasks feature-name -y` skips requirements+design approval and generates tasks  
 - Added argument-hint: Commands now auto-display `<feature-name> [-y]` during input
 - Traditional step-by-step approval still available (spec.json editing or interactive approval)
 
@@ -478,12 +478,12 @@ Fundamental review of entire spec-driven development workflow
 - Implementation tasks optimized for code generation LLMs
 - Test-driven development approach integrated into each task
 - Clearer management of inter-task dependencies
-- Improved to independent prompt format aligned with Kiro design principles
+- Improved to independent prompt format aligned with Spec design principles
 
 ### Fixed Issues
 
 **Improved Directory Handling**
-- Now works properly even when `.kiro/steering/` directory doesn't exist
+- Now works properly even when `.spec/steering/` directory doesn't exist
 - More user-friendly error messages
 
 **Improved Internal File Management**
@@ -497,7 +497,7 @@ Fundamental review of entire spec-driven development workflow
 - Simplified spec.json structure and improved maintainability
 
 **Revised Requirements Generation Approach**
-- Reverted from overly comprehensive requirements generation to original Kiro design
+- Reverted from overly comprehensive requirements generation to original Spec design
 - Removed forceful expressions like "CRITICAL" and "MUST"
 - Changed to gradual requirements generation focused on core functionality
 - Restored natural development flow premised on iterative improvement
@@ -517,7 +517,7 @@ Fundamental review of entire spec-driven development workflow
 - Added detailed usage recommendations and guidance
 
 **Unified Steering Management Functions**
-- `/kiro:steering` command now properly handles existing files
+- `/spec:steering` command now properly handles existing files
 - More intuitive steering document management
 
 **Improved System Stability**
@@ -529,7 +529,7 @@ Fundamental review of entire spec-driven development workflow
 ## Ver 0.1.0 (July 18, 2025 Update)
 
 ### Basic Features
-- Implemented Kiro IDE-style specification-driven development system
+- Implemented Spec IDE-style specification-driven development system
 - 3-phase approval workflow: Requirements → Design → Tasks → Implementation
 - EARS format requirements definition support
 - Hierarchical requirements structure organization
@@ -553,7 +553,7 @@ Fundamental review of entire spec-driven development workflow
 ## Development History
 
 **July 17-18, 2025: Foundation Building Period**
-Project initialization and implementation of core framework for Kiro-style specification-driven development
+Project initialization and implementation of core framework for spec-style specification-driven development
 
 **July 18-24, 2025: Multilingual & Feature Expansion Period**
 Added English and Traditional Chinese support, GitHub Actions integration, enhanced documentation
@@ -562,22 +562,22 @@ Added English and Traditional Chinese support, GitHub Actions integration, enhan
 Security enhancements, inclusion modes improvements, system stability improvements
 
 **July 26, 2025: Specification Generation Quality Innovation & System Simplification**
-Significantly improved generation quality of requirements, design, and tasks documents, removed excessive progress tracking and returned to original Kiro design
+Significantly improved generation quality of requirements, design, and tasks documents, removed excessive progress tracking and returned to original Spec design
 
 ---
 
 ## Usage
 
 1. Copy **`.claude/commands/` directory** and **`CLAUDE.md` file** to your project
-2. Run `/kiro:steering` in Claude Code to configure project information
-3. Create new specifications with `/kiro:spec-init [feature-name]`
+2. Run `/spec:steering` in Claude Code to configure project information
+3. Create new specifications with `/spec:spec-init [feature-name]`
 4. Progress through development step by step: requirements → design → tasks
 
 For detailed usage instructions, see [README_en.md](README_en.md).
 
 ## Related Links
 
-- **[Zenn Article](https://zenn.dev/gotalab/articles/3db0621ce3d6d2)** - Detailed explanation of Kiro's specification-driven development process
+- **[Zenn Article](https://zenn.dev/gotalab/articles/3db0621ce3d6d2)** - Detailed explanation of Spec's specification-driven development process
 - **[Japanese Documentation](README.md)**
 - **[Traditional Chinese Documentation](README_zh-TW.md)**
 - **Claude Code Command Refresh**: Retired `.tpl` files and standardized on 11 commands (including `validate-impl`), delivering the same cross-platform template set with a simplified layout.
