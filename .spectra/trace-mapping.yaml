@@ -1,0 +1,46 @@
+mappings:
+  - id: trace-root
+    description: hello trace root
+    spec: docs/hello/requirements.md
+    design: ""
+    code:
+      files: []
+      symbols: []
+    tasks: []
+    tags: []
+  - id: "1"
+    description: "Basic Greeting"
+    spec: docs/hello/requirements.md
+    design: ""
+    code:
+      files: []
+      symbols: []
+    tasks: []
+    tags: ["@spec"]
+  - id: "2"
+    description: "Personalized Greeting"
+    spec: docs/hello/requirements.md
+    design: ""
+    code:
+      files: []
+      symbols: []
+    tasks: []
+    tags: ["@spec"]
+  - id: "3"
+    description: "Help and Usage"
+    spec: docs/hello/requirements.md
+    design: ""
+    code:
+      files: []
+      symbols: []
+    tasks: []
+    tags: ["@spec"]
+  - id: "4"
+    description: "Development and Testing"
+    spec: docs/hello/requirements.md
+    design: ""
+    code:
+      files: []
+      symbols: []
+    tasks: []
+    tags: ["@spec"]

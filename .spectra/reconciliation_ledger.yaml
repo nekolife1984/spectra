@@ -1,0 +1,37 @@
+entries:
+- author: Genya Okada
+  commit: e604d527b8d0baa7027a19883325e745d38be6c3
+  commit_message: 'fix: remove conditional guard on check_drift --snapshot'
+  files_count: 0
+  id: ledger-20260725-001
+  reason: setup
+  tags_count: 189
+  timestamp: '2026-07-25T22:55:48.839335'
+  type: snapshot
+- author: Genya Okada
+  commit: e604d527b8d0baa7027a19883325e745d38be6c3
+  commit_message: 'fix: remove conditional guard on check_drift --snapshot'
+  files_count: 3
+  id: ledger-20260725-002
+  reason: 'spectra-quick: todo-cli'
+  tags_count: 202
+  timestamp: '2026-07-25T23:00:33.127228'
+  type: snapshot
+- author: Genya Okada
+  commit: e604d527b8d0baa7027a19883325e745d38be6c3
+  commit_message: 'fix: remove conditional guard on check_drift --snapshot'
+  files_count: 3
+  id: ledger-20260725-003
+  reason: 'spectra-quick: todo-cli'
+  tags_count: 202
+  timestamp: '2026-07-25T23:02:31.241929'
+  type: snapshot
+- author: Genya Okada
+  commit: e604d527b8d0baa7027a19883325e745d38be6c3
+  commit_message: 'fix: remove conditional guard on check_drift --snapshot'
+  files_count: 0
+  id: ledger-20260725-004
+  reason: 'spectra-quick: hello'
+  tags_count: 193
+  timestamp: '2026-07-25T23:50:45.923569'
+  type: snapshot

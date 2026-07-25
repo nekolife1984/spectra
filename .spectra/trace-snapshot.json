@@ -1,0 +1,971 @@
+{
+  "timestamp": "2026-07-25T23:50:44.968116",
+  "files": {},
+  "tag_entries": [
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-requirements/SKILL.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-design/SKILL.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-design/SKILL.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "-->`, `<!-- @design"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` comments to each changed file, using the exact section numbers from `requirements.md` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "module",
+      "value": "<module-name>` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "X.Y` comments to each test function or test file that validates a requirement:"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1` in a test for requirement 1.1"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1, 1.2`"
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "<id>` tag. Omission causes false positives in traceability checks."
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` to a file, ensure that file path is also listed in the corresponding mapping entry's `code.files`."
+    },
+    {
+      "file": "tools/spectra/templates/agents/claude-code-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` is present for every requirement section this task satisfies, `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-requirements/SKILL.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-design/SKILL.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-design/SKILL.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "-->`, `<!-- @design"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` comments to each changed file, using the exact section numbers from `requirements.md` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "module",
+      "value": "<module-name>` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "X.Y` comments to each test function or test file that validates a requirement:"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1` in a test for requirement 1.1"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1, 1.2`"
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "<id>` tag. Omission causes false positives in traceability checks."
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` to a file, ensure that file path is also listed in the corresponding mapping entry's `code.files`."
+    },
+    {
+      "file": "tools/spectra/templates/agents/cursor-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` is present for every requirement section this task satisfies, `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-requirements/SKILL.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-design/SKILL.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-design/SKILL.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "-->`, `<!-- @design"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` comments to each changed file, using the exact section numbers from `requirements.md` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "module",
+      "value": "<module-name>` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "X.Y` comments to each test function or test file that validates a requirement:"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1` in a test for requirement 1.1"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1, 1.2`"
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "<id>` tag. Omission causes false positives in traceability checks."
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` to a file, ensure that file path is also listed in the corresponding mapping entry's `code.files`."
+    },
+    {
+      "file": "tools/spectra/templates/agents/opencode-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` is present for every requirement section this task satisfies, `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-requirements/SKILL.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-design/SKILL.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-design/SKILL.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "-->`, `<!-- @design"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` comments to each changed file, using the exact section numbers from `requirements.md` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "module",
+      "value": "<module-name>` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "X.Y` comments to each test function or test file that validates a requirement:"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1` in a test for requirement 1.1"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1, 1.2`"
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "<id>` tag. Omission causes false positives in traceability checks."
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` to a file, ensure that file path is also listed in the corresponding mapping entry's `code.files`."
+    },
+    {
+      "file": "tools/spectra/templates/agents/codex-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` is present for every requirement section this task satisfies, `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-requirements/SKILL.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-design/SKILL.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-design/SKILL.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "-->`, `<!-- @design"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` comments to each changed file, using the exact section numbers from `requirements.md` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "module",
+      "value": "<module-name>` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "X.Y` comments to each test function or test file that validates a requirement:"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1` in a test for requirement 1.1"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1, 1.2`"
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "<id>` tag. Omission causes false positives in traceability checks."
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` to a file, ensure that file path is also listed in the corresponding mapping entry's `code.files`."
+    },
+    {
+      "file": "tools/spectra/templates/agents/gemini-cli-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` is present for every requirement section this task satisfies, `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-requirements/SKILL.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-design/SKILL.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-design/SKILL.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "-->`, `<!-- @design"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` comments to each changed file, using the exact section numbers from `requirements.md` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "module",
+      "value": "<module-name>` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "X.Y` comments to each test function or test file that validates a requirement:"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1` in a test for requirement 1.1"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1, 1.2`"
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "<id>` tag. Omission causes false positives in traceability checks."
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` to a file, ensure that file path is also listed in the corresponding mapping entry's `code.files`."
+    },
+    {
+      "file": "tools/spectra/templates/agents/github-copilot-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` is present for every requirement section this task satisfies, `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-requirements/SKILL.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-design/SKILL.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-design/SKILL.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "-->`, `<!-- @design"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` comments to each changed file, using the exact section numbers from `requirements.md` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "module",
+      "value": "<module-name>` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "X.Y` comments to each test function or test file that validates a requirement:"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1` in a test for requirement 1.1"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1, 1.2`"
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "<id>` tag. Omission causes false positives in traceability checks."
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` to a file, ensure that file path is also listed in the corresponding mapping entry's `code.files`."
+    },
+    {
+      "file": "tools/spectra/templates/agents/windsurf-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` is present for every requirement section this task satisfies, `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-requirements/SKILL.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-design/SKILL.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-design/SKILL.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "X"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "spec",
+      "value": "-->`, `<!-- @design"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` comments to each changed file, using the exact section numbers from `requirements.md` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "module",
+      "value": "<module-name>` (e.g., `"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "X.Y` comments to each test function or test file that validates a requirement:"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1` in a test for requirement 1.1"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "verifies",
+      "value": "1.1, 1.2`"
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "<id>` tag. Omission causes false positives in traceability checks."
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` to a file, ensure that file path is also listed in the corresponding mapping entry's `code.files`."
+    },
+    {
+      "file": "tools/spectra/templates/agents/antigravity-skills/skills/spectra-impl/templates/implementer-prompt.md",
+      "tag": "impl",
+      "value": "X.Y` is present for every requirement section this task satisfies, `"
+    },
+    {
+      "file": "tools/spectra/templates/shared/settings/ja/templates/specs/requirements.md",
+      "tag": "spec",
+      "value": "1"
+    },
+    {
+      "file": "tools/spectra/templates/shared/settings/ja/templates/specs/requirements.md",
+      "tag": "spec",
+      "value": "2"
+    },
+    {
+      "file": "tools/spectra/templates/shared/settings/ja/templates/specs/tasks.md",
+      "tag": "impl",
+      "value": "X.Y` \u30bf\u30b0\u3068\u3057\u3066\u30b3\u30fc\u30c9\u306b\u81ea\u52d5\u4ed8\u4e0e\u3055\u308c\u307e\u3059\u3002`_Boundary:_` \u306f `.spectra/trace-mapping.yaml` \u306e `code.files` / `code.symbols` \u3068\u7167\u5408\u3055\u308c\u3001CRG `get_impact_radius_tool` \u3067\u6a5f\u68b0\u691c\u8a3c\u53ef\u80fd\u3067\u3059\u3002"
+    },
+    {
+      "file": "tools/spectra/templates/shared/settings/ja/templates/specs/design.md",
+      "tag": "design",
+      "value": "[\u30b3\u30f3\u30dd\u30fc\u30cd\u30f3\u30c8\u540d]"
+    },
+    {
+      "file": "tools/spectra/templates/shared/settings/ja/templates/specs/design.md",
+      "tag": "satisfies",
+      "value": "2.1, 2.3"
+    },
+    {
+      "file": "tools/spectra/templates/shared/settings/en/templates/specs/requirements.md",
+      "tag": "spec",
+      "value": "1"
+    },
+    {
+      "file": "tools/spectra/templates/shared/settings/en/templates/specs/requirements.md",
+      "tag": "spec",
+      "value": "2"
+    },
+    {
+      "file": "tools/spectra/templates/shared/settings/en/templates/specs/tasks.md",
+      "tag": "impl",
+      "value": "X.Y` tags during implementation. `_Boundary:_` is validated against `.spectra/trace-mapping.yaml`'s `code.files` / `code.symbols` and can be mechanically verified via CRG `get_impact_radius_tool`."
+    },
+    {
+      "file": "tools/spectra/templates/shared/settings/en/templates/specs/design.md",
+      "tag": "design",
+      "value": "[Component Name]"
+    },
+    {
+      "file": "tools/spectra/templates/shared/settings/en/templates/specs/design.md",
+      "tag": "satisfies",
+      "value": "2.1, 2.3"
+    },
+    {
+      "file": "tools/spectra/templates/shared/quality/4-fixtures-guide.md",
+      "tag": "impl",
+      "value": "1.1"
+    },
+    {
+      "file": "tools/spectra/templates/shared/quality/4-fixtures-guide.md",
+      "tag": "impl",
+      "value": "1.2"
+    },
+    {
+      "file": "tools/spectra/templates/shared/quality/4-fixtures-guide.md",
+      "tag": "impl",
+      "value": "1.3"
+    },
+    {
+      "file": "tools/spectra/templates/shared/quality/4-fixtures-guide.md",
+      "tag": "impl",
+      "value": "1.4"
+    },
+    {
+      "file": "tools/spectra/templates/shared/quality/4-fixtures-guide.md",
+      "tag": "verifies",
+      "value": "1.1"
+    },
+    {
+      "file": "tools/spectra/templates/shared/quality/4-fixtures-guide.md",
+      "tag": "verifies",
+      "value": "1.2"
+    },
+    {
+      "file": "tools/spectra/templates/shared/quality/4-fixtures-guide.md",
+      "tag": "verifies",
+      "value": "1.3"
+    },
+    {
+      "file": "tools/spectra/templates/shared/quality/4-fixtures-guide.md",
+      "tag": "verifies",
+      "value": "1.4"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/README.md",
+      "tag": "impl",
+      "value": "\u30b3\u30fc\u30c9\u306e\u30ab\u30d0\u30ec\u30c3\u30b8\u78ba\u8a8d\uff08coverage.json \u307e\u305f\u306f .coverage \u304c\u5fc5\u8981\uff09"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/README.md",
+      "tag": "verifies",
+      "value": "\u30d5\u30a1\u30a4\u30eb\u306e\u5b9f\u30a2\u30b5\u30fc\u30b7\u30e7\u30f3\u30c1\u30a7\u30c3\u30af"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/README.md",
+      "tag": "impl",
+      "value": "\u30bf\u30b0\u304c\u6b20\u3051\u3066\u308b\u30d5\u30a1\u30a4\u30eb\u3092\u8b66\u544a"
+    },
+    {
+      "file": "docs/hello/requirements.md",
+      "tag": "spec",
+      "value": "1"
+    },
+    {
+      "file": "docs/hello/requirements.md",
+      "tag": "spec",
+      "value": "2"
+    },
+    {
+      "file": "docs/hello/requirements.md",
+      "tag": "spec",
+      "value": "3"
+    },
+    {
+      "file": "docs/hello/requirements.md",
+      "tag": "spec",
+      "value": "4"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/fix-trace-mapping.py",
+      "tag": "impl",
+      "value": "\u30bf\u30b0\u6b63\u898f\u8868\u73fe"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-impl-completeness.py",
+      "tag": "impl",
+      "value": "\u30bf\u30b0\u306e\u30d1\u30bf\u30fc\u30f3:"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/extract_tags.py",
+      "tag": "spec",
+      "value": "1.1"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/extract_tags.py",
+      "tag": "design",
+      "value": "AuthService"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/extract_tags.py",
+      "tag": "satisfies",
+      "value": "1.1, 1.2"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/extract_tags.py",
+      "tag": "spec",
+      "value": "1"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/extract_tags.py",
+      "tag": "design",
+      "value": "Auth"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/extract_tags.py",
+      "tag": "satisfies",
+      "value": "1.1, 1.2"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/extract_tags.py",
+      "tag": "impl",
+      "value": "1.1"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/extract_tags.py",
+      "tag": "feature",
+      "value": "login"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/extract_tags.py",
+      "tag": "impl",
+      "value": "/ // @impl |"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/extract_tags.py",
+      "tag": "impl",
+      "value": "\u3092\u8aa4\u691c\u77e5\u3057\u306a\u3044\u3088\u3046\u3001"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/brownfield-init.py",
+      "tag": "spec",
+      "value": "{spec_id}"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/brownfield-init.py",
+      "tag": "design",
+      "value": "{main_module.title()}"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/brownfield-init.py",
+      "tag": "satisfies",
+      "value": "{spec_id}"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/brownfield-init.py",
+      "tag": "impl",
+      "value": "\u30bf\u30b0\u30d1\u30bf\u30fc\u30f3\uff08"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/brownfield-init.py",
+      "tag": "impl",
+      "value": "{spec_id}\""
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/brownfield-init.py",
+      "tag": "impl",
+      "value": "\u30bf\u30b0\u633f\u5165"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "spec",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "design",
+      "value": "ComponentName"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "satisfies",
+      "value": "X.Y"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "impl",
+      "value": "/ // @impl /  \u306e\u5168\u5f62\u5f0f\u306b\u5bfe\u5fdc"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "impl",
+      "value": "\u30bf\u30b0\u304c\u3042\u308b\u3079\u304d\u30a8\u30f3\u30c8\u30ea\u306f\u3001\u30d5\u30a1\u30a4\u30eb\u306b @impl \u30bf\u30b0\u304c\u542b\u307e\u308c\u3066\u3044\u308b\u304b"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "module",
+      "value": "\u30a8\u30f3\u30c8\u30ea\u306e\u30c1\u30a7\u30c3\u30af"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "module",
+      "value": "{module_name} \u30bf\u30b0\u304c\u898b\u3064\u304b\u3089\u306a\u3044\""
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "impl",
+      "value": "\u30bf\u30b0\u304c\u3042\u308b\u306e\u306b @module \u30bf\u30b0\u304c\u306a\u3044\u30d5\u30a1\u30a4\u30eb\u3092\u8b66\u544a"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "impl",
+      "value": "\u304c\u3042\u308b\u306e\u306b @module \u304c\u306a\u3044\uff08\u63a8\u5968\u30ec\u30d9\u30eb\uff09"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "module",
+      "value": "<module-name> \u3092\u8ffd\u52a0\""
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "verifies",
+      "value": "X.Y \u304c .spectra/trace-mapping.yaml \u306b\u30a8\u30f3\u30c8\u30ea\u3092\u6301\u3064\u304b"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "verifies",
+      "value": "\u30bf\u30b0\u3092\u6301\u3064\u30d5\u30a1\u30a4\u30eb\u3092\u53ce\u96c6"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/check-trace-completeness.py",
+      "tag": "impl",
+      "value": "\u30d5\u30a1\u30a4\u30eb\u3068\u884c\u756a\u53f7\u3092\u53ce\u96c6"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/impact.py",
+      "tag": "impl",
+      "value": "\u30bf\u30b0"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/impact.py",
+      "tag": "verifies",
+      "value": "\u30bf\u30b0"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/impact.py",
+      "tag": "impl",
+      "value": "/ @verifies \u30c1\u30a7\u30c3\u30af\uff08\u30d5\u30a1\u30a4\u30eb\u304c\u5b58\u5728\u3059\u308b\u5834\u5408\u306e\u307f\uff09"
+    },
+    {
+      "file": "tools/spectra/templates/shared/scripts/impact.py",
+      "tag": "verifies",
+      "value": "\u304c\u3042\u308b\u30c6\u30b9\u30c8"
+    },
+    {
+      "file": "tests/test_impact.py",
+      "tag": "impl",
+      "value": "1.1, 1.2"
+    },
+    {
+      "file": "tests/test_impact.py",
+      "tag": "verifies",
+      "value": "1.1"
+    },
+    {
+      "file": "tests/test_impact.py",
+      "tag": "impl",
+      "value": "1.1\\n\")"
+    },
+    {
+      "file": "tests/test_impact.py",
+      "tag": "impl",
+      "value": "2.3\\n"
+    },
+    {
+      "file": "tests/test_impact.py",
+      "tag": "impl",
+      "value": "1.1"
+    }
+  ]
+}

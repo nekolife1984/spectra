@@ -144,20 +144,42 @@ Wait for completion.
 
 After Phase 4, run the spec trace completeness gate, then a lightweight sanity review before claiming completion.
 
-**Trace Completeness Gate**:
-- If `.spectra/trace-mapping.yaml` exists, verify all spec-side traceability:
-  ```bash
-  python3 .spectra/scripts/check-trace-completeness.py --check spec,design,requirements,depends --project-dir .
+**Initialize Trace Mapping** (if not yet created):
+- If `.spectra/trace-mapping.yaml` does NOT exist, read `docs/{feature-name}/requirements.md` and extract `@spec` IDs, then create `.spectra/trace-mapping.yaml` with a skeleton entry per requirement.
+- Each entry format:
+  ```yaml
+  mappings:
+    - id: trace-root
+      description: {feature-name} trace root
+      spec: docs/{feature-name}/requirements.md
+      design: ""
+      code: { files: [], symbols: [] }
+      tasks: []
+      tags: []
+    - id: "1"
+      description: ""
+      spec: docs/{feature-name}/requirements.md
+      design: ""
+      code: { files: [], symbols: [] }
+      tasks: []
+      tags: ["@spec"]
   ```
-- If the gate fails, fix the gaps and re-run until it passes.
+- Use Read + Write tool to create the file.
 
-**Update Snapshot** (after gate passes):
+**Trace Completeness Gate**:
+- Verify spec-side traceability (skips gracefully if no mapping yet):
+  ```bash
+  python3 .spectra/scripts/check-trace-completeness.py --check spec --project-dir .
+  ```
+- If the gate fails, fix gaps before snapshot.
+
+**Update Snapshot** (always run):
 - Update the trace snapshot to establish a baseline:
   ```bash
   python3 .spectra/scripts/check_drift.py --snapshot --reason "spectra-quick: {feature-name}"
   ```
 
-**Sanity Review** (after gate and snapshot):
+**Sanity Review**:
 
 - Review `requirements.md`, `design.md`, and `tasks.md` directly from disk. If `brief.md` exists, use it only as supporting context.
 - Prefer a fresh review sub-agent when multi-agent is available. Pass only file paths and the review objective; the reviewer should read the generated files itself.
