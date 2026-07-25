@@ -53,7 +53,7 @@ describe('real gemini-cli-skills manifest', () => {
     expect(out).toContain('[templateDir] skills: templates/agents/gemini-cli-skills/skills -> .gemini/skills');
     expect(out).toContain('[templateFile] doc_main: templates/agents/gemini-cli-skills/docs/GEMINI.md -> ./GEMINI.md');
     expect(out).toContain('[templateDir] traceability_scripts: templates/shared/scripts -> .spectra/scripts');
-    expect(out).toContain('[templateDir] settings_templates: templates/shared/settings/en/templates -> .spectra/settings/templates');
+    expect(out).toContain('[templateDir] settings_templates: templates/shared/settings/en/templates -> .spectra/templates');
     expect(out).toContain('[templateDir] gemini_agents');
   });
 
@@ -91,7 +91,7 @@ describe('real gemini-cli-skills manifest', () => {
     expect(skillSpecQuickText).toMatch(/name: spectra-quick/);
     expect(skillSpecQuickText).toContain('/spectra-impl');
 
-    const settingsTemplate = join(cwd, '.spectra/settings/templates/specs/init.json');
+    const settingsTemplate = join(cwd, '.spectra/templates/specs/init.json');
     expect(await exists(settingsTemplate)).toBe(true);
 
     // Gemini-specific: agents directory

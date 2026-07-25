@@ -27,9 +27,9 @@ metadata:
 - `{{SPECS_DIR}}/$1/research.md` (if exists, contains gap analysis from `/spectra-validate-gap`)
 - Core steering context: `product.md`, `tech.md`, `structure.md`
 - Additional steering files only when directly relevant to requirement coverage, architecture boundaries, integrations, runtime prerequisites, security/performance constraints, or team conventions that affect implementation readiness
-- `{{SPECTRA_DIR}}/settings/templates/specs/design.md` for document structure
+- `{{SPECTRA_DIR}}/templates/specs/design.md` for document structure
 - Read `rules/design-principles.md` from this skill's directory for design principles
-- `{{SPECTRA_DIR}}/settings/templates/specs/research.md` for discovery log structure
+- `{{SPECTRA_DIR}}/templates/specs/research.md` for discovery log structure
 
 **Validate requirements approval**:
 - If `-y` flag provided ($2 == "-y"): Auto-approve requirements in spec.json
@@ -109,7 +109,7 @@ Once all research results return, synthesize in main context before proceeding.
 ### Step 4: Generate Design Draft
 
 1. **Load Design Template and Rules**:
-   - Read `{{SPECTRA_DIR}}/settings/templates/specs/design.md` for structure
+   - Read `{{SPECTRA_DIR}}/templates/specs/design.md` for structure
    - Read `rules/design-principles.md` from this skill's directory for principles
 
 2. **Generate Design Draft**:
@@ -178,7 +178,7 @@ Provide brief summary in the language specified in spec.json:
 
 **Format**: Concise Markdown (under 200 words) - this is the command output, NOT the design document itself
 
-**Note**: The actual design document follows `{{SPECTRA_DIR}}/settings/templates/specs/design.md` structure.
+**Note**: The actual design document follows `{{SPECTRA_DIR}}/templates/specs/design.md` structure.
 
 ## Safety & Fallback
 
@@ -195,7 +195,7 @@ Provide brief summary in the language specified in spec.json:
 - **Suggested Action**: "Run `/spectra-requirements $1` to generate requirements first"
 
 **Template Missing**:
-- **User Message**: "Template file missing at `{{SPECTRA_DIR}}/settings/templates/specs/design.md`"
+- **User Message**: "Template file missing at `{{SPECTRA_DIR}}/templates/specs/design.md`"
 - **Suggested Action**: "Check repository setup or restore template file"
 - **Fallback**: Use inline basic structure with warning
 

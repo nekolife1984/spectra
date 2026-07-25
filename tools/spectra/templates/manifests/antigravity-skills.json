@@ -25,7 +25,7 @@
       "source": {
         "type": "templateDir",
         "fromDir": "templates/shared/settings/{{LANG_CODE}}/templates",
-        "toDir": "{{SPECTRA_DIR}}/settings/templates"
+        "toDir": "{{SPECTRA_DIR}}/templates"
       },
       "when": { "agent": "antigravity-skills" }
     },

@@ -38,7 +38,7 @@ metadata:
 **Load generation rules and template**:
 - Read `rules/tasks-generation.md` from this skill's directory for principles
 - If `sequential` is false: Read `rules/tasks-parallel-analysis.md` from this skill's directory for parallel judgement criteria
-- Read `{{SPECTRA_DIR}}/settings/templates/specs/tasks.md` for format (supports `(P)` markers)
+- Read `{{SPECTRA_DIR}}/templates/specs/tasks.md` for format (supports `(P)` markers)
 
 #### Parallel Research
 

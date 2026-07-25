@@ -72,8 +72,8 @@ Execute these 4 phases in order:
 
    a. Read templates:
    ```
-   - {{SPECTRA_DIR}}/settings/templates/specs/init.json
-   - {{SPECTRA_DIR}}/settings/templates/specs/requirements-init.md
+   - {{SPECTRA_DIR}}/templates/specs/init.json
+   - {{SPECTRA_DIR}}/templates/specs/requirements-init.md
    ```
 
    b. Replace placeholders:
@@ -240,7 +240,7 @@ Sanity review: PASSED | FOLLOW-UP REQUIRED
 ### Error Scenarios
 
 **Template Missing**:
-- Check `{{SPECTRA_DIR}}/settings/templates/specs/` exists
+- Check `{{SPECTRA_DIR}}/templates/specs/` exists
 - Report specific missing file
 - Exit with error
 

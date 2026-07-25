@@ -34,7 +34,7 @@ Check `{{SPECTRA_DIR}}/steering/` status:
 
 ## Bootstrap Flow
 
-1. Load templates from `{{SPECTRA_DIR}}/settings/templates/steering/`
+1. Load templates from `{{SPECTRA_DIR}}/templates/steering/`
 2. Analyze codebase (JIT):
 
 #### Parallel Research

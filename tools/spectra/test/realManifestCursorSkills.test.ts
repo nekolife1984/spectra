@@ -53,7 +53,7 @@ describe('real cursor-skills manifest', () => {
     expect(out).toContain('[templateDir] skills: templates/agents/cursor-skills/skills -> .cursor/skills');
     expect(out).toContain('[templateFile] doc_main: templates/agents/cursor-skills/docs/AGENTS.md -> ./AGENTS.md');
     expect(out).toContain('[templateDir] traceability_scripts: templates/shared/scripts -> .spectra/scripts');
-    expect(out).toContain('[templateDir] settings_templates: templates/shared/settings/en/templates -> .spectra/settings/templates');
+    expect(out).toContain('[templateDir] settings_templates: templates/shared/settings/en/templates -> .spectra/templates');
   });
 
   it('apply writes AGENTS.md, skill files, and settings to cwd', async () => {
@@ -90,7 +90,7 @@ describe('real cursor-skills manifest', () => {
     expect(skillSpecQuickText).toMatch(/name: spectra-quick/);
     expect(skillSpecQuickText).toContain('/spectra-impl');
 
-    const settingsTemplate = join(cwd, '.spectra/settings/templates/specs/init.json');
+    const settingsTemplate = join(cwd, '.spectra/templates/specs/init.json');
     expect(await exists(settingsTemplate)).toBe(true);
 
     const skillSpecDesign = join(cwd, '.cursor/skills/spectra-design/SKILL.md');

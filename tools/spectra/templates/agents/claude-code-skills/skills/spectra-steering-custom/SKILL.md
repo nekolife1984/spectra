@@ -24,7 +24,7 @@ metadata:
 
 If steering context is already available from conversation, skip redundant file reads.
 Otherwise:
-- Check `{{SPECTRA_DIR}}/settings/templates/steering-custom/` for available templates
+- Check `{{SPECTRA_DIR}}/templates/steering-custom/` for available templates
 - Read `rules/steering-principles.md` from this skill's directory for steering principles
 
 ## Workflow
@@ -34,7 +34,7 @@ Otherwise:
    - Specific requirements or patterns to document
 
 2. **Check if template exists**:
-   - Load from `{{SPECTRA_DIR}}/settings/templates/steering-custom/{name}.md` if available
+   - Load from `{{SPECTRA_DIR}}/templates/steering-custom/{name}.md` if available
    - Use as starting point, customize based on project
 
 3. **Analyze codebase** (JIT) for relevant patterns:
@@ -59,7 +59,7 @@ After all parallel research completes, synthesize findings for steering document
 
 ## Available Templates
 
-Templates available in `{{SPECTRA_DIR}}/settings/templates/steering-custom/`:
+Templates available in `{{SPECTRA_DIR}}/templates/steering-custom/`:
 
 1. **api-standards.md** - REST/GraphQL conventions, error handling
 2. **testing.md** - Test organization, mocking, coverage
