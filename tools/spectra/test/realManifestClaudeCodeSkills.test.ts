@@ -239,7 +239,7 @@ describe('real claude-code-skills manifest', () => {
       expect(await exists(join(cwd, `.claude/skills/${skill}/rules`))).toBe(false);
     }
 
-    const settingsRuleDir = join(cwd, '.spectra/settings/rules');
+    const settingsRuleDir = join(cwd, '.spectra/rules');
     expect(await exists(settingsRuleDir)).toBe(false);
 
     expect(ctx.logs.join('\n')).toMatch(/\d+\/\d+ files written/);
