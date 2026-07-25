@@ -85,18 +85,18 @@ $langFlag = if ($langChoice -eq "2") { "--lang ja" } else { "" }
 $crgPlatform = $crgPlatformMap[$agentChoice]
 $prefix = $prefixMap[$agentChoice]
 
-# Spec directory prompt
-$specFlag = ""
+# Specs directory prompt
+$specsFlag = ""
 Write-Host ""
-Write-Host "  Spec directory (where specs and settings are stored):"
-$specInput = Read-Host "  Path (Enter=.spec)"
-if (-not [string]::IsNullOrEmpty($specInput)) {
-    $specFlag = "--spectra-dir $specInput"
+Write-Host "  Specs directory (where specification docs are stored):"
+$specsInput = Read-Host "  Path (Enter=docs)"
+if (-not [string]::IsNullOrEmpty($specsInput)) {
+    $specsFlag = "--specs-dir $specsInput"
 }
 
 try {
-    Write-Info "Running: npx github:$GITHUB_REPO $agentFlag $langFlag $specFlag"
-    npx "github:$GITHUB_REPO" $agentFlag $langFlag $specFlag
+    Write-Info "Running: npx github:$GITHUB_REPO $agentFlag $langFlag $specsFlag"
+    npx "github:$GITHUB_REPO" $agentFlag $langFlag $specsFlag
 } catch {
     Write-Warn "npx github: failed. Falling back to git clone..."
     $tmpDir = "$env:TEMP\spectra-$(Get-Random)"

@@ -115,15 +115,6 @@ case "${LANG_CHOICE:-1}" in
 esac
 
 echo ""
-echo "  Settings directory (where settings and steering are stored):"
-echo -n "  Path (Enter=.spectra): "
-read -r SPECTRA_DIR_INPUT
-SPEC_FLAG=""
-if [ -n "$SPECTRA_DIR_INPUT" ]; then
-  SPEC_FLAG="--spectra-dir $SPECTRA_DIR_INPUT"
-fi
-
-echo ""
 echo "  Specs directory (where specification docs are stored):"
 echo -n "  Path (Enter=docs): "
 read -r SPECS_DIR_INPUT
@@ -133,8 +124,8 @@ if [ -n "$SPECS_DIR_INPUT" ]; then
 fi
 
 echo ""
-info "Running: npx github:$GITHUB_REPO $AGENT_FLAG $LANG_FLAG $SPEC_FLAG $SPECS_FLAG"
-npx "github:$GITHUB_REPO" $AGENT_FLAG $LANG_FLAG $SPEC_FLAG $SPECS_FLAG
+info "Running: npx github:$GITHUB_REPO $AGENT_FLAG $LANG_FLAG $SPECS_FLAG"
+npx "github:$GITHUB_REPO" $AGENT_FLAG $LANG_FLAG $SPECS_FLAG
 ok "spectra installation complete"
 
 # ── Step 2: CRG Setup ──────────────────────────────────
