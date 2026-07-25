@@ -82,8 +82,8 @@ def scan_directory(directory: Path) -> list[dict]:
     all_tags = []
     for ext in EXTENSIONS:
         for fpath in directory.rglob(f"*{ext}"):
-            # __pycache__, .venv, node_modules, .git をスキップ
-            if any(part.startswith("__") or part in (".venv", "node_modules", ".git", "dist", "build") for part in fpath.parts):
+            # __pycache__, .venv, node_modules, .git, .spectra, dist, build をスキップ
+            if any(part.startswith("__") or part in (".venv", "node_modules", ".git", ".spectra", "dist", "build") for part in fpath.parts):
                 continue
             all_tags.extend(extract_tags_from_file(fpath))
     return all_tags
@@ -94,7 +94,7 @@ def get_files_without_tags(directory: Path) -> list[Path]:
     untagged = []
     for ext in EXTENSIONS:
         for fpath in directory.rglob(f"*{ext}"):
-            if any(part.startswith("__") or part in (".venv", "node_modules", ".git", "dist", "build") for part in fpath.parts):
+            if any(part.startswith("__") or part in (".venv", "node_modules", ".git", ".spectra", "dist", "build") for part in fpath.parts):
                 continue
             tags = extract_tags_from_file(fpath)
             if not tags:
