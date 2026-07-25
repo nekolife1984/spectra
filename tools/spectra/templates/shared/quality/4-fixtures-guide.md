@@ -92,7 +92,7 @@ def test_legacy():
 
 ### green_control
 ```yaml
-# .trace-mapping.yaml (一部)
+# .spectra/trace-mapping.yaml (一部)
 mappings:
   - id: "1.1"
     code:

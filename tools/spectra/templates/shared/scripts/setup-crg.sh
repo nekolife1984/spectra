@@ -19,8 +19,8 @@ PLATFORM=""
 SKIP_BUILD=false
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd 2>/dev/null || echo "$SCRIPT_DIR")"
-TRACE_EXAMPLE="$PROJECT_ROOT/.trace-mapping.example.yaml"
-TRACE_TARGET="$PROJECT_ROOT/.trace-mapping.yaml"
+TRACE_EXAMPLE="$PROJECT_ROOT/.spectra/trace-mapping.example.yaml"
+TRACE_TARGET="$PROJECT_ROOT/.spectra/trace-mapping.yaml"
 
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; NC='\033[0m'
 info()  { echo -e "${CYAN}ℹ️  $1${NC}"; }
@@ -119,7 +119,7 @@ fi
 # Copy example if target doesn't exist
 if [ -f "$TRACE_EXAMPLE" ] && [ ! -f "$TRACE_TARGET" ]; then
   cp "$TRACE_EXAMPLE" "$TRACE_TARGET"
-  ok "Created .trace-mapping.yaml from example"
+  ok "Created .spectra/trace-mapping.yaml from example"
 fi
 
 # Set up pre-commit hook

@@ -2,7 +2,7 @@
 """
 check-trace-completeness.py — トレーサビリティ完全性チェック
 
-コード内の @impl/@module/@feature タグと .trace-mapping.yaml,
+コード内の @impl/@module/@feature タグと .spectra/trace-mapping.yaml,
 tasks.md の一貫性を検証する包括的ゲート。
 False-Green ベクターチェック（P0）を含む。
 
@@ -25,25 +25,25 @@ Usage:
 Exit code: 0 = all passed, 1 = any check failed
 
 Checks:
-  1. impl      — @impl ↔ .trace-mapping.yaml 完全性
+  1. impl      — @impl ↔ .spectra/trace-mapping.yaml 完全性
   2. files     — code.files 実在性 + @impl タグ一致
   3. symbols   — code.symbols 実在性（関数/クラス名）
   4. module    — @module タグ網羅性
-  5. requirements — _Requirements:_ → .trace-mapping.yaml トレース
+  5. requirements — _Requirements:_ → .spectra/trace-mapping.yaml トレース
   6. depends   — _Depends:_ 構文チェック
-  7. spec      — @spec ↔ .trace-mapping.yaml 完全性（requirements.md）
-  8. design    — @design + @satisfies ↔ .trace-mapping.yaml 完全性（design.md）
-  9. test      — @verifies ↔ .trace-mapping.yaml 完全性（テストファイル）
+  7. spec      — @spec ↔ .spectra/trace-mapping.yaml 完全性（requirements.md）
+  8. design    — @design + @satisfies ↔ .spectra/trace-mapping.yaml 完全性（design.md）
+  9. test      — @verifies ↔ .spectra/trace-mapping.yaml 完全性（テストファイル）
 
   P0 false-green ベクターチェック:
   10. coverage   — @impl タグ行のカバレッジ実行確認（行レベル、coverage.json/.coverage/LCOV対応）
   11. assertions — @verifies ファイルの実アサーション有無
-  12. stale      — .trace-mapping.yaml 参照ファイルの鮮度（90日ルール）
+  12. stale      — .spectra/trace-mapping.yaml 参照ファイルの鮮度（90日ルール）
   P1 false-green ベクターチェック:
   13. cross-lang — 言語間の @impl タグ一貫性
   14. snapshot   — コード変更後のスナップショット更新確認
   P2 false-green ベクターチェック:
-  15. descriptions — .trace-mapping.yaml の description 未設定
+  15. descriptions — .spectra/trace-mapping.yaml の description 未設定
   16. satisfies   — design.md の @satisfies 未マッピング
 """
 
@@ -63,7 +63,7 @@ except ImportError:
 
 
 # ── 定数 ──
-TRACE_MAPPING_PATH = Path(".trace-mapping.yaml")
+TRACE_MAPPING_PATH = Path(".spectra/trace-mapping.yaml")
 TASKS_MD_PATH = Path(".spectra/specs")
 
 # 言語プロファイルを読み込み
@@ -125,7 +125,7 @@ SATISFIES_TAG_RE = re.compile(r'<!--\s*@satisfies\s+(.+?)\s*-->', re.MULTILINE)
 # ── ユーティリティ ──
 
 def load_mapping(project_dir: Path) -> list[dict]:
-    """.trace-mapping.yaml を読み込む。"""
+    """.spectra/trace-mapping.yaml を読み込む。"""
     path = project_dir / TRACE_MAPPING_PATH
     if not path.exists():
         return []
@@ -206,13 +206,13 @@ def requires_expand(value: str) -> list[str]:
 
 def check_impl_completeness(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
-    Check 1: @impl ↔ .trace-mapping.yaml 完全性
-    - .trace-mapping.yaml にエントリがあるのにコードに @impl タグがない
-    - コードに @impl タグがあるのに .trace-mapping.yaml にエントリがない（dual check）
+    Check 1: @impl ↔ .spectra/trace-mapping.yaml 完全性
+    - .spectra/trace-mapping.yaml にエントリがあるのにコードに @impl タグがない
+    - コードに @impl タグがあるのに .spectra/trace-mapping.yaml にエントリがない（dual check）
     """
     issues = []
 
-    # .trace-mapping.yaml に登録されている全 @impl 要件ID
+    # .spectra/trace-mapping.yaml に登録されている全 @impl 要件ID
     mapped_impl_ids: dict[str, dict] = {}
     for m in mappings:
         tags = m.get("tags", [])
@@ -233,10 +233,10 @@ def check_impl_completeness(project_dir: Path, mappings: list[dict]) -> list[str
                     if single_id:
                         code_impls.setdefault(single_id, []).append(fpath)
 
-    # チェックA: .trace-mapping.yaml にエントリがあるのにコードに @impl タグがない
+    # チェックA: .spectra/trace-mapping.yaml にエントリがあるのにコードに @impl タグがない
     for mid, entry in sorted(mapped_impl_ids.items()):
         if mid not in code_impls:
-            # .trace-mapping.yaml の code.files に書かれていても実ファイルにタグがない場合
+            # .spectra/trace-mapping.yaml の code.files に書かれていても実ファイルにタグがない場合
             cfiles = entry.get("code", {}).get("files", [])
             found_in_files = find_code_files(project_dir, cfiles)
             if found_in_files:
@@ -248,23 +248,23 @@ def check_impl_completeness(project_dir: Path, mappings: list[dict]) -> list[str
                         break
                 if not tagged:
                     issues.append(
-                        f"[impl] @impl {mid}: エントリは .trace-mapping.yaml にあるが、"
+                        f"[impl] @impl {mid}: エントリは .spectra/trace-mapping.yaml にあるが、"
                         f"参照ファイル {cfiles} に対応する @impl タグが見つからない"
                     )
             else:
                 issues.append(
-                    f"[impl] @impl {mid}: .trace-mapping.yaml にエントリがあるが、"
+                    f"[impl] @impl {mid}: .spectra/trace-mapping.yaml にエントリがあるが、"
                     f"コード内に @impl {mid} タグが見つからない"
                 )
 
-    # チェックB: コードに @impl タグがあるのに .trace-mapping.yaml にエントリがない
+    # チェックB: コードに @impl タグがあるのに .spectra/trace-mapping.yaml にエントリがない
     for impl_id, files in sorted(code_impls.items()):
         if impl_id not in mapped_impl_ids:
             file_list = ", ".join(str(f.relative_to(project_dir)) for f in files[:3])
             suffix = "..." if len(files) > 3 else ""
             issues.append(
                 f"[impl] @impl {impl_id}: コード ({file_list}{suffix}) にタグがあるが、"
-                f".trace-mapping.yaml にエントリがない"
+                f".spectra/trace-mapping.yaml にエントリがない"
             )
 
     return issues
@@ -273,7 +273,7 @@ def check_impl_completeness(project_dir: Path, mappings: list[dict]) -> list[str
 def check_files_existence(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
     Check 2: code.files 実在性 + @impl タグ一致
-    - .trace-mapping.yaml に書かれているファイルが存在するか
+    - .spectra/trace-mapping.yaml に書かれているファイルが存在するか
     - そのファイルに @impl タグが entry.id と一致するか
     """
     issues = []
@@ -323,7 +323,7 @@ def check_files_existence(project_dir: Path, mappings: list[dict]) -> list[str]:
 def check_symbols_existence(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
     Check 3: code.symbols 実在性
-    - .trace-mapping.yaml に書かれているシンボル（関数名/クラス名）が
+    - .spectra/trace-mapping.yaml に書かれているシンボル（関数名/クラス名）が
       参照コードファイルに実際に存在するか
     """
     issues = []
@@ -358,7 +358,7 @@ def check_symbols_existence(project_dir: Path, mappings: list[dict]) -> list[str
 def check_module_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
     Check 4: @module タグ網羅性
-    - @module タグを持つ .trace-mapping.yaml エントリに対応する @module タグがコードにあるか
+    - @module タグを持つ .spectra/trace-mapping.yaml エントリに対応する @module タグがコードにあるか
     - @impl タグのあるファイルに @module タグも推奨
     """
     issues = []
@@ -384,7 +384,7 @@ def check_module_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
 
             if not found_in_code:
                 issues.append(
-                    f"[module] @module {module_name}: .trace-mapping.yaml にエントリがあるが、"
+                    f"[module] @module {module_name}: .spectra/trace-mapping.yaml にエントリがあるが、"
                     f"コード内に # @module {module_name} タグが見つからない"
                 )
 
@@ -408,9 +408,9 @@ def check_module_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
 
 def check_requirements_trace(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
-    Check 5: _Requirements:_ → .trace-mapping.yaml トレース
+    Check 5: _Requirements:_ → .spectra/trace-mapping.yaml トレース
     - tasks.md の _Requirements: X.Y で参照されている要件IDが
-      .trace-mapping.yaml にエントリとして存在するか
+      .spectra/trace-mapping.yaml にエントリとして存在するか
     """
     issues = []
     task_files = find_tasks_mds(project_dir)
@@ -432,7 +432,7 @@ def check_requirements_trace(project_dir: Path, mappings: list[dict]) -> list[st
                     rel = task_file.relative_to(project_dir)
                     issues.append(
                         f"[requirements] {rel}: _Requirements: {req_id} が参照されているが、"
-                        f".trace-mapping.yaml に対応するエントリがない"
+                        f".spectra/trace-mapping.yaml に対応するエントリがない"
                     )
 
     return issues
@@ -483,9 +483,9 @@ def check_depends_syntax(project_dir: Path, mappings: list[dict]) -> list[str]:
 
 def check_spec_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
-    Check 7: @spec ↔ .trace-mapping.yaml 完全性
-    - requirements.md の <!-- @spec X.Y --> が対応する .trace-mapping.yaml エントリを持つか
-    - .trace-mapping.yaml の各エントリに対応する @spec タグがあるか
+    Check 7: @spec ↔ .spectra/trace-mapping.yaml 完全性
+    - requirements.md の <!-- @spec X.Y --> が対応する .spectra/trace-mapping.yaml エントリを持つか
+    - .spectra/trace-mapping.yaml の各エントリに対応する @spec タグがあるか
     """
     issues = []
     spec_files = [p for p in find_spec_mds(project_dir) if p.name == "requirements.md"]
@@ -507,16 +507,16 @@ def check_spec_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
             if spec_id not in mapped_ids:
                 rel = spec_file.relative_to(project_dir)
                 issues.append(
-                    f"[spec] {rel}: @spec {spec_id} が .trace-mapping.yaml に対応するエントリなし"
+                    f"[spec] {rel}: @spec {spec_id} が .spectra/trace-mapping.yaml に対応するエントリなし"
                 )
 
-    # 逆方向: .trace-mapping.yaml の各エントリに対応する @spec タグがあるか
+    # 逆方向: .spectra/trace-mapping.yaml の各エントリに対応する @spec タグがあるか
     for m in mappings:
         mid = m.get("id", "")
         tags = m.get("tags", [])
         if mid and "@impl" in tags and mid not in spec_tags_found:
             issues.append(
-                f"[spec] .trace-mapping.yaml id={mid} に requirements.md の @spec タグが見つからない"
+                f"[spec] .spectra/trace-mapping.yaml id={mid} に requirements.md の @spec タグが見つからない"
             )
 
     return issues
@@ -524,9 +524,9 @@ def check_spec_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
 
 def check_design_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
-    Check 8: @design + @satisfies ↔ .trace-mapping.yaml 完全性
-    - design.md の <!-- @design ComponentName --> が対応する .trace-mapping.yaml エントリを持つか
-    - design.md の <!-- @satisfies X.Y --> が対応する .trace-mapping.yaml エントリを持つか
+    Check 8: @design + @satisfies ↔ .spectra/trace-mapping.yaml 完全性
+    - design.md の <!-- @design ComponentName --> が対応する .spectra/trace-mapping.yaml エントリを持つか
+    - design.md の <!-- @satisfies X.Y --> が対応する .spectra/trace-mapping.yaml エントリを持つか
     """
     issues = []
     design_files = [p for p in find_spec_mds(project_dir) if p.name == "design.md"]
@@ -542,7 +542,7 @@ def check_design_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
             continue
 
         # @design タグのチェック
-        # .trace-mapping.yaml の code.symbols のシンボル名と照合
+        # .spectra/trace-mapping.yaml の code.symbols のシンボル名と照合
         all_symbols: set[str] = set()
         for m in mappings:
             for sym in m.get("code", {}).get("symbols", []):
@@ -558,7 +558,7 @@ def check_design_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
                     rel = design_file.relative_to(project_dir)
                     issues.append(
                         f"[design] {rel}: @design {comp_name} が "
-                        f".trace-mapping.yaml の code.symbols または module エントリに見つからない"
+                        f".spectra/trace-mapping.yaml の code.symbols または module エントリに見つからない"
                     )
 
         # @satisfies タグのチェック
@@ -568,7 +568,7 @@ def check_design_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
                 if req_id not in mapped_ids:
                     rel = design_file.relative_to(project_dir)
                     issues.append(
-                        f"[design] {rel}: @satisfies {req_id} が .trace-mapping.yaml に対応するエントリなし"
+                        f"[design] {rel}: @satisfies {req_id} が .spectra/trace-mapping.yaml に対応するエントリなし"
                     )
 
     return issues
@@ -576,9 +576,9 @@ def check_design_tags(project_dir: Path, mappings: list[dict]) -> list[str]:
 
 def check_test_trace(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
-    Check 9: @verifies ↔ .trace-mapping.yaml 完全性
-    - テストファイルの # @verifies X.Y が .trace-mapping.yaml にエントリを持つか
-    - .trace-mapping.yaml の各エントリに tests または @verifies があるか
+    Check 9: @verifies ↔ .spectra/trace-mapping.yaml 完全性
+    - テストファイルの # @verifies X.Y が .spectra/trace-mapping.yaml にエントリを持つか
+    - .spectra/trace-mapping.yaml の各エントリに tests または @verifies があるか
     """
     issues = []
     mapped_ids = {m.get("id", "") for m in mappings if m.get("id")}
@@ -598,17 +598,17 @@ def check_test_trace(project_dir: Path, mappings: list[dict]) -> list[str]:
                 for rid in req_ids:
                     verifies_in_tests.setdefault(rid, []).append(str(fpath))
 
-    # チェックA: @verifies があるのに .trace-mapping.yaml にエントリがない
+    # チェックA: @verifies があるのに .spectra/trace-mapping.yaml にエントリがない
     for rid, files in sorted(verifies_in_tests.items()):
         if rid not in mapped_ids:
             file_list = ", ".join(str(Path(f).relative_to(project_dir)) for f in files[:3])
             suffix = "..." if len(files) > 3 else ""
             issues.append(
                 f"[test] @verifies {rid}: テスト ({file_list}{suffix}) にタグがあるが、"
-                f".trace-mapping.yaml に対応するエントリがない"
+                f".spectra/trace-mapping.yaml に対応するエントリがない"
             )
 
-    # チェックB: .trace-mapping.yaml に @impl エントリがあるのに @verifies がない
+    # チェックB: .spectra/trace-mapping.yaml に @impl エントリがあるのに @verifies がない
     for m in mappings:
         mid = m.get("id", "")
         tags = m.get("tags", [])
@@ -616,7 +616,7 @@ def check_test_trace(project_dir: Path, mappings: list[dict]) -> list[str]:
             tests_from_mapping = m.get("tests", [])
             if not tests_from_mapping:
                 issues.append(
-                    f"[test] .trace-mapping.yaml id={mid}: @impl エントリがあるが、"
+                    f"[test] .spectra/trace-mapping.yaml id={mid}: @impl エントリがあるが、"
                     f"テストに @verifies {mid} が見つからない（tests: フィールドも空）"
                 )
 
@@ -692,7 +692,7 @@ def check_assertions_in_verifies(project_dir: Path, mappings: list[dict]) -> lis
 
 def check_mapping_freshness(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
-    P0-3: .trace-mapping.yaml エントリの鮮度チェック
+    P0-3: .spectra/trace-mapping.yaml エントリの鮮度チェック
     - 各エントリの参照コードが直近 N 日以内に変更されているか
     - git blame を使用（リポジトリが git 管理下であることが前提）
     """
@@ -1138,7 +1138,7 @@ def check_snapshot_freshness(project_dir: Path, mappings: list[dict]) -> list[st
 
 def check_mapping_descriptions(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
-    P2-1: .trace-mapping.yaml の全エントリに description があるか
+    P2-1: .spectra/trace-mapping.yaml の全エントリに description があるか
     """
     issues = []
     if not mappings:
@@ -1155,7 +1155,7 @@ def check_mapping_descriptions(project_dir: Path, mappings: list[dict]) -> list[
 
 def check_satisfies_mapped(project_dir: Path, mappings: list[dict]) -> list[str]:
     """
-    P2-2: design.md の @satisfies が .trace-mapping.yaml に存在するか
+    P2-2: design.md の @satisfies が .spectra/trace-mapping.yaml に存在するか
     """
     issues = []
     if not mappings:
@@ -1182,7 +1182,7 @@ def check_satisfies_mapped(project_dir: Path, mappings: list[dict]) -> list[str]
                     rel = design_file.relative_to(project_dir)
                     issues.append(
                         f"[satisfies] {rel}: @satisfies {req_id} が "
-                        f".trace-mapping.yaml に対応するエントリなし"
+                        f".spectra/trace-mapping.yaml に対応するエントリなし"
                     )
     return issues
 
@@ -1246,13 +1246,13 @@ def main():
                   f"選択肢: {', '.join(sorted(AVAILABLE_CHECKS.keys()))}", file=sys.stderr)
             sys.exit(1)
 
-    # .trace-mapping.yaml の有無
+    # .spectra/trace-mapping.yaml の有無
     mapping_path = project_dir / TRACE_MAPPING_PATH
     has_mapping = mapping_path.exists()
     mappings = load_mapping(project_dir) if has_mapping else []
 
     if not has_mapping:
-        print(f"\u2139\ufe0f  .trace-mapping.yaml が見つかりません — "
+        print(f"\u2139\ufe0f  .spectra/trace-mapping.yaml が見つかりません — "
               f"impl/files/symbols/module/spec/design/test チェックはスキップされます")
 
     total_issues = 0
@@ -1262,7 +1262,7 @@ def main():
         # mapping が必要なチェックはスキップ
         if check_name in ("impl", "files", "symbols", "module", "spec", "design", "test") and not has_mapping:
             if args.verbose:
-                print(f"  ⏭️  {check_name}: スキップ（.trace-mapping.yaml なし）")
+                print(f"  ⏭️  {check_name}: スキップ（.spectra/trace-mapping.yaml なし）")
             continue
 
         check_func = AVAILABLE_CHECKS[check_name]

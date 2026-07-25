@@ -12,7 +12,7 @@
 # This script:
 #   1. Installs spectra skills and templates
 #   2. Installs and configures code-review-graph
-#   3. Initializes .trace-mapping.yaml
+#   3. Initializes .spectra/trace-mapping.yaml
 #   4. Saves initial snapshot
 #   5. (opt-in) Copies CI/CD templates
 
@@ -162,16 +162,16 @@ fi
 
 ok "code-review-graph setup complete"
 
-# ── Step 3: Initialize .trace-mapping.yaml ─────────────
-info "Step 3/4: Checking .trace-mapping.yaml..."
+# ── Step 3: Initialize .spectra/trace-mapping.yaml ─────────────
+info "Step 3/4: Checking .spectra/trace-mapping.yaml..."
 
-if [ -f ".trace-mapping.yaml" ]; then
-  ok ".trace-mapping.yaml already exists"
-elif [ -f ".trace-mapping.example.yaml" ]; then
-  cp ".trace-mapping.example.yaml" ".trace-mapping.yaml"
-  ok "Created .trace-mapping.yaml from .trace-mapping.example.yaml"
+if [ -f ".spectra/trace-mapping.yaml" ]; then
+  ok ".spectra/trace-mapping.yaml already exists"
+elif [ -f ".spectra/trace-mapping.example.yaml" ]; then
+  cp ".spectra/trace-mapping.example.yaml" ".spectra/trace-mapping.yaml"
+  ok "Created .spectra/trace-mapping.yaml from .spectra/trace-mapping.example.yaml"
 else
-  warn ".trace-mapping.yaml not found. Create one manually later."
+  warn ".spectra/trace-mapping.yaml not found. Create one manually later."
 fi
 
 # ── Step 4: Initial Snapshot ───────────────────────────

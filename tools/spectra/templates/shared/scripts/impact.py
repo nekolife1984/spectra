@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-impact.py — CRG (code-review-graph) + .trace-mapping.yaml による影響分析。
---quick モードでは .trace-mapping.yaml なしでも @impl/@spec/@verifies タグの
+impact.py — CRG (code-review-graph) + .spectra/trace-mapping.yaml による影響分析。
+--quick モードでは .spectra/trace-mapping.yaml なしでも @impl/@spec/@verifies タグの
 grep で簡易影響分析が可能。
 
 影響度バンド（Green/Amber/Gray）で各成果物の関連強度を分類:
@@ -25,7 +25,7 @@ Usage:
   # CRG 連携 (JSON 出力)
   python3 .spectra/scripts/impact.py --spec-id 6.1 --crg
 
-  # --quick: .trace-mapping.yaml なしで @impl/@spec/@verifies タグを grep
+  # --quick: .spectra/trace-mapping.yaml なしで @impl/@spec/@verifies タグを grep
   python3 .spectra/scripts/impact.py --quick --file src/auth/login.py
   python3 .spectra/scripts/impact.py --quick --spec-id 1.1
   python3 .spectra/scripts/impact.py --quick --diff
@@ -60,7 +60,7 @@ from typing import Any, Optional
 import yaml
 
 
-TRACE_MAPPING_PATH = Path(".trace-mapping.yaml")
+TRACE_MAPPING_PATH = Path(".spectra/trace-mapping.yaml")
 
 # 言語プロファイルを読み込み
 try:
@@ -95,7 +95,7 @@ DESIGN_TAG_RE = re.compile(r'<!--\s*@design\s+(.+?)\s*-->', re.MULTILINE)
 # ── 影響度バンド（Green/Amber/Gray） ──
 # 証拠タイプごとの重み
 BAND_WEIGHTS = {
-    "mapping": 40,         # .trace-mapping.yaml に直接記載
+    "mapping": 40,         # .spectra/trace-mapping.yaml に直接記載
     "impl_tag": 25,        # @impl タグ
     "verifies_tag": 20,    # @verifies タグ
     "crg_direct": 15,      # CRG 1 hop（直接 import/呼び出し）
@@ -123,7 +123,7 @@ def _compute_file_band(
     Args:
         file_path: 評価対象のファイルパス
         spec_id: 対象要件ID
-        in_mapping: .trace-mapping.yaml に記載されているか
+        in_mapping: .spectra/trace-mapping.yaml に記載されているか
         has_impl: @impl タグが一致するか
         has_verifies: @verifies タグが一致するか
         crg_hops: CRG 推移的距離（None = 未計測）
@@ -138,7 +138,7 @@ def _compute_file_band(
     if in_mapping:
         score += BAND_WEIGHTS["mapping"]
         evidence.append({"type": "mapping", "weight": BAND_WEIGHTS["mapping"],
-                         "detail": ".trace-mapping.yaml"})
+                         "detail": ".spectra/trace-mapping.yaml"})
     if has_impl:
         score += BAND_WEIGHTS["impl_tag"]
         evidence.append({"type": "impl_tag", "weight": BAND_WEIGHTS["impl_tag"],
@@ -251,7 +251,7 @@ def _filter_by_band(banded: dict, band_filter: str) -> list[str]:
 
 
 def load_mapping(path: Path = TRACE_MAPPING_PATH) -> list[dict]:
-    """.trace-mapping.yaml を読み込む。"""
+    """.spectra/trace-mapping.yaml を読み込む。"""
     if not path.exists():
         return []
     with open(path) as f:
@@ -384,7 +384,7 @@ def _run_crg_cli_query(subcommand: str, target: str, cli_path: str) -> Optional[
         return None
 
 
-# ── 標準モード（.trace-mapping.yaml 必要） ──
+# ── 標準モード（.spectra/trace-mapping.yaml 必要） ──
 
 
 def impact_from_spec(mappings: list[dict], spec_id: str, use_crg: bool = False,
@@ -392,7 +392,7 @@ def impact_from_spec(mappings: list[dict], spec_id: str, use_crg: bool = False,
     """仕様 ID から影響範囲を分析する。"""
     matched = find_by_spec_id(mappings, spec_id)
     if not matched:
-        return {"error": f"spec-id '{spec_id}' not found in .trace-mapping.yaml"}
+        return {"error": f"spec-id '{spec_id}' not found in .spectra/trace-mapping.yaml"}
 
     result: dict[str, Any] = {
         "query_type": "spec\u2192code",
@@ -447,7 +447,7 @@ def impact_from_code(mappings: list[dict], filepath: str, use_crg: bool = False,
         matched = find_by_symbol(mappings, Path(filepath).stem)
 
     if not matched:
-        return {"error": f"'{filepath}' not found in .trace-mapping.yaml"}
+        return {"error": f"'{filepath}' not found in .spectra/trace-mapping.yaml"}
 
     result: dict[str, Any] = {
         "query_type": "code\u2192spec",
@@ -530,7 +530,7 @@ def impact_from_diff(mappings: list[dict], use_crg: bool = False,
     }
 
 
-# ── Quick モード（.trace-mapping.yaml 不要） ──
+# ── Quick モード（.spectra/trace-mapping.yaml 不要） ──
 
 
 def _grep_tags(project_dir: Path, tag_re: re.Pattern, file_suffixes: tuple[str, ...]) -> dict[str, list[str]]:
@@ -577,7 +577,7 @@ def _grep_design_tags(project_dir: Path) -> dict[str, list[str]]:
 
 def quick_impact_from_file(project_dir: Path, filepath: str) -> dict:
     """
-    --quick --file <path>: .trace-mapping.yaml なしでファイルの @impl タグから
+    --quick --file <path>: .spectra/trace-mapping.yaml なしでファイルの @impl タグから
     関連する spec やテストを grep で見つける。
     """
     target = Path(filepath)
@@ -675,7 +675,7 @@ def quick_impact_from_file(project_dir: Path, filepath: str) -> dict:
 
 def quick_impact_from_spec(project_dir: Path, spec_id: str) -> dict:
     """
-    --quick --spec-id <id>: .trace-mapping.yaml なしで要件IDから
+    --quick --spec-id <id>: .spectra/trace-mapping.yaml なしで要件IDから
     関連する実装コードやテストを grep で見つける。
     """
     impls = _grep_impl_tags(project_dir)
@@ -692,7 +692,7 @@ def quick_impact_from_spec(project_dir: Path, spec_id: str) -> dict:
         "design_files": designs.get(spec_id, []),
     }
 
-    # 合体（.trace-mapping.yaml ライクに整形）
+    # 合体（.spectra/trace-mapping.yaml ライクに整形）
     if result["impl_files"] or result["test_files"] or result["spec_files"]:
         result["mapping"] = {
             "id": spec_id,
@@ -811,7 +811,7 @@ def cmd_rename(project_dir: Path, old_id: str, new_id: str, dry_run: bool = Fals
             continue
         _scan_and_replace(fpath, "_Requirements_/_Depends_", lambda c: id_re.sub(new_id, c))
 
-    # 5. .trace-mapping.yaml: id: "OLD" → id: "NEW"
+    # 5. .spectra/trace-mapping.yaml: id: "OLD" → id: "NEW"
     mapping_path = project_dir / TRACE_MAPPING_PATH
     if mapping_path.exists():
         def _replace_mapping_id(content: str) -> str:
@@ -821,7 +821,7 @@ def cmd_rename(project_dir: Path, old_id: str, new_id: str, dry_run: bool = Fals
                 f'id: "{new_id}"',
                 content,
             )
-        _scan_and_replace(mapping_path, "id: in .trace-mapping.yaml", _replace_mapping_id)
+        _scan_and_replace(mapping_path, "id: in .spectra/trace-mapping.yaml", _replace_mapping_id)
 
     return {
         "query_type": "rename",
@@ -1525,7 +1525,7 @@ def cmd_serve(mappings: list[dict], result: dict, port: int = 0,
 
 
 def main():
-    parser = argparse.ArgumentParser(description="CRG + .trace-mapping.yaml 影響分析、または --quick 簡易影響分析")
+    parser = argparse.ArgumentParser(description="CRG + .spectra/trace-mapping.yaml 影響分析、または --quick 簡易影響分析")
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--spec-id", type=str, help="影響分析: 仕様IDからコード影響")
     group.add_argument("--file", type=str, help="影響分析: コードファイルから仕様影響")
@@ -1537,7 +1537,7 @@ def main():
     parser.add_argument("--crg", action="store_true", help="CRG (code-review-graph) ツールと連携")
     parser.add_argument("--crg-hook", type=str, help="CRG クエリ用の外部スクリプト")
     parser.add_argument("--json", action="store_true", help="JSON 出力")
-    parser.add_argument("--quick", action="store_true", help=".trace-mapping.yaml 不要の簡易モード（@impl/@spec/@verifies を grep）")
+    parser.add_argument("--quick", action="store_true", help=".spectra/trace-mapping.yaml 不要の簡易モード（@impl/@spec/@verifies を grep）")
     parser.add_argument("--band", type=str,
                         choices=["green", "amber", "gray", "green+", "amber+"],
                         help="バンドフィルター（green/amber/gray/green+/amber+）。指定したバンド以上の項目のみ表示")
@@ -1572,7 +1572,7 @@ def main():
         else:
             result = cmd_rename(project_dir, old_id, new_id, args.dry_run)
     elif args.quick:
-        # Quick モード: .trace-mapping.yaml 不要
+        # Quick モード: .spectra/trace-mapping.yaml 不要
         if args.spec_id:
             result = quick_impact_from_spec(project_dir, args.spec_id)
         elif args.file:
@@ -1582,7 +1582,7 @@ def main():
         elif args.list:
             result = {"note": "--list is not supported in --quick mode"}
     else:
-        # 標準モード: .trace-mapping.yaml 必須
+        # 標準モード: .spectra/trace-mapping.yaml 必須
         mappings = load_mapping(project_dir / TRACE_MAPPING_PATH)
         if not mappings:
             print(f"ERROR: {TRACE_MAPPING_PATH} not found or empty. Use --quick for grep-based analysis.",

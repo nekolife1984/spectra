@@ -2,9 +2,9 @@
 Unit and integration tests for impact.py.
 
 impact.py is a 1667-line tool that drives the spectra traceability story:
-  - load .trace-mapping.yaml
+  - load .spectra/trace-mapping.yaml
   - classify impact into Green/Amber/Gray bands
-  - run --quick grep-based impact when no .trace-mapping.yaml exists
+  - run --quick grep-based impact when no .spectra/trace-mapping.yaml exists
   - drive CRG integration, graph rendering, HTTP serve, etc.
 
 Until this commit, the file shipped with zero tests, so any regression

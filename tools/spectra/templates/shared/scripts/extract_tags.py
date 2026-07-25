@@ -16,7 +16,7 @@ Usage:
   --file <path>      単一ファイルをスキャン
   --format text|json 出力形式（デフォルト: text）
   --check-missing    要件タグなしのPythonファイルを警告（exit 1 で終了）
-  --trace-mapping    出力を .trace-mapping.yaml 形式で表示
+  --trace-mapping    出力を .spectra/trace-mapping.yaml 形式で表示
 """
 
 import argparse
@@ -117,7 +117,7 @@ def format_text(tags: list[dict]) -> str:
 
 
 def format_trace_mapping(tags: list[dict]) -> str:
-    """.trace-mapping.yaml に追記可能な形式で出力する。"""
+    """.spectra/trace-mapping.yaml に追記可能な形式で出力する。"""
     lines = []
     # impl タグをファイルごとに集約
     impl_by_file: dict[str, list[str]] = {}
@@ -137,7 +137,7 @@ def format_trace_mapping(tags: list[dict]) -> str:
             feature_by_file[f].add(t["value"].strip())
 
     lines.append("# 以下は extract_tags.py の出力です。")
-    lines.append("# .trace-mapping.yaml にコピーして使用してください。\n")
+    lines.append("# .spectra/trace-mapping.yaml にコピーして使用してください。\n")
 
     for filepath, impl_ids in sorted(impl_by_file.items()):
         modules = module_by_file.get(filepath, set())
@@ -162,7 +162,7 @@ def main():
     parser.add_argument("--file", type=str, help="単一ファイルをスキャン")
     parser.add_argument("--format", choices=["text", "json"], default="text", help="出力形式")
     parser.add_argument("--check-missing", action="store_true", help="タグのないファイルを警告")
-    parser.add_argument("--trace-mapping", action="store_true", help=".trace-mapping.yaml 追記形式で出力")
+    parser.add_argument("--trace-mapping", action="store_true", help=".spectra/trace-mapping.yaml 追記形式で出力")
     args = parser.parse_args()
 
     if not args.dir and not args.file:

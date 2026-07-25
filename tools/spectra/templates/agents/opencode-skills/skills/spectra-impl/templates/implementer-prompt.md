@@ -65,7 +65,7 @@ Before self-review, tag each changed file and update spec documents with traceab
 - Add `<!-- @design ComponentName -->` before each component section in `design.md`
 - Add `<!-- @satisfies X.Y -->` before each component section in `design.md` to declare which requirements it satisfies
 
-**Gate**: If `.trace-mapping.yaml` exists, run the trace completeness gate:
+**Gate**: If `.spectra/trace-mapping.yaml` exists, run the trace completeness gate:
   ```bash
   python3 .spectra/scripts/check-trace-completeness.py
   ```

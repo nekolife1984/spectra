@@ -78,7 +78,7 @@ Step 4: Review Requirements Draft:
    - Update `updated_at` timestamp
 
 6. **Run @spec Completeness Gate**:
-   - If `.trace-mapping.yaml` exists, verify `@spec` tags match the mapping:
+   - If `.spectra/trace-mapping.yaml` exists, verify `@spec` tags match the mapping:
      ```bash
      python3 .spectra/scripts/check-trace-completeness.py --check spec --project-dir .
      ```

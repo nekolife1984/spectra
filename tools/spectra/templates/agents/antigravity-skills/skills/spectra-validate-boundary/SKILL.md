@@ -13,7 +13,7 @@ This skill performs **task boundary vs. actual code graph verification**. It use
   - Narrow boundaries (actual impact wider than declared) are detected
   - Wide boundaries (declared scope broader than actual) are detected
   - Undeclared dependencies missing from `_Depends:_` are detected
-  - `.trace-mapping.yaml` consistency with `@impl` tags is verified
+  - `.spectra/trace-mapping.yaml` consistency with `@impl` tags is verified
 </background_information>
 
 <instructions>
@@ -23,7 +23,7 @@ This skill performs **task boundary vs. actual code graph verification**. It use
 1. Verify `.spectra/specs/$1/tasks.md` exists
 2. If `$1` is empty, scan all features in `.spectra/specs/`
 3. Extract all `_Boundary:_` annotations from tasks.md
-4. Read `.trace-mapping.yaml`
+4. Read `.spectra/trace-mapping.yaml`
 
 ## Step 2: CRG Code Graph Verification
 
@@ -70,14 +70,14 @@ Rate each `_Boundary:_`:
 If user explicitly requests auto-fix (`--fix`):
 1. Expand narrow `_Boundary:_` to match CRG impact
 2. Add discovered deps to `_Depends:_`
-3. Update `.trace-mapping.yaml`
+3. Update `.spectra/trace-mapping.yaml`
 
 </instructions>
 
 ## Critical Constraints
 
 - Default is **read-only** mode. Auto-fix only on explicit request.
-- If CRG is unavailable, report and run basic `.trace-mapping.yaml` validation only.
+- If CRG is unavailable, report and run basic `.spectra/trace-mapping.yaml` validation only.
 
 ## Usage
 

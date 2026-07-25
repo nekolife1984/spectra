@@ -29,7 +29,7 @@ Invoke-WebRequest -Uri https://raw.githubusercontent.com/nekolife1984/spectra/ma
 1. spectra スキルのインストール（エージェント・言語を選択）
 2. code-review-graph のインストールと MCP 設定
 3. コードグラフの初回ビルド
-4. `.trace-mapping.yaml` の初期化
+4. `.spectra/trace-mapping.yaml` の初期化
 5. pre-commit hook のセットアップ（コミット時にスナップショット自動更新）
 6. 初回スナップショットの保存
 
@@ -66,10 +66,10 @@ bash .spectra/scripts/setup-crg.sh --yes
 | `spectra-discovery` | 既存拡張時に影響範囲を自動表示 |
 | `spectra-design` | コードグラフ分析で設計を強化 |
 | `spectra-tasks` | `_Boundary:_` を CRG で機械検証 |
-| `spectra-init` | `.trace-mapping.yaml` スケルトン自動生成 |
-| `spectra-batch` | `.trace-mapping.yaml` 一括生成 |
+| `spectra-init` | `.spectra/trace-mapping.yaml` スケルトン自動生成 |
+| `spectra-batch` | `.spectra/trace-mapping.yaml` 一括生成 |
 | `spectra-review` | CRG 強化された境界検証 |
-| `spectra-impl` | `@impl` タグ自動スキャン + `.trace-mapping.yaml` 更新 |
+| `spectra-impl` | `@impl` タグ自動スキャン + `.spectra/trace-mapping.yaml` 更新 |
 | `spectra-validate-impl` | CRG フロー検証 |
 | `spectra-debug` | CRG グラフ調査 |
 | `spectra-verify-completion` | CRG アーキテクチャ整合性チェック |

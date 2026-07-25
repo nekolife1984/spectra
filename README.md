@@ -29,7 +29,7 @@ The script automates:
 1. Install spectra skills (choose agent & language)
 2. Install and configure code-review-graph
 3. Build the initial code graph
-4. Initialize `.trace-mapping.yaml`
+4. Initialize `.spectra/trace-mapping.yaml`
 5. Set up pre-commit hook (auto snapshot on every commit)
 6. Save initial snapshot
 
@@ -66,10 +66,10 @@ Most skills integrate with code-review-graph for graph-aware code analysis:
 | `spectra-discovery` | Auto-assess impact scope when extending existing specs |
 | `spectra-design` | Code graph analysis to inform architecture design |
 | `spectra-tasks` | Machine-verify `_Boundary:_` against actual code graph |
-| `spectra-init` | Auto-generate `.trace-mapping.yaml` skeleton |
-| `spectra-batch` | Auto-generate `.trace-mapping.yaml` for all specs |
+| `spectra-init` | Auto-generate `.spectra/trace-mapping.yaml` skeleton |
+| `spectra-batch` | Auto-generate `.spectra/trace-mapping.yaml` for all specs |
 | `spectra-review` | CRG-enhanced boundary respect check |
-| `spectra-impl` | Auto-scan `@impl` tags and update `.trace-mapping.yaml` |
+| `spectra-impl` | Auto-scan `@impl` tags and update `.spectra/trace-mapping.yaml` |
 | `spectra-validate-impl` | CRG flow validation |
 | `spectra-debug` | CRG graph investigation |
 | `spectra-verify-completion` | CRG architecture alignment check |

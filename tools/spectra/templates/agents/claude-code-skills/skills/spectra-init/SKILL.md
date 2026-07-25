@@ -24,8 +24,8 @@ Generate a unique feature name from the project description ($ARGUMENTS) and ini
      - `{{PROJECT_DESCRIPTION}}` → from brief.md if available, otherwise $ARGUMENTS
      - `{{LANG_CODE}}` → language code (detect from user's input language, default to `en`)
    - Write `spec.json` and `requirements.md` to spec directory
-6. **Initialize `.trace-mapping.yaml`** (if it doesn't exist):
-   - If `.trace-mapping.yaml` doesn't exist in the project root, create it with a skeleton entry for this spec
+6. **Initialize `.spectra/trace-mapping.yaml`** (if it doesn't exist):
+   - If `.spectra/trace-mapping.yaml` doesn't exist in the project root, create it with a skeleton entry for this spec
    - Read `requirements.md` to extract requirement IDs (e.g., `1.1`, `2.1`)
    - Write a basic entry for each requirement:
      ```yaml
@@ -40,7 +40,7 @@ Generate a unique feature name from the project description ($ARGUMENTS) and ini
          tasks: []
          tags: ["@impl"]
      ```
-   - If `.trace-mapping.yaml` already exists, append new entries without duplicating existing `id` values
+   - If `.spectra/trace-mapping.yaml` already exists, append new entries without duplicating existing `id` values
 
 ## Important Constraints
 - Do NOT generate requirements, design, or tasks. This skill only creates spec.json and requirements.md.

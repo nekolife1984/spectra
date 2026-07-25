@@ -118,14 +118,14 @@ Before writing `tasks.md`, run one lightweight independent sanity review of the 
   - Update `updated_at` timestamp
 
 **Run Spec Trace Completeness Gate**:
-- If `.trace-mapping.yaml` exists, verify all spec-side traceability:
+- If `.spectra/trace-mapping.yaml` exists, verify all spec-side traceability:
   ```bash
   python3 .spectra/scripts/check-trace-completeness.py --check spec,design,requirements,depends --project-dir .
   ```
 - This checks:
-  - `@spec` tags in requirements.md ↔ `.trace-mapping.yaml`
-  - `@design` / `@satisfies` tags in design.md ↔ `.trace-mapping.yaml`
-  - `_Requirements:_` in tasks.md ↔ `.trace-mapping.yaml`
+  - `@spec` tags in requirements.md ↔ `.spectra/trace-mapping.yaml`
+  - `@design` / `@satisfies` tags in design.md ↔ `.spectra/trace-mapping.yaml`
+  - `_Requirements:_` in tasks.md ↔ `.spectra/trace-mapping.yaml`
   - `_Depends:_` syntax and task ID validity
 - If the gate fails, fix the gaps and re-run until it passes
 
@@ -165,7 +165,7 @@ Provide brief summary in the language specified in spec.json:
 3. **Trace Gate**:
    - ✅ @spec tags in requirements.md
    - ✅ @design/@satisfies tags in design.md
-   - ✅ _Requirements:_ in tasks.md mapped to .trace-mapping.yaml
+   - ✅ _Requirements:_ in tasks.md mapped to .spectra/trace-mapping.yaml
    - ✅ _Depends:_ syntax and task ID validity
 4. **Quality Validation**:
    - ✅ All requirements mapped to tasks

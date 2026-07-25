@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """check-impl-completeness.py — @impl タグの抜けチェックゲート。
 
-.trace-mapping.yaml に登録された要件IDに対応する @impl タグが、
+.spectra/trace-mapping.yaml に登録された要件IDに対応する @impl タグが、
 実際のコードに存在するかどうかを検証する。
 
 Usage:
-  # デフォルト（カレントディレクトリの .trace-mapping.yaml を読む）
+  # デフォルト（カレントディレクトリの .spectra/trace-mapping.yaml を読む）
   python3 .spectra/scripts/check-impl-completeness.py
 
   # 特定のプロジェクトルートを指定
@@ -14,8 +14,8 @@ Usage:
   # 全ソースファイルの @impl タグ有無もチェック（trace-mapping の有無問わず）
   python3 .spectra/scripts/check-impl-completeness.py --check-all-sources
 
-  # .trace-mapping.yaml のパスを明示指定
-  python3 .spectra/scripts/check-impl-completeness.py --trace-mapping /path/to/.trace-mapping.yaml
+  # .spectra/trace-mapping.yaml のパスを明示指定
+  python3 .spectra/scripts/check-impl-completeness.py --trace-mapping /path/to/.spectra/trace-mapping.yaml
 
   # JSON 出力（CI で機械的に処理したい場合）
   python3 .spectra/scripts/check-impl-completeness.py --format json
@@ -53,7 +53,7 @@ SKIP_DIRS = {"__pycache__", ".venv", "node_modules", ".git", "dist", "build", ".
 
 
 def load_trace_mapping(path: Path) -> list[dict]:
-    """.trace-mapping.yaml を読み込み、マッピングリストを返す。"""
+    """.spectra/trace-mapping.yaml を読み込み、マッピングリストを返す。"""
     if not path.exists():
         return []
     try:
@@ -116,7 +116,7 @@ def check_mapping_completeness(
     file_tags: dict[str, list[str]],
     project_dir: Path,
 ) -> list[dict]:
-    """.trace-mapping.yaml の各マッピングに対して @impl タグの存在を検証する。"""
+    """.spectra/trace-mapping.yaml の各マッピングに対して @impl タグの存在を検証する。"""
     findings: list[dict] = []
 
     for mapping in mappings:
@@ -223,7 +223,7 @@ def format_text(findings: list[dict]) -> str:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Check @impl tag completeness against .trace-mapping.yaml",
+        description="Check @impl tag completeness against .spectra/trace-mapping.yaml",
     )
     parser.add_argument(
         "--project-dir", type=str, default=".",
@@ -231,7 +231,7 @@ def main():
     )
     parser.add_argument(
         "--trace-mapping", type=str,
-        help="Path to .trace-mapping.yaml (default: <project-dir>/.trace-mapping.yaml)",
+        help="Path to .spectra/trace-mapping.yaml (default: <project-dir>/.spectra/trace-mapping.yaml)",
     )
     parser.add_argument(
         "--check-all-sources", action="store_true",
@@ -248,12 +248,12 @@ def main():
         print(f"ERROR: Project directory '{project_dir}' does not exist", file=sys.stderr)
         sys.exit(1)
 
-    trace_mapping_path = Path(args.trace_mapping) if args.trace_mapping else project_dir / ".trace-mapping.yaml"
+    trace_mapping_path = Path(args.trace_mapping) if args.trace_mapping else project_dir / ".spectra/trace-mapping.yaml"
 
     all_findings: list[dict] = []
     has_error = False
 
-    # ── Step 1: .trace-mapping.yaml vs @impl tags ──
+    # ── Step 1: .spectra/trace-mapping.yaml vs @impl tags ──
     mappings = load_trace_mapping(trace_mapping_path)
 
     if mappings:
@@ -267,7 +267,7 @@ def main():
         if trace_mapping_path.exists():
             print(f"⚠️  {trace_mapping_path} exists but has no valid mappings", file=sys.stderr)
         else:
-            print(f"ℹ️  No .trace-mapping.yaml found at {trace_mapping_path}", file=sys.stderr)
+            print(f"ℹ️  No .spectra/trace-mapping.yaml found at {trace_mapping_path}", file=sys.stderr)
 
     # ── Step 2: --check-all-sources（全ソースの @impl 有無）──
     if args.check_all_sources:

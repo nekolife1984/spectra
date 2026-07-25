@@ -7,7 +7,7 @@ ln -sf ../../.spectra/scripts/pre-commit.sh .git/hooks/pre-commit
 ```
 
 This automatically runs on every `git commit`:
-1. **`@impl` tag completeness check** — verifies that `.trace-mapping.yaml` entries have corresponding `@impl` tags in the code (blocks commit if missing)
+1. **`@impl` tag completeness check** — verifies that `.spectra/trace-mapping.yaml` entries have corresponding `@impl` tags in the code (blocks commit if missing)
 2. **Traceability snapshot update** — records code changes for drift detection
 
 ## Verification

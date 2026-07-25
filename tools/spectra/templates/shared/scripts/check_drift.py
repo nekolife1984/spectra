@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """check_drift.py — コードと仕様書の間のドリフト（乖離）を検出する。
 
-スナップショットベースで動作し、コードの @impl タグと .trace-mapping.yaml を比較する。
+スナップショットベースで動作し、コードの @impl タグと .spectra/trace-mapping.yaml を比較する。
 reconciliation_ledger（設計判断台帳）にも対応。
 
 Usage:
@@ -42,7 +42,7 @@ from typing import Any, Optional
 import yaml
 
 # 定数
-TRACE_MAPPING_PATH = Path(".trace-mapping.yaml")
+TRACE_MAPPING_PATH = Path(".spectra/trace-mapping.yaml")
 SNAPSHOT_PATH = Path(".spectra/trace-snapshot.json")
 LEDGER_PATH = Path(".spectra/reconciliation_ledger.yaml")
 
@@ -52,7 +52,7 @@ _EXTRACT_TAGS = _SCRIPT_DIR / "extract_tags.py"
 
 
 def load_mapping(path: Path = TRACE_MAPPING_PATH) -> list[dict]:
-    """.trace-mapping.yaml を読み込む。"""
+    """.spectra/trace-mapping.yaml を読み込む。"""
     if not path.exists():
         return []
     with open(path) as f:
@@ -155,7 +155,7 @@ def detect_drift(mappings: list[dict], snapshot: dict) -> list[dict]:
                 "detail": f"File content changed (hash: {current_hash[:12]} vs {snap_info.get('hash', '?')[:12]})",
             })
 
-    # 2. 新しい @impl タグの追加をチェック（.trace-mapping.yaml に未登録）
+    # 2. 新しい @impl タグの追加をチェック（.spectra/trace-mapping.yaml に未登録）
     current_tags = extract_tags_from_dir()
     registered_ids = {m["id"] for m in mappings}
 
@@ -168,10 +168,10 @@ def detect_drift(mappings: list[dict], snapshot: dict) -> list[dict]:
                         "type": "UNREGISTERED_IMPL_TAG",
                         "file": tag["file"],
                         "tag": v,
-                        "detail": f"@impl {v} in {tag['file']} not found in .trace-mapping.yaml",
+                        "detail": f"@impl {v} in {tag['file']} not found in .spectra/trace-mapping.yaml",
                     })
 
-    # 3. .trace-mapping.yaml にあるがコードにない @impl タグ
+    # 3. .spectra/trace-mapping.yaml にあるがコードにない @impl タグ
     tag_map: dict[str, list[str]] = {}
     for tag in current_tags:
         if tag["tag"] == "impl":
@@ -259,7 +259,7 @@ def main():
 
     mappings = load_mapping()
     if not mappings:
-        print("WARNING: .trace-mapping.yaml not found or empty", file=sys.stderr)
+        print("WARNING: .spectra/trace-mapping.yaml not found or empty", file=sys.stderr)
 
     if args.snapshot:
         snapshot = build_snapshot(mappings)

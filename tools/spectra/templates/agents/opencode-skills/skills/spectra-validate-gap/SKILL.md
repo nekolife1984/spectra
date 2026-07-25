@@ -53,10 +53,10 @@ After all parallel research completes, synthesize findings for gap analysis.
 
 4. **CRG Gap Detection** (when code-review-graph is available):
    - **Code without spec**: Query `@impl` tag coverage — which code files have no corresponding spec ID?
-     - `grep -rn "@impl" src/` vs `.trace-mapping.yaml` entries
-     - Report: "N functions have @impl tags not registered in .trace-mapping.yaml"
+     - `grep -rn "@impl" src/` vs `.spectra/trace-mapping.yaml` entries
+     - Report: "N functions have @impl tags not registered in .spectra/trace-mapping.yaml"
    - **Spec without code**: Which requirements have no code yet?
-     - Cross-reference `.trace-mapping.yaml` empty `code.files` with pending tasks
+     - Cross-reference `.spectra/trace-mapping.yaml` empty `code.files` with pending tasks
      - Report: "N requirements have no code files mapped yet"
    - **Orphan modules**: Run `code-review-graph query` for modules that exist in code but aren't mentioned in any spec
      - `code-review-graph query callers_of` on each major module to find disconnected code

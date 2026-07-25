@@ -4,7 +4,7 @@
 # 有効化: ln -sf ../../.spectra/scripts/pre-commit.sh .git/hooks/pre-commit
 #
 # 以下のチェックを実行する:
-#   1. .trace-mapping.yaml とコードの @impl タグを突き合わせ
+#   1. .spectra/trace-mapping.yaml とコードの @impl タグを突き合わせ
 #   2. コード変更のスナップショットを更新
 
 PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || echo '.')"
@@ -14,7 +14,7 @@ EXIT_CODE=0
 echo "🔍 [pre-commit] Running traceability checks..."
 
 # ── 1. @impl タグの完全性チェック ──
-if [ -f "$SCRIPT_DIR/check-impl-completeness.py" ] && [ -f "$PROJECT_ROOT/.trace-mapping.yaml" ]; then
+if [ -f "$SCRIPT_DIR/check-impl-completeness.py" ] && [ -f "$PROJECT_ROOT/.spectra/trace-mapping.yaml" ]; then
     echo "  → Checking @impl tag completeness..."
     python3 "$SCRIPT_DIR/check-impl-completeness.py" --project-dir "$PROJECT_ROOT"
     if [ $? -ne 0 ]; then
@@ -30,7 +30,7 @@ elif [ -f "$SCRIPT_DIR/extract_tags.py" ]; then
 fi
 
 # ── 2. スナップショット更新（コード変更を記録） ──
-if [ -f "$SCRIPT_DIR/check_drift.py" ] && [ -f "$PROJECT_ROOT/.trace-mapping.yaml" ]; then
+if [ -f "$SCRIPT_DIR/check_drift.py" ] && [ -f "$PROJECT_ROOT/.spectra/trace-mapping.yaml" ]; then
     echo "  → Updating traceability snapshot..."
     python3 "$SCRIPT_DIR/check_drift.py" --snapshot 2>/dev/null || true
 fi

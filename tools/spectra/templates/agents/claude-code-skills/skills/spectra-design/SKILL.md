@@ -145,7 +145,7 @@ Once all research results return, synthesize in main context before proceeding.
    - Update `updated_at` timestamp
 
 3. **Run @design/@satisfies Completeness Gate**:
-   - If `.trace-mapping.yaml` exists, verify `@design` and `@satisfies` tags match the mapping:
+   - If `.spectra/trace-mapping.yaml` exists, verify `@design` and `@satisfies` tags match the mapping:
      ```bash
      python3 .spectra/scripts/check-trace-completeness.py --check design --project-dir .
      ```

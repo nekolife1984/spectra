@@ -162,7 +162,7 @@ python3 .spectra/scripts/impact.py --quick --diff --band amber+
 
 | 証拠タイプ | 重み | 説明 |
 |-----------|:----:|------|
-| `.trace-mapping.yaml` | 40 | 設計者が明示的にリンク |
+| `.spectra/trace-mapping.yaml` | 40 | 設計者が明示的にリンク |
 | `@impl` タグ | 25 | 実装者がコードにタグ付け |
 | `@verifies` タグ | 20 | テストが要件を検証 |
 | CRG 直接（1 hop） | 15 | import/呼び出し関係 |
@@ -290,7 +290,7 @@ python3 .spectra/scripts/check-trace-completeness.py --check coverage
 # @verifies ファイルの実アサーションチェック
 python3 .spectra/scripts/check-trace-completeness.py --check assertions
 
-# .trace-mapping.yaml 参照コードの鮮度チェック（90日ルール）
+# .spectra/trace-mapping.yaml 参照コードの鮮度チェック（90日ルール）
 python3 .spectra/scripts/check-trace-completeness.py --check stale
 
 # CI/CD で全P0チェックと一緒に実行
@@ -370,10 +370,10 @@ python3 .spectra/scripts/check_drift.py --diff --gate
 # @impl タグが欠けてるファイルを警告
 python3 .spectra/scripts/extract_tags.py --check-missing
 
-# .trace-mapping.yaml 追記形式でタグ出力
+# .spectra/trace-mapping.yaml 追記形式でタグ出力
 python3 .spectra/scripts/extract_tags.py --trace-mapping
 
-# 簡易影響分析（.trace-mapping.yaml 不要）
+# 簡易影響分析（.spectra/trace-mapping.yaml 不要）
 python3 .spectra/scripts/impact.py --quick --file src/auth/login.py
 python3 .spectra/scripts/impact.py --quick --spec-id 1.1
 python3 .spectra/scripts/impact.py --quick --diff
@@ -382,7 +382,7 @@ python3 .spectra/scripts/impact.py --quick --diff
 ## アーキテクチャ
 
 ```
-.trace-mapping.yaml         ← 仕様↔コードの対応表（真実の源泉）
+.spectra/trace-mapping.yaml         ← 仕様↔コードの対応表（真実の源泉）
 .spectra/scripts/            ← 分析スクリプト群
 strands-chat/**/*.py        ← @impl タグが埋め込まれたコード
 .git/hooks/pre-commit       ← pre-commit hook（check_drift.py --snapshot）
@@ -400,6 +400,6 @@ GitHub Actions / cron       ← 定期監視（オプション）
 
 ## 注意事項
 
-- `.trace-mapping.yaml` は手動でメンテナンスする。`extract_tags.py --trace-mapping` が追記用の出力を生成する。
+- `.spectra/trace-mapping.yaml` は手動でメンテナンスする。`extract_tags.py --trace-mapping` が追記用の出力を生成する。
 - スナップショット `.spectra/trace-snapshot.json` は gitignore 対象。CI では毎回 `--snapshot` してから `--check` するか、`--diff --gate` を使う。
-- CRG MCP が利用できない環境では `--crg` オプションはスタブとして動作し、影響分析は `.trace-mapping.yaml` の直接マッピングのみに基づく。
+- CRG MCP が利用できない環境では `--crg` オプションはスタブとして動作し、影響分析は `.spectra/trace-mapping.yaml` の直接マッピングのみに基づく。

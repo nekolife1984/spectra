@@ -145,7 +145,7 @@ Wait for completion.
 After Phase 4, run the spec trace completeness gate, then a lightweight sanity review before claiming completion.
 
 **Trace Completeness Gate**:
-- If `.trace-mapping.yaml` exists, verify all spec-side traceability:
+- If `.spectra/trace-mapping.yaml` exists, verify all spec-side traceability:
   ```bash
   python3 .spectra/scripts/check-trace-completeness.py --check spec,design,requirements,depends --project-dir .
   ```

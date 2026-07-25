@@ -51,11 +51,11 @@ Skills are located in `.agents/skills/spectra-*/SKILL.md` (or agent-specific pat
 - `spectra-review` — task-local adversarial review protocol used by reviewer subagents
 - `spectra-debug` — root-cause-first debug protocol used by debugger subagents
 - `spectra-verify-completion` — fresh-evidence gate before success or completion claims
-- `spectra-trace` — trace spec changes to code impact (requires `.trace-mapping.yaml`)
+- `spectra-trace` — trace spec changes to code impact (requires `.spectra/trace-mapping.yaml`)
 - `spectra-impact` — trace code changes back to affected specs
 - `spectra-validate-boundary` — mechanically verify `_Boundary:_` against CRG code graph
 - **CRG MCP tools** (code-review-graph) are used by design, review, validation, and debug skills for code-graph-aware impact analysis
-- **Traceability**: Projects with `.trace-mapping.yaml` get automated impact analysis via `.spectra/scripts/impact.py` and drift detection via `.spectra/scripts/check_drift.py`
+- **Traceability**: Projects with `.spectra/trace-mapping.yaml` get automated impact analysis via `.spectra/scripts/impact.py` and drift detection via `.spectra/scripts/check_drift.py`
 - **If there is even a 1% chance a skill applies to the current task, invoke it.** Do not skip skills because the task seems simple.
 
 ## Development Rules

@@ -19,7 +19,7 @@
   - _Boundary: {{COMPONENT_NAMES}}_ *((P)タスクのみ。スコープが明らかな場合は省略可)*
   - _Depends: {{TASK_IDS}}_ *(自明でないクロス境界依存関係のみ。ほとんどのタスクは省略)*
 
-> **トレーサビリティ**: `_Requirements:_` の要件IDは、実装時に `# @impl X.Y` タグとしてコードに自動付与されます。`_Boundary:_` は `.trace-mapping.yaml` の `code.files` / `code.symbols` と照合され、CRG `get_impact_radius_tool` で機械検証可能です。
+> **トレーサビリティ**: `_Requirements:_` の要件IDは、実装時に `# @impl X.Y` タグとしてコードに自動付与されます。`_Boundary:_` は `.spectra/trace-mapping.yaml` の `code.files` / `code.symbols` と照合され、CRG `get_impact_radius_tool` で機械検証可能です。
 
 > **並列マーカー**: 並列実行可能なタスクにのみ ` (P)` を付与。`--sequential` モードではマーカーを省略。
 >

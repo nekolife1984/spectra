@@ -110,7 +110,7 @@ For each detected feature:
   ```
 - Run `check-trace-completeness.py --help` for available checks and options (9 checks including @verifies test traceability)
 - If any check fails → flag as Critical (missing traceability = features not linked to specs)
-- If `.trace-mapping.yaml` doesn't exist but the project uses spectra specs → flag as Warning (traceability not configured)
+- If `.spectra/trace-mapping.yaml` doesn't exist but the project uses spectra specs → flag as Warning (traceability not configured)
 
 #### Judgment Checks (read code, compare to spec)
 

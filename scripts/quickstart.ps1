@@ -131,15 +131,15 @@ if (Test-Path $setupCrgPath) {
     Write-Warn "CRG setup skipped"
 }
 
-# ── Step 3: .trace-mapping.yaml ──
-Write-Info "Step 3/4: Checking .trace-mapping.yaml..."
-if (Test-Path ".trace-mapping.yaml") {
-    Write-Ok ".trace-mapping.yaml already exists"
-} elseif (Test-Path ".trace-mapping.example.yaml") {
-    Copy-Item ".trace-mapping.example.yaml" ".trace-mapping.yaml"
-    Write-Ok "Created .trace-mapping.yaml from .trace-mapping.example.yaml"
+# ── Step 3: .spectra/trace-mapping.yaml ──
+Write-Info "Step 3/4: Checking .spectra/trace-mapping.yaml..."
+if (Test-Path ".spectra/trace-mapping.yaml") {
+    Write-Ok ".spectra/trace-mapping.yaml already exists"
+} elseif (Test-Path ".spectra/trace-mapping.example.yaml") {
+    Copy-Item ".spectra/trace-mapping.example.yaml" ".spectra/trace-mapping.yaml"
+    Write-Ok "Created .spectra/trace-mapping.yaml from .spectra/trace-mapping.example.yaml"
 } else {
-    Write-Warn ".trace-mapping.yaml not found. Create one manually later."
+    Write-Warn ".spectra/trace-mapping.yaml not found. Create one manually later."
 }
 
 # ── Step 4: Initial snapshot ──

@@ -1,4 +1,4 @@
-# .trace-mapping.yaml — 仕様 ↔ コード トレーサビリティマッピング
+# .spectra/trace-mapping.yaml — 仕様 ↔ コード トレーサビリティマッピング
 #
 # spectra で生成した specs と実装コードを紐付けるためのファイル。
 # このファイルをプロジェクトルートに配置し、コードに @impl タグを

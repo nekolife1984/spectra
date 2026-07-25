@@ -93,14 +93,14 @@ vectors:
     class: temporal_decay
     priority: P0
     summary: |
-      .trace-mapping.yaml のエントリが長期間（デフォルト90日以上）
+      .spectra/trace-mapping.yaml のエントリが長期間（デフォルト90日以上）
       git blame でコード変更の対象になっておらず、実装と乖離している
       可能性がある。
     invariant: |
-      全 .trace-mapping.yaml エントリの参照先コードが90日以内に
+      全 .spectra/trace-mapping.yaml エントリの参照先コードが90日以内に
       変更されているか、または明示的に frozen マークが付いている。
     mutation: |
-      .trace-mapping.yaml に id を追加するが、該当コードを1年間変更しない。
+      .spectra/trace-mapping.yaml に id を追加するが、該当コードを1年間変更しない。
     expected_detection: caught_amber  # 乖離"可能性"のため amber
     severity: amber
     owner_gate: false
@@ -109,7 +109,7 @@ vectors:
     detection: missed_green
     check_framework: git
     check: |
-      git blame --since=90.days .trace-mapping.yaml
+      git blame --since=90.days .spectra/trace-mapping.yaml
     cli: check_drift.py --check-stale
 
   # ── P0-4: CI gate bypassed ──────────────────────────────────
@@ -215,10 +215,10 @@ vectors:
     class: documentation_debt
     priority: P2
     summary: |
-      .trace-mapping.yaml に description がないエントリがある。
+      .spectra/trace-mapping.yaml に description がないエントリがある。
       何の要件か人間が判断できない。
     invariant: |
-      全 .trace-mapping.yaml mapping エントリに description が
+      全 .spectra/trace-mapping.yaml mapping エントリに description が
       設定されている。
     mutation: |
       description フィールドを削除。
@@ -236,13 +236,13 @@ vectors:
     class: cross_reference_gap
     priority: P2
     summary: |
-      design.md に @satisfies 1.1 があるが、.trace-mapping.yaml
+      design.md に @satisfies 1.1 があるが、.spectra/trace-mapping.yaml
       に id: 1.1 のエントリがない。
     invariant: |
-      全 design.md の @satisfies 参照が .trace-mapping.yaml に
+      全 design.md の @satisfies 参照が .spectra/trace-mapping.yaml に
       エントリを持つ。
     mutation: |
-      .trace-mapping.yaml から該当エントリを削除。
+      .spectra/trace-mapping.yaml から該当エントリを削除。
     expected_detection: caught_red
     severity: red
     owner_gate: false

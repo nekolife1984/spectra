@@ -6,7 +6,7 @@ brownfield-init.py — 既存コードからトレーサビリティを初期化
 spectra のトレーサビリティ設定を自動生成する。
 
 Usage:
-  # コードをスキャンして .spectra/ + .trace-mapping.yaml を生成
+  # コードをスキャンして .spectra/ + .spectra/trace-mapping.yaml を生成
   python3 .spectra/scripts/brownfield-init.py
 
   # ドライラン（変更なし）
@@ -208,7 +208,7 @@ def generate_tasks(main_module: str, spec_id: str, mod_data: dict) -> str:
 
 def generate_trace_mapping(modules: dict[str, dict],
                            spec_ids: dict[str, str]) -> str:
-    """.trace-mapping.yaml を生成する。"""
+    """.spectra/trace-mapping.yaml を生成する。"""
     lines = ["mappings:"]
     for mod_name in sorted(modules.keys()):
         mid = spec_ids[mod_name]
@@ -345,12 +345,12 @@ def main():
         print(f"  📄 .spectra/specs/{mod_name}/design.md")
         print(f"  📄 .spectra/specs/{mod_name}/tasks.md")
 
-    # .trace-mapping.yaml 生成
+    # .spectra/trace-mapping.yaml 生成
     tm_content = generate_trace_mapping(modules, spec_ids)
-    tm_path = project_dir / ".trace-mapping.yaml"
+    tm_path = project_dir / ".spectra/trace-mapping.yaml"
     if not args.dry_run:
         tm_path.write_text(tm_content, encoding="utf-8")
-    print(f"\n  📄 .trace-mapping.yaml  ({len(modules)} mappings)")
+    print(f"\n  📄 .spectra/trace-mapping.yaml  ({len(modules)} mappings)")
 
     # @impl タグ挿入
     if not args.no_tags:
@@ -365,7 +365,7 @@ def main():
     print(f"\n{'✅ Dry-run complete' if args.dry_run else '✅ Brownfield init complete!'}")
     if not args.dry_run:
         print(f"\nNext steps:")
-        print(f"  1. Review .spectra/specs/ and .trace-mapping.yaml")
+        print(f"  1. Review .spectra/specs/ and .spectra/trace-mapping.yaml")
         print(f"  2. Run: python3 .spectra/scripts/check_drift.py --snapshot")
         print(f"  3. Run: python3 .spectra/scripts/check-trace-completeness.py")
 

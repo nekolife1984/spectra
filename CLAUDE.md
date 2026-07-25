@@ -17,13 +17,13 @@ This project integrates **code-review-graph (CRG)** MCP tools for code-graph-awa
 
 ## Traceability
 
-Projects can maintain a `.trace-mapping.yaml` file linking spec IDs to code files, symbols, tasks, and docs.
+Projects can maintain a `.spectra/trace-mapping.yaml` file linking spec IDs to code files, symbols, tasks, and docs.
 Scripts in `.spectra/scripts/` provide automated impact analysis:
 
 | Script | Purpose |
 |--------|---------|
 | `extract_tags.py` | Extract `@impl`/`@module`/`@feature`/`@verifies` from code, `@spec`/`@design`/`@satisfies` from spec docs |
-| `impact.py` | Bidirectional spec\u2194code impact analysis (`--quick` for grep-based mode without .trace-mapping.yaml) |
+| `impact.py` | Bidirectional spec\u2194code impact analysis (`--quick` for grep-based mode without .spectra/trace-mapping.yaml) |
 | `check_drift.py` | Snapshot-based drift detection between code and specs |
 | `check-trace-completeness.py` | **Gate**: Verify @impl, code.files, code.symbols, @module, _Requirements:_, _Depends:_, @spec, @design, @satisfies, and @verifies traceability |
 
